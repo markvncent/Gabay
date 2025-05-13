@@ -1,23 +1,29 @@
+package frontend.search;
+
 import javax.swing.*;
 import javax.swing.border.*;
+import javax.swing.event.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.font.TextAttribute;
 import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
 import java.util.ArrayList;
+import backend.model.CandidateDataLoader;
 import java.awt.geom.Rectangle2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
+import frontend.landingpage.LandingPageUI;
 
-public class CandidateSearch extends JFrame {
+public class CandidateSearchUI extends JFrame {
     // Font variables
     private Font interRegular;
     private Font interBlack;
@@ -87,7 +93,7 @@ public class CandidateSearch extends JFrame {
     private int cardMarginHorizontal = 15; // Horizontal spacing between cards
     private int cardsPerRow = 4; // Number of cards per row
     
-    public CandidateSearch() {
+    public CandidateSearchUI() {
         // Load fonts
         loadFonts();
         
@@ -315,7 +321,7 @@ public class CandidateSearch extends JFrame {
                     // Go back to landing page
                     Dimension currentSize = getSize();
                     dispose();
-                    LandingPage landingPage = new LandingPage();
+                    LandingPageUI landingPage = new LandingPageUI();
                     landingPage.setSize(currentSize); // Set the same size as current window
                     landingPage.setLocationRelativeTo(null); // Center on screen
                     landingPage.setVisible(true);
@@ -346,7 +352,7 @@ public class CandidateSearch extends JFrame {
                     // Go back to landing page
                     Dimension currentSize = getSize();
                     dispose();
-                    LandingPage landingPage = new LandingPage();
+                    LandingPageUI landingPage = new LandingPageUI();
                     landingPage.setSize(currentSize); // Set the same size as current window
                     landingPage.setLocationRelativeTo(null); // Center on screen
                     landingPage.setVisible(true);
@@ -394,9 +400,7 @@ public class CandidateSearch extends JFrame {
         filterDropdown = new FilterDropdown(contentPanel, interMedium, interRegular, this::handleFilterSelection) {
             @Override
             public void toggleDropdown() {
-                // Call the parent method first
                 super.toggleDropdown();
-                
                 // Ensure divider is below any open dropdowns
                 adjustDividerForDropdowns();
             }
@@ -408,9 +412,7 @@ public class CandidateSearch extends JFrame {
         provinceDropdown = new ProvinceDropdown(contentPanel, interMedium, interRegular, this::handleProvinceSelection) {
             @Override
             public void toggleDropdown() {
-                // Call the parent method first
                 super.toggleDropdown();
-                
                 // Ensure divider is below any open dropdowns
                 adjustDividerForDropdowns();
             }
@@ -1467,15 +1469,15 @@ public class CandidateSearch extends JFrame {
                 
                 CandidateDataLoader.Candidate candidate = candidatesData.get(i);
                 
-                // Create a placeholder image path - in real app would need actual candidate images
-                String imagePath = "resources/images/candidates/default_candidate.jpg";
+                // Use the candidate's image path if available, otherwise use default
+                String imagePath = candidate.getImagePath();
                 
                 // Create card
                 CandidateCard card = new CandidateCard(
                     candidate.getName(),
                     candidate.getPosition(),
                     candidate.getParty(),
-                    imagePath, // Use placeholder image since actual images aren't available
+                    imagePath,
                     interRegular,
                     interSemiBold,
                     interMedium,
@@ -1602,7 +1604,7 @@ public class CandidateSearch extends JFrame {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                CandidateSearch searchPage = new CandidateSearch();
+                CandidateSearchUI searchPage = new CandidateSearchUI();
                 searchPage.setVisible(true);
             }
         });

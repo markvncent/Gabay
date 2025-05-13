@@ -1,9 +1,12 @@
+package backend.model;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import util.ResourceHelper;
 
 /**
  * Utility class to load candidate data from the candidates.txt file
@@ -19,13 +22,19 @@ public class CandidateDataLoader {
         private String party;
         private String region;
         private String age;
+        private String imagePath;
         
         public Candidate(String name, String position, String party, String region, String age) {
+            this(name, position, party, region, age, null);
+        }
+        
+        public Candidate(String name, String position, String party, String region, String age, String imagePath) {
             this.name = name;
             this.position = position;
             this.party = party;
             this.region = region;
             this.age = age;
+            this.imagePath = imagePath != null ? imagePath : "resources/images/candidates/default_candidate.jpg";
         }
         
         public String getName() {
@@ -47,6 +56,10 @@ public class CandidateDataLoader {
         public String getAge() {
             return age;
         }
+        
+        public String getImagePath() {
+            return imagePath;
+        }
     }
     
     /**
@@ -57,31 +70,50 @@ public class CandidateDataLoader {
     public static List<Candidate> loadCandidates() {
         List<Candidate> candidates = new ArrayList<>();
         
-        // Define possible file paths to search
-        String[] possiblePaths = {
-            "candidates.txt",
-            "./candidates.txt",
-            "../candidates.txt",
-            "src/candidates.txt",
-            "./src/candidates.txt"
-        };
+        // Add some default candidates for testing if no file is found
+        candidates.add(new Candidate("John Doe", "Senator", "Independent", "NCR", "45", "resources/images/candidates/john_doe.jpg"));
+        candidates.add(new Candidate("Jane Smith", "Governor", "Progressive", "Region IV-A", "38", "resources/images/candidates/jane_smith.jpg"));
+        candidates.add(new Candidate("Bob Wilson", "Representative", "Conservative", "Region III", "52", "resources/images/candidates/bob_wilson.jpg"));
+        candidates.add(new Candidate("Alice Brown", "Mayor", "Liberal", "Region VII", "41", "resources/images/candidates/alice_brown.jpg"));
         
-        // Try to find and load the file from one of the possible paths
-        File candidatesFile = null;
-        for (String path : possiblePaths) {
-            File testFile = new File(path);
-            if (testFile.exists()) {
-                candidatesFile = testFile;
-                System.out.println("Found candidates file at: " + testFile.getAbsolutePath());
-                break;
+        // Try to find the candidates file using ResourceHelper first
+        File candidatesFile = ResourceHelper.getDataFile("candidates.txt");
+        
+        // If not found with ResourceHelper, try alternative paths
+        if (!candidatesFile.exists()) {
+            // Define possible file paths to search - updated to include resources/data directory
+            String[] possiblePaths = {
+                "resources/data/candidates.txt",
+                "./resources/data/candidates.txt",
+                "../resources/data/candidates.txt",
+                "candidates.txt",
+                "./candidates.txt",
+                "../candidates.txt",
+                "src/candidates.txt",
+                "./src/candidates.txt"
+            };
+            
+            // Try to find and load the file from one of the possible paths
+            for (String path : possiblePaths) {
+                File testFile = new File(path);
+                if (testFile.exists()) {
+                    candidatesFile = testFile;
+                    System.out.println("Found candidates file at: " + testFile.getAbsolutePath());
+                    break;
+                }
             }
+        } else {
+            System.out.println("Found candidates file using ResourceHelper at: " + candidatesFile.getAbsolutePath());
         }
         
-        // If file is not found, return empty list
+        // If file is not found, return the default candidates
         if (candidatesFile == null || !candidatesFile.exists()) {
-            System.out.println("Candidates file not found in any of the searched locations.");
+            System.out.println("Candidates file not found in any of the searched locations. Using default candidates.");
             return candidates;
         }
+        
+        // Clear default candidates if we found a file
+        candidates.clear();
         
         try (BufferedReader reader = new BufferedReader(new FileReader(candidatesFile))) {
             String line;
@@ -90,13 +122,14 @@ public class CandidateDataLoader {
             String party = null;
             String region = null;
             String age = null;
+            String imagePath = null;
             
             while ((line = reader.readLine()) != null) {
                 // Skip empty lines
                 if (line.trim().isEmpty()) {
                     // If we have collected enough data for a candidate, add them to the list
                     if (name != null && position != null && party != null) {
-                        candidates.add(new Candidate(name, position, party, region, age));
+                        candidates.add(new Candidate(name, position, party, region, age, imagePath));
                         
                         // Reset candidate data
                         name = null;
@@ -104,6 +137,7 @@ public class CandidateDataLoader {
                         party = null;
                         region = null;
                         age = null;
+                        imagePath = null;
                     }
                     continue;
                 }
@@ -119,12 +153,14 @@ public class CandidateDataLoader {
                     region = line.substring("Region:".length()).trim();
                 } else if (line.startsWith("Age:")) {
                     age = line.substring("Age:".length()).trim();
+                } else if (line.startsWith("Image:")) {
+                    imagePath = line.substring("Image:".length()).trim();
                 }
             }
             
             // Add the last candidate if there's data
             if (name != null && position != null && party != null) {
-                candidates.add(new Candidate(name, position, party, region, age));
+                candidates.add(new Candidate(name, position, party, region, age, imagePath));
             }
             
         } catch (IOException e) {

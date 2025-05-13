@@ -1,5 +1,6 @@
+package util;
+
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 
 /**
@@ -12,6 +13,7 @@ public class ResourceHelper {
     private static final String RESOURCES_PATH = "resources";
     private static final String IMAGES_PATH = RESOURCES_PATH + File.separator + "images";
     private static final String FONTS_PATH = "lib" + File.separator + "fonts";
+    private static final String DATA_PATH = RESOURCES_PATH + File.separator + "data";
     
     // Specific image directories
     private static final String CANDIDATE_SEARCH_PATH = IMAGES_PATH + File.separator + "Candidate Search";
@@ -78,6 +80,16 @@ public class ResourceHelper {
      */
     public static File getFontFile(String fileName) {
         return getResourceFile(FONTS_PATH, fileName);
+    }
+    
+    /**
+     * Returns a data file from the data directory
+     * 
+     * @param fileName The data file name with extension
+     * @return A File object for the data file
+     */
+    public static File getDataFile(String fileName) {
+        return getResourceFile(DATA_PATH, fileName);
     }
     
     /**

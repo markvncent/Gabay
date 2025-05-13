@@ -31,7 +31,7 @@ GabayApp/
 ├── src/                  # Source code
 │   ├── App.java          # Main application entry point
 │   ├── LandingPage.java  # Landing page UI
-│   ├── AdminPage.java    # Admin interface
+│   ├── AdminLogin.java    # Admin login interface
 │   └── CandidateSearch.java # Candidate search interface
 └── README.md             # This file
 ```
@@ -142,7 +142,7 @@ This will compile all Java files and place the resulting class files in the `bui
 ### Project Structure
 - `LandingPage.java`: Main UI with buttons to navigate to different features
 - `CandidateSearch.java`: Interface for searching candidate information
-- `AdminPage.java`: Administrative interface for maintaining data
+- `AdminLogin.java`: Administrative login interface for authentication
 - Supporting UI components for filters, cards, and other elements
 
 ## License

@@ -1,6 +1,8 @@
+import frontend.landingpage.LandingPageUI;
+
 public class App {
     public static void main(String[] args) throws Exception {
-        LandingPage ui = new LandingPage();
+        LandingPageUI ui = new LandingPageUI();
         ui.setVisible(true);
     }
 }

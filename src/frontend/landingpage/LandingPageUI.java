@@ -1,3 +1,5 @@
+package frontend.landingpage;
+
 import javax.swing.*;
 import javax.swing.border.*;
 import java.awt.*;
@@ -13,8 +15,14 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
 import java.util.ArrayList;
+import frontend.admin.AdminLoginUI;
+import frontend.search.CandidateSearchUI;
+import frontend.comparison.CandidateComparisonUI;
+import frontend.overview.CandidateOverviewUI;
+import frontend.quiz.CandidateQuizUI;
+import frontend.admin.AdminPanelUI;
 
-public class LandingPage extends JFrame {
+public class LandingPageUI extends JFrame {
     
     // Font variables
     private Font interRegular;
@@ -91,7 +99,7 @@ public class LandingPage extends JFrame {
     private int watermarkFontSize = 12;
     private Color watermarkColor = new Color(0xA1, 0xA1, 0xA1); // New #A1A1A1 color for the watermark
     
-    public LandingPage() {
+    public LandingPageUI() {
         // Load Inter fonts
         loadFonts();
         
@@ -109,7 +117,10 @@ public class LandingPage extends JFrame {
         // Set default font for all UI elements
         setUIFont(interRegular);
         
-        // Create a custom panel with white background and the images
+        // Create a layered pane for absolute positioning
+        JLayeredPane layeredPane = new JLayeredPane();
+        
+        // Create main panel with custom background
         JPanel backgroundPanel = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
@@ -118,31 +129,42 @@ public class LandingPage extends JFrame {
                 g.setColor(new Color(0xFF, 0xFF, 0xFF)); // #FFFFFF
                 g.fillRect(0, 0, getWidth(), getHeight());
                 
-                // Draw background image centered with reduced opacity (5% - reduced from 8%)
+                // Draw background image centered with reduced opacity
                 if (backgroundImage != null && showBackgroundImage) {
                     // Use Graphics2D for better quality rendering and to set opacity
                     Graphics2D g2d = (Graphics2D)g;
+                    
+                    // Enable high-quality rendering
                     g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, 
                                         RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+                    g2d.setRenderingHint(RenderingHints.KEY_RENDERING, 
+                                        RenderingHints.VALUE_RENDER_QUALITY);
+                    g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+                                        RenderingHints.VALUE_ANTIALIAS_ON);
                     
-                    int imageX = (getWidth() - 1802) / 2;
-                    int imageY = (getHeight() - 1519) / 2;
+                    // Calculate dimensions for 200% scaling
+                    int scaledWidth = (int)(backgroundImage.getWidth() * 2);
+                    int scaledHeight = (int)(backgroundImage.getHeight() * 2);
+                    
+                    // Calculate position to center the image
+                    int imageX = (getWidth() - scaledWidth) / 2;
+                    int imageY = (getHeight() - scaledHeight) / 2;
                     
                     // Print debugging info once, not on every repaint
                     if (!paintedOnce) {
                         System.out.println("Drawing image at: " + imageX + "," + imageY + 
-                                          " with size: 1802x1519. Panel size: " + 
-                                          getWidth() + "x" + getHeight() + 
-                                          ", Opacity: 5%");
+                                          " with size: " + scaledWidth + "x" + scaledHeight + 
+                                          ". Panel size: " + getWidth() + "x" + getHeight() + 
+                                          ", Opacity: 3%");
                         paintedOnce = true;
                     }
                     
-                    // Set the opacity to 5% (0.05f) - reduced from 8%
+                    // Set the opacity to 3% (0.03f) - reduced from 5%
                     AlphaComposite alphaComposite = AlphaComposite.getInstance(
-                        AlphaComposite.SRC_OVER, 0.05f);
+                        AlphaComposite.SRC_OVER, 0.03f);
                     g2d.setComposite(alphaComposite);
                     
-                    g2d.drawImage(backgroundImage, imageX, imageY, 1802, 1519, this);
+                    g2d.drawImage(backgroundImage, imageX, imageY, scaledWidth, scaledHeight, this);
                     
                     // Reset composite for other components
                     g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f));
@@ -151,67 +173,38 @@ public class LandingPage extends JFrame {
                 // Draw header image, centered horizontally and at adjusted Y position
                 if (headerImage != null) {
                     Graphics2D g2d = (Graphics2D)g;
+                    
+                    // Enable high-quality rendering
                     g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, 
                                         RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+                    g2d.setRenderingHint(RenderingHints.KEY_RENDERING, 
+                                        RenderingHints.VALUE_RENDER_QUALITY);
+                    g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+                                        RenderingHints.VALUE_ANTIALIAS_ON);
                     
-                    // Calculate scaling factors based on both dimensions
-                    double widthScaleFactor = Math.min(1.0, getWidth() / (double)initialWindowWidth);
+                    // Calculate header dimensions (25% of window width - decreased from 30%)
+                    int headerWidth = (int)(getWidth() * 0.25);
+                    int headerHeight = (int)((double)headerImage.getHeight() / headerImage.getWidth() * headerWidth);
+                    
+                    // Calculate scaling factor for responsive positioning
                     double heightScaleFactor = Math.min(1.0, getHeight() / (double)initialWindowHeight);
                     
-                    // Calculate maximum header height to avoid button overlap
-                    // Use 40% of screen height as max header height on small screens
-                    double maxHeaderHeightFactor = 0.4;
-                    if (getHeight() < 700) {
-                        // Reduce header size more aggressively on smaller screens
-                        maxHeaderHeightFactor = 0.3;
-                    }
-                    if (getHeight() < 500) {
-                        // Even smaller on very small screens
-                        maxHeaderHeightFactor = 0.25;
-                    }
+                    // Position header image at top center with responsive vertical position
+                    int headerX = (getWidth() - headerWidth) / 2;
+                    int headerY = (int)(50 * heightScaleFactor); // Scale based on window height
                     
-                    double maxHeightBasedSize = getHeight() * maxHeaderHeightFactor / headerImage.getHeight();
+                    // Ensure minimum padding from top
+                    headerY = Math.max(20, headerY);
                     
-                    // Use the smaller factor to maintain aspect ratio while ensuring it fits
-                    double scaleFactor = Math.min(Math.min(widthScaleFactor, heightScaleFactor), maxHeightBasedSize);
-                    
-                    // Apply minimum scale to ensure header is never too small
-                    scaleFactor = Math.max(0.3, scaleFactor);
-                    
-                    int scaledHeaderWidth = (int)(headerImage.getWidth() * scaleFactor);
-                    int scaledHeaderHeight = (int)(headerImage.getHeight() * scaleFactor);
-                    
-                    // Calculate x position to center the header image
-                    int headerX = (getWidth() - scaledHeaderWidth) / 2;
-                    
-                    // Adjust Y position if window is very small
-                    // Scale the Y position proportionally to the window height
-                    int adjustedHeaderY = (int)(headerY * heightScaleFactor);
-                    
-                    // Ensure minimum visibility at the top
-                    adjustedHeaderY = Math.max(10, adjustedHeaderY);
-                    
-                    // For very small windows, keep header near the top but still visible
-                    if (getHeight() < 600) {
-                        adjustedHeaderY = Math.min(adjustedHeaderY, getHeight() / 10);
-                    }
-                    
-                    // Log position on first paint for debugging
-                    if (!headerPaintedOnce) {
-                        System.out.println("Drawing header at: " + headerX + "," + adjustedHeaderY + 
-                                          " with size: " + scaledHeaderWidth + "x" + scaledHeaderHeight + 
-                                          " (scale: " + scaleFactor + ")");
-                        headerPaintedOnce = true;
-                    }
-                    
-                    g2d.drawImage(headerImage, headerX, adjustedHeaderY, 
-                                 scaledHeaderWidth, scaledHeaderHeight, this);
+                    // Draw the header image with high quality
+                    g2d.drawImage(headerImage, headerX, headerY, headerWidth, headerHeight, this);
                 }
                 
                 // Draw the horizontal divider line
-                if (true) { // Always show the divider (can be made conditional if needed)
+                if (true) { // Always show the divider
                     Graphics2D g2d = (Graphics2D)g;
                     g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                    g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
                     
                     // Calculate scaling factors for responsive positioning
                     double widthScaleFactor = Math.min(1.0, getWidth() / (double)initialWindowWidth);
@@ -391,36 +384,45 @@ public class LandingPage extends JFrame {
                             // Draw the content with centered text and wrapping
                             drawCenteredText(g2d, contents[i], sectionX, contentY, sectionWidth);
                         }
-                        
-                        // Draw watermark at the bottom of the window, with proper spacing
-                        int watermarkY = getHeight() - (int)(30 * heightScaleFactor); // 30px from bottom
-                        
-                        // In very small windows, ensure watermark is still visible
-                        if (getHeight() < 700) {
-                            // Position at fixed bottom distance
-                            watermarkY = getHeight() - 15;
-                        }
-                        
-                        // Create watermark font
-                        float scaledWatermarkFontSize = watermarkFontSize * (float)scaleRatio;
-                        scaledWatermarkFontSize = Math.max(8f, scaledWatermarkFontSize); // Minimum 8pt
-                        
+                    }
+                    
+                    // Draw watermark at the bottom of the window, with proper spacing
+                    // Moved outside the conditional block to ensure it's always displayed
+                    double scaleRatio = Math.min(widthScaleFactor, heightScaleFactor);
+                    int watermarkY = getHeight() - (int)(30 * heightScaleFactor); // 30px from bottom
+                    
+                    // In very small windows, ensure watermark is still visible
+                    if (getHeight() < 700) {
+                        // Position at fixed bottom distance
+                        watermarkY = getHeight() - 15;
+                    }
+                    
+                    // Create watermark font
+                    float scaledWatermarkFontSize = watermarkFontSize * (float)scaleRatio;
+                    scaledWatermarkFontSize = Math.max(8f, scaledWatermarkFontSize); // Minimum 8pt
+                    
+                    // Use interMedium if available, otherwise fall back to a system font
+                    Font scaledWatermarkFont;
+                    if (interMedium != null) {
                         // Apply letter spacing (-5%) to watermark font
                         Map<TextAttribute, Object> watermarkAttributes = new HashMap<>();
                         watermarkAttributes.put(TextAttribute.TRACKING, -0.05); // -5% letter spacing
-                        Font scaledWatermarkFont = interMedium.deriveFont(scaledWatermarkFontSize).deriveFont(watermarkAttributes);
-                        
-                        g2d.setFont(scaledWatermarkFont);
-                        // Use the new watermark color
-                        g2d.setColor(watermarkColor);
-                        
-                        // Center watermark horizontally
-                        FontMetrics watermarkMetrics = g2d.getFontMetrics();
-                        int watermarkWidth = watermarkMetrics.stringWidth(watermarkText);
-                        int watermarkX = (getWidth() - watermarkWidth) / 2;
-                        
-                        g2d.drawString(watermarkText, watermarkX, watermarkY);
+                        scaledWatermarkFont = interMedium.deriveFont(scaledWatermarkFontSize).deriveFont(watermarkAttributes);
+                    } else {
+                        // Fallback to system font
+                        scaledWatermarkFont = new Font("SansSerif", Font.PLAIN, (int)scaledWatermarkFontSize);
                     }
+                    
+                    g2d.setFont(scaledWatermarkFont);
+                    // Use the watermark color
+                    g2d.setColor(watermarkColor);
+                    
+                    // Center watermark horizontally
+                    FontMetrics watermarkMetrics = g2d.getFontMetrics();
+                    int watermarkWidth = watermarkMetrics.stringWidth(watermarkText);
+                    int watermarkX = (getWidth() - watermarkWidth) / 2;
+                    
+                    g2d.drawString(watermarkText, watermarkX, watermarkY);
                 }
             }
             
@@ -484,139 +486,101 @@ public class LandingPage extends JFrame {
             private boolean paintedOnce = false;
             private boolean headerPaintedOnce = false;
         };
-        backgroundPanel.setLayout(new GridBagLayout());
         
-        // Create admin button in the top left corner
-        adminButton = new JButton("Admin");
-        if (interMedium != null) {
-            // Use Inter-SemiBold if available, with Medium as fallback
-            Font adminFont = interSemiBold != null ? interSemiBold.deriveFont(14f) : interMedium.deriveFont(14f);
-            adminButton.setFont(adminFont);
-        } else {
-            adminButton.setFont(new Font("Sans-Serif", Font.BOLD, 14));
-        }
-        adminButton.setForeground(Color.WHITE);
-        adminButton.setBackground(new Color(0x2F, 0x39, 0x8E)); // #2F398E - Primary blue
-        adminButton.setFocusPainted(false);
-        adminButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        // Use null layout for absolute positioning
+        backgroundPanel.setLayout(null);
         
-        // Apply the same styled button behavior as the main buttons
-        adminButton = createStyledAdminButton("Admin", new Color(0x2F, 0x39, 0x8E));
-        
-        // Create a layer for absolute positioning components on top of the main layout
-        JLayeredPane layeredPane = new JLayeredPane();
-        layeredPane.setPreferredSize(new Dimension(1440, 1024));
-        
-        // Add the main background panel to the layered pane
-        backgroundPanel.setBounds(0, 0, 1440, 1024);
-        layeredPane.add(backgroundPanel, JLayeredPane.DEFAULT_LAYER);
-        
-        // Position the admin button in the top right corner with equal margin from top and right edge
-        int margin = 20;
-        int adminButtonWidth = 120;
-        int adminButtonHeight = 40;
-        int rightOffset = 40; // Increased distance from right edge
-        adminButton.setBounds(getWidth() - adminButtonWidth - margin - rightOffset, margin, adminButtonWidth, adminButtonHeight);
-        layeredPane.add(adminButton, JLayeredPane.PALETTE_LAYER);
-        
-        // Create panel to hold the buttons in a 2x2 grid
+        // Create button panel with GridLayout
         buttonPanel = new JPanel(new GridLayout(2, 2, horizontalGap, verticalGap));
-        buttonPanel.setOpaque(false); // Make panel transparent
+        buttonPanel.setOpaque(false);
         
-        // Create four buttons with specific size and colors
-        button1 = createStyledButton("Search Candidate", new Color(0x2F, 0x39, 0x8E)); // #2f398e
-        button2 = createStyledButton("Compare Candidates", new Color(0xF9, 0xB3, 0x45)); // #f9b345
-        button3 = createStyledButton("Candidates Overview", new Color(0xEB, 0x42, 0x3E)); // #eb423e
-        button4 = createStyledButton("Gabáy Quiz Match", new Color(0x2F, 0x39, 0x8E)); // #2f398e
+        // Create buttons
+        button1 = createStyledButton("Search Candidate", new Color(0x2F, 0x39, 0x8E));
+        button2 = createStyledButton("Compare Candidates", new Color(0xF9, 0xB3, 0x45));
+        button3 = createStyledButton("Candidates Overview", new Color(0xEB, 0x42, 0x3E));
+        button4 = createStyledButton("Gabáy Quiz Match", new Color(0x2F, 0x39, 0x8E));
         
-        // Set initial font size for all buttons
-        adjustButtonFont(button1, originalButtonFontSize);
-        adjustButtonFont(button2, originalButtonFontSize);
-        adjustButtonFont(button3, originalButtonFontSize);
-        adjustButtonFont(button4, originalButtonFontSize);
-        
-        // Set preferred size for all buttons
-        button1.setPreferredSize(new Dimension(buttonWidth, buttonHeight));
-        button2.setPreferredSize(new Dimension(buttonWidth, buttonHeight));
-        button3.setPreferredSize(new Dimension(buttonWidth, buttonHeight));
-        button4.setPreferredSize(new Dimension(buttonWidth, buttonHeight));
-        
-        // Add action listeners to buttons
-        button1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Open the Search Candidate page
-                Dimension currentSize = getSize();
-                dispose(); // Close the current window
-                CandidateSearch searchPage = new CandidateSearch();
-                searchPage.setSize(currentSize); // Set the same size as current window
-                searchPage.setLocationRelativeTo(null); // Center on screen
-                searchPage.setVisible(true);
-            }
+        // Add action listener for Search button
+        button1.addActionListener(e -> {
+            Dimension currentSize = getSize();
+            dispose(); // Close current window
+            CandidateSearchUI searchUI = new CandidateSearchUI();
+            searchUI.setSize(currentSize); // Set the same size as current window
+            searchUI.setLocationRelativeTo(null); // Center on screen
+            searchUI.setVisible(true);
         });
         
-        // Compare button no longer opens the CandidateComparison page
-        button2.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Just show a message - CandidateComparison has been deleted
-                JOptionPane.showMessageDialog(LandingPage.this, 
-                    "Candidate Comparison feature has been removed.", 
-                    "Feature Unavailable", 
-                    JOptionPane.INFORMATION_MESSAGE);
-            }
+        // Add action listener for Compare button
+        button2.addActionListener(e -> {
+            Dimension currentSize = getSize();
+            dispose(); // Close current window
+            CandidateComparisonUI comparisonUI = new CandidateComparisonUI();
+            comparisonUI.setSize(currentSize); // Set the same size as current window
+            comparisonUI.setLocationRelativeTo(null); // Center on screen
+            comparisonUI.setVisible(true);
         });
         
-        // Add buttons to the panel
+        // Add action listener for Overview button
+        button3.addActionListener(e -> {
+            Dimension currentSize = getSize();
+            dispose(); // Close current window
+            CandidateOverviewUI overviewUI = new CandidateOverviewUI();
+            overviewUI.setSize(currentSize); // Set the same size as current window
+            overviewUI.setLocationRelativeTo(null); // Center on screen
+            overviewUI.setVisible(true);
+        });
+        
+        // Add action listener for Quiz button
+        button4.addActionListener(e -> {
+            Dimension currentSize = getSize();
+            dispose(); // Close current window
+            CandidateQuizUI quizUI = new CandidateQuizUI();
+            quizUI.setSize(currentSize); // Set the same size as current window
+            quizUI.setLocationRelativeTo(null); // Center on screen
+            quizUI.setVisible(true);
+        });
+        
+        // Add buttons to panel
         buttonPanel.add(button1);
         buttonPanel.add(button2);
         buttonPanel.add(button3);
         buttonPanel.add(button4);
         
-        // Add the button panel to the background panel
+        // Add button panel to background panel
         backgroundPanel.add(buttonPanel);
         
-        // Add the layered pane to the frame
+        // Create admin button
+        adminButton = createStyledAdminButton("Admin", new Color(0x2F, 0x39, 0x8E));
+        backgroundPanel.add(adminButton);
+        
+        // Set initial bounds for layered pane
+        layeredPane.setBounds(0, 0, 1440, 1024);
+        backgroundPanel.setBounds(0, 0, 1440, 1024);
+        
+        // Add panels to layered pane
+        layeredPane.add(backgroundPanel, JLayeredPane.DEFAULT_LAYER);
+        
+        // Set content pane
         setContentPane(layeredPane);
         
-        // Add component listener to handle resize events
+        // Add component listener for window resize
         addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
-                // This ensures layout is updated when window is resized
-                adjustLayoutForWindowSize(); // This will adjust buttons and calculate space
-                
-                // Update the layered pane and background panel sizes
-                layeredPane.setSize(getSize());
-                backgroundPanel.setSize(getSize());
-                
-                // Update admin button position to right side with equal margins
-                int margin = 20;
-                int rightOffset = 40; // Increased distance from right edge
-                int adminButtonWidth = 120;
-                adminButton.setLocation(getWidth() - adminButtonWidth - margin - rightOffset, margin);
-                
-                revalidate();
-                repaint(); // Make sure the background is redrawn
-                
-                // Log window size for debugging
-                System.out.println("Window resized to: " + getWidth() + "x" + getHeight());
+                adjustLayoutForWindowSize();
             }
         });
         
-        // Add a key listener to toggle the background image
+        // Add key listener for background toggle
         addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_B) {
                     showBackgroundImage = !showBackgroundImage;
-                    System.out.println("Background image " + (showBackgroundImage ? "shown" : "hidden"));
                     repaint();
                 }
             }
         });
-        
-        // Make the frame focusable to receive key events
         setFocusable(true);
     }
     
@@ -1651,51 +1615,61 @@ public class LandingPage extends JFrame {
     }
     
     private void adjustLayoutForWindowSize() {
-        // Only adjust if we have all the required components
-        if (headerImage == null || buttonPanel == null) {
-            return;
-        }
-        
-        int windowHeight = getHeight();
         int windowWidth = getWidth();
+        int windowHeight = getHeight();
         
-        // Update admin button position when window size changes
-        int margin = 20;
-        int rightOffset = 40; // Increased distance from right edge
-        int adminButtonWidth = 120;
-        if (adminButton != null) {
-            adminButton.setLocation(windowWidth - adminButtonWidth - margin - rightOffset, margin);
+        // Update layered pane and background panel sizes
+        if (getContentPane() instanceof JLayeredPane) {
+            JLayeredPane layeredPane = (JLayeredPane) getContentPane();
+            layeredPane.setSize(windowWidth, windowHeight);
+            
+            // Update background panel size
+            if (layeredPane.getComponentCount() > 0) {
+                Component backgroundPanel = layeredPane.getComponent(0);
+                backgroundPanel.setBounds(0, 0, windowWidth, windowHeight);
+            }
         }
         
-        // Calculate scale factors based on both dimensions
+        // Calculate scale factors
         double widthScaleFactor = Math.min(1.0, windowWidth / (double)initialWindowWidth);
         double heightScaleFactor = Math.min(1.0, windowHeight / (double)initialWindowHeight);
+        double scaleFactor = Math.min(widthScaleFactor, heightScaleFactor);
         
-        // Calculate maximum header height to avoid button overlap
-        // Use 40% of screen height as max header height on small screens
-        double maxHeaderHeightFactor = 0.4;
-        if (windowHeight < 700) {
-            // Reduce header size more aggressively on smaller screens
-            maxHeaderHeightFactor = 0.3;
-        }
-        if (windowHeight < 500) {
-            // Even smaller on very small screens
-            maxHeaderHeightFactor = 0.25;
-        }
-        
-        double maxHeightBasedSize = windowHeight * maxHeaderHeightFactor / headerImage.getHeight();
-        
-        // Use the smaller factor to maintain aspect ratio while ensuring it fits
-        double scaleFactor = Math.min(Math.min(widthScaleFactor, heightScaleFactor), maxHeightBasedSize);
-        
-        // Apply minimum scale to ensure elements are never too small
-        scaleFactor = Math.max(0.3, scaleFactor);
-        
-        int scaledHeaderHeight = (int)(headerImage.getHeight() * scaleFactor);
-        
-        // Scale button size and font based on window dimensions
+        // Scale button panel size
         int scaledButtonWidth = (int)(buttonWidth * scaleFactor);
         int scaledButtonHeight = (int)(buttonHeight * scaleFactor);
+        int scaledHGap = (int)(horizontalGap * scaleFactor);
+        int scaledVGap = (int)(verticalGap * scaleFactor);
+        
+        // Calculate total button panel size
+        int totalButtonPanelWidth = (scaledButtonWidth * 2) + scaledHGap;
+        int totalButtonPanelHeight = (scaledButtonHeight * 2) + scaledVGap;
+        
+        // Calculate header height for proper spacing
+        int headerWidth = (int)(windowWidth * 0.25); // 25% of window width
+        int headerHeight = 0;
+        if (headerImage != null) {
+            headerHeight = (int)((double)headerImage.getHeight() / headerImage.getWidth() * headerWidth);
+        }
+        int headerSpacing = (int)(baseMinimumHeaderButtonSpace * heightScaleFactor);
+        
+        // Position buttons with proper spacing from header
+        int headerBottomY = (int)(50 * heightScaleFactor) + headerHeight; // headerY + headerHeight
+        
+        // Adjust button panel position to maintain proper spacing from header
+        // while still keeping it centered vertically in the available space
+        int availableHeight = windowHeight - headerBottomY - headerSpacing;
+        int buttonPanelY = headerBottomY + headerSpacing + 
+                          (availableHeight - totalButtonPanelHeight) / 3; // Position at 1/3 of available space
+        
+        // Apply the minimum shift up of 25px as previously requested
+        buttonPanelY = Math.min(buttonPanelY, (int)(windowHeight * 0.4) - 25);
+        
+        // Center button panel horizontally
+        int buttonPanelX = (windowWidth - totalButtonPanelWidth) / 2;
+        
+        // Update button panel bounds
+        buttonPanel.setBounds(buttonPanelX, buttonPanelY, totalButtonPanelWidth, totalButtonPanelHeight);
         
         // Update button sizes
         button1.setPreferredSize(new Dimension(scaledButtonWidth, scaledButtonHeight));
@@ -1703,109 +1677,51 @@ public class LandingPage extends JFrame {
         button3.setPreferredSize(new Dimension(scaledButtonWidth, scaledButtonHeight));
         button4.setPreferredSize(new Dimension(scaledButtonWidth, scaledButtonHeight));
         
-        // Scale font size for buttons
+        // Update button fonts
         float scaledFontSize = originalButtonFontSize * (float)scaleFactor;
-        scaledFontSize = Math.max(16f, scaledFontSize); // Minimum font size of 16pt
-        
+        scaledFontSize = Math.max(16f, scaledFontSize);
         adjustButtonFont(button1, scaledFontSize);
         adjustButtonFont(button2, scaledFontSize);
         adjustButtonFont(button3, scaledFontSize);
         adjustButtonFont(button4, scaledFontSize);
         
-        // Calculate position for header
-        int adjustedHeaderY = (int)(headerY * heightScaleFactor);
-        adjustedHeaderY = Math.max(10, adjustedHeaderY); // Ensure minimum visibility
+        // Update grid layout gaps
+        ((GridLayout)buttonPanel.getLayout()).setHgap(scaledHGap);
+        ((GridLayout)buttonPanel.getLayout()).setVgap(scaledVGap);
         
-        // Calculate dynamic space between header and buttons based on window height
-        int minimumHeaderButtonSpace = (int)(baseMinimumHeaderButtonSpace * heightScaleFactor);
-        minimumHeaderButtonSpace = Math.max(20, minimumHeaderButtonSpace); // At least 20px
+        // Update admin button position - fixed position in top right
+        int margin = (int)(20 * scaleFactor);
+        int rightOffset = (int)(40 * scaleFactor);
+        int adminButtonWidth = (int)(120 * scaleFactor);
+        int adminButtonHeight = (int)(40 * scaleFactor);
+        adminButton.setBounds(windowWidth - adminButtonWidth - margin - rightOffset, margin, 
+                            adminButtonWidth, adminButtonHeight);
         
-        // On very small screens, reduce this space to prioritize button visibility
-        if (windowHeight < 550) {
-            minimumHeaderButtonSpace = 15;
-        }
-        
-        // Calculate the available space using scaled header height
-        int availableHeight = windowHeight - adjustedHeaderY - scaledHeaderHeight - minimumHeaderButtonSpace;
-        
-        // Get the GridBagLayout constraints for the button panel
-        GridBagConstraints constraints = ((GridBagLayout) getContentPane().getLayout()).getConstraints(buttonPanel);
-        
-        // If available height is too small, adjust the button position
-        if (availableHeight < buttonPanel.getPreferredSize().height) {
-            // Calculate a suitable inset that ensures buttons are visible
-            int topInset = Math.max(10, windowHeight / 10); // At least 10px from top or 10% of window height
+        // Update divider position
+        if (dynamicDividerPosition) {
+            // Position divider below buttons with proper spacing
+            int bottomOfButtons = buttonPanelY + totalButtonPanelHeight;
+            int dividerSpacing = (int)(50 * heightScaleFactor);
+            dividerY = bottomOfButtons + dividerSpacing - 25; // Shifted up by 25px (10+15)
             
-            // For extremely small windows, position buttons near the top with minimal space for the header
-            if (windowHeight < 400) {
-                topInset = scaledHeaderHeight + 15; // Just enough space for the header plus a small gap
-            } else if (windowHeight < 600) {
-                // For small windows, ensure buttons are visible
-                topInset = Math.min(topInset, windowHeight / 5);
-            }
-            
-            // Set the Y position to be relative to the window size
-            constraints.insets = new Insets(topInset, 0, 0, 0);
-            
-            System.out.println("Window is small, adjusting button position. Top inset: " + constraints.insets.top);
-        } else {
-            // Normal layout for large windows
-            constraints.insets = new Insets(0, 0, 0, 0);
-        }
-        
-        // Apply the updated constraints
-        ((GridBagLayout) getContentPane().getLayout()).setConstraints(buttonPanel, constraints);
-        
-        // Update gaps between buttons
-        int scaledHorizontalGap = Math.max(5, (int)(horizontalGap * scaleFactor));
-        int scaledVerticalGap = Math.max(5, (int)(verticalGap * scaleFactor));
-        ((GridLayout)buttonPanel.getLayout()).setHgap(scaledHorizontalGap);
-        ((GridLayout)buttonPanel.getLayout()).setVgap(scaledVerticalGap);
-        
-        // For smaller screens, dynamically adjust divider position based on button position
-        // This ensures the divider is always visible below the buttons
-        int bottomOfButtons = constraints.insets.top + buttonPanel.getPreferredSize().height + 20;
-        if (bottomOfButtons > 0 && dynamicDividerPosition) {
-            // Calculate dynamic scaled position
-            if (windowHeight < 700) {
-                // On smaller screens, position the divider directly below the buttons
-                dividerY = Math.max(703, bottomOfButtons + 50); // Use at least original position or below buttons
-            } else {
-                // On larger screens, maintain proportionate spacing
-                dividerY = (int)(initialWindowHeight * 0.7); // Approximately 70% down the window
-            }
-            
-            // Adjust the proportional spacing of the divider
-            double dividerPositionRatio = dividerY / (double)initialWindowHeight;
-            int newDividerY = (int)(windowHeight * dividerPositionRatio);
-            newDividerY = Math.min(newDividerY, windowHeight - 200); // Keep at least 200px from bottom for text sections
-            
-            // Ensure divider is below buttons
-            newDividerY = Math.max(newDividerY, bottomOfButtons + 50);
-            
-            // Update divider and about section position
-            dividerY = newDividerY;
-            aboutHeadingY = dividerY + 48 + 3; // Update based on new divider position with added 2px
-            
-            // Also adjust the divider width and X position for smaller screens
-            double widthRatio = windowWidth / (double)initialWindowWidth;
-            dividerLength = (int)(1093 * widthRatio);
-            dividerX = (int)(windowWidth * 0.12); // Approximately 12% from left edge
-            
-            // Ensure minimum width for readability
+            // Scale divider width while maintaining minimum width
+            dividerLength = (int)(1093 * widthScaleFactor);
+            dividerLength = Math.min(dividerLength, windowWidth - 100);
             dividerLength = Math.max(dividerLength, 300);
-            dividerLength = Math.min(dividerLength, windowWidth - 100); // Maximum width with padding
             
-            // Center divider if window is very narrow
-            if (windowWidth < 500) {
-                dividerX = (windowWidth - dividerLength) / 2;
-            }
+            // Center divider horizontally
+            dividerX = (windowWidth - dividerLength) / 2;
+            
+            // Update about section position relative to divider
+            aboutHeadingY = dividerY + (int)(48 * heightScaleFactor);
+            aboutParagraphY = aboutHeadingY + (int)(48 * heightScaleFactor);
+            aboutHeadingX = dividerX;
+            aboutParagraphX = dividerX;
+            aboutParagraphWidth = dividerLength;
         }
         
         // Force layout update
-        buttonPanel.revalidate();
-        
-        // Trigger repaint to ensure divider and text sections get updated
+        revalidate();
         repaint();
     }
     
@@ -1973,7 +1889,7 @@ public class LandingPage extends JFrame {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                LandingPage ui = new LandingPage();
+                LandingPageUI ui = new LandingPageUI();
                 ui.setVisible(true);
             }
         });
@@ -2256,18 +2172,14 @@ public class LandingPage extends JFrame {
             button.setFont(new Font("Sans-Serif", Font.BOLD, 14));
         }
         
-        // Add action listener to navigate to AdminPage
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Navigate to Admin Page
-                Dimension currentSize = getSize();
-                dispose();
-                AdminPage adminPage = new AdminPage();
-                adminPage.setSize(currentSize); // Set the same size as current window
-                adminPage.setLocationRelativeTo(null); // Center on screen
-                adminPage.setVisible(true);
-            }
+        // Add action listener to navigate to AdminLogin
+        button.addActionListener(e -> {
+            Dimension currentSize = getSize();
+            dispose(); // Close current window
+            AdminLoginUI adminLogin = new AdminLoginUI();
+            adminLogin.setSize(currentSize); // Set the same size as current window
+            adminLogin.setLocationRelativeTo(null); // Center on screen
+            adminLogin.setVisible(true);
         });
         
         return button;
