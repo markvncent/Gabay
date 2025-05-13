@@ -1,0 +1,36 @@
+# Compiled class files
+*.class
+
+# Binary files
+bin/
+*.jar
+*.war
+*.ear
+
+# Eclipse specific files
+.classpath
+.project
+.settings/
+
+# IntelliJ specific files
+*.iml
+.idea/
+out/
+
+# VS Code specific files (keep settings.json since it has project config)
+.vscode/.history
+.vscode/launch.json
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Large binary files
+lib/fonts/*.zip
+# Keep the font files themselves since they're needed for the app
+
+# Backup files
+*~
+*.bak
+*.swp
+*.old 

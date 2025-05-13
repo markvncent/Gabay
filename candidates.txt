@@ -1,0 +1,47 @@
+Name: Margarita Santos  
+Age: 44  
+Region: Region I  
+Party Affiliation: Progressive Reform Alliance  
+Positions: Senator (1st term)  
+Years of Experience: 12  
+Campaign Slogan: Progress Through Compassion  
+Platforms: Poverty alleviation; Social welfare programs; Indigenous peoples' rights; Educational scholarships  
+Supported Issues: Expanded welfare programs; Indigenous land rights; Free education  
+Opposed Issues: Foreign mining contracts; Privatization of public utilities  
+Notable Laws: Expanded Scholarship Fund Act; Indigenous Cultural Preservation Act  
+
+Name: Antonio Villanueva  
+Age: 61  
+Region: Region IV 
+Party Affiliation: Nationalist People's Coalition  
+Positions: Senator (3rd term)  
+Years of Experience: 28  
+Campaign Slogan: Integrity. Service. Results.  
+Platforms: Agricultural modernization; Anti-corruption measures; Infrastructure development; National security  
+Supported Issues: Increased military funding; Traditional family values; Farmer subsidies  
+Opposed Issues: Divorce legalization; Same-sex marriage  
+Notable Laws: Agricultural Modernization Fund Act; Anti-Corruption Commission Act  
+
+Name: Isabella Reyes  
+Age: 52  
+Region: Region X  
+Party Affiliation: Liberal Democratic Party  
+Positions: Senator (2nd term)  
+Years of Experience: 15  
+Campaign Slogan: Building Bridges, Not Walls  
+Platforms: Universal healthcare expansion; Educational reform; Women's rights legislation; Climate change adaptation  
+Supported Issues: Reproductive health education; SOGIE bill; Progressive taxation  
+Opposed Issues: Death penalty; Mandatory military service  
+Notable Laws: Comprehensive Healthcare Access Act; Women's Economic Empowerment Act  
+
+Name: Ramon Dizon  
+Age: 58  
+Region: NCR Region  
+Party Affiliation: Nationalist Party  
+Positions: Senator (2nd term)  
+Years of Experience: 22  
+Campaign Slogan: A Stronger Nation Together  
+Platforms: Economic development; Foreign investment; Tax reform; Tourism promotion  
+Supported Issues: Foreign investments; Tax breaks for businesses; Infrastructure projects  
+Opposed Issues: Higher minimum wage; Stricter environmental regulations  
+Notable Laws: Foreign Investment Simplification Act; Tourism Development Zone Act  
