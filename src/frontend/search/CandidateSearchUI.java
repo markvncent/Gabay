@@ -21,7 +21,10 @@ import java.awt.geom.Rectangle2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
+// Uncomment LandingPageUI import for proper redirection
 import frontend.landingpage.LandingPageUI;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class CandidateSearchUI extends JFrame {
     // Font variables
@@ -88,10 +91,12 @@ public class CandidateSearchUI extends JFrame {
     private JTextField searchField;
     
     // Repositioning variables
-    private List<CandidateCard> candidateCards = new ArrayList<>();
     private int cardMarginTop = 20; // Margin between divider and cards
     private int cardMarginHorizontal = 15; // Horizontal spacing between cards
     private int cardsPerRow = 4; // Number of cards per row
+    
+    // CandidateCardPanel for displaying cards in a scrollable container
+    private CandidateCardPanel cardPanel;
     
     public CandidateSearchUI() {
         // Load fonts
@@ -318,24 +323,21 @@ public class CandidateSearchUI extends JFrame {
             logoLabel.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    // Go back to landing page
-                    Dimension currentSize = getSize();
-                    dispose();
-                    LandingPageUI landingPage = new LandingPageUI();
-                    landingPage.setSize(currentSize); // Set the same size as current window
-                    landingPage.setLocationRelativeTo(null); // Center on screen
-                    landingPage.setVisible(true);
+                    // Navigate to landing page
+                    navigateToLandingPage();
                 }
                 
                 @Override
                 public void mouseEntered(MouseEvent e) {
-                    // Optional: Add hover effect
+                    // Add hover effect - subtle glow around logo
                     logoLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+                    setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
                 }
                 
                 @Override
                 public void mouseExited(MouseEvent e) {
                     logoLabel.setBorder(null);
+                    setCursor(Cursor.getDefaultCursor());
                 }
             });
         } else {
@@ -349,13 +351,8 @@ public class CandidateSearchUI extends JFrame {
             logoLabel.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    // Go back to landing page
-                    Dimension currentSize = getSize();
-                    dispose();
-                    LandingPageUI landingPage = new LandingPageUI();
-                    landingPage.setSize(currentSize); // Set the same size as current window
-                    landingPage.setLocationRelativeTo(null); // Center on screen
-                    landingPage.setVisible(true);
+                    // Navigate to landing page
+                    navigateToLandingPage();
                 }
             });
             
@@ -471,6 +468,34 @@ public class CandidateSearchUI extends JFrame {
                 adjustLayoutForWindowSize();
                 revalidate();
                 repaint();
+            }
+        });
+
+        // Add key listener to search field for live filtering
+        searchField.addKeyListener(new KeyAdapter() {
+            // Delay timer for smoother search experience
+            private Timer searchTimer = new Timer(300, e -> performSearch());
+            
+            @Override
+            public void keyReleased(KeyEvent e) {
+                // Reset and restart timer on each keystroke
+                if (searchTimer.isRunning()) {
+                    searchTimer.restart();
+                } else {
+                    searchTimer.start();
+                }
+            }
+            
+            private void performSearch() {
+                String query = searchField.getText();
+                if (query.equals("Search for candidates or issues...")) {
+                    query = "";
+                }
+                
+                // Apply search to card panel
+                if (cardPanel != null) {
+                    cardPanel.filterCards(query);
+                }
             }
         });
     }
@@ -733,8 +758,12 @@ public class CandidateSearchUI extends JFrame {
         // Handle the filter selection here
         System.out.println("Selected filter: " + (selectedFilter != null ? selectedFilter : "None"));
         
-        // You can perform additional actions based on the selected filter
-        // For example, update the search field placeholder text
+        // Apply filters to card panel
+        if (cardPanel != null) {
+            // Filter cards by category (if relevant functionality is implemented)
+            // For now, just refresh the data
+            cardPanel.filterCards(searchField.getText());
+        }
     }
     
     /**
@@ -743,6 +772,11 @@ public class CandidateSearchUI extends JFrame {
     private void handleProvinceSelection(String selectedProvince) {
         // Handle the province selection here
         System.out.println("Selected province: " + (selectedProvince != null ? selectedProvince : "None"));
+        
+        // Apply province filter to card panel
+        if (cardPanel != null && selectedProvince != null) {
+            cardPanel.filterByProvince(selectedProvince);
+        }
     }
     
     /**
@@ -823,7 +857,7 @@ public class CandidateSearchUI extends JFrame {
                         // Update province dropdown position
                         if (provinceDropdown != null) {
                             JPanel provinceRectangle = provinceDropdown.getProvinceRectangle();
-                            // Position with right edge aligned to Find button, 5px gap below, 200px width
+                            // Position with right edge aligned to Find button, 5px below, 200px width
                             int findButtonRightEdge = startX + firstWidth + gap1 + secondWidth + gap2 + thirdWidth;
                             int provinceWidth = (int)(200 * widthScaleFactor);
                             int provinceX = findButtonRightEdge - provinceWidth;
@@ -856,7 +890,7 @@ public class CandidateSearchUI extends JFrame {
                         filterDropdown.updatePositionOnResize();
 
                         // Update candidate card position if it exists
-                        if (candidateCards.isEmpty()) {
+                        if (cardPanel == null) {
                             // No candidate cards to update
                         } else {
                             // Update candidate cards positioning
@@ -1157,7 +1191,7 @@ public class CandidateSearchUI extends JFrame {
                     }
                     
                     // Also update the candidate card position if it exists
-                    if (candidateCards.isEmpty()) {
+                    if (cardPanel == null) {
                         // No candidate cards to update
                     } else {
                         // Update candidate cards positioning, centering them below the divider line
@@ -1264,8 +1298,18 @@ public class CandidateSearchUI extends JFrame {
             
             @Override
             public void mouseClicked(MouseEvent e) {
-                // Button click action would go here (no functionality yet as requested)
-                System.out.println("Find button clicked");
+                // Perform search when Find button is clicked
+                String query = searchField.getText();
+                if (query.equals("Search for candidates or issues...")) {
+                    query = "";
+                }
+                
+                // Apply search to card panel
+                if (cardPanel != null) {
+                    cardPanel.filterCards(query);
+                }
+                
+                System.out.println("Find button clicked: Searching for '" + query + "'");
             }
         });
         
@@ -1340,12 +1384,9 @@ public class CandidateSearchUI extends JFrame {
             contentPanel.setComponentZOrder(dividerLine, contentPanel.getComponentCount() - 1);
         }
         
-        // Ensure candidate cards are above the divider but below dropdowns
-        for (CandidateCard card : candidateCards) {
-            // Put cards just above the divider but below dropdowns
-            int cardZOrder = contentPanel.getComponentCount() - 2;
-            cardZOrder = Math.max(0, cardZOrder); // Ensure non-negative
-            contentPanel.setComponentZOrder(card, cardZOrder);
+        // Ensure the card panel is below the divider but above other components
+        if (cardPanel != null && contentPanel != null) {
+            contentPanel.setComponentZOrder(cardPanel, contentPanel.getComponentCount() - 2);
         }
         
         // FIRST: Process regular dropdowns
@@ -1389,119 +1430,43 @@ public class CandidateSearchUI extends JFrame {
      * Adds a candidate card section below the divider line
      */
     private void addCandidateCardSection(JPanel parentPanel, int startX, int startY, int width) {
-        // Create a panel to hold the candidate cards in a grid
-        JPanel cardsContainer = new JPanel(null); // Use absolute positioning
-        cardsContainer.setOpaque(false);
+        // Create the card panel instead of managing individual cards
+        cardPanel = new CandidateCardPanel(
+            interRegular,
+            interSemiBold,
+            interMedium,
+            this::handleViewProfile
+        );
         
-        // Calculate the width available for cards
-        int availableWidth = width;
+        // Set very low background opacity (10%)
+        cardPanel.setBackgroundOpacity(0.0f);
         
-        // Calculate card width (accounting for margins)
-        int totalCardWidth = 275;
-        int cardSpacing = cardMarginHorizontal;
+        // Calculate proper height - either fixed height or fill available space
+        int availableHeight = parentPanel.getHeight() - startY - 20;
+        // Minimum height of 400px to ensure visibility
+        int cardPanelHeight = Math.max(400, availableHeight);
         
-        // Calculate how many cards can fit in a row
-        int maxCardsPerRow = Math.max(1, (availableWidth + cardSpacing) / (totalCardWidth + cardSpacing));
-        cardsPerRow = Math.min(maxCardsPerRow, 4); // Limit to 4 cards per row maximum
+        // Set position and size
+        cardPanel.setBounds(startX, startY, width, cardPanelHeight);
         
-        // Adjust card spacing to evenly distribute cards
-        if (cardsPerRow > 1) {
-            cardSpacing = (availableWidth - (cardsPerRow * totalCardWidth)) / (cardsPerRow - 1);
-        }
+        // Set top margin
+        cardPanel.setTopMargin(5);
         
-        // Load candidate data from candidates.txt
-        List<CandidateDataLoader.Candidate> candidatesData = CandidateDataLoader.loadCandidates();
+        // Add the panel to the parent
+        parentPanel.add(cardPanel);
         
-        // Card dimensions
-        int cardWidth = 275;
-        int cardHeight = 94;
+        // Set component priority to ensure proper layering
+        parentPanel.setComponentZOrder(cardPanel, parentPanel.getComponentCount() - 2);
         
-        // If no candidates were loaded, try to use placeholder candidates
-        if (candidatesData.isEmpty()) {
-            System.out.println("Warning: No candidates loaded from file. Using placeholder candidates.");
-            // Use placeholder data (former hardcoded data)
-            Object[][] placeholderData = {
-                {"Leni Robredo", "Presidential Candidate", "Liberal Party", "resources/images/candidates/leni_robredo.jpg"},
-                {"Bongbong Marcos", "Presidential Candidate", "Partido Federal ng Pilipinas", "resources/images/candidates/bongbong_marcos.jpg"},
-                {"Sara Duterte", "Vice Presidential Candidate", "Lakas–CMD", "resources/images/candidates/sara_duterte.jpg"},
-                {"Manny Pacquiao", "Presidential Candidate", "PROMDI", "resources/images/candidates/manny_pacquiao.jpg"}
-            };
-            
-            // Create cards using placeholder data
-            for (int i = 0; i < placeholderData.length; i++) {
-                // Calculate row and column
-                int row = i / cardsPerRow;
-                int col = i % cardsPerRow;
-                
-                // Calculate position
-                int x = startX + col * (cardWidth + cardSpacing);
-                int y = startY + row * (cardHeight + 15); // 15px vertical spacing
-                
-                // Create card with placeholder data
-                CandidateCard card = new CandidateCard(
-                    (String)placeholderData[i][0], // Name
-                    (String)placeholderData[i][1], // Position
-                    (String)placeholderData[i][2], // Party
-                    (String)placeholderData[i][3], // Image path
-                    interRegular,
-                    interSemiBold,
-                    interMedium,
-                    this::handleViewProfile
-                );
-                
-                // Set card position
-                card.setBounds(x, y, cardWidth, cardHeight);
-                
-                // Add to parent panel and track in our list
-                parentPanel.add(card);
-                candidateCards.add(card);
-            }
-        } else {
-            // Create cards from loaded candidate data
-            for (int i = 0; i < candidatesData.size(); i++) {
-                // Calculate row and column
-                int row = i / cardsPerRow;
-                int col = i % cardsPerRow;
-                
-                // Calculate position
-                int x = startX + col * (cardWidth + cardSpacing);
-                int y = startY + row * (cardHeight + 15); // 15px vertical spacing
-                
-                CandidateDataLoader.Candidate candidate = candidatesData.get(i);
-                
-                // Use the candidate's image path if available, otherwise use default
-                String imagePath = candidate.getImagePath();
-                
-                // Create card
-                CandidateCard card = new CandidateCard(
-                    candidate.getName(),
-                    candidate.getPosition(),
-                    candidate.getParty(),
-                    imagePath,
-                    interRegular,
-                    interSemiBold,
-                    interMedium,
-                    this::handleViewProfile
-                );
-                
-                // Set card position
-                card.setBounds(x, y, cardWidth, cardHeight);
-                
-                // Add to parent panel and track in our list
-                parentPanel.add(card);
-                candidateCards.add(card);
-            }
-            
-            System.out.println("Successfully loaded " + candidatesData.size() + " candidates from file.");
-        }
+        // Force visualization
+        cardPanel.revalidate();
+        parentPanel.revalidate();
+        parentPanel.repaint();
         
-        // Calculate container height to fit all cards
-        int itemCount = Math.max(candidatesData.isEmpty() ? 4 : candidatesData.size(), candidateCards.size());
-        int rows = (int) Math.ceil((double) itemCount / cardsPerRow);
-        int containerHeight = rows * cardHeight + (rows - 1) * 15; // 15px vertical spacing
-        
-        // Set container bounds
-        cardsContainer.setBounds(startX, startY, width, containerHeight);
+        // Log successful addition for debugging
+        System.out.println("Successfully added CandidateCardPanel: " + 
+                         "x=" + startX + ", y=" + startY + 
+                         ", width=" + width + ", height=" + cardPanelHeight);
     }
     
     /**
@@ -1516,77 +1481,29 @@ public class CandidateSearchUI extends JFrame {
      * Updates the layout of candidate cards based on window size
      */
     private void updateCandidateCardsLayout(int startX, int totalWidth) {
-        if (candidateCards.isEmpty()) {
-            return;
-        }
-        
-        // Find content panel 
-        Component[] mainComponents = getContentPane().getComponents();
-        JPanel contentPanel = null;
-        
-        for (Component comp : mainComponents) {
-            if (comp instanceof JPanel && 
-                ((BorderLayout)getContentPane().getLayout()).getConstraints(comp) == BorderLayout.CENTER) {
-                contentPanel = (JPanel) comp;
-                break;
+        if (cardPanel != null) {
+            // Get current position and size
+            Rectangle bounds = cardPanel.getBounds();
+            
+            // Calculate available height from current position to bottom of window
+            Component contentPanel = null;
+            for (Component comp : getContentPane().getComponents()) {
+                if (comp instanceof JPanel && 
+                    ((BorderLayout)getContentPane().getLayout()).getConstraints(comp) == BorderLayout.CENTER) {
+                    contentPanel = comp;
+                    break;
+                }
             }
-        }
-        
-        if (contentPanel == null) {
-            return;
-        }
-        
-        // Find the divider line
-        Component[] contentComponents = contentPanel.getComponents();
-        JPanel dividerLinePanel = null;
-        
-        for (Component contentComp : contentComponents) {
-            if (contentComp instanceof JPanel && "dividerLine".equals(contentComp.getName())) {
-                dividerLinePanel = (JPanel) contentComp;
-                break;
-            }
-        }
-        
-        if (dividerLinePanel == null) {
-            return;
-        }
-        
-        // Calculate new starting Y position
-        int newCardY = dividerLinePanel.getBounds().y + cardMarginTop;
-        
-        // Calculate how many cards can fit in a row
-        int cardWidth = 275;
-        int cardSpacing = cardMarginHorizontal;
-        int maxCardsPerRow = Math.max(1, (totalWidth + cardSpacing) / (cardWidth + cardSpacing));
-        int currentCardsPerRow = Math.min(maxCardsPerRow, 4); // Limit to 4 cards per row maximum
-        
-        // Adjust card spacing to evenly distribute cards across the centered area
-        int totalCardRowWidth;
-        if (currentCardsPerRow > 1) {
-            // Calculate total width of all cards in a row with equal spacing
-            totalCardRowWidth = (currentCardsPerRow * cardWidth) + ((currentCardsPerRow - 1) * cardSpacing);
             
-            // If the total row width is less than available width, center the row
-            if (totalCardRowWidth < totalWidth) {
-                // Update starting X to center the entire row of cards
-                startX += (totalWidth - totalCardRowWidth) / 2;
-            }
-        }
-        
-        // Reposition all cards in the grid
-        for (int i = 0; i < candidateCards.size(); i++) {
-            CandidateCard card = candidateCards.get(i);
+            int availableHeight = contentPanel != null ? 
+                contentPanel.getHeight() - bounds.y - 20 : 400;
             
-            // Calculate row and column
-            int row = i / currentCardsPerRow;
-            int col = i % currentCardsPerRow;
+            // Update bounds of the card panel - maintain current Y position
+            cardPanel.setBounds(startX, bounds.y, totalWidth, Math.max(400, availableHeight));
             
-            // Calculate position
-            int x = startX + col * (cardWidth + cardSpacing);
-            int y = newCardY + row * (card.getHeight() + 15); // 15px vertical spacing
-            
-            // Update card position
-            card.setBounds(x, y, cardWidth, card.getHeight());
+            // Force update
+            cardPanel.revalidate();
+            cardPanel.repaint();
         }
     }
     
@@ -1598,6 +1515,22 @@ public class CandidateSearchUI extends JFrame {
             clearIconLabel.setVisible(visible);
             clearIconVisible = visible;
         }
+    }
+    
+    // Add the method to handle redirection to landing page
+    private void navigateToLandingPage() {
+        // Save current window size before closing
+        Dimension currentSize = getSize();
+        Point currentLocation = getLocation();
+        
+        // Close this window
+        dispose();
+        
+        // Create and show the landing page with same size and position
+        LandingPageUI landingPage = new LandingPageUI();
+        landingPage.setSize(currentSize);
+        landingPage.setLocation(currentLocation);
+        landingPage.setVisible(true);
     }
     
     public static void main(String[] args) {

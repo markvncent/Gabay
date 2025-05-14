@@ -6,7 +6,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import util.ResourceHelper;
 
 /**
  * Utility class to load candidate data from the candidates.txt file
@@ -63,59 +62,41 @@ public class CandidateDataLoader {
     }
     
     /**
-     * Load candidates from the candidates.txt file
-     * 
-     * @return List of Candidate objects
+     * Load candidates from the data file
      */
     public static List<Candidate> loadCandidates() {
         List<Candidate> candidates = new ArrayList<>();
         
-        // Add some default candidates for testing if no file is found
-        candidates.add(new Candidate("John Doe", "Senator", "Independent", "NCR", "45", "resources/images/candidates/john_doe.jpg"));
-        candidates.add(new Candidate("Jane Smith", "Governor", "Progressive", "Region IV-A", "38", "resources/images/candidates/jane_smith.jpg"));
-        candidates.add(new Candidate("Bob Wilson", "Representative", "Conservative", "Region III", "52", "resources/images/candidates/bob_wilson.jpg"));
-        candidates.add(new Candidate("Alice Brown", "Mayor", "Liberal", "Region VII", "41", "resources/images/candidates/alice_brown.jpg"));
-        
-        // Try to find the candidates file using ResourceHelper first
-        File candidatesFile = ResourceHelper.getDataFile("candidates.txt");
-        
-        // If not found with ResourceHelper, try alternative paths
-        if (!candidatesFile.exists()) {
-            // Define possible file paths to search - updated to include resources/data directory
-            String[] possiblePaths = {
-                "resources/data/candidates.txt",
-                "./resources/data/candidates.txt",
-                "../resources/data/candidates.txt",
-                "candidates.txt",
-                "./candidates.txt",
-                "../candidates.txt",
-                "src/candidates.txt",
-                "./src/candidates.txt"
-            };
+        try {
+            // Try to load from the resources directory first
+            File candidatesFile = new File("resources/data/candidates.txt");
             
-            // Try to find and load the file from one of the possible paths
-            for (String path : possiblePaths) {
-                File testFile = new File(path);
-                if (testFile.exists()) {
-                    candidatesFile = testFile;
-                    System.out.println("Found candidates file at: " + testFile.getAbsolutePath());
-                    break;
+            // If not found, try alternative paths
+            if (!candidatesFile.exists()) {
+                // Try various alternative paths
+                String[] possiblePaths = {
+                    "data/candidates.txt",
+                    "../resources/data/candidates.txt",
+                    "candidates.txt"
+                };
+                
+                for (String path : possiblePaths) {
+                    File testFile = new File(path);
+                    if (testFile.exists()) {
+                        candidatesFile = testFile;
+                        System.out.println("Found candidates file at: " + path);
+                        break;
+                    }
                 }
             }
-        } else {
-            System.out.println("Found candidates file using ResourceHelper at: " + candidatesFile.getAbsolutePath());
-        }
-        
-        // If file is not found, return the default candidates
-        if (candidatesFile == null || !candidatesFile.exists()) {
-            System.out.println("Candidates file not found in any of the searched locations. Using default candidates.");
-            return candidates;
-        }
-        
-        // Clear default candidates if we found a file
-        candidates.clear();
-        
-        try (BufferedReader reader = new BufferedReader(new FileReader(candidatesFile))) {
+            
+            if (!candidatesFile.exists()) {
+                System.err.println("WARNING: candidates.txt file not found");
+                return candidates; // Return empty list
+            }
+            
+            // Read the file line by line
+            BufferedReader reader = new BufferedReader(new FileReader(candidatesFile));
             String line;
             String name = null;
             String position = null;

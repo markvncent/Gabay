@@ -13,6 +13,7 @@ import java.awt.event.*;
 import java.util.function.Consumer;
 import java.io.BufferedReader;
 import java.io.FileReader;
+import javax.swing.RepaintManager;
 
 /**
  * A panel that displays a list of candidate profiles.
@@ -108,19 +109,37 @@ public class ProfileListPanel extends JPanel {
         contentPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
         
         // Create scroll pane with custom appearance
-        scrollPane = new JScrollPane(contentPanel);
+        scrollPane = new JScrollPane(contentPanel) {
+            @Override
+            protected void paintComponent(Graphics g) {
+                // Use double buffering to eliminate artifacts
+                Graphics2D g2d = (Graphics2D) g.create();
+                g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                
+                // Ensure the background is painted to eliminate ghosts
+                g2d.setColor(bgColor);
+                g2d.fillRect(0, 0, getWidth(), getHeight());
+                
+                super.paintComponent(g2d);
+                g2d.dispose();
+            }
+        };
+        
         scrollPane.setOpaque(false);
         scrollPane.getViewport().setOpaque(false);
         scrollPane.setBorder(null);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         
-        // Improve scrolling performance
+        // Improve scrolling performance and eliminate artifacts
         scrollPane.getVerticalScrollBar().setUnitIncrement(16); // Faster scrolling
         scrollPane.setWheelScrollingEnabled(true);
         
-        // Reduce flicker during scrolling by using double buffering
-        scrollPane.getViewport().setScrollMode(JViewport.BACKINGSTORE_SCROLL_MODE);
+        // Use BLIT_SCROLL_MODE for best rendering during scrolling
+        scrollPane.getViewport().setScrollMode(JViewport.BLIT_SCROLL_MODE);
+        
+        // Add a paint manager to handle asynchronous repaints with correct visualization
+        RepaintManager.currentManager(scrollPane).setDoubleBufferingEnabled(true);
         
         // Customize scroll bar
         JScrollBar verticalScrollBar = scrollPane.getVerticalScrollBar();
@@ -147,6 +166,33 @@ public class ProfileListPanel extends JPanel {
                 button.setMinimumSize(new Dimension(0, 0));
                 button.setMaximumSize(new Dimension(0, 0));
                 return button;
+            }
+            
+            @Override
+            protected void paintThumb(Graphics g, JComponent c, Rectangle thumbBounds) {
+                if (thumbBounds.isEmpty() || !scrollbar.isEnabled()) {
+                    return;
+                }
+                
+                Graphics2D g2 = (Graphics2D) g.create();
+                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, 
+                                   RenderingHints.VALUE_ANTIALIAS_ON);
+                
+                // Use rounded rectangle for thumb with smoother corners
+                g2.setColor(thumbColor);
+                g2.fillRoundRect(thumbBounds.x, thumbBounds.y, 
+                                thumbBounds.width, thumbBounds.height, 8, 8);
+                g2.dispose();
+            }
+        });
+        
+        // Add adjustment listener to handle clean repaints during scrolling
+        verticalScrollBar.addAdjustmentListener(e -> {
+            if (e.getValueIsAdjusting()) {
+                // Force a clean repaint when scrolling
+                contentPanel.invalidate();
+                contentPanel.revalidate();
+                contentPanel.repaint();
             }
         });
         
@@ -341,8 +387,13 @@ public class ProfileListPanel extends JPanel {
         JPanel cardPanel = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
+                // Use high-quality rendering with double buffering
                 Graphics2D g2d = (Graphics2D) g.create();
                 g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+                
+                // First clear the background to avoid artifacts
+                g2d.clearRect(0, 0, getWidth(), getHeight());
                 
                 // Determine if this card is selected
                 boolean isSelected = (cardIndex == selectedCardIndex);
@@ -373,6 +424,18 @@ public class ProfileListPanel extends JPanel {
                 // Let the layout manager handle the components
                 super.paintComponent(g);
             }
+            
+            // Override to ensure consistent rendering
+            @Override
+            public void repaint() {
+                super.repaint();
+                // If any avatar panel exists, also repaint it
+                for (Component c : getComponents()) {
+                    if (c instanceof JPanel) {
+                        c.repaint();
+                    }
+                }
+            }
         };
         
         cardPanel.setLayout(new BorderLayout());
@@ -387,9 +450,13 @@ public class ProfileListPanel extends JPanel {
         JPanel avatarPanel = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
+                // Clear the area first to avoid ghost artifacts
+                g.clearRect(0, 0, getWidth(), getHeight());
+                
+                // Use high-quality rendering
                 Graphics2D g2d = (Graphics2D) g;
                 g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
                 
                 // Draw light gray background circle
                 g2d.setColor(new Color(0xF1, 0xF5, 0xF9));
@@ -530,7 +597,7 @@ public class ProfileListPanel extends JPanel {
     }
     
     /**
-     * Set the selected card index and update the UI
+     * Sets the selected card index and update the UI
      * @param index The index of the selected card
      */
     public void setSelectedCardIndex(int index) {
@@ -542,6 +609,10 @@ public class ProfileListPanel extends JPanel {
             for (JPanel card : candidateCards) {
                 card.repaint();
             }
+            
+            // Ensure complete repaint without artifacts
+            RepaintManager.currentManager(this).markCompletelyDirty(this);
+            repaint();
         }
     }
     
@@ -586,8 +657,23 @@ public class ProfileListPanel extends JPanel {
      * Update the UI based on whether we have data
      */
     private void refreshUI() {
+        // Ensure clean rendering by marking the component as completely dirty
+        RepaintManager.currentManager(this).markCompletelyDirty(this);
         revalidate();
         repaint();
+        
+        // Also mark the scroll pane and content panel for complete repainting
+        if (scrollPane != null) {
+            RepaintManager.currentManager(scrollPane).markCompletelyDirty(scrollPane);
+            scrollPane.revalidate();
+            scrollPane.repaint();
+        }
+        
+        if (contentPanel != null) {
+            RepaintManager.currentManager(contentPanel).markCompletelyDirty(contentPanel);
+            contentPanel.revalidate();
+            contentPanel.repaint();
+        }
     }
     
     @Override

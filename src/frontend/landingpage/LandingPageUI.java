@@ -17,9 +17,9 @@ import java.util.List;
 import java.util.ArrayList;
 import frontend.admin.AdminLoginUI;
 import frontend.search.CandidateSearchUI;
-import frontend.comparison.CandidateComparisonUI;
-import frontend.overview.CandidateOverviewUI;
-import frontend.quiz.CandidateQuizUI;
+// import frontend.comparison.CandidateComparisonUI;
+// import frontend.overview.CandidateOverviewUI;
+// import frontend.quiz.CandidateQuizUI;
 import frontend.admin.AdminPanelUI;
 
 public class LandingPageUI extends JFrame {
@@ -514,30 +514,42 @@ public class LandingPageUI extends JFrame {
         button2.addActionListener(e -> {
             Dimension currentSize = getSize();
             dispose(); // Close current window
-            CandidateComparisonUI comparisonUI = new CandidateComparisonUI();
-            comparisonUI.setSize(currentSize); // Set the same size as current window
-            comparisonUI.setLocationRelativeTo(null); // Center on screen
-            comparisonUI.setVisible(true);
+            // CandidateComparisonUI comparisonUI = new CandidateComparisonUI();
+            // comparisonUI.setSize(currentSize); // Set the same size as current window
+            // comparisonUI.setLocationRelativeTo(null); // Center on screen
+            // comparisonUI.setVisible(true);
+            // For now, just show a message
+            System.out.println("Comparison feature not yet implemented");
+            // Reopen landing page
+            reopenLandingPage(currentSize, getLocation());
         });
         
         // Add action listener for Overview button
         button3.addActionListener(e -> {
             Dimension currentSize = getSize();
             dispose(); // Close current window
-            CandidateOverviewUI overviewUI = new CandidateOverviewUI();
-            overviewUI.setSize(currentSize); // Set the same size as current window
-            overviewUI.setLocationRelativeTo(null); // Center on screen
-            overviewUI.setVisible(true);
+            // CandidateOverviewUI overviewUI = new CandidateOverviewUI();
+            // overviewUI.setSize(currentSize); // Set the same size as current window
+            // overviewUI.setLocationRelativeTo(null); // Center on screen
+            // overviewUI.setVisible(true);
+            // For now, just show a message
+            System.out.println("Overview feature not yet implemented");
+            // Reopen landing page
+            reopenLandingPage(currentSize, getLocation());
         });
         
         // Add action listener for Quiz button
         button4.addActionListener(e -> {
             Dimension currentSize = getSize();
             dispose(); // Close current window
-            CandidateQuizUI quizUI = new CandidateQuizUI();
-            quizUI.setSize(currentSize); // Set the same size as current window
-            quizUI.setLocationRelativeTo(null); // Center on screen
-            quizUI.setVisible(true);
+            // CandidateQuizUI quizUI = new CandidateQuizUI();
+            // quizUI.setSize(currentSize); // Set the same size as current window
+            // quizUI.setLocationRelativeTo(null); // Center on screen
+            // quizUI.setVisible(true);
+            // For now, just show a message
+            System.out.println("Quiz feature not yet implemented");
+            // Reopen landing page
+            reopenLandingPage(currentSize, getLocation());
         });
         
         // Add buttons to panel
@@ -2183,5 +2195,68 @@ public class LandingPageUI extends JFrame {
         });
         
         return button;
+    }
+
+    // In the method that handles card clicks
+    private void handleCardClick(String cardType) {
+        System.out.println("Card clicked: " + cardType);
+        
+        // Save current window size
+        Dimension currentSize = getSize();
+        Point currentLocation = getLocation();
+        
+        // Close this window
+        dispose();
+        
+        // Navigate to appropriate UI
+        if ("comparison".equals(cardType)) {
+            // Comment out since CandidateComparisonUI is missing
+            // CandidateComparisonUI comparisonUI = new CandidateComparisonUI();
+            // comparisonUI.setSize(currentSize);
+            // comparisonUI.setLocation(currentLocation);
+            // comparisonUI.setVisible(true);
+            // For now, just show a message
+            System.out.println("Comparison feature not yet implemented");
+            // Reopen landing page
+            reopenLandingPage(currentSize, currentLocation);
+        }
+        else if ("overview".equals(cardType)) {
+            // Comment out since CandidateOverviewUI is missing
+            // CandidateOverviewUI overviewUI = new CandidateOverviewUI();
+            // overviewUI.setSize(currentSize);
+            // overviewUI.setLocation(currentLocation);
+            // overviewUI.setVisible(true);
+            // For now, just show a message
+            System.out.println("Overview feature not yet implemented");
+            // Reopen landing page
+            reopenLandingPage(currentSize, currentLocation);
+        }
+        else if ("quiz".equals(cardType)) {
+            // Comment out since CandidateQuizUI is missing
+            // CandidateQuizUI quizUI = new CandidateQuizUI();
+            // quizUI.setSize(currentSize);
+            // quizUI.setLocation(currentLocation);
+            // quizUI.setVisible(true);
+            // For now, just show a message
+            System.out.println("Quiz feature not yet implemented");
+            // Reopen landing page
+            reopenLandingPage(currentSize, currentLocation);
+        }
+        else if ("search".equals(cardType)) {
+            CandidateSearchUI searchUI = new CandidateSearchUI();
+            searchUI.setSize(currentSize);
+            searchUI.setLocation(currentLocation);
+            searchUI.setVisible(true);
+        }
+    }
+    
+    /**
+     * Reopen the landing page (used when a feature is not implemented)
+     */
+    private void reopenLandingPage(Dimension size, Point location) {
+        LandingPageUI landingPage = new LandingPageUI();
+        landingPage.setSize(size);
+        landingPage.setLocation(location);
+        landingPage.setVisible(true);
     }
 } 

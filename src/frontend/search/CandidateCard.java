@@ -10,6 +10,8 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import java.util.function.Consumer;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A modular component to display candidate information in a card format.
@@ -60,6 +62,9 @@ public class CandidateCard extends JPanel {
     
     // Callback
     private Consumer<String> onViewProfile;
+    
+    // Hover state listener for external control
+    private List<Consumer<Boolean>> hoverListeners = new ArrayList<>();
     
     /**
      * Create a new candidate card
@@ -319,7 +324,7 @@ public class CandidateCard extends JPanel {
             @Override
             public void mouseEntered(MouseEvent e) {
                 // Set hovering state to true
-                hovering = true;
+                setHovering(true);
                 
                 // Add a small cursor pointer effect
                 setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -363,7 +368,7 @@ public class CandidateCard extends JPanel {
             @Override
             public void mouseExited(MouseEvent e) {
                 // Set hovering state to false
-                hovering = false;
+                setHovering(false);
                 
                 // Return cursor to default
                 setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
@@ -382,6 +387,39 @@ public class CandidateCard extends JPanel {
         addMouseListener(hoverAdapter);
         mainCardPanel.addMouseListener(hoverAdapter);
         imagePanel.addMouseListener(hoverAdapter);
+    }
+    
+    /**
+     * Sets the hovering state of this card and notifies listeners
+     * @param hovering True if the card is being hovered over, false otherwise
+     */
+    public void setHovering(boolean hovering) {
+        if (this.hovering != hovering) {
+            this.hovering = hovering;
+            
+            // Notify any hover listeners
+            for (Consumer<Boolean> listener : hoverListeners) {
+                listener.accept(hovering);
+            }
+        }
+    }
+    
+    /**
+     * Add a listener to be notified when hover state changes
+     * @param listener Consumer that accepts a boolean indicating hover state
+     */
+    public void addCustomHoverListener(Consumer<Boolean> listener) {
+        if (!hoverListeners.contains(listener)) {
+            hoverListeners.add(listener);
+        }
+    }
+    
+    /**
+     * Remove a hover listener
+     * @param listener The listener to remove
+     */
+    public void removeCustomHoverListener(Consumer<Boolean> listener) {
+        hoverListeners.remove(listener);
     }
     
     /**
