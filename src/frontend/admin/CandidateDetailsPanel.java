@@ -14,6 +14,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 
+import backend.candidate.Candidate;
+import backend.candidate.CandidateDataManager;
+
 /**
  * A simplified rectangle component for the admin panel.
  * This component is a placeholder for candidate details, positioned beside the directory panel.
@@ -89,6 +92,9 @@ public class CandidateDetailsPanel extends JPanel {
     
     // Position dropdown reference
     private PositionsDropdown positionsDropdown;
+    
+    // Add a reference to CandidateDirectoryPanel
+    private CandidateDirectoryPanel directoryPanel;
     
     /**
      * Creates a new CandidateDetailsPanel as a simple rectangle
@@ -1915,6 +1921,10 @@ public class CandidateDetailsPanel extends JPanel {
                                          "Success", 
                                          JOptionPane.INFORMATION_MESSAGE);
             clearForm(); // Reset form for next entry
+            // Refresh the directory panel list
+            if (directoryPanel != null) {
+                directoryPanel.loadCandidatesFromBackend();
+            }
         } else {
             JOptionPane.showMessageDialog(this, 
                                          "Failed to " + (isEditMode ? "update" : "add") + " candidate", 
@@ -2191,5 +2201,10 @@ public class CandidateDetailsPanel extends JPanel {
                 page2Button.repaint();
             }
         }
+    }
+    
+    // Add a setter for the directory panel
+    public void setDirectoryPanel(CandidateDirectoryPanel directoryPanel) {
+        this.directoryPanel = directoryPanel;
     }
 } 
