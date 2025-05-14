@@ -307,6 +307,10 @@ public class ProfileListPanel extends JPanel {
                         name = line.substring("Name:".length()).trim();
                     } else if (line.startsWith("Position:")) {
                         position = line.substring("Position:".length()).trim();
+                    } else if (line.startsWith("Positions:")) {
+                        position = line.substring("Positions:".length()).trim();
+                    } else if (line.startsWith("Running Position:")) {
+                        position = line.substring("Running Position:".length()).trim();
                     } else if (line.startsWith("Party Affiliation:")) {
                         party = line.substring("Party Affiliation:".length()).trim();
                     } else if (line.startsWith("Image:")) {

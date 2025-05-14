@@ -2035,9 +2035,24 @@ public class CandidateDetailsPanel extends JPanel {
         setFieldText(lawsField, candidateData.get("Notable Laws"));
         setFieldText(opposedField, candidateData.get("Opposed Issues"));
         
-        // Set dropdown values
-        selectedRegion = candidateData.getOrDefault("Region", "Select Region");
-        selectedPosition = candidateData.getOrDefault("Position", "Select Position");
+        // Set dropdown values - check multiple possible keys for region and position
+        String regionValue = null;
+        if (candidateData.containsKey("Region")) {
+            regionValue = candidateData.get("Region");
+        } else if (candidateData.containsKey("Hometown Region")) {
+            regionValue = candidateData.get("Hometown Region");
+        }
+        selectedRegion = regionValue != null ? regionValue : "Select Region";
+        
+        String positionValue = null;
+        if (candidateData.containsKey("Position")) {
+            positionValue = candidateData.get("Position");
+        } else if (candidateData.containsKey("Running Position")) {
+            positionValue = candidateData.get("Running Position");
+        } else if (candidateData.containsKey("Positions")) {
+            positionValue = candidateData.get("Positions");
+        }
+        selectedPosition = positionValue != null ? positionValue : "Select Position";
         
         // Update the dropdowns to show selected values
         updateDropdownDisplays();
@@ -2112,9 +2127,24 @@ public class CandidateDetailsPanel extends JPanel {
         setFieldText(lawsField, candidateData.get("Notable Laws"));
         setFieldText(opposedField, candidateData.get("Opposed Issues"));
         
-        // Set dropdown values
-        selectedRegion = candidateData.getOrDefault("Region", "Select Region");
-        selectedPosition = candidateData.getOrDefault("Position", "Select Position");
+        // Set dropdown values - check multiple possible keys for region and position
+        String regionValue = null;
+        if (candidateData.containsKey("Region")) {
+            regionValue = candidateData.get("Region");
+        } else if (candidateData.containsKey("Hometown Region")) {
+            regionValue = candidateData.get("Hometown Region");
+        }
+        selectedRegion = regionValue != null ? regionValue : "Select Region";
+        
+        String positionValue = null;
+        if (candidateData.containsKey("Position")) {
+            positionValue = candidateData.get("Position");
+        } else if (candidateData.containsKey("Running Position")) {
+            positionValue = candidateData.get("Running Position");
+        } else if (candidateData.containsKey("Positions")) {
+            positionValue = candidateData.get("Positions");
+        }
+        selectedPosition = positionValue != null ? positionValue : "Select Position";
         
         // Update the dropdowns to show selected values
         updateDropdownDisplays();
