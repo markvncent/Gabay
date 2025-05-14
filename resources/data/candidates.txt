@@ -1,47 +1,2119 @@
-Name: Margarita Santos  
-Age: 44  
-Region: Region I  
-Party Affiliation: Progressive Reform Alliance  
-Positions: Senator (1st term)  
-Years of Experience: 12  
-Campaign Slogan: Progress Through Compassion  
-Platforms: Poverty alleviation; Social welfare programs; Indigenous peoples' rights; Educational scholarships  
-Supported Issues: Expanded welfare programs; Indigenous land rights; Free education  
-Opposed Issues: Foreign mining contracts; Privatization of public utilities  
-Notable Laws: Expanded Scholarship Fund Act; Indigenous Cultural Preservation Act  
+Name: Fernando "Nanding" Reyes
+Age: 62
+Position: President
+Party Affiliation: Partido ng Pagbabago at Pag-asa (PPP)
+Region: Region I
+Notable Laws: Rural Development Act of 2015; Anti-Corruption Enhancement Law; Philippine Education Reform Bill
+Campaign Slogan: Tunay na Pagbabago, Tunay na Pag-asa
+Years of Experience: 38
+Platforms: Economic reform focused on countryside development; Aggressive anti-corruption campaign; Infrastructure development in rural areas; Strengthening agricultural sector; Improved healthcare system access
+Supported Issues: Constitutional amendments for federal system; Increased military spending; Foreign investment expansion; Small and medium enterprise support
+Opposed Issues: Mining in protected areas; Political dynasty perpetuation; Tax amnesty for large corporations
+Image: resources/images/candidates/default.png
+Social Stance: Universal Healthcare Funding - Agree
+Social Stance: Mandatory Sex Education - Disagree
+Social Stance: Legalization of Divorce - Disagree
+Social Stance: Mandatory ROTC for Senior High Students - Agree
+Social Stance: Anti-Terror Law - Neutral
+Social Stance: Federalism - Agree
+Social Stance: Jeepney Modernization Program - No Data
+Social Stance: Minimum Wage Standardization - No Data
+Social Stance: Lowering the Age of Criminal Responsibility - Agree
+Social Stance: Same-Sex Marriage - Disagree
+Social Stance: Reinstating the Death Penalty - Agree
+Social Stance: Foreign Investment in Land Ownership - Agree
+Social Stance: Passing the SOGIE Equality Bill - Disagree
 
-Name: Antonio Villanueva  
-Age: 61  
-Region: Region IV 
-Party Affiliation: Nationalist People's Coalition  
-Positions: Senator (3rd term)  
-Years of Experience: 28  
-Campaign Slogan: Integrity. Service. Results.  
-Platforms: Agricultural modernization; Anti-corruption measures; Infrastructure development; National security  
-Supported Issues: Increased military funding; Traditional family values; Farmer subsidies  
-Opposed Issues: Divorce legalization; Same-sex marriage  
-Notable Laws: Agricultural Modernization Fund Act; Anti-Corruption Commission Act  
 
-Name: Isabella Reyes  
-Age: 52  
-Region: Region X  
-Party Affiliation: Liberal Democratic Party  
-Positions: Senator (2nd term)  
-Years of Experience: 15  
-Campaign Slogan: Building Bridges, Not Walls  
-Platforms: Universal healthcare expansion; Educational reform; Women's rights legislation; Climate change adaptation  
-Supported Issues: Reproductive health education; SOGIE bill; Progressive taxation  
-Opposed Issues: Death penalty; Mandatory military service  
-Notable Laws: Comprehensive Healthcare Access Act; Women's Economic Empowerment Act  
+Name: Maria "Maring" Villanueva-Santos
+Age: 58
+Position: President
+Party Affiliation: Partido Demokratiko ng Pilipinas (PDP)
+Region: Region XI
+Notable Laws: Women's Protection Act; Climate Change Adaptation Framework; Free College Education Law
+Campaign Slogan: Kababaihan, Kabataan, Kinabukasan
+Years of Experience: 30
+Platforms: Women's empowerment and gender equality; Education system overhaul; Environmental protection and climate change adaptation; Healthcare reform with focus on preventive care; Diplomatic approach to territorial disputes
+Supported Issues: Increased education budget; Environmental protection legislation; Divorce law; Universal healthcare
+Opposed Issues: Death penalty restoration; Nuclear energy development; Military involvement in civilian governance
+Image: No Data
+Social Stance: Universal Healthcare Funding - Agree
+Social Stance: Mandatory Sex Education - Agree
+Social Stance: Legalization of Divorce - Agree
+Social Stance: Mandatory ROTC for Senior High Students - Neutral
+Social Stance: Anti-Terror Law - No Data
+Social Stance: Federalism - Disagree
+Social Stance: Jeepney Modernization Program - Neutral
+Social Stance: Minimum Wage Standardization - Agree
+Social Stance: Lowering the Age of Criminal Responsibility - Neutral
+Social Stance: Same-Sex Marriage - Agree
+Social Stance: Reinstating the Death Penalty - Disagree
+Social Stance: Foreign Investment in Land Ownership - No Data
+Social Stance: Passing the SOGIE Equality Bill - Agree
 
-Name: Ramon Dizon  
-Age: 58  
-Region: NCR Region  
-Party Affiliation: Nationalist Party  
-Positions: Senator (2nd term)  
-Years of Experience: 22  
-Campaign Slogan: A Stronger Nation Together  
-Platforms: Economic development; Foreign investment; Tax reform; Tourism promotion  
-Supported Issues: Foreign investments; Tax breaks for businesses; Infrastructure projects  
-Opposed Issues: Higher minimum wage; Stricter environmental regulations  
-Notable Laws: Foreign Investment Simplification Act; Tourism Development Zone Act 
+
+Name: Roberto "Bert" Gonzales Jr.
+Age: 65
+Hometown Region: CALABARZON
+Party Affiliation: Lakas ng Bayan (LNB)
+Running Position: President
+Years of Experience: 40
+Campaign Slogan: "Karanasan at Katapatan para sa Bayan" (Experience and Loyalty for the Nation)
+Platforms: Traditional values preservation; Business-friendly economic policies; Strong national defense; Law and order enforcement; Infrastructure development
+Supported Issues: Lower corporate taxes; Military modernization; Traditional family values; Infrastructure projects through PPP
+Opposed Issues: Same-sex marriage; Liberal drug policies; Government spending on welfare programs
+Notable Laws Enacted: National Defense Enhancement Act; Investment Liberalization Law; Tax Reform Acceleration Program
+Stances On Social Issues:
+Legalization of Divorce - Disagree
+Passing the SOGIE Equality Bill - Disagree
+Reinstating the Death Penalty - Agree
+Lowering the Age of Criminal Responsibility - No Data
+Federalism - Agree
+Mandatory ROTC for Senior High Students - No Data
+Same-Sex Marriage - Disagree
+Anti-Terror Law - Nuetral
+Jeepney Modernization Program - Disagree
+Foreign Investment in Land Ownership - Agree
+Universal Healthcare Funding - Agree
+Mandatory Sex Education - No Data
+Minimum Wage Standardization - Disagree
+
+
+Name: Danilo "Danny" Macaraig
+Age: 54
+Hometown Region: Region VII
+Party Affiliation: Partido ng Pagbabago at Pag-asa (PPP)
+Running Position: Vice President
+Years of Experience: 25
+Campaign Slogan: "Kasama Mo sa Pagsulong" (With You in Progress)
+Platforms: Youth development and employment; OFW rights and protection; Education innovation; Digital governance; Tourism development
+Supported Issues: Tech startup incentives; OFW benefits expansion; Digital infrastructure development; Technical education reform
+Opposed Issues: Internet censorship; Budget cuts to education; Traditional bureaucratic processes
+Notable Laws Enacted: OFW Protection and Benefits Act; Digital Education Framework Law; Youth Employment Act
+Stances On Social Issues:
+Legalization of Divorce - Agree
+Passing the SOGIE Equality Bill - Agree
+Reinstating the Death Penalty - Disagree
+Lowering the Age of Criminal Responsibility - Neutral
+Federalism - Disagree
+Mandatory ROTC for Senior High Students - Neutral
+Same-Sex Marriage - Agree
+Anti-Terror Law - Disagree
+Jeepney Modernization Program - No Data
+Foreign Investment in Land Ownership - Disagree
+Universal Healthcare Funding - Agree
+Mandatory Sex Education - Agree
+Minimum Wage Standardization - No Data
+
+
+Name: Rosario "Charo" Lim-Tan
+Age: 60
+Hometown Region: Region X
+Party Affiliation: Partido Demokratiko ng Pilipinas (PDP)
+Running Position: Vice President
+Years of Experience: 28
+Campaign Slogan: "Puso para sa Mahihirap" (Heart for the Poor)
+Platforms: Poverty alleviation programs; Healthcare for underserved areas; Housing for informal settlers; Small business support; Agricultural modernization
+Supported Issues: Social welfare expansion; Microfinance programs; Indigenous peoples' rights; Land reform
+Opposed Issues: Business monopolies; Luxury development projects; Mining in ancestral domains
+Notable Laws Enacted: Comprehensive Poverty Reduction Act; Rural Health Improvement Program; Affordable Housing for All Law
+Stances On Social Issues:
+Legalization of Divorce - Disagree
+Passing the SOGIE Equality Bill - Disagree
+Reinstating the Death Penalty - Agree
+Lowering the Age of Criminal Responsibility - No Data
+Federalism - Agree
+Mandatory ROTC for Senior High Students - Nuetral
+Same-Sex Marriage - Disagree
+Anti-Terror Law - Agree
+Jeepney Modernization Program - Agree
+Foreign Investment in Land Ownership - No Data
+Universal Healthcare Funding - Agree
+Mandatory Sex Education - Disagree
+Minimum Wage Standardization - Nuetral
+
+
+Name: Jose "Joey" Mendoza
+Age: 48
+Hometown Region: Region V
+Party Affiliation: Independent
+Running Position: Senator
+Years of Experience: 15
+Campaign Slogan: "Boses ng Masang Pilipino" (Voice of the Filipino Masses)
+Platforms: Labor rights protection; Livable wage advocacy; Anti-contractualization; Healthcare workers' welfare; Consumer protection
+Supported Issues: Organized labor strengthening; Workers' benefits expansion; Price control on basic commodities; Public transportation improvement
+Opposed Issues: Labor contractualization; Foreign worker importation; Privatization of public services
+Notable Laws Enacted: Workers' Protection Act; Public Transport Modernization Law; Consumer Protection Enhancement Act
+Stances On Social Issues:
+Legalization of Divorce - Nuetral
+Passing the SOGIE Equality Bill - Disagree
+Reinstating the Death Penalty - No Data
+Lowering the Age of Criminal Responsibility - Disagree
+Federalism - Agree
+Mandatory ROTC for Senior High Students - Nuetral
+Same-Sex Marriage - Disagree
+Anti-Terror Law - Nuetral
+Jeepney Modernization Program - Disagree
+Foreign Investment in Land Ownership - Nuetral
+Universal Healthcare Funding - No Data
+Mandatory Sex Education - Nuetral
+Minimum Wage Standardization - Agree
+
+
+Name: Georgina "Gigi" Santos-Cruz
+Age: 43
+Hometown Region: Region VI
+Party Affiliation: Lakas ng Bayan (LNB)
+Running Position: Senator
+Years of Experience: 12
+Campaign Slogan: "Para sa Pamilyang Pilipino" (For the Filipino Family)
+Platforms: Family-centered policies; Traditional values education; Children's welfare; Senior citizen benefits; Maternal healthcare
+Supported Issues: Family planning through natural methods; Religious education in schools; Pro-life advocacy; Senior citizen benefits expansion
+Opposed Issues: Comprehensive sex education; Same-sex unions; Liberal abortion laws; Notable Laws Enacted: Family Welfare Enhancement Act; Senior Citizens' Benefits Expansion; Maternal Care Improvement Law
+Stances On Social Issues:
+Legalization of Divorce - Disagree 
+Passing the SOGIE Equality Bill - Disagree
+Reinstating the Death Penalty - No Data
+Lowering the Age of Criminal Responsibility - Agree
+Federalism - Agree
+Mandatory ROTC for Senior High Students - Agree
+Same-Sex Marriage - Disagree 
+Anti-Terror Law - Agree
+Jeepney Modernization Program - No Data
+Foreign Investment in Land Ownership - Agree
+Universal Healthcare Funding - No Data
+Mandatory Sex Education - Disagree
+Minimum Wage Standardization -Agree
+
+
+Name: Benjamin "Benny" Trinidad
+Age: 55
+Hometown Region: Region VIII
+Party Affiliation: Partido ng Pagbabago at Pag-asa (PPP)
+Running Position: Senator
+Years of Experience: 22
+Campaign Slogan: "Ekonomiya Para sa Lahat" (Economy for All)
+Platforms: Economic reforms for inclusive growth; SME development; Local industry protection; Export market expansion; Job creation in rural areas
+Supported Issues: Local manufacturing incentives; Agricultural subsidies; Foreign investment with conditions; Creative industry development
+Opposed Issues: Unrestricted free trade; Labor export policy; Excessive foreign control of industries
+Notable Laws Enacted: SME Development Act; Local Industry Protection Law; Export Enhancement Program
+Stances On Social Issues:
+Legalization of Divorce - Nuetral
+Passing the SOGIE Equality Bill - Nuetral
+Reinstating the Death Penalty - No Data
+Lowering the Age of Criminal Responsibility - Agree
+Federalism - Disagree
+Mandatory ROTC for Senior High Students - No Data
+Same-Sex Marriage - Nuetral
+Anti-Terror Law - Disagree
+Jeepney Modernization Program - Disagree
+Foreign Investment in Land Ownership - Neutral
+Universal Healthcare Funding - Agree
+Mandatory Sex Education - Neutral
+Minimum Wage Standardization - Disagree
+
+
+Name: Monica "Monic" Estrella
+Age: 38
+Hometown Region: NCR
+Party Affiliation: Partido Demokratiko ng Pilipinas (PDP)
+Running Position: Senator
+Years of Experience: 10
+Campaign Slogan: "Bagong Mukha, Bagong Pag-asa" (New Face, New Hope)
+Platforms: Environmental protection; Clean energy transition; Sustainable urban planning; Disaster risk reduction; Green jobs creation
+Supported Issues: Renewable energy development; Single-use plastic ban; Urban green spaces; Climate change education
+Opposed Issues: Coal power plants; Unsustainable mining; Reclamation projects; Deforestation
+Notable Laws Enacted: Clean Air Act Amendment; Renewable Energy Incentives Law; Disaster Preparedness Enhancement Act
+Stances On Social Issues:
+Legalization of Divorce - Agree
+Passing the SOGIE Equality Bill - Agree
+Reinstating the Death Penalty - Agree
+Lowering the Age of Criminal Responsibility - Agree
+Federalism - Agree
+Mandatory ROTC for Senior High Students - No Data
+Same-Sex Marriage - Agree
+Anti-Terror Law - Disagree
+Jeepney Modernization Program - Disagree
+Foreign Investment in Land Ownership - Disagree
+Universal Healthcare Funding - Agree
+Mandatory Sex Education - Agree
+Minimum Wage Standardization - Agree
+
+
+Name: Ricardo "Ricky" Villafuerte III
+Age: 46
+Hometown Region: CALABARZON
+Party Affiliation: Nacionalista Party (NP)
+Running Position: Senator
+Years of Experience: 18
+Campaign Slogan: "Disiplina at Kaunlaran" (Discipline and Progress)
+Platforms: Law and order; Anti-drug campaign; Military modernization; Police reform; National security
+Supported Issues: Death penalty restoration; Mandatory military service; Police capability enhancement; Anti-terrorism measures
+Opposed Issues: Liberal drug policies; Military budget cuts; International interference in security
+Notable Laws Enacted: No Enacted Laws
+Stances On Social Issues:
+Legalization of Divorce - Disagree
+Passing the SOGIE Equality Bill - No Data
+Reinstating the Death Penalty - Agree 
+Lowering the Age of Criminal Responsibility - Neutral
+Federalism - Neutral
+Mandatory ROTC for Senior High Students - Agree 
+Same-Sex Marriage - No Data
+Anti-Terror Law - Agree 
+Jeepney Modernization Program - Disagree
+Foreign Investment in Land Ownership -Agree
+Universal Healthcare Funding - Agree
+Mandatory Sex Education - Disagree
+Minimum Wage Standardization - Disagree
+
+
+Name: Ramon “Monching” Delos Reyes
+Age: 56
+Hometown Region: NCR
+Party Affiliation: Bagong Alyansa ng Bayan
+Running Position: Senator
+Years of Experience: 0 (Former sitcom actor and TV personality)
+Campaign Slogan: “Galing sa Masa, Para sa Masa!”
+Platforms: N/A (Still consulting experts)
+Supported Issues: N/A
+Opposed Issues: N/A
+Notable Laws Enacted: None (first-time candidate)
+Stances On Social Issues:
+Legalization of Divorce - Disagree
+Passing the SOGIE Equality Bill - Disagree
+Reinstating the Death Penalty - No Data
+Lowering the Age of Criminal Responsibility - Agree
+Federalism - No Data
+Mandatory ROTC for Senior High Students - Neutral
+Same-Sex Marriage - Disagree
+Anti-Terror Law - Neutral
+Jeepney Modernization Program - Disagree
+Foreign Investment in Land Ownership - Neutral
+Universal Healthcare Funding - Agree
+Mandatory Sex Education - Agree
+Minimum Wage Standardization - Neutral
+
+
+Name: Alyssa Marie Gutierrez
+Age: 34
+Hometown Region: Region IV-A
+Party Affiliation: Puso at Serbisyo Party
+Running Position: Senator
+Years of Experience: 0 (Beauty queen and influencer)
+Campaign Slogan: “Beauty with a Heart, Leadership with Grace”
+Platforms: Still formulating with the help of her team
+Supported Issues: N/A
+Opposed Issues: N/A
+Notable Laws Enacted: None
+Stances On Social Issues:
+Legalization of Divorce - Neutral
+Passing the SOGIE Equality Bill - Neutral
+Reinstating the Death Penalty - Disagree
+Lowering the Age of Criminal Responsibility - No Data
+Federalism - Disagree
+Mandatory ROTC for Senior High Students - Agree
+Same-Sex Marriage - Nuetral
+Anti-Terror Law - No Data
+Jeepney Modernization Program - Neutral
+Foreign Investment in Land Ownership - Disagree
+Universal Healthcare Funding - Agree
+Mandatory Sex Education - Agree
+Minimum Wage Standardization - Neutral
+
+
+Name: Enrico “DJ Rico” Alvarez
+Age: 42
+Hometown Region: Region VII
+Party Affiliation: Independent
+Running Position: Senator
+Years of Experience: 0 (Radio DJ and club host)
+Campaign Slogan: “Makinig sa Tunay na Boses ng Bayan!”
+Platforms: No specific platform announced
+Supported Issues: N/A
+Opposed Issues: N/A
+Notable Laws Enacted: None
+Stances On Social Issues:
+Legalization of Divorce - Agree
+Passing the SOGIE Equality Bill - Agree
+Reinstating the Death Penalty - Disagree
+Lowering the Age of Criminal Responsibility - Agree
+Federalism - Disagree
+Mandatory ROTC for Senior High Students - Disagree
+Same-Sex Marriage - Agree
+Anti-Terror Law - Disagree
+Jeepney Modernization Program - Neutral
+Foreign Investment in Land Ownership - Disagree
+Universal Healthcare Funding - Agree
+Mandatory Sex Education - Agree
+Minimum Wage Standardization - Agree
+
+
+Name: Samuel “Kuya Sam” Villena
+Age: 61
+Hometown Region: Region II
+Party Affiliation: Tapat at Makabayan Party
+Running Position: Senator
+Years of Experience: 1 (Barangay Captain)
+Campaign Slogan: “Ang Simpleng Alagad ng Bayan”
+Platforms: No national platform yet due to limited exposure
+Supported Issues: N/A
+Opposed Issues: N/A
+Notable Laws Enacted: None
+Stances On Social Issues:
+Legalization of Divorce - Disagree
+Passing the SOGIE Equality Bill - Disagree
+Reinstating the Death Penalty - Agree
+Lowering the Age of Criminal Responsibility - Agree
+Federalism - Neutral
+Mandatory ROTC for Senior High Students - Agree
+Same-Sex Marriage - Disagree
+Anti-Terror Law - Neutral
+Jeepney Modernization Program - Neutral
+Foreign Investment in Land Ownership - Agree
+Universal Healthcare Funding - Agree
+Mandatory Sex Education - Disagree
+Minimum Wage Standardization - Agree
+
+
+Name: Katrina dela Cruz
+Age: 38
+Hometown Region: Region VI
+Party Affiliation: Para sa Pamilya Coalition
+Running Position: Senator
+Years of Experience: 0 (Reality show finalist and entrepreneur)
+Campaign Slogan: “Ang Tinig ng Kabataan at Negosyante”
+Platforms: Still learning the legislative process
+Supported Issues: N/A
+Opposed Issues: N/A
+Notable Laws Enacted: None
+Stances On Social Issues:
+Legalization of Divorce - Neutral
+Passing the SOGIE Equality Bill - Disagree
+Reinstating the Death Penalty - Neutral
+Lowering the Age of Criminal Responsibility - Agree
+Federalism - Agree
+Mandatory ROTC for Senior High Students - Disagree
+Same-Sex Marriage - Disagree
+Anti-Terror Law - Agree
+Jeepney Modernization Program - Agree
+Foreign Investment in Land Ownership - Disagree
+Universal Healthcare Funding - Neutral
+Mandatory Sex Education - Neutral
+Minimum Wage Standardization - Neutral
+
+
+Name: Rosario “Chay” Mendoza
+Age: 52
+Region: Region I
+Party Affiliation: Partido ng Bagong Pag-asa
+Running Position: Governor
+Years of Experience: 12
+Campaign Slogan: “Ilocos Una sa Serbisyo”
+Platforms: Infrastructure development; Renewable energy promotion; Local industry support
+Supported Issues: Renewable energy; Rural economic zones; Environmental protection
+Opposed Issues: Mining in protected areas; Political dynasties
+Notable Laws Enacted: Ilocos Green Energy Act; Local Enterprise Support Law
+Stances On Social Issues:
+Legalization of Divorce - Neutral
+Passing the SOGIE Equality Bill - Disagree
+Reinstating the Death Penalty - No Data
+Lowering the Age of Criminal Responsibility - Agree
+Federalism - No Data
+Mandatory ROTC for Senior High Students -Neutral
+Same-Sex Marriage - Disagree
+Anti-Terror Law - Agree
+Jeepney Modernization Program - Neutral
+Foreign Investment in Land Ownership - Disagree
+Universal Healthcare Funding - No Data
+Mandatory Sex Education - Agree
+Minimum Wage Standardization - Agree
+
+Name: Jaime “Jimmy” Fontanilla
+Age: 60
+Region: Region I
+Party Affiliation: National Unity Movement
+Running Position: Governor
+Years of Experience: 25
+Campaign Slogan: “Tapat sa Ilocano, Serbisyo Sigurado”
+Platforms: Agriculture modernization; Healthcare system strengthening
+Supported Issues: Universal healthcare; Farmers' subsidy; Disaster preparedness
+Opposed Issues: Charter change (Cha-Cha); Importation of staple goods
+Notable Laws Enacted: Ilocos Health Access Program; Agricultural Modernization Act
+Stances On Social Issues:
+Legalization of Divorce - Agree
+Passing the SOGIE Equality Bill - Neutral
+Reinstating the Death Penalty - Disagree
+Lowering the Age of Criminal Responsibility -  Agree
+Federalism - Disagree
+Mandatory ROTC for Senior High Students - No Data
+Same-Sex Marriage - Nuetral
+Anti-Terror Law - Disagree
+Jeepney Modernization Program - Disagree
+Foreign Investment in Land Ownership - Disagree
+Universal Healthcare Funding - Agree 
+Mandatory Sex Education - Neutral
+Minimum Wage Standardization - Agree
+
+
+Name: Leticia “Letty” Domingo
+Age: 48
+Region: Region I
+Party Affiliation: Partido ng Bagong Pag-asa
+Running Position: Vice Governor
+Years of Experience: 10
+Campaign Slogan: “Tinig ng Mamamayan, Lakas ng Batas”
+Platforms: Legislative transparency; Support for small-scale industries
+Supported Issues: Livelihood programs; Women's rights; Inclusive education
+Opposed Issues: Political dynasties; Red-tagging
+Notable Laws Enacted: Women's Employment Access Act
+Stances On Social Issues:
+Legalization of Divorce - Agree
+Passing the SOGIE Equality Bill - Agree
+Reinstating the Death Penalty - No Data
+Lowering the Age of Criminal Responsibility - Disagree
+Federalism - Disagree
+Mandatory ROTC for Senior High Students - Disagree
+Same-Sex Marriage - Nuetral
+Anti-Terror Law - No Data
+Jeepney Modernization Program - Disagree
+Foreign Investment in Land Ownership - Agree
+Universal Healthcare Funding - Agree
+Mandatory Sex Education - Agree
+Minimum Wage Standardization - Agree
+
+
+Name: Ernesto “Ernie” Galvez
+Age: 55
+Region: Region I
+Party Affiliation: National Unity Movement
+Running Position: Vice Governor
+Years of Experience: 18
+Campaign Slogan: “Siguradong Aksyon, Serbisyong Galvez”
+Platforms: Budget reforms; Senior citizen programs
+Supported Issues: Pension increase; Community healthcare centers
+Opposed Issues: Jeepney phase-out without support; Mandatory ROTC
+Notable Laws Enacted: Elder Rights Protection Bill
+Stances On Social Issues:
+Legalization of Divorce - Nuetral
+Passing the SOGIE Equality Bill - Nuetral
+Reinstating the Death Penalty - Agree
+Lowering the Age of Criminal Responsibility - Disagree
+Federalism - Agree
+Mandatory ROTC for Senior High Students - Disagree 
+Same-Sex Marriage - Nuetral
+Anti-Terror Law - No Data
+Jeepney Modernization Program - Disagree
+Foreign Investment in Land Ownership - Agree
+Universal Healthcare Funding - Agree
+Mandatory Sex Education - Agree
+Minimum Wage Standardization - No Data
+
+
+Name: Maria Teresa “Tessie” De Guzman
+Age: 52
+Region: Region II
+Party Affiliation: Partido Makabayan
+Running Position: Governor
+Years of Experience: 18
+Campaign Slogan: "Sa Puso ng Lambak, Serbisyo ang Kaakibat"
+Platforms: Agricultural modernization, Disaster preparedness, Livelihood programs, Indigenous people's rights
+Supported Issues: Agrarian reform, Rural healthcare, Education access in remote areas
+Opposed Issues: Illegal logging, Political dynasties
+Notable Laws Enacted: Rural Agricultural Modernization Act, IP Rights Strengthening Act
+Stances On Social Issues:
+Legalization of Divorce - Agree
+Passing the SOGIE Equality Bill - No Data
+Reinstating the Death Penalty  Agree
+Lowering the Age of Criminal Responsibility - Nuetral
+Federalism - Nuetral
+Mandatory ROTC for Senior High Students - Nuetral
+Same-Sex Marriage - Nuetral
+Anti-Terror Law - Agree
+Jeepney Modernization Program - Disagree
+Foreign Investment in Land Ownership - Disagree
+Universal Healthcare Funding - Agree
+Mandatory Sex Education - Agree
+Minimum Wage Standardization - No Data
+
+Name: Engr. Rolando “Rolly” Mallari
+Age: 60
+Region: Region II
+Party Affiliation: Bagong Bayan Coalition
+Running Position: Governor
+Years of Experience: 10
+Campaign Slogan: "Inhenyero Para sa Kaunlaran"
+Platforms: Infrastructure development, Flood control systems, Road connectivity
+Supported Issues: Public-private partnerships, Climate-resilient infrastructure
+Opposed Issues: Overreliance on imported goods, Bureaucratic red tape
+Notable Laws Enacted: Provincial Infra Boost Bill
+Stances On Social Issues:
+Legalization of Divorce - Nuetral
+Passing the SOGIE Equality Bill - Nuetral
+Reinstating the Death Penalty - Disagree
+Lowering the Age of Criminal Responsibility - Agree
+Federalism - Nuetral
+Mandatory ROTC for Senior High Students - Nuetral
+Same-Sex Marriage - Nuetral
+Anti-Terror Law - Disagree
+Jeepney Modernization Program - Nuetral
+Foreign Investment in Land Ownership - Disagree
+Universal Healthcare Funding - Agree
+Mandatory Sex Education - Agree
+Minimum Wage Standardization - Agree
+
+
+Name: Alfredo “Fred” Macaraeg
+Age: 48
+Region: Region II
+Party Affiliation: Partido Makabayan
+Running Position: Vice Governor
+Years of Experience: 12
+Campaign Slogan: "Kakayahan, Karanasan, Kaakibat"
+Platforms: Health center upgrades, Cooperative funding, Youth empowerment
+Supported Issues: Free public education, Local business incentives
+Opposed Issues: Corporate mining, Political violence
+Notable Laws Enacted: Youth Cooperative Support Act
+Stances On Social Issues:
+Legalization of Divorce - Agree
+Passing the SOGIE Equality Bill - Agree
+Reinstating the Death Penalty - Disagree
+Lowering the Age of Criminal Responsibility - Agree
+Federalism - Agree
+Mandatory ROTC for Senior High Students - Nuetral
+Same-Sex Marriage - Agree
+Anti-Terror Law - Disagree
+Jeepney Modernization Program - Nuetral
+Foreign Investment in Land Ownership - Disagree
+Universal Healthcare Funding - Agree
+Mandatory Sex Education - Agree
+Minimum Wage Standardization - Agree
+
+Name: Carolina “Car” Domingo
+Age: 43
+Region: Region II
+Party Affiliation: Bagong Bayan Coalition
+Running Position: Vice Governor
+Years of Experience: 7
+Campaign Slogan: "Babaeng May Gawa, Hindi Lang Salita"
+Platforms: Microenterprise support, Anti-corruption education programs
+Supported Issues: Gender equality, Digital governance
+Opposed Issues: Misuse of LGU funds
+Notable Laws Enacted: Local Government Transparency Ordinance
+Stances On Social Issues:
+Legalization of Divorce - Disagree
+Passing the SOGIE Equality Bill - Disagree
+Reinstating the Death Penalty - Agree
+Lowering the Age of Criminal Responsibility - Agree
+Federalism - Agree
+Mandatory ROTC for Senior High Students - Nuetral
+Same-Sex Marriage - Disagree
+Anti-Terror Law - Agree
+Jeepney Modernization Program - Agree
+Foreign Investment in Land Ownership - Agree
+Universal Healthcare Funding - Agree
+Mandatory Sex Education - Disagree
+Minimum Wage Standardization - Nuetral
+
+
+Name: Renato “Nato” Calderon
+Age: 55
+Region: Region III
+Party Affiliation: Partido ng Masang Manggagawa
+Running Position: Governor
+Years of Experience: 20
+Campaign Slogan: "Gobyerno Para sa Gawa, Hindi sa Porma"
+Platforms: Industrial growth, Labor protection, Local job creation
+Supported Issues: Workers' rights, Social pension reform
+Opposed Issues: Contractualization, Labor exploitation
+Notable Laws Enacted: Central Luzon Labor Protection Bill
+Stances On Social Issues:
+Legalization of Divorce - Agree
+Passing the SOGIE Equality Bill - Disagree
+Reinstating the Death Penalty - Agree
+Lowering the Age of Criminal Responsibility - Disagree
+Federalism - Agree
+Mandatory ROTC for Senior High Students - Agree
+Same-Sex Marriage - Disagree
+Anti-Terror Law - Agree
+Jeepney Modernization Program - Nuetral
+Foreign Investment in Land Ownership - Agree
+Universal Healthcare Funding - Agree
+Mandatory Sex Education - Disagree
+Minimum Wage Standardization - Agree
+
+Name: Atty. Julianne “Jules” Pascual
+Age: 39
+Region: Region III
+Party Affiliation: Tinig ng Bayan
+Running Position: Governor
+Years of Experience: 12
+Campaign Slogan: "Karapatang Laban, Karapatang Ipaglaban"
+Platforms: Legal aid access, Rule of law, Anti-land grabbing
+Supported Issues: Judicial reform, Human rights
+Opposed Issues: Extra-judicial killings, Authoritarian policies
+Notable Laws Enacted: Legal Aid Enhancement Act
+Stances On Social Issues:
+Legalization of Divorce - Nuetral
+Passing the SOGIE Equality Bill - Nuetral
+Reinstating the Death Penalty - No Data
+Lowering the Age of Criminal Responsibility - Agree
+Federalism - Disagree
+Mandatory ROTC for Senior High Students - No Data
+Same-Sex Marriage - Nuetral
+Anti-Terror Law - Disagree 
+Jeepney Modernization Program - Agree
+Foreign Investment in Land Ownership - Disagree
+Universal Healthcare Funding - Agree
+Mandatory Sex Education - Agree
+Minimum Wage Standardization - Disagree
+
+Name: Rico “Kap” Guzman
+Age: 49
+Region: Region III
+Party Affiliation: Partido ng Masang Manggagawa
+Running Position: Vice Governor
+Years of Experience: 15
+Campaign Slogan: "Kap na Maaasahan sa Lahat ng Panahon"
+Platforms: Barangay support fund, Senior citizen aid, Farmers' subsidy
+Supported Issues: Social welfare, Basic service delivery
+Opposed Issues: Misuse of calamity funds
+Notable Laws Enacted: Barangay Assistance Equity Bill
+Stances On Social Issues:
+Legalization of Divorce - Agree
+Passing the SOGIE Equality Bill - Nuetral
+Reinstating the Death Penalty - Disagree
+Lowering the Age of Criminal Responsibility - Agree
+Federalism - Disagree
+Mandatory ROTC for Senior High Students - Nuetral
+Same-Sex Marriage - Nuetral
+Anti-Terror Law - Agree
+Jeepney Modernization Program - Agree
+Foreign Investment in Land Ownership - Disagree
+Universal Healthcare Funding - Nuetral
+Mandatory Sex Education - Disagree
+Minimum Wage Standardization - Disagree
+
+Name: Dr. Felisa “Doc Liza” Gatchalian
+Age: 44
+Region: Region III
+Party Affiliation: Tinig ng Bayan
+Running Position: Vice Governor
+Years of Experience: 10
+Campaign Slogan: "Gobyernong May Malasakit at Galing"
+Platforms: Health system upgrade, Free medicine access
+Supported Issues: Universal healthcare, Mental health
+Opposed Issues: Health budget cuts
+Notable Laws Enacted: Central Luzon Mental Wellness Act
+Stances On Social Issues:
+Legalization of Divorce - Nuetral
+Passing the SOGIE Equality Bill - Agree
+Reinstating the Death Penalty - Disagree
+Lowering the Age of Criminal Responsibility - Agree
+Federalism - Disagree
+Mandatory ROTC for Senior High Students - Nuetral
+Same-Sex Marriage - Agree
+Anti-Terror Law - Disagree
+Jeepney Modernization Program - Nuetral
+Foreign Investment in Land Ownership - Disagree
+Universal Healthcare Funding - Agree
+Mandatory Sex Education - Agree
+Minimum Wage Standardization - Agree
+
+
+Name: Edgardo “Ed” Ramos
+Age: 58
+Region: Region IV-A
+Party Affiliation: Partido Para sa Masa
+Running Position: Governor
+Years of Experience: 22
+Campaign Slogan: "Serbisyong Totoo, Hindi Pampapogi"
+Platforms: Affordable housing, Urban transport solutions, Youth training programs
+Supported Issues: Housing for informal settlers, Anti-traffic programs
+Opposed Issues: Urban congestion negligence
+Notable Laws Enacted: Urban Housing Equity Act
+Stances On Social Issues:
+Legalization of Divorce - Disagree
+Passing the SOGIE Equality Bill - Disagree
+Reinstating the Death Penalty - Agree
+Lowering the Age of Criminal Responsibility - Agree
+Federalism - Nuetral
+Mandatory ROTC for Senior High Students - Agree
+Same-Sex Marriage - Disagree
+Anti-Terror Law - No Data
+Jeepney Modernization Program - Disagree
+Foreign Investment in Land Ownership - Nuetral
+Universal Healthcare Funding - Agree
+Mandatory Sex Education - Disagree
+Minimum Wage Standardization - Agree
+
+Name: Katrina “Trina” San Jose
+Age: 42
+Region: Region IV-A
+Party Affiliation: Bayanihan Unity Party
+Running Position: Governor
+Years of Experience: 14
+Campaign Slogan: "Babaeng May Puso at Plano"
+Platforms: Women's rights, Education reform, Child welfare
+Supported Issues: SOGIE Bill, Maternal health
+Opposed Issues: Gender-based violence
+Notable Laws Enacted: Provincial Child Welfare Ordinance
+Stances On Social Issues:
+Legalization of Divorce - Agree
+Passing the SOGIE Equality Bill - Agree
+Reinstating the Death Penalty - Nuetral
+Lowering the Age of Criminal Responsibility - Nuetral
+Federalism - Disagree
+Mandatory ROTC for Senior High Students - Disagree
+Same-Sex Marriage - Agree
+Anti-Terror Law - Agree
+Jeepney Modernization Program - Nuetral
+Foreign Investment in Land Ownership - Disagree
+Universal Healthcare Funding - Agree
+Mandatory Sex Education - Agree
+Minimum Wage Standardization - Disagree
+
+
+Name: Ernesto “Nesty” Guevarra
+Age: 51
+Region: Region IV-A
+Party Affiliation: Partido Para sa Masa
+Running Position: Vice Governor
+Years of Experience: 16
+Campaign Slogan: "Kasangga ng Mamamayan, Kaagapay ng Kaunlaran"
+Platforms: Cooperative funding, Barangay education support
+Supported Issues: Barangay development, Food security
+Opposed Issues: Delayed LGU project releases
+Notable Laws Enacted: Barangay Development Fund Act
+Stances On Social Issues:
+Legalization of Divorce - Agree
+Passing the SOGIE Equality Bill - Disagree
+Reinstating the Death Penalty - No Data
+Lowering the Age of Criminal Responsibility - Nuetral
+Federalism - Agree
+Mandatory ROTC for Senior High Students - Agree
+Same-Sex Marriage - Disagree
+Anti-Terror Law - Agree
+Jeepney Modernization Program - Agree
+Foreign Investment in Land Ownership - Nuetral
+Universal Healthcare Funding - Agree
+Mandatory Sex Education - Agree
+Minimum Wage Standardization - Nuetral
+
+Name: Joanna “Jowa” Castillo
+Age: 36
+Region: Region IV-A
+Party Affiliation: Bayanihan Unity Party
+Running Position: Vice Governor
+Years of Experience: 8
+Campaign Slogan: "Tunay na Pagbabago Mula sa Babae"
+Platforms: Health outreach programs, Skills training for women
+Supported Issues: Women empowerment, Universal health
+Opposed Issues: Domestic abuse tolerance
+Notable Laws Enacted: CALABARZON Women's Shelter Initiative
+Stances On Social Issues:
+Legalization of Divorce - No Data
+Passing the SOGIE Equality Bill - No Data
+Reinstating the Death Penalty - Agree
+Lowering the Age of Criminal Responsibility - No Data
+Federalism - No Data
+Mandatory ROTC for Senior High Students - Agree
+Same-Sex Marriage - Agree
+Anti-Terror Law - Agree
+Jeepney Modernization Program - No Data
+Foreign Investment in Land Ownership - Agree
+Universal Healthcare Funding - Agree
+Mandatory Sex Education - Agree
+Minimum Wage Standardization - No Data
+
+
+Name: Ricardo “Carding” Velasquez
+Age: 59
+Region: Region IV-B (MIMAROPA)
+Party Affiliation: Makabayan Bloc
+Running Position: Governor
+Years of Experience: 20
+Campaign Slogan: “Serbisyo Mula sa Puso”
+Platforms: Public health expansion; Island connectivity; Sustainable fishing and tourism
+Supported Issues: Healthcare funding; Renewable energy; Local fisherfolk support
+Opposed Issues: Open-pit mining; Budget cuts in education
+Notable Laws Enacted: Island Development Fund Act; Marine Protection Initiative
+Stances On Social Issues:
+Legalization of Divorce - Disagree
+Passing the SOGIE Equality Bill - Agree
+Reinstating the Death Penalty - Disagree
+Lowering the Age of Criminal Responsibility - Disagree
+Federalism - Agree
+Mandatory ROTC for Senior High Students - Neutral
+Same-Sex Marriage - No Data
+Anti-Terror Law - Agree
+Jeepney Modernization Program - Disagree
+Foreign Investment in Land Ownership - Disagree
+Universal Healthcare Funding - Agree
+Mandatory Sex Education - Agree
+Minimum Wage Standardization - Agree
+
+Name: Maria Andrea “Andeng” Cruz
+Age: 44
+Region: Region IV-B (MIMAROPA)
+Party Affiliation: Partido Bagong Bansa
+Running Position: Governor
+Years of Experience: 6
+Campaign Slogan: “MIMAROPA Una sa Lahat!”
+Platforms: Youth employment; Agritech investments; Tourism modernization
+Supported Issues: Digital education access; Public-private partnerships
+Opposed Issues: Political dynasties; Delays in infrastructure
+Notable Laws Enacted: Provincial Tech Grants Act
+Stances On Social Issues:
+Legalization of Divorce - Agree
+Passing the SOGIE Equality Bill - Agree
+Reinstating the Death Penalty - Disagree
+Lowering the Age of Criminal Responsibility - Agree
+Federalism - Agree
+Mandatory ROTC for Senior High Students - Neutral
+Same-Sex Marriage - Agree
+Anti-Terror Law - Neutral 
+Jeepney Modernization Program - Neutral
+Foreign Investment in Land Ownership - Disagree
+Universal Healthcare Funding - Agree
+Mandatory Sex Education - Neutral
+Minimum Wage Standardization - Agree
+
+
+Name: Ernesto “Erning” Diaz
+Age: 52
+Region: Region IV-B (MIMAROPA)
+Party Affiliation: Makabayan Bloc
+Running Position: Vice Governor
+Years of Experience: 10
+Campaign Slogan: “Kaagapay ng Mamamayan”
+Platforms: Barangay health centers; Support for island barangays
+Supported Issues: Local governance strengthening; Pro-people budgeting
+Opposed Issues: Corruption; Delayed project implementation
+Notable Laws Enacted: None
+Stances On Social Issues:
+Legalization of Divorce - Neutral
+Passing the SOGIE Equality Bill - Disagree
+Reinstating the Death Penalty - Neutral
+Lowering the Age of Criminal Responsibility - Disagree
+Federalism - Neutral
+Mandatory ROTC for Senior High Students - Disagree
+Same-Sex Marriage - Disagree
+Anti-Terror Law - Disagree
+Jeepney Modernization Program - Disagree
+Foreign Investment in Land Ownership - Neutral
+Universal Healthcare Funding - Neutral
+Mandatory Sex Education - Neutral
+Minimum Wage Standardization - Agree
+
+Name: Luisito “Louie” Gonzaga
+Age: 39
+Region: Region IV-B (MIMAROPA)
+Party Affiliation: Partido Bagong Bansa
+Running Position: Vice Governor
+Years of Experience: 3
+Campaign Slogan: “MIMAROPA, Sama-Sama”
+Platforms: Local tourism incentives; School building projects
+Supported Issues: Decentralized services; Education reform
+Opposed Issues: Bureaucratic red tape
+Notable Laws Enacted: None
+Stances On Social Issues:
+Legalization of Divorce - Disagree
+Passing the SOGIE Equality Bill - Neutral
+Reinstating the Death Penalty - No Data
+Lowering the Age of Criminal Responsibility - Neutral
+Federalism - Disagree
+Mandatory ROTC for Senior High Students - Agree
+Same-Sex Marriage - Disagree
+Anti-Terror Law - Agree
+Jeepney Modernization Program - Neutral
+Foreign Investment in Land Ownership - Neutral
+Universal Healthcare Funding - No Data
+Mandatory Sex Education - Neutral
+Minimum Wage Standardization - Neutral
+
+
+Name: Genaro “Gerry” Abundo
+Age: 55
+Region: Region V – Bicol Region
+Party Affiliation: Partido ng Masa
+Running Position: Governor
+Years of Experience: 12
+Campaign Slogan: "Sa Bicol, Para sa Masa!"
+Platforms: Disaster preparedness, livelihood programs, and sustainable agriculture
+Supported Issues: Climate resilience, poverty reduction, fisherfolk support
+Opposed Issues: Coal power expansion, foreign fishing access
+Notable Laws Enacted: Bicol Fisherfolk Assistance Act
+Stances On Social Issues:
+Legalization of Divorce - No Data
+Passing the SOGIE Equality Bill - Disagree
+Reinstating the Death Penalty - Neutral
+Lowering the Age of Criminal Responsibility -Neutral
+Federalism - Agree
+Mandatory ROTC for Senior High Students - Disagree
+Same-Sex Marriage - Neutral
+Anti-Terror Law - No Data
+Jeepney Modernization Program - Neutral
+Foreign Investment in Land Ownership - Disagree
+Universal Healthcare Funding - Neutral
+Mandatory Sex Education - No Data
+Minimum Wage Standardization - Neutral
+
+Name: Felicita “Fely” Remulla
+Age: 60
+Region: Region V – Bicol Region
+Party Affiliation: Nacionalista Party
+Running Position: Governor
+Years of Experience: 20
+Campaign Slogan: "Maunlad na Bicol, Ating Abutin"
+Platforms: Road infrastructure, provincial tourism, and public health centers
+Supported Issues: Road access, maternal health, local investment
+Opposed Issues: Political insurgency, unregulated small-scale mining
+Notable Laws Enacted: Regional Tourism Growth Act
+Stances On Social Issues:
+Legalization of Divorce - Neutral
+Passing the SOGIE Equality Bill -Neutral
+Reinstating the Death Penalty - Disagree
+Lowering the Age of Criminal Responsibility - Agree
+Federalism - No Data
+Mandatory ROTC for Senior High Students - Disagree
+Same-Sex Marriage - Neutral
+Anti-Terror Law - Neutral
+Jeepney Modernization Program - No Data
+Foreign Investment in Land Ownership - Agree
+Universal Healthcare Funding - Agree 
+Mandatory Sex Education - Neutral
+Minimum Wage Standardization - Neutral
+
+
+Name: Ramon “Mon” Berroya
+Age: 47
+Region: Region V – Bicol Region
+Party Affiliation: Partido ng Masa
+Running Position: Vice Governor
+Years of Experience: 8
+Campaign Slogan: "Karugtong ng Pagbabago"
+Platforms: Youth employment, education grants, and community cooperatives
+Supported Issues: Scholarship expansion, youth development, anti-drug campaigns
+Opposed Issues: Education budget cuts
+Notable Laws Enacted: Youth Empowerment Fund Act
+Stances On Social Issues:
+Legalization of Divorce - Disagree
+Passing the SOGIE Equality Bill - No Data
+Reinstating the Death Penalty - Neutral
+Lowering the Age of Criminal Responsibility - Disagree
+Federalism - Neutral
+Mandatory ROTC for Senior High Students - No Data
+Same-Sex Marriage - Neutral
+Anti-Terror Law - Neutral
+Jeepney Modernization Program - Agree
+Foreign Investment in Land Ownership - Disagree
+Universal Healthcare Funding - No Data
+Mandatory Sex Education - Neutral
+Minimum Wage Standardization - Agree
+
+Name: Ligaya “Joy” Imperial
+Age: 52
+Region: Region V – Bicol Region
+Party Affiliation: Nacionalista Party
+Running Position: Vice Governor
+Years of Experience: 10
+Campaign Slogan: "Serbisyong Bicolano, Buong Puso"
+Platforms: Health caravans, women's livelihood, water system upgrades
+Supported Issues: Women's rights, rural healthcare
+Opposed Issues: Delayed LGU fund transfers
+Notable Laws Enacted: Bicol Women Livelihood Fund Act
+Stances On Social Issues:
+Legalization of Divorce - Neutral
+Passing the SOGIE Equality Bill - Agree
+Reinstating the Death Penalty - Disagree
+Lowering the Age of Criminal Responsibility - Neutral
+Federalism - No Data
+Mandatory ROTC for Senior High Students - Neutral
+Same-Sex Marriage - No Data
+Anti-Terror Law - Agree
+Jeepney Modernization Program - Disagree
+Foreign Investment in Land Ownership - No Data
+Universal Healthcare Funding - Agree 
+Mandatory Sex Education - Agree
+Minimum Wage Standardization - Neutral
+
+
+Name: Alejandro “Jun” Padilla
+Age: 50
+Region: Region VI – Western Visayas
+Party Affiliation: Aksyon Demokratiko
+Running Position: Governor
+Years of Experience: 15
+Campaign Slogan: "Visayas Para sa Lahat"
+Platforms: Agro-industrial development, anti-smuggling, port modernization
+Supported Issues: Farmer cooperatives, export zones
+Opposed Issues: Import-heavy policies
+Notable Laws Enacted: Iloilo Agro-Export Act
+Stances On Social Issues:
+Legalization of Divorce - Neutral
+Passing the SOGIE Equality Bill - Agree
+Reinstating the Death Penalty - Disagree
+Lowering the Age of Criminal Responsibility - Neutral
+Federalism - Neutral
+Mandatory ROTC for Senior High Students - No Data
+Same-Sex Marriage - Agree
+Anti-Terror Law - No Data
+Jeepney Modernization Program - Neutral
+Foreign Investment in Land Ownership - Disagree 
+Universal Healthcare Funding - Disagree
+Mandatory Sex Education - Neutral
+Minimum Wage Standardization - Neutral
+
+Name: Beatrice “Bea” Villaruel
+Age: 53
+Region: Region VI – Western Visayas
+Party Affiliation: PDP-Laban
+Running Position: Governor
+Years of Experience: 12
+Campaign Slogan: "Kauswagan sa Tanan!"
+Platforms: Job generation, coastal cleanup programs
+Supported Issues: Job fairs, marine biodiversity
+Opposed Issues: Overdevelopment of beaches
+Notable Laws Enacted: Visayas Green Coast Initiative
+Stances On Social Issues:
+Legalization of Divorce - Neutral
+Passing the SOGIE Equality Bill - Agree
+Reinstating the Death Penalty - Neutral
+Lowering the Age of Criminal Responsibility - Disagree
+Federalism - Neutral
+Mandatory ROTC for Senior High Students - Agree
+Same-Sex Marriage - No Data
+Anti-Terror Law - Neutral
+Jeepney Modernization Program - Neutral
+Foreign Investment in Land Ownership - Disagree
+Universal Healthcare Funding - Agree
+Mandatory Sex Education - Neutral
+Minimum Wage Standardization - Neutral
+
+Name: Christian “Xian” Tagle
+Age: 38
+Region: Region VI – Western Visayas
+Party Affiliation: Aksyon Demokratiko
+Running Position: Vice Governor
+Years of Experience: 6
+Campaign Slogan: "Kabataan, Kaakibat ng Pag-unlad"
+Platforms: ICT education, startup incubation, rural innovation
+Supported Issues: STEM education, tech funding
+Opposed Issues: Provincial underemployment
+Notable Laws Enacted: Startup Hubs for Provinces Act
+Stances On Social Issues:
+Legalization of Divorce - Neutral
+Passing the SOGIE Equality Bill - No Data
+Reinstating the Death Penalty - Agree
+Lowering the Age of Criminal Responsibility -Neutral
+Federalism - No Data
+Mandatory ROTC for Senior High Students - Neutral
+Same-Sex Marriage - Neutral
+Anti-Terror Law - Neutral
+Jeepney Modernization Program - Disagree
+Foreign Investment in Land Ownership - Neutral
+Universal Healthcare Funding - Agree
+Mandatory Sex Education - Neutral
+Minimum Wage Standardization - No Data
+
+Name: Lourdes “Daisy” Marasigan
+Age: 44
+Region: Region VI – Western Visayas
+Party Affiliation: PDP-Laban
+Running Position: Vice Governor
+Years of Experience: 9
+Campaign Slogan: "Lingkod Probinsya, Lingkod Pamilya"
+Platforms: Health insurance access, barangay medical units
+Supported Issues: Universal health care, barangay empowerment
+Opposed Issues: Centralized health services
+Notable Laws Enacted: Provincial Health Extension Act
+Stances On Social Issues:
+Legalization of Divorce -Disagree
+Passing the SOGIE Equality Bill - Agree
+Reinstating the Death Penalty - Neutral
+Lowering the Age of Criminal Responsibility - Neutral
+Federalism - Neutral
+Mandatory ROTC for Senior High Students - Disagree
+Same-Sex Marriage - Agree
+Anti-Terror Law - Neutral
+Jeepney Modernization Program - No Data
+Foreign Investment in Land Ownership - Agree
+Universal Healthcare Funding - Agree
+Mandatory Sex Education - Neutral
+Minimum Wage Standardization - No Data
+
+
+Name: Celestino “Tino” Uy
+Age: 61
+Region: Region VII (Central Visayas)
+Party Affiliation: Lakas ng Masa
+Running Position: Governor
+Years of Experience: 25
+Campaign Slogan: “Ginhawa Para sa Bisaya”
+Platforms: Livelihood programs; Digital infrastructure; Island emergency services
+Supported Issues: Rural health services; Agriculture innovation
+Opposed Issues: Charter Change; Unregulated tourism expansion
+Notable Laws Enacted: Cebu-Bohol Coastal Management Act; Tech4Farmers Bill
+Stances On Social Issues:
+Legalization of Divorce - Neutral
+Passing the SOGIE Equality Bill - Agree
+Reinstating the Death Penalty - Neutral
+Lowering the Age of Criminal Responsibility - Disagree
+Federalism - Disagree
+Mandatory ROTC for Senior High Students - No Data
+Same-Sex Marriage - Neutral
+Anti-Terror Law - Agree
+Jeepney Modernization Program - Disagree
+Foreign Investment in Land Ownership -Neutral
+Universal Healthcare Funding - Agree
+Mandatory Sex Education - No Data
+Minimum Wage Standardization - Neutral
+
+Name: Liza May “Lime” Bantugon
+Age: 47
+Region: Region VII (Central Visayas)
+Party Affiliation: Partido Makabago
+Running Position: Governor
+Years of Experience: 10
+Campaign Slogan: “Bisaya Bangon!”
+Platforms: Housing for urban poor; Flood control; Women in leadership
+Supported Issues: Inclusive governance; Social housing
+Opposed Issues: Budget misuse; Political dynasties
+Notable Laws Enacted: Women in Public Leadership Program Act
+Stances On Social Issues:
+Legalization of Divorce - Agree
+Passing the SOGIE Equality Bill - Neutral
+Reinstating the Death Penalty - Disagree
+Lowering the Age of Criminal Responsibility - Neutral
+Federalism - Neutral
+Mandatory ROTC for Senior High Students -Neutral
+Same-Sex Marriage - No Data
+Anti-Terror Law - Agree
+Jeepney Modernization Program - Neutral
+Foreign Investment in Land Ownership - Disagree
+Universal Healthcare Funding - No Data
+Mandatory Sex Education - Neutral
+Minimum Wage Standardization - Neutral
+
+
+Vice Governor Candidates
+Name: Paulo “Paong” Ramos
+Age: 50
+Region: Region VII (Central Visayas)
+Party Affiliation: Lakas ng Masa
+Running Position: Vice Governor
+Years of Experience: 8
+Campaign Slogan: “Ang Bisaya, Palaban!”
+Platforms: Local business support; Health insurance expansion
+Supported Issues: MSME development; Accessible government services
+Opposed Issues: Service centralization
+Notable Laws Enacted: Local Business Empowerment Ordinance
+Stances On Social Issues:
+Legalization of Divorce - Neutral
+Passing the SOGIE Equality Bill - Neutral
+Reinstating the Death Penalty - Disagree
+Lowering the Age of Criminal Responsibility - Neutral
+Federalism - Disagree
+Mandatory ROTC for Senior High Students - Neutral
+Same-Sex Marriage - Agree
+Anti-Terror Law - No Data
+Jeepney Modernization Program - Agree
+Foreign Investment in Land Ownership - Neutral
+Universal Healthcare Funding - Agree
+Mandatory Sex Education - No Data
+Minimum Wage Standardization - Neutral
+
+Name: Katrina “Kat” del Rosario
+Age: 35
+Region: Region VII (Central Visayas)
+Party Affiliation: Partido Makabago
+Running Position: Vice Governor
+Years of Experience: 5
+Campaign Slogan: “Bagong Boses, Bagong Pananaw”
+Platforms: Youth in governance; Support for creatives and freelancers
+Supported Issues: Education innovation; Mental health access
+Opposed Issues: Inaccessible bureaucracy
+Notable Laws Enacted: None
+Stances On Social Issues:
+Legalization of Divorce - Neutral
+Passing the SOGIE Equality Bill - Disagree
+Reinstating the Death Penalty - Neutral
+Lowering the Age of Criminal Responsibility - Neutral
+Federalism - Agree
+Mandatory ROTC for Senior High Students - No Data
+Same-Sex Marriage - Agree
+Anti-Terror Law - Agree
+Jeepney Modernization Program - Neutral
+Foreign Investment in Land Ownership - Neutral
+Universal Healthcare Funding - Agree 
+Mandatory Sex Education - Disagree
+Minimum Wage Standardization - Agree
+
+Name: Alfredo "Alfie" Villanueva
+Age: 57
+Region: Region VIII – Eastern Visayas
+Party Affiliation: Partido Makabayan
+Running Position: Governor
+Years of Experience: 12
+Campaign Slogan: "Tulay ng Kaunlaran"
+Platforms: Infrastructure development; post-disaster housing; tourism revival; education access
+Supported Issues: Disaster resilience funding; free college tuition; rural electrification
+Opposed Issues: Mining in protected areas
+Notable Laws Enacted: Eastern Visayas Rehabilitation Act
+Stances On Social Issues:
+Legalization of Divorce - Agree
+Passing the SOGIE Equality Bill - Neutral
+Reinstating the Death Penalty - Neutral
+Lowering the Age of Criminal Responsibility - Disagree
+Federalism - No Data
+Mandatory ROTC for Senior High Students - Agree
+Same-Sex Marriage - No Data
+Anti-Terror Law - Neutral
+Jeepney Modernization Program - Agree
+Foreign Investment in Land Ownership - Neutral
+Universal Healthcare Funding - Disagree
+Mandatory Sex Education - Neutral
+Minimum Wage Standardization - Agree
+
+Name: Marian “Yanyan” Robles
+Age: 44
+Region: Region VIII – Eastern Visayas
+Party Affiliation: Nacionalista Reform Movement
+Running Position: Governor
+Years of Experience: 8
+Campaign Slogan: "Bago, Mabilis, Epektibo!"
+Platforms: Anti-poverty programs; local entrepreneurship; youth skills training
+Supported Issues: Microfinance expansion; anti-red tape reforms
+Opposed Issues: Political dynasties
+Notable Laws Enacted: Local MSME Incentive Act
+Stances On Social Issues:
+Legalization of Divorce - Agree
+Passing the SOGIE Equality Bill - Neutral
+Reinstating the Death Penalty - Disagree
+Lowering the Age of Criminal Responsibility - Neutral
+Federalism - No Data
+Mandatory ROTC for Senior High Students - Neutral
+Same-Sex Marriage - Agree
+Anti-Terror Law - Disagree
+Jeepney Modernization Program - Neutral
+Foreign Investment in Land Ownership - Disagree
+Universal Healthcare Funding - Neutral
+Mandatory Sex Education - Agree
+Minimum Wage Standardization - Neutral
+
+Name: Ronald “Dong” Coloma
+Age: 49
+Region: Region VIII – Eastern Visayas
+Party Affiliation: Partido Makabayan
+Running Position: Vice Governor
+Years of Experience: 10
+Campaign Slogan: "Boses ng Probinsya, Aksyon sa Kapitolyo"
+Platforms: Budget transparency; local health clinics; school modernization
+Supported Issues: Universal healthcare; barangay empowerment
+Opposed Issues: Centralized budget allocation
+Notable Laws Enacted: Barangay Development Assistance Program
+Stances On Social Issues:
+Legalization of Divorce - Agree
+Passing the SOGIE Equality Bill - Neutral
+Reinstating the Death Penalty - Disagree
+Lowering the Age of Criminal Responsibility - No Data
+Federalism - Neutral
+Mandatory ROTC for Senior High Students - Disagree
+Same-Sex Marriage - Neutral
+Anti-Terror Law - Neutral
+Jeepney Modernization Program - Agree
+Foreign Investment in Land Ownership - No Data
+Universal Healthcare Funding - Agree
+Mandatory Sex Education - Neutral
+Minimum Wage Standardization - Agree
+
+Name: Clarisse “Cai” Mondragon
+Age: 37
+Region: Region VIII – Eastern Visayas
+Party Affiliation: Nacionalista Reform Movement
+Running Position: Vice Governor
+Years of Experience: 5
+Campaign Slogan: "Kabataan Una Sa Lahat"
+Platforms: Youth participation; cultural preservation; clean governance
+Supported Issues: Youth councils; anti-corruption reforms
+Opposed Issues: Political dynasties
+Notable Laws Enacted: Regional Youth Leadership Fund
+Stances On Social Issues:
+Legalization of Divorce - Agree
+Passing the SOGIE Equality Bill - Disagree
+Reinstating the Death Penalty - Neutral
+Lowering the Age of Criminal Responsibility - Disagree
+Federalism Neutral
+Mandatory ROTC for Senior High Students - Agree
+Same-Sex Marriage - No Data
+Anti-Terror Law - Neutral
+Jeepney Modernization Program - Agree
+Foreign Investment in Land Ownership - Disagree
+Universal Healthcare Funding - Neutral
+Mandatory Sex Education - No Data
+Minimum Wage Standardization - Neutral
+
+
+Name: Ricardo “Carding” Dela Peña
+Age: 60
+Region: Region IX – Zamboanga Peninsula
+Party Affiliation: Partido Makabayan
+Running Position: Governor
+Years of Experience: 20
+Campaign Slogan: "Serbisyong Walang Kinikilingan"
+Platforms: Peace and order; rural electrification; livelihood training
+Supported Issues: Peace talks; agriculture support
+Opposed Issues: Militarization in civilian zones
+Notable Laws Enacted: Peace and Livelihood Integration Act
+Stances On Social Issues:
+Legalization of Divorce - Disagree
+Passing the SOGIE Equality Bill - Agree
+Reinstating the Death Penalty -Neutral
+Lowering the Age of Criminal Responsibility - No Data
+Federalism - Agree
+Mandatory ROTC for Senior High Students -Neutral
+Same-Sex Marriage - Disagree
+Anti-Terror Law -Neutral
+Jeepney Modernization Program - No Data
+Foreign Investment in Land Ownership - Agree
+Universal Healthcare Funding - Neutral
+Mandatory Sex Education - Neutral
+Minimum Wage Standardization - No Data
+
+Name: Donna “D” Lagrosa
+Age: 50
+Region: Region IX – Zamboanga Peninsula
+Party Affiliation: Bagong Bayan Coalition
+Running Position: Governor
+Years of Experience: 10
+Campaign Slogan: "Progress Beyond Politics"
+Platforms: Water access; business-friendly permits; transparency
+Supported Issues: Clean water access; business tax incentives
+Opposed Issues: Outdated zoning ordinances
+Notable Laws Enacted: Regional Water Access Expansion Law
+Stances On Social Issues:
+Legalization of Divorce -Neutral
+Passing the SOGIE Equality Bill - Neutral
+Reinstating the Death Penalty - Disagree
+Lowering the Age of Criminal Responsibility - Disagree
+Federalism - Neutral
+Mandatory ROTC for Senior High Students - Agree
+Same-Sex Marriage - No Data
+Anti-Terror Law -Neutral
+Jeepney Modernization Program - Agree
+Foreign Investment in Land Ownership - Disagree
+Universal Healthcare Funding - No Data
+Mandatory Sex Education -Neutral
+Minimum Wage Standardization - Agree
+
+
+Name: Amado “Madz” Maturan
+Age: 55
+Region: Region IX – Zamboanga Peninsula
+Party Affiliation: Partido Makabayan
+Running Position: Vice Governor
+Years of Experience: 14
+Campaign Slogan: "Para sa Probinsyang Payapa"
+Platforms: Public security; legal aid centers; rural clinics
+Supported Issues: Human rights advocacy; indigenous support
+Opposed Issues: Illegal paramilitary groups
+Notable Laws Enacted: Rural Legal Aid Act
+Stances On Social Issues:
+Legalization of Divorce - Neutral
+Passing the SOGIE Equality Bill - Neutral
+Reinstating the Death Penalty - No Data
+Lowering the Age of Criminal Responsibility - Agree
+Federalism - No Data
+Mandatory ROTC for Senior High Students - Neutral
+Same-Sex Marriage - Agree
+Anti-Terror Law - Neutral
+Jeepney Modernization Program - Disagree
+Foreign Investment in Land Ownership - No Data
+Universal Healthcare Funding - Neutral
+Mandatory Sex Education - Disagree
+Minimum Wage Standardization - Neutral
+
+
+Name: Jamie “J-Me” Santos
+Age: 41
+Region: Region IX – Zamboanga Peninsula
+Party Affiliation: Bagong Bayan Coalition
+Running Position: Vice Governor
+Years of Experience: 6
+Campaign Slogan: "Makatao, Makabago"
+Platforms: Digital governance; women's empowerment
+Supported Issues: Digital literacy; women's rights
+Opposed Issues: Traditional bureaucratic delays
+Notable Laws Enacted: Digital Barangay Access Act
+Stances On Social Issues:
+Legalization of Divorce - Neutral
+Passing the SOGIE Equality Bill - Agree
+Reinstating the Death Penalty - Disagree
+Lowering the Age of Criminal Responsibility - Agree
+Federalism - No Data
+Mandatory ROTC for Senior High Students - Agree
+Same-Sex Marriage - Neutral
+Anti-Terror Law - No Data
+Jeepney Modernization Program - Disagree
+Foreign Investment in Land Ownership - Disagree
+Universal Healthcare Funding - Neutral
+Mandatory Sex Education - Agree
+Minimum Wage Standardization - Neutral
+
+Name: Manuel “Manny” B. Andrada
+Age: 56
+Region: Region X – Northern Mindanao
+Party Affiliation: Partido Makabayan
+Running Position: Governor
+Years of Experience: 18
+Campaign Slogan: "Bangon Mindanao, Para sa Masa!"
+Platforms: Agrarian reform; peace talks; accessible healthcare
+Supported Issues: Land redistribution; free rural healthcare
+Opposed Issues: Military encroachment on IP land
+Notable Laws Enacted: Mindanao Agrarian Strengthening Act
+Stances On Social Issues:
+Legalization of Divorce - Disagree
+Passing the SOGIE Equality Bill - Neutral
+Reinstating the Death Penalty - Neutral
+Lowering the Age of Criminal Responsibility - Disagree
+Federalism - No Data
+Mandatory ROTC for Senior High Students - Neutral
+Same-Sex Marriage - Agree
+Anti-Terror Law - No Data
+Jeepney Modernization Program - Agree
+Foreign Investment in Land Ownership - Neutral
+Universal Healthcare Funding - Agree
+Mandatory Sex Education - Disagree
+Minimum Wage Standardization - No Data
+
+Name: Veronica “Vee” Salcedo
+Age: 45
+Region: Region X – Northern Mindanao
+Party Affiliation: Lakas ng Bayan Movement
+Running Position: Governor
+Years of Experience: 9
+Campaign Slogan: "Para sa Siguradong Pag-unlad"
+Platforms: Investment incentives; infrastructure; youth programs
+Supported Issues: Ease of doing business; youth scholarships
+Opposed Issues: Political monopolies
+Notable Laws Enacted: Regional Investment Acceleration Act
+Stances On Social Issues:
+Legalization of Divorce - Agree
+Passing the SOGIE Equality Bill - Neutral
+Reinstating the Death Penalty - Disagree
+Lowering the Age of Criminal Responsibility - Neutral
+Federalism - No Data
+Mandatory ROTC for Senior High Students - Disagree
+Same-Sex Marriage - Neutral
+Anti-Terror Law - Agree
+Jeepney Modernization Program - No Data
+Foreign Investment in Land Ownership - Neutral
+Universal Healthcare Funding - Agree
+Mandatory Sex Education - Agree
+Minimum Wage Standardization - Neutral
+
+
+Name: Romulo “Romy” De Castro
+Age: 60
+Region: Region X – Northern Mindanao
+Party Affiliation: Partido Makabayan
+Running Position: Vice Governor
+Years of Experience: 16
+Campaign Slogan: "Tunay na Serbisyo, Hindi Promises!"
+Platforms: Barangay development; senior citizen aid; cooperative support
+Supported Issues: Expanded senior pensions; local cooperatives
+Opposed Issues: POGO (offshore gambling) zones
+Notable Laws Enacted: Senior Aid Plus Law
+Stances On Social Issues:
+Legalization of Divorce - Neutral
+Passing the SOGIE Equality Bill - Disagree
+Reinstating the Death Penalty - Disagree
+Lowering the Age of Criminal Responsibility - Neutral
+Federalism - Neutral
+Mandatory ROTC for Senior High Students - Agree
+Same-Sex Marriage - Agree
+Anti-Terror Law - Agree
+Jeepney Modernization Program - No Data
+Foreign Investment in Land Ownership - Neutral
+Universal Healthcare Funding - Agree
+Mandatory Sex Education - No Data
+Minimum Wage Standardization - Neutral
+
+Name: Kristine “Kaye” Montalban
+Age: 38
+Region: Region X – Northern Mindanao
+Party Affiliation: Lakas ng Bayan Movement
+Running Position: Vice Governor
+Years of Experience: 5
+Campaign Slogan: "Modernong Serbisyo, Malinis na Pamamahala"
+Platforms: E-governance; women's health; road projects
+Supported Issues: Digital governance; reproductive rights
+Opposed Issues: Bureaucratic corruption
+Notable Laws Enacted: eBaryo Access Act
+Stances On Social Issues:
+Legalization of Divorce - No Data
+Passing the SOGIE Equality Bill - Disagree
+Reinstating the Death Penalty - Disagree
+Lowering the Age of Criminal Responsibility - Neutral
+Federalism - Agree
+Mandatory ROTC for Senior High Students - Agree
+Same-Sex Marriage - Neutral
+Anti-Terror Law - No Data
+Jeepney Modernization Program - Agree
+Foreign Investment in Land Ownership - Agree
+Universal Healthcare Funding - Disagree
+Mandatory Sex Education - Agree 
+Minimum Wage Standardization - Neutral
+
+
+Name: Delfin “Ping” Robledo
+Age: 63
+Region: Region XI – Davao Region
+Party Affiliation: Partido Progresibo ng Masa
+Running Position: Governor
+Years of Experience: 22
+Campaign Slogan: "Pagbabago na, Hindi Palusot!"
+Platforms: Anti-corruption; social housing; labor rights
+Supported Issues: Anti-political dynasty; higher labor wages
+Opposed Issues: Pork barrel allocations
+Notable Laws Enacted: Honest Governance Act
+Stances On Social Issues:
+Legalization of Divorce - Neutral
+Passing the SOGIE Equality Bill - Disagree
+Reinstating the Death Penalty - Neutral
+Lowering the Age of Criminal Responsibility - Agree
+Federalism - Disagree
+Mandatory ROTC for Senior High Students - Neutral
+Same-Sex Marriage - Agree
+Anti-Terror Law - Disagree
+Jeepney Modernization Program - Neutral
+Foreign Investment in Land Ownership - Disagree
+Universal Healthcare Funding - No Data
+Mandatory Sex Education - Disagree
+Minimum Wage Standardization - Agree 
+
+Name: Bianca “BB” Sison
+Age: 40
+Region: Region XI – Davao Region
+Party Affiliation: Federal Unity Party
+Running Position: Governor
+Years of Experience: 7
+Campaign Slogan: "Kaunlaran sa Bagong Sistema"
+Platforms: Federal advocacy; farm subsidies; disaster response
+Supported Issues: Federalism; disaster-resilient infrastructure
+Opposed Issues: Delayed government procurement
+Notable Laws Enacted: Local Farm Subsidy Act
+Stances On Social Issues:
+Legalization of Divorce - Neutral
+Passing the SOGIE Equality Bill - Disagree
+Reinstating the Death Penalty - Neutral
+Lowering the Age of Criminal Responsibility - No Data
+Federalism - Agree (Supports federalism)
+Mandatory ROTC for Senior High Students - Disagree
+Same-Sex Marriage - Disagree
+Anti-Terror Law - Agree
+Jeepney Modernization Program - Disagree
+Foreign Investment in Land Ownership - Agree
+Universal Healthcare Funding - Neutral
+Mandatory Sex Education - Disagree
+Minimum Wage Standardization - No Data
+
+
+Name: Elmer “Lolo Em” Sevilla
+Age: 67
+Region: Region XI – Davao Region
+Party Affiliation: Partido Progresibo ng Masa
+Running Position: Vice Governor
+Years of Experience: 28
+Campaign Slogan: "Serbisyong Bukal sa Puso"
+Platforms: Public transport regulation; healthcare access; anti-drug education
+Supported Issues: Expanded PhilHealth; clean transport policies
+Opposed Issues: Police brutality
+Notable Laws Enacted: Public Transport Reform Law
+Stances On Social Issues:
+Legalization of Divorce - Disagree
+Passing the SOGIE Equality Bill - Neutral
+Reinstating the Death Penalty - Agree
+Lowering the Age of Criminal Responsibility - Neutral
+Federalism - Disagree
+Mandatory ROTC for Senior High Students - Disagree
+Same-Sex Marriage - Neutral
+Anti-Terror Law - Disagree 
+Jeepney Modernization Program - Agree 
+Foreign Investment in Land Ownership - Agree
+Universal Healthcare Funding - Agree
+Mandatory Sex Education - No Data
+Minimum Wage Standardization - Disagree
+
+Name: Melchor “Mek” Gonzaga
+Age: 35
+Region: Region XI – Davao Region
+Party Affiliation: Federal Unity Party
+Running Position: Vice Governor
+Years of Experience: 4
+Campaign Slogan: "Isang Probinsya, Isang Pananaw"
+Platforms: Youth leadership; job generation
+Supported Issues: Start-up grants; youth entrepreneurship
+Opposed Issues: Generational political families
+Notable Laws Enacted: Regional Youth Fund Act
+Stances On Social Issues:
+Legalization of Divorce - Neutral
+Passing the SOGIE Equality Bill - Disagree
+Reinstating the Death Penalty - Agree
+Lowering the Age of Criminal Responsibility - Neutral
+Federalism - Neutral
+Mandatory ROTC for Senior High Students - Neutral
+Same-Sex Marriage - Agree
+Anti-Terror Law - No Data
+Jeepney Modernization Program - Disagree
+Foreign Investment in Land Ownership - Disagree
+Universal Healthcare Funding - No Data
+Mandatory Sex Education - Agree
+Minimum Wage Standardization - Disagree
+
+
+Name: Eduardo “Edong” Calibugan
+Age: 58
+Region: Region XII – Soccsksargen
+Party Affiliation: Makabayan Unity Party
+Running Position: Governor
+Years of Experience: 14
+Campaign Slogan: "Serbisyo, Hindi Pulitika"
+Platforms: Public housing; anti-mining in ancestral domains
+Supported Issues: Indigenous land rights; housing rights
+Opposed Issues: Large-scale extractive mining
+Notable Laws Enacted: Ancestral Land Security Act
+Stances On Social Issues:
+Legalization of Divorce - Disagree
+Passing the SOGIE Equality Bill - Neutral
+Reinstating the Death Penalty - Neutral
+Lowering the Age of Criminal Responsibility - Disagree
+Federalism - Disagree
+Mandatory ROTC for Senior High Students - Disagree
+Same-Sex Marriage - Neutral
+Anti-Terror Law - Agree
+Jeepney Modernization Program - Agree
+Foreign Investment in Land Ownership -Disagree
+Universal Healthcare Funding - Neutral
+Mandatory Sex Education -Disagree
+Minimum Wage Standardization - No Data
+
+Name: Sofia “Sophie” Lanusa
+Age: 42
+Region: Region XII – Soccsksargen
+Party Affiliation: Tapat na Lingkod Movement
+Running Position: Governor
+Years of Experience: 10
+Campaign Slogan: "Gobyerno para sa Tao"
+Platforms: Women-led governance; barangay healthcare
+Supported Issues: Maternal healthcare; women's protection laws
+Opposed Issues: Gender discrimination
+Notable Laws Enacted: Women's Safety Zone Act
+Stances On Social Issues:
+Legalization of Divorce - Agree
+Passing the SOGIE Equality Bill - Agree
+Reinstating the Death Penalty - Neutral
+Lowering the Age of Criminal Responsibility - Disagree
+Federalism - Disagree
+Mandatory ROTC for Senior High Students - Agree
+Same-Sex Marriage - No Data
+Anti-Terror Law - Disagree
+Jeepney Modernization Program - Agree
+Foreign Investment in Land Ownership - Neutral
+Universal Healthcare Funding - Agree
+Mandatory Sex Education - Agree
+Minimum Wage Standardization - Neutral
+
+Name: Noel “Nonoy” Pitogo
+Age: 59
+Region: Region XII – Soccsksargen
+Party Affiliation: Makabayan Unity Party
+Running Position: Vice Governor
+Years of Experience: 17
+Campaign Slogan: "Sama-Samang Sulong SOCCSKSARGEN"
+Platforms: Local transport; food security
+Supported Issues: Food sovereignty; anti-import policies
+Opposed Issues: Subsidy cuts
+Notable Laws Enacted: Regional Food Security Bill
+Stances On Social Issues:
+Legalization of Divorce - Disagree
+Passing the SOGIE Equality Bill - No Data
+Reinstating the Death Penalty - Agree
+Lowering the Age of Criminal Responsibility - Neutral
+Federalism - Disagree
+Mandatory ROTC for Senior High Students - Agree
+Same-Sex Marriage - No Data
+Anti-Terror Law - Neutral
+Jeepney Modernization Program - Agree 
+Foreign Investment in Land Ownership - Disagree
+Universal Healthcare Funding - Neutral
+Mandatory Sex Education - Disagree
+Minimum Wage Standardization - Agree
+
+Name: Charina “Cha” Guinto
+Age: 36
+Region: Region XII – Soccsksargen
+Party Affiliation: Tapat na Lingkod Movement
+Running Position: Vice Governor
+Years of Experience: 6
+Campaign Slogan: "Makabago, Makatao"
+Platforms: Healthcare for IPs; social inclusion
+Supported Issues: Indigenous cultural rights
+Opposed Issues: Forced displacement
+Notable Laws Enacted: IP Health Empowerment Act
+Stances On Social Issues:
+Legalization of Divorce - Agree
+Passing the SOGIE Equality Bill - Disagree
+Reinstating the Death Penalty - Agree
+Lowering the Age of Criminal Responsibility - Disagree
+Federalism - Neutral
+Mandatory ROTC for Senior High Students - No Data
+Same-Sex Marriage - No Data
+Anti-Terror Law - Disagree
+Jeepney Modernization Program - Neutral
+Foreign Investment in Land Ownership - Disagree
+Universal Healthcare Funding - Agree 
+Mandatory Sex Education - Neutral
+Minimum Wage Standardization - Agree
+
+
+Name: Antonio “Tonyo” Lucban
+Age: 61
+Region: Region XIII – Caraga
+Party Affiliation: Partido Demokratiko ng Masa
+Running Position: Governor
+Years of Experience: 20
+Campaign Slogan: "Ang Gawa, Hindi Salita!"
+Platforms: Mineral reform; forest conservation; tribal engagement
+Supported Issues: Environmental justice
+Opposed Issues: Logging expansion
+Notable Laws Enacted: Forest and Ancestral Preservation Act
+Stances On Social Issues:
+Legalization of Divorce - Agree
+Passing the SOGIE Equality Bill - Disagree
+Reinstating the Death Penalty - No Data
+Lowering the Age of Criminal Responsibility - Agree
+Federalism - Disagree
+Mandatory ROTC for Senior High Students - Agree
+Same-Sex Marriage - Neutral
+Anti-Terror Law - No Data
+Jeepney Modernization Program - Disagree
+Foreign Investment in Land Ownership - Disagree
+Universal Healthcare Funding - Agree
+Mandatory Sex Education - Neutral
+Minimum Wage Standardization - Neutral
+
+Name: Luzviminda “Luz” Cordero
+Age: 46
+Region: Region XIII – Caraga
+Party Affiliation: People First Alliance
+Running Position: Governor
+Years of Experience: 11
+Campaign Slogan: "Babae Para sa Pagbabago"
+Platforms: Gender-inclusive planning; healthcare expansion
+Supported Issues: Universal healthcare; anti-abuse policies
+Opposed Issues: Underfunded women's shelters
+Notable Laws Enacted: Women's Rural Welfare Act
+Stances On Social Issues:
+Legalization of Divorce - Disagree
+Passing the SOGIE Equality Bill - Agree 
+Reinstating the Death Penalty - Neutral
+Lowering the Age of Criminal Responsibility - Agree
+Federalism - Disagree
+Mandatory ROTC for Senior High Students - Agree
+Same-Sex Marriage - No Data
+Anti-Terror Law - Disagree
+Jeepney Modernization Program - Neutral
+Foreign Investment in Land Ownership - Agree
+Universal Healthcare Funding - Agree 
+Mandatory Sex Education - Neutral
+Minimum Wage Standardization - Agree
+
+
+Name: Isagani “Gani” Plaridel
+Age: 54
+Region: Region XIII – Caraga
+Party Affiliation: Partido Demokratiko ng Masa
+Running Position: Vice Governor
+Years of Experience: 13
+Campaign Slogan: "Serbisyo Mula Probinsya, Para sa Lahat"
+Platforms: Tourism; indigenous arts; clean energy
+Supported Issues: Local heritage protection
+Opposed Issues: Coal plant expansions
+Notable Laws Enacted: Regional Eco-Tourism Act
+Stances On Social Issues:
+Legalization of Divorce - Disagree
+Passing the SOGIE Equality Bill - Neutral
+Reinstating the Death Penalty - Agree
+Lowering the Age of Criminal Responsibility - Agree
+Federalism - Disagree
+Mandatory ROTC for Senior High Students - Agree
+Same-Sex Marriage - No Data
+Anti-Terror Law - Disagree
+Jeepney Modernization Program - Agree
+Foreign Investment in Land Ownership - Agree
+Universal Healthcare Funding - Neutral
+Mandatory Sex Education - Disagree
+Minimum Wage Standardization - Neutral
+
+Name: Catherine “Cathy” Baldelomar
+Age: 39
+Region: Region XIII – Caraga
+Party Affiliation: People First Alliance
+Running Position: Vice Governor
+Years of Experience: 5
+Campaign Slogan: "Malinis, Maasahan, Makabayan"
+Platforms: Citizen feedback systems; road repairs; education
+Supported Issues: Free education; public accountability
+Opposed Issues: Budget secrecy
+Notable Laws Enacted: Open Budget Transparency Law
+Stances On Social Issues:
+Legalization of Divorce - Agree
+Passing the SOGIE Equality Bill - Neutral
+Reinstating the Death Penalty - No Data
+Lowering the Age of Criminal Responsibility - Disagree
+Federalism - Agree
+Mandatory ROTC for Senior High Students - Disagree
+Same-Sex Marriage - Neutral
+Anti-Terror Law - Agree
+Jeepney Modernization Program - No Data
+Foreign Investment in Land Ownership - Disagree
+Universal Healthcare Funding - Agree
+Mandatory Sex Education - Agree
+Minimum Wage Standardization - Neutral
+
+
+Name: Amira “Ami” Alonto
+Age: 51
+Region: BARMM
+Party Affiliation: Bangsamoro Unity Front
+Running Position: Governor
+Years of Experience: 15
+Campaign Slogan: "Para sa Kapayapaan at Pag-unlad ng Bangsamoro"
+Platforms: Peace process; halal trade; Islamic banking
+Supported Issues: Autonomy; cultural preservation
+Opposed Issues: Outside intervention in local law
+Notable Laws Enacted: Bangsamoro Economic Empowerment Act
+Stances On Social Issues:
+Legalization of Divorce - Disagree
+Passing the SOGIE Equality Bill - Agree
+Reinstating the Death Penalty - Neutral
+Lowering the Age of Criminal Responsibility - Disagree
+Federalism - Agree
+Mandatory ROTC for Senior High Students - Agree
+Same-Sex Marriage - Disagree 
+Anti-Terror Law - Agree
+Jeepney Modernization Program - Disagree
+Foreign Investment in Land Ownership - Neutral
+Universal Healthcare Funding - Agree
+Mandatory Sex Education - Agree
+Minimum Wage Standardization - Neutral
+
+Name: Omar “Omi” Pendatun
+Age: 47
+Region: BARMM
+Party Affiliation: Pagkakaisa ng Mindanao
+Running Position: Governor
+Years of Experience: 10
+Campaign Slogan: "Bangsamoro, Sama-Sama Tayo"
+Platforms: Clean governance; Islamic education; women in leadership
+Supported Issues: Decentralized development
+Opposed Issues: National-level appointments for BARMM
+Notable Laws Enacted: Women in Ulama Council Act
+Stances On Social Issues:
+Legalization of Divorce - Disagree
+Passing the SOGIE Equality Bill - Neutral
+Reinstating the Death Penalty - Neutral
+Lowering the Age of Criminal Responsibility - Agree
+Federalism - Agree 
+Mandatory ROTC for Senior High Students - Neutral
+Same-Sex Marriage - Disagree 
+Anti-Terror Law - Agree
+Jeepney Modernization Program - Agree
+Foreign Investment in Land Ownership - Disagree
+Universal Healthcare Funding - Neutral
+Mandatory Sex Education - Agree
+Minimum Wage Standardization - Neutral
+
+
+Name: Yasmin “Min” Hassan
+Age: 43
+Region: BARMM
+Party Affiliation: Bangsamoro Unity Front
+Running Position: Vice Governor
+Years of Experience: 8
+Campaign Slogan: "Tiwala at Tapang para sa Bangsamoro"
+Platforms: Minority education; youth outreach
+Supported Issues: Arabic-based education; youth councils
+Opposed Issues: Armed school interventions
+Notable Laws Enacted: Youth Development Mandate Act
+Stances On Social Issues:
+Legalization of Divorce - Disagree 
+Passing the SOGIE Equality Bill - Neutral
+Reinstating the Death Penalty - Agree
+Lowering the Age of Criminal Responsibility - Disagree
+Federalism - Agree 
+Mandatory ROTC for Senior High Students - Disagree 
+Same-Sex Marriage - Disagree
+Anti-Terror Law - Neutral
+Jeepney Modernization Program - No Data
+Foreign Investment in Land Ownership - Disagree
+Universal Healthcare Funding - Agree
+Mandatory Sex Education - Agree
+Minimum Wage Standardization - Neutral
+
+Name: Abdul “Dul” Karim
+Age: 36
+Region: BARMM
+Party Affiliation: Pagkakaisa ng Mindanao
+Running Position: Vice Governor
+Years of Experience: 4
+Campaign Slogan: "Kapayapaan, Kaalaman, Kaunlaran"
+Platforms: Interfaith dialogue; technology for governance
+Supported Issues: Online services; inter-ethnic harmony
+Opposed Issues: Religious profiling
+Notable Laws Enacted: Faith-based Online Access Act
+Stances On Social Issues:
+Legalization of Divorce - Disagree
+Passing the SOGIE Equality Bill - No Data
+Reinstating the Death Penalty - Neutral
+Lowering the Age of Criminal Responsibility - Neutral
+Federalism - Agree
+Mandatory ROTC for Senior High Students - Agree
+Same-Sex Marriage - Disagree 
+Anti-Terror Law - Disagree 
+Jeepney Modernization Program - Neutral
+Foreign Investment in Land Ownership - Neutral
+Universal Healthcare Funding - Agree
+Mandatory Sex Education - Agree
+Minimum Wage Standardization - No Data
+
+
+Name: Atty. Maribel “Belle” Soriano
+Age: 52
+Region: NCR
+Party Affiliation: Tamang Katarungan Partylist (Justice Sector)
+Running Position: Party-list Representative
+Years of Experience: 18
+Campaign Slogan: "Katarungan Para sa Lahat, Hindi Para sa Iilan"
+Platforms: Strengthening the Public Attorney's Office; Free legal aid nationwide; Protection of whistleblowers
+Supported Issues: Human rights defense; Anti-red tape; Support for judicial reform
+Opposed Issues: Unjust detention; Political imprisonment
+Notable Laws Enacted: Whistleblower Protection Act; Expanded Legal Aid for Rural Areas Act
+Stances On Social Issues:
+Legalization of Divorce - Neutral
+Passing the SOGIE Equality Bill - Agree 
+Reinstating the Death Penalty - Disagree 
+Lowering the Age of Criminal Responsibility - Disagree
+Federalism - Neutral
+Mandatory ROTC for Senior High Students - Neutral
+Same-Sex Marriage - Agree
+Anti-Terror Law - Disagree 
+Jeepney Modernization Program - Disagree
+Foreign Investment in Land Ownership - Disagree
+Universal Healthcare Funding - Agree
+Mandatory Sex Education - Neutral
+Minimum Wage Standardization - Agree
+
+Name: Pastor Daniel “Danny” Silang
+Age: 58
+Region: Region IV-A
+Party Affiliation: Buhay at Pananampalataya Partylist (Faith-Based Sector)
+Running Position: Party-list Representative
+Years of Experience: 12
+Campaign Slogan: "Maka-Diyos, Maka-Tao, Maka-Bayan"
+Platforms: Religious freedoms; Community values education; Moral and ethical governance
+Supported Issues: Mandatory moral education; Anti-abortion; SOGIE Bill
+Opposed Issues: Divorce law; Same-sex marriage; Notable Laws Enacted; Religious Freedom and Ethics Education Act
+Stances On Social Issues:
+Legalization of Divorce - Disagree 
+Passing the SOGIE Equality Bill - Agree
+Reinstating the Death Penalty - Disagree
+Lowering the Age of Criminal Responsibility - Neutral
+Federalism - Agree
+Mandatory ROTC for Senior High Students - Agree
+Same-Sex Marriage - Disagree 
+Anti-Terror Law - Disagree
+Jeepney Modernization Program - No Data
+Foreign Investment in Land Ownership - Neutral
+Universal Healthcare Funding - Neutral
+Mandatory Sex Education - Agree
+Minimum Wage Standardization - Neutral
+
+Name: Rica “Kikay” Escaño
+Age: 39
+Region: Region VI
+Party Affiliation: Kabataang Makabayan Partylist (Youth & Student Sector)
+Running Position: Party-list Representative
+Years of Experience: 6
+Campaign Slogan: "Kabataan, Kakampi ng Bayan!"
+Platforms: Free tertiary education; Expanded mental health access in schools; Internet access in rural campuses
+Supported Issues:Mental health rights; Education budget increase; Climate action
+Opposed Issues: Mandatory ROTC; Tuition fee hikes
+Notable Laws Enacted: Campus Mental Wellness Act; Youth Scholarship and Connectivity Law
+Stances On Social Issues:
+Legalization of Divorce - Agree
+Passing the SOGIE Equality Bill - Agree
+Reinstating the Death Penalty - Agree
+Lowering the Age of Criminal Responsibility - Disagree
+Federalism - Neutral
+Mandatory ROTC for Senior High Students - Disagree 
+Same-Sex Marriage - Agree
+Anti-Terror Law - Disagree
+Jeepney Modernization Program - Neutral
+Foreign Investment in Land Ownership - Disagree
+Universal Healthcare Funding - Agree 
+Mandatory Sex Education - Agree
+Minimum Wage Standardization - Neutral
+
+Name: Captain Tomas “Tommy” Laxa (Ret.)
+Age: 64
+Region: Region I
+Party Affiliation: Sundalo at Pulis Para sa Bayan Partylist (Uniformed Personnel Sector)
+Running Position: Party-list Representative
+Years of Experience: 20
+Campaign Slogan: "Karangalan ng Serbisyo, Proteksyon sa Bayan"
+Platforms: Benefits for retired and active servicemen; Medical coverage for military families; Housing for uniformed personnel
+Supported Issues: Expanded veteran pensions; Anti-insurgency modernization
+Opposed Issues: Reduction of military budget; Amnesty for rebels
+Notable Laws Enacted: Uniformed Services Housing Act; Health and Education Support Act for Soldiers' Dependents
+Stances On Social Issues:
+Legalization of Divorce - Neutral
+Passing the SOGIE Equality Bill - Neutral
+Reinstating the Death Penalty - Agree
+Lowering the Age of Criminal Responsibility - Agree
+Federalism - Neutral
+Mandatory ROTC for Senior High Students - Agree
+Same-Sex Marriage - Disagree
+Anti-Terror Law - Agree
+Jeepney Modernization Program - Disagree
+Foreign Investment in Land Ownership - Disagree
+Universal Healthcare Funding - Agree
+Mandatory Sex Education - Disagree
+Minimum Wage Standardization - Neutral
+
+Name: Jessica “Jecka” De Guzman
+Age: 44
+Region: Region VIII
+Party Affiliation: OFW Tayo Partylist (Migrant Workers Sector)
+Running Position: Party-list Representative
+Years of Experience: 10
+Campaign Slogan: "Alaga ng Gobyerno ang OFW"
+Platforms: Legal aid desks in embassies; Reintegration programs for returning OFWs; Family support programs
+Supported Issues: OFW bill of rights; Mandatory financial education
+Opposed Issues: Agency overcharges; Contract substitution
+Notable Laws Enacted: OFW Family Reintegration Act; Migrant Workers' Protection and Rights Law
+Stances On Social Issues:
+Legalization of Divorce - Agree
+Passing the SOGIE Equality Bill - No Data
+Reinstating the Death Penalty - Neutral
+Lowering the Age of Criminal Responsibility - Agree
+Federalism - Agree
+Mandatory ROTC for Senior High Students - Agree
+Same-Sex Marriage - Agree
+Anti-Terror Law - Neutral
+Jeepney Modernization Program - Disagree
+Foreign Investment in Land Ownership - Disagree
+Universal Healthcare Funding- Agress
+Mandatory Sex Education - Agree
+Minimum Wage Standardization - Agree 
