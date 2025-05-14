@@ -42,6 +42,7 @@ public class CandidateProfiles {
             String line;
             Map<String, String> candidateData = null;
             Map<String, String> socialStances = new HashMap<>();
+            boolean inSocialStancesSection = false;
             
             while ((line = reader.readLine()) != null) {
                 line = line.trim();
@@ -65,6 +66,25 @@ public class CandidateProfiles {
                     
                     // Start a new candidate
                     candidateData = new HashMap<>();
+                    inSocialStancesSection = false;
+                }
+                
+                // Check if we're entering the "Stances On Social Issues:" section
+                if (line.equals("Stances On Social Issues:")) {
+                    inSocialStancesSection = true;
+                    continue; // Skip to next line
+                }
+                
+                // Handle entries within the social stances section
+                if (inSocialStancesSection && candidateData != null) {
+                    // Format is expected to be "Issue - Stance"
+                    int dashIndex = line.indexOf(" - ");
+                    if (dashIndex > 0) {
+                        String issue = line.substring(0, dashIndex).trim();
+                        String stance = line.substring(dashIndex + 3).trim();
+                        socialStances.put(issue, stance);
+                    }
+                    continue; // Skip the regular processing below
                 }
                 
                 // Handle Social Stance lines (with the individual stance format)
@@ -253,7 +273,7 @@ public class CandidateProfiles {
             return false;
         }
         
-        // Remove candidate
+        // Delete candidate
         candidateList.remove(index);
         
         // Save changes to file
@@ -261,9 +281,9 @@ public class CandidateProfiles {
     }
     
     /**
-     * Get a specific candidate profile
-     * @param index Index of the candidate to get
-     * @return Map containing candidate data, or null if invalid index
+     * Get a candidate profile by index
+     * @param index Index of the candidate to return
+     * @return Map containing candidate data, or null if not found
      */
     public static Map<String, String> getCandidate(int index) {
         // Make sure data is loaded
@@ -276,11 +296,12 @@ public class CandidateProfiles {
             return null;
         }
         
-        return candidateList.get(index);
+        // Return a deep copy of the candidate data to prevent external changes
+        return new HashMap<>(candidateList.get(index));
     }
     
     /**
-     * Get the total number of candidates
+     * Get the number of candidates in the list
      * @return Number of candidates
      */
     public static int getCandidateCount() {
@@ -293,35 +314,35 @@ public class CandidateProfiles {
     }
     
     /**
-     * Create a default empty candidate data structure
-     * @return Map with default keys and empty values
+     * Create an empty candidate with default values
+     * @return Map with empty candidate data
      */
     public static Map<String, String> createEmptyCandidate() {
         Map<String, String> candidate = new HashMap<>();
         
-        // Basic candidate information
+        // Set default values for required fields
         candidate.put("Name", "");
         candidate.put("Age", "");
-        candidate.put("Region", "");
         candidate.put("Position", "");
         candidate.put("Party Affiliation", "");
-        candidate.put("Years of Experience", "");
+        candidate.put("Region", "");
+        candidate.put("Notable Laws", "");
         candidate.put("Campaign Slogan", "");
-        candidate.put("Image", "");
-        
-        // Additional fields
+        candidate.put("Years of Experience", "");
         candidate.put("Platforms", "");
         candidate.put("Supported Issues", "");
-        candidate.put("Notable Laws", "");
         candidate.put("Opposed Issues", "");
+        
+        // Empty social stances
+        candidate.put("Social Stances", "");
         
         return candidate;
     }
     
     /**
-     * Format social stances map into a string for storage
-     * @param stances Map of social issue stances
-     * @return Formatted string representation of stances (e.g., "Issue1:Stance1;Issue2:Stance2")
+     * Format social stances as a single string for storage
+     * @param stances Map of social stances
+     * @return Formatted string representation
      */
     public static String formatSocialStances(Map<String, String> stances) {
         if (stances == null || stances.isEmpty()) {
@@ -343,9 +364,9 @@ public class CandidateProfiles {
     }
     
     /**
-     * Parse social stances string back into a map
-     * @param stancesStr Formatted string of stances (e.g., "Issue1:Stance1;Issue2:Stance2")
-     * @return Map of issue to stance
+     * Parse social stances from a formatted string
+     * @param stancesStr Formatted social stances string
+     * @return Map of social stances
      */
     public static Map<String, String> parseSocialStances(String stancesStr) {
         Map<String, String> stances = new HashMap<>();

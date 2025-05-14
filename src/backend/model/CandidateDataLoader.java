@@ -133,10 +133,16 @@ public class CandidateDataLoader {
                 } else if (line.startsWith("Positions:")) {
                     // Support both singular and plural forms for backward compatibility
                     position = line.substring("Positions:".length()).trim();
+                } else if (line.startsWith("Running Position:")) {
+                    // Support the "Running Position:" format found in newer data entries
+                    position = line.substring("Running Position:".length()).trim();
                 } else if (line.startsWith("Party Affiliation:")) {
                     party = line.substring("Party Affiliation:".length()).trim();
                 } else if (line.startsWith("Region:")) {
                     region = line.substring("Region:".length()).trim();
+                } else if (line.startsWith("Hometown Region:")) {
+                    // Support "Hometown Region:" as an alternative to "Region:"
+                    region = line.substring("Hometown Region:".length()).trim();
                 } else if (line.startsWith("Age:")) {
                     age = line.substring("Age:".length()).trim();
                 } else if (line.startsWith("Image:")) {

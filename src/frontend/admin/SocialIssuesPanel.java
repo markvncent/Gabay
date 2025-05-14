@@ -125,6 +125,9 @@ public class SocialIssuesPanel extends JPanel {
         // Get the currently selected stance for this issue, if any
         String selectedStance = selectedStances.getOrDefault(issue, "No Data");
         
+        // Normalize the stance value to handle misspellings (e.g., "Nuetral" -> "Neutral")
+        selectedStance = normalizeStanceValue(selectedStance);
+        
         for (int j = 0; j < STANCE_OPTIONS.length; j++) {
             String stance = STANCE_OPTIONS[j];
             Color stanceColor = getStanceColor(stance);
@@ -157,6 +160,32 @@ public class SocialIssuesPanel extends JPanel {
         }
         
         return issueRow;
+    }
+    
+    /**
+     * Normalize stance value to handle misspellings
+     * @param stance The stance value to normalize
+     * @return Normalized stance value
+     */
+    private String normalizeStanceValue(String stance) {
+        if (stance == null) {
+            return "No Data";
+        }
+        
+        // Handle common misspellings
+        if (stance.equalsIgnoreCase("Nuetral")) {
+            return "Neutral";
+        }
+        
+        // Make sure stance exactly matches one of our options
+        for (String option : STANCE_OPTIONS) {
+            if (option.equalsIgnoreCase(stance)) {
+                return option; // Return the correctly cased option
+            }
+        }
+        
+        // Default to No Data if no match found
+        return "No Data";
     }
     
     /**
@@ -261,9 +290,13 @@ public class SocialIssuesPanel extends JPanel {
             return;
         }
         
-        // Update our selected stances map
+        // Update our selected stances map with normalized values
         selectedStances.clear();
-        selectedStances.putAll(stances);
+        
+        // Normalize all stance values first
+        for (Map.Entry<String, String> entry : stances.entrySet()) {
+            selectedStances.put(entry.getKey(), normalizeStanceValue(entry.getValue()));
+        }
         
         // Need to redraw the panel to reflect changes
         contentPanel.removeAll();
@@ -281,8 +314,11 @@ public class SocialIssuesPanel extends JPanel {
             }
         }
         
+        // Force complete repaint
         contentPanel.revalidate();
         contentPanel.repaint();
+        revalidate();
+        repaint();
     }
     
     /**
