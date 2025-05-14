@@ -125,27 +125,32 @@ public class CandidateDataLoader {
             String imagePath = null;
             
             while ((line = reader.readLine()) != null) {
-                // Skip empty lines
-                if (line.trim().isEmpty()) {
-                    // If we have collected enough data for a candidate, add them to the list
-                    if (name != null && position != null && party != null) {
-                        candidates.add(new Candidate(name, position, party, region, age, imagePath));
-                        
-                        // Reset candidate data
-                        name = null;
-                        position = null;
-                        party = null;
-                        region = null;
-                        age = null;
-                        imagePath = null;
-                    }
+                // Skip comments and empty lines
+                if (line.trim().isEmpty() || line.trim().startsWith("#")) {
                     continue;
+                }
+                
+                // If we encounter a new "Name:" entry and already have candidate data,
+                // add the previous candidate to the list before starting the new one
+                if (line.startsWith("Name:") && name != null) {
+                    candidates.add(new Candidate(name, position, party, region, age, imagePath));
+                    
+                    // Reset candidate data
+                    name = null;
+                    position = null;
+                    party = null;
+                    region = null;
+                    age = null;
+                    imagePath = null;
                 }
                 
                 // Parse each line based on prefix
                 if (line.startsWith("Name:")) {
                     name = line.substring("Name:".length()).trim();
+                } else if (line.startsWith("Position:")) {
+                    position = line.substring("Position:".length()).trim();
                 } else if (line.startsWith("Positions:")) {
+                    // Support both singular and plural forms for backward compatibility
                     position = line.substring("Positions:".length()).trim();
                 } else if (line.startsWith("Party Affiliation:")) {
                     party = line.substring("Party Affiliation:".length()).trim();
@@ -159,7 +164,7 @@ public class CandidateDataLoader {
             }
             
             // Add the last candidate if there's data
-            if (name != null && position != null && party != null) {
+            if (name != null) {
                 candidates.add(new Candidate(name, position, party, region, age, imagePath));
             }
             

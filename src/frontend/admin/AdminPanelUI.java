@@ -14,7 +14,7 @@ import frontend.landingpage.LandingPageUI;
 
 /**
  * Admin Panel UI for the Gabay application
- * Simplified template with just backdrop and header logo
+ * Provides administrative control for managing the application
  */
 public class AdminPanelUI extends JFrame {
     // Font variables
@@ -28,6 +28,7 @@ public class AdminPanelUI extends JFrame {
     private Color primaryBlue = new Color(0x2F, 0x39, 0x8E); // #2f398e
     private Color headingColor = new Color(0x47, 0x55, 0x69); // #475569
     private Color paragraphColor = new Color(0x8D, 0x8D, 0x8D); // #8D8D8D
+    private Color textDark = new Color(0x47, 0x55, 0x69); // #475569 - for consistent text
     
     // Background image
     private BufferedImage backgroundImage;
@@ -50,6 +51,10 @@ public class AdminPanelUI extends JFrame {
     // Window dimensions
     private int initialWindowWidth = 1440;
     private int initialWindowHeight = 1024;
+    
+    // Add member variables for the panels
+    private CandidateDirectoryPanel directoryPanel;
+    private CandidateDetailsPanel detailsPanel;
     
     public AdminPanelUI() {
         // Load fonts
@@ -248,18 +253,25 @@ public class AdminPanelUI extends JFrame {
             Image scaledLogo = headerLogoImage.getScaledInstance(logoWidth, logoHeight, Image.SCALE_SMOOTH);
             logoLabel.setIcon(new ImageIcon(scaledLogo));
             
-            // Make logo clickable to go back to landing page
+            // Make logo clickable to exit the application
             logoLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
             logoLabel.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    // Go back to landing page
+                    // Redirect to LandingPageUI
+                    System.out.println("Redirecting to Landing Page...");
+                    // Hide current window
+                    setVisible(false);
+                    
+                    // Create and show the LandingPageUI
                     Dimension currentSize = getSize();
-                    dispose();
                     LandingPageUI landingPage = new LandingPageUI();
-                    landingPage.setSize(currentSize); // Set the same size as current window
-                    landingPage.setLocationRelativeTo(null); // Center on screen
+                    landingPage.setSize(currentSize);
+                    landingPage.setLocationRelativeTo(null);
                     landingPage.setVisible(true);
+                    
+                    // Dispose this window
+                    dispose();
                 }
                 
                 @Override
@@ -283,13 +295,20 @@ public class AdminPanelUI extends JFrame {
             logoLabel.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    // Go back to landing page
+                    // Redirect to LandingPageUI
+                    System.out.println("Redirecting to Landing Page...");
+                    // Hide current window
+                    setVisible(false);
+                    
+                    // Create and show the LandingPageUI
                     Dimension currentSize = getSize();
-                    dispose();
                     LandingPageUI landingPage = new LandingPageUI();
                     landingPage.setSize(currentSize);
                     landingPage.setLocationRelativeTo(null);
                     landingPage.setVisible(true);
+                    
+                    // Dispose this window
+                    dispose();
                 }
             });
         }
@@ -299,15 +318,73 @@ public class AdminPanelUI extends JFrame {
         // Add components to panels
         headerPanel.add(logoPanel, BorderLayout.WEST);
         
-        // Add a content panel (empty for now)
-        JPanel contentPanel = new JPanel();
-        contentPanel.setLayout(null); // Use null layout for precise positioning
-        contentPanel.setOpaque(false);
-        contentPanel.setBorder(BorderFactory.createEmptyBorder(20, 50, 20, 50));
+        // Create content panel with a layered pane
+        JLayeredPane layeredPane = new JLayeredPane();
+        layeredPane.setPreferredSize(new Dimension(initialWindowWidth, initialWindowHeight));
         
-        // Add panels to main panel
+        // Create content panel
+        JPanel contentPanel = new JPanel(new BorderLayout());
+        contentPanel.setOpaque(false);
+        contentPanel.setBorder(BorderFactory.createEmptyBorder(20, 40, 20, 40));
+        contentPanel.setBounds(0, 0, initialWindowWidth, initialWindowHeight);
+        
+        // Add component listener to handle resize events
+        layeredPane.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                // Update bounds of all child components when the layered pane is resized
+                contentPanel.setBounds(0, 0, layeredPane.getWidth(), layeredPane.getHeight());
+                
+                // After directoryPanel and detailsPanel are defined, we'll make sure they're visible
+                if (directoryPanel != null && detailsPanel != null) {
+                    // Get the current window width and available space
+                    int availableWidth = layeredPane.getWidth();
+                    
+                    // Calculate the gap between panels
+                    int gapBetweenPanels = 10;
+                    
+                    // Calculate total width of both panels plus gap
+                    int totalWidth = directoryPanel.getWidth() + detailsPanel.getWidth() + gapBetweenPanels;
+                    
+                    // Calculate the start X position to center both panels horizontally
+                    int startX = (availableWidth - totalWidth) / 2;
+                    
+                    // Keep vertical position the same
+                    int directoryY = directoryPanel.getY();
+                    int detailsY = detailsPanel.getY();
+                    
+                    // Calculate new bounds for each panel
+                    directoryPanel.setBounds(startX, directoryY, directoryPanel.getWidth(), directoryPanel.getHeight());
+                    detailsPanel.setBounds(startX + directoryPanel.getWidth() + gapBetweenPanels, detailsY, detailsPanel.getWidth(), detailsPanel.getHeight());
+                    
+                    directoryPanel.setVisible(true);
+                    detailsPanel.setVisible(true);
+                }
+            }
+        });
+        
+        // Remove tabbed pane - only use a simple panel
+        JPanel simplePanel = new JPanel();
+        simplePanel.setOpaque(false);
+        contentPanel.add(simplePanel, BorderLayout.CENTER);
+        
+        // Add the content panel to the layered pane
+        layeredPane.add(contentPanel, JLayeredPane.DEFAULT_LAYER);
+        
+        // Create the candidate directory panel and add it to the layered pane
+        directoryPanel = new CandidateDirectoryPanel();
+        layeredPane.add(directoryPanel, JLayeredPane.PALETTE_LAYER);
+        
+        // Create the candidate details panel and add it to the layered pane
+        detailsPanel = new CandidateDetailsPanel();
+        layeredPane.add(detailsPanel, JLayeredPane.PALETTE_LAYER);
+        
+        // Connect the panels
+        directoryPanel.setDetailsPanel(detailsPanel);
+        
+        // Add the panels to the UI
         mainPanel.add(headerPanel, BorderLayout.NORTH);
-        mainPanel.add(contentPanel, BorderLayout.CENTER);
+        mainPanel.add(layeredPane, BorderLayout.CENTER);
         
         // Set content pane
         setContentPane(mainPanel);
@@ -316,9 +393,15 @@ public class AdminPanelUI extends JFrame {
         addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
-                // Handle resizing if needed
+                // Update the layered pane size to match the window size
+                layeredPane.setSize(getContentPane().getSize());
+                
+                // Force revalidation of all components
                 revalidate();
                 repaint();
+                
+                // Explicitly trigger the layeredPane's componentResized listener
+                layeredPane.dispatchEvent(new ComponentEvent(layeredPane, ComponentEvent.COMPONENT_RESIZED));
             }
         });
     }
@@ -468,7 +551,18 @@ public class AdminPanelUI extends JFrame {
             @Override
             public void run() {
                 AdminPanelUI adminPanel = new AdminPanelUI();
+                
+                // Set minimum size to ensure panels have enough space
+                adminPanel.setMinimumSize(new Dimension(1280, 800));
+                
+                // Set initial size and center on screen
+                adminPanel.setSize(1440, 900);
+                adminPanel.setLocationRelativeTo(null);
+                
                 adminPanel.setVisible(true);
+                
+                // Print a message to help with debugging
+                System.out.println("Admin Panel UI launched successfully");
             }
         });
     }

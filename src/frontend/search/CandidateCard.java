@@ -27,7 +27,7 @@ public class CandidateCard extends JPanel {
     private String candidateName;
     private String candidatePosition;
     private String candidateParty;
-    private BufferedImage candidateImage;
+    private BufferedImage candidateImage = null;
     
     // Styling properties
     private final Color cardBackground = new Color(255, 255, 255);
@@ -42,7 +42,9 @@ public class CandidateCard extends JPanel {
     private final int CARD_PADDING = 12;
     
     // Animation properties
-    private float hoverState = 0.0f; // 0.0 = not hovered, 1.0 = fully hovered
+    private float hoverState = 0.0f; // 0.0 = not hovering, 1.0 = fully hovering
+    private boolean hovering = false; // Track if mouse is currently over the card
+    private boolean selected = false;
     private Timer animationTimer;
     private final int ANIMATION_DURATION = 150; // milliseconds
     private final int ANIMATION_STEPS = 10;
@@ -55,6 +57,9 @@ public class CandidateCard extends JPanel {
     private Font interRegular;
     private Font interSemiBold;
     private Font interMedium;
+    
+    // Callback
+    private Consumer<String> onViewProfile;
     
     /**
      * Create a new candidate card
@@ -77,6 +82,14 @@ public class CandidateCard extends JPanel {
         this.interRegular = interRegular;
         this.interSemiBold = interSemiBold;
         this.interMedium = interMedium;
+        
+        // Debug: Print the candidate information received
+        System.out.println("--------------------------------------------------------------");
+        System.out.println("Creating CandidateCard with details:");
+        System.out.println(" - Name: [" + candidateName + "]");
+        System.out.println(" - Position: [" + candidatePosition + "]");
+        System.out.println(" - Party: [" + candidateParty + "]");
+        System.out.println("--------------------------------------------------------------");
         
         // Load candidate image
         loadCandidateImage(imagePath);
@@ -178,7 +191,11 @@ public class CandidateCard extends JPanel {
         
         // Create position label with specified styling
         positionLabel = new JLabel(candidatePosition);
-        positionLabel.setForeground(textPrimary); // #0F172A as requested
+        // Use regular font with smaller size for position
+        positionLabel.setForeground(textSecondary);
+        positionLabel.setBackground(null);
+        positionLabel.setOpaque(false);
+        positionLabel.setBorder(null);
         positionLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
         if (interRegular != null) {
             positionLabel.setFont(interRegular.deriveFont(12f));
@@ -199,9 +216,9 @@ public class CandidateCard extends JPanel {
         // Add components to info panel with spacing
         infoPanel.add(Box.createVerticalGlue());
         infoPanel.add(nameLabel);
-        infoPanel.add(Box.createVerticalStrut(4));
+        infoPanel.add(Box.createVerticalStrut(3)); // Equal spacing between name and position
         infoPanel.add(positionLabel);
-        infoPanel.add(Box.createVerticalStrut(2));
+        infoPanel.add(Box.createVerticalStrut(3)); // Equal spacing between position and party
         infoPanel.add(partyLabel);
         infoPanel.add(Box.createVerticalGlue());
         
@@ -222,26 +239,24 @@ public class CandidateCard extends JPanel {
     }
     
     /**
-     * Set up the animation timer for smooth transitions
+     * Set up animation timer for smooth hover transitions
      */
     private void setupAnimationTimer() {
-        animationTimer = new Timer(ANIMATION_DURATION / ANIMATION_STEPS, e -> {
-            // Calculate the next hover state based on direction
-            if (hoverState < 1.0f && animationDirection > 0) {
-                hoverState = Math.min(1.0f, hoverState + (1.0f / ANIMATION_STEPS));
-            } else if (hoverState > 0.0f && animationDirection < 0) {
-                hoverState = Math.max(0.0f, hoverState - (1.0f / ANIMATION_STEPS));
-            }
-            
-            // Update components based on new hover state
-            updateComponentsForHoverState();
-            
-            // Stop the timer when we've reached the target state
-            if ((animationDirection > 0 && hoverState >= 1.0f) || 
-                (animationDirection < 0 && hoverState <= 0.0f)) {
-                ((Timer)e.getSource()).stop();
+        // Create timer that fires every 16ms (roughly 60fps)
+        animationTimer = new Timer(16, e -> {
+            // Update hover state based on isHovering flag
+            if (hovering && hoverState < 1.0f) {
+                hoverState = Math.min(1.0f, hoverState + 0.15f);
+                updateFonts();
+                repaint();
+            } else if (!hovering && hoverState > 0.0f) {
+                hoverState = Math.max(0.0f, hoverState - 0.15f);
+                updateFonts();
+                repaint();
             }
         });
+        animationTimer.setRepeats(true);
+        animationTimer.start();
     }
     
     // Animation direction: 1 for hover, -1 for un-hover
@@ -268,7 +283,7 @@ public class CandidateCard extends JPanel {
      * Update font sizes based on hover state
      */
     private void updateFonts() {
-        // Name font: 14px normal to 15px on hover
+        // Name font: 14px normal to 15px on hover - using SemiBold
         if (interSemiBold != null) {
             float nameSize = 14f + (1f * hoverState);
             nameLabel.setFont(interSemiBold.deriveFont(nameSize));
@@ -277,18 +292,20 @@ public class CandidateCard extends JPanel {
             nameLabel.setFont(new Font("Sans-Serif", Font.BOLD, nameSize));
         }
         
-        // Position font: 12px normal to 13px on hover
+        // Position font: 12px normal to 13px on hover - using Regular
         if (interRegular != null) {
             float positionSize = 12f + (1f * hoverState);
             positionLabel.setFont(interRegular.deriveFont(positionSize));
-            
-            // Party font: 11px normal to 12px on hover
-            float partySize = 11f + (1f * hoverState);
-            partyLabel.setFont(interRegular.deriveFont(partySize));
         } else {
             int positionSize = 12 + Math.round(hoverState);
             positionLabel.setFont(new Font("Sans-Serif", Font.PLAIN, positionSize));
-            
+        }
+        
+        // Party font: 11px normal to 12px on hover - using Regular
+        if (interRegular != null) {
+            float partySize = 11f + (1f * hoverState);
+            partyLabel.setFont(interRegular.deriveFont(partySize));
+        } else {
             int partySize = 11 + Math.round(hoverState);
             partyLabel.setFont(new Font("Sans-Serif", Font.PLAIN, partySize));
         }
@@ -301,11 +318,8 @@ public class CandidateCard extends JPanel {
         MouseAdapter hoverAdapter = new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                // Start animation to hovered state
-                animationDirection = 1;
-                if (!animationTimer.isRunning()) {
-                    animationTimer.start();
-                }
+                // Set hovering state to true
+                hovering = true;
                 
                 // Add a small cursor pointer effect
                 setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -348,14 +362,19 @@ public class CandidateCard extends JPanel {
             
             @Override
             public void mouseExited(MouseEvent e) {
-                // Start animation to normal state
-                animationDirection = -1;
-                if (!animationTimer.isRunning()) {
-                    animationTimer.start();
-                }
+                // Set hovering state to false
+                hovering = false;
                 
                 // Return cursor to default
                 setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+            }
+            
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                // Trigger view profile action
+                if (onViewProfile != null) {
+                    onViewProfile.accept(candidateName);
+                }
             }
         };
         

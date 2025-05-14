@@ -21,8 +21,6 @@ public class AdminLoginUI extends JFrame {
     private Color searchBorderColor = new Color(0xCB, 0xD5, 0xE1); // #CBD5E1
     private Color dividerColor = new Color(0xD9, 0xD9, 0xD9); // #D9D9D9
     private Color placeholderColor = Color.GRAY;
-    private Color buttonColor = new Color(0x2B, 0x37, 0x80); // #2B3780
-    private Color buttonShadowColor = new Color(0x1A, 0x21, 0x4D); // Darker blue for beneath button
     
     // UI Components
     private JTextField usernameField;

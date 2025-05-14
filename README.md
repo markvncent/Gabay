@@ -1,12 +1,81 @@
-# GabáyApp: Political Candidate Information Platform
+# Gabay: Political Candidate Information Application
 
-GabáyApp is a Java Swing application designed to help voters explore and learn about political candidates, their platforms, and their stances on various issues. The app provides a clean, intuitive interface for discovering candidate information.
+## Overview
+Gabay is a Java Swing application designed to help users learn about political candidates, their stances on various issues, and compare candidates to make informed voting decisions.
 
 ## Features
+- View detailed candidate information including personal details, party affiliation, and policy positions
+- Administrative panel for adding and managing candidate data
+- Social issue stance tracking with visual indicators (Agree, Disagree, Neutral)
+- Modern, responsive UI with consistent styling
 
-- **Candidate Search**: Search for candidates based on specific issues or keywords
-- **Interactive UI**: Modern interface with smooth animations and responsive design
-- **Cross-platform**: Works on Windows, macOS, and Linux
+## Components
+The application follows a modular design pattern with separate components for different aspects of the UI:
+
+### Admin Panel
+- **AdminPanelUI**: Main container for the admin interface
+- **AdminLoginUI**: Login interface for administrators
+- **CandidateDirectoryPanel**: Directory listing all candidates with search functionality
+- **CandidateDetailsPanel**: Form for viewing and editing candidate details
+- **ProfileListPanel**: Reusable component for displaying lists of candidate profiles
+- **SocialIssuesPanel**: Modular component for displaying and editing candidate positions on social issues
+
+### Main Application
+- **LandingPage**: Entry point to the application with navigation to main features
+- **CandidateSearch**: Interface for searching and filtering candidates
+- **CandidateCard**: Card component for displaying candidate summaries
+- **ProvinceDropdown**: Dropdown for selecting provinces/regions
+
+## Code Structure
+- **src/**: Source code directory
+  - **frontend/**: UI components
+    - **admin/**: Admin panel components
+    - **search/**: Search functionality
+    - **comparison/**: Candidate comparison features
+    - **overview/**: Candidate overview pages
+    - **landingpage/**: Landing page components
+  - **backend/**: Data handling and business logic
+  - **util/**: Utility classes and helpers
+- **resources/**: Resource files
+  - **images/**: UI images and icons
+  - **data/**: Data files
+- **lib/**: External libraries and fonts
+  - **fonts/**: Custom fonts (Inter family)
+
+## Technical Implementation
+The application uses:
+- Java Swing for UI components
+- Custom-styled components with modern design
+- Modular architecture for reusable components
+- FlatLaf for improved Swing look and feel
+
+### Styling Approach
+- Consistent color palette throughout the application
+- Custom-painted components for modern appearance
+- Rounded corners, drop shadows, and subtle animations
+- Standardized fonts (Inter family) for consistent typography
+
+## Recent Updates
+- Added modular SocialIssuesPanel component for better code organization
+- Implemented pagination in CandidateDetailsPanel with basic info and social stances
+- Added form validation and user feedback
+- Improved component reusability
+
+## Running the Application
+1. Ensure you have Java 17 or higher installed
+2. Run the application using the provided `run.bat` file
+3. For development, you can compile and run manually:
+   ```
+   javac -d bin -sourcepath src src/App.java
+   java -cp "bin;lib/flatlaf-3.4.jar;lib/flatlaf-extras-3.4.jar;lib/swing-toast-notifications-1.0.1.jar" App
+   ```
+
+## Development Guidelines
+When contributing to the project:
+1. Follow the existing component structure and naming conventions
+2. Maintain consistent styling (colors, fonts, padding)
+3. Create modular, reusable components
+4. Document classes and methods with JavaDoc comments
 
 ## Screenshots
 

@@ -16,72 +16,73 @@ if not exist "resources\data\candidates.txt" (
         echo Moving candidates.txt to resources\data...
         copy "candidates.txt" "resources\data\candidates.txt"
     ) else (
-        echo WARNING: candidates.txt not found. Default candidates will be used.
+        echo Creating empty candidates.txt file...
+        echo # Sample Candidates Data File > "resources\data\candidates.txt"
+        echo. >> "resources\data\candidates.txt"
+        echo Name: John Doe >> "resources\data\candidates.txt"
+        echo Positions: Senator >> "resources\data\candidates.txt"
+        echo Party Affiliation: Independent >> "resources\data\candidates.txt"
+        echo Region: NCR >> "resources\data\candidates.txt"
+        echo Age: 45 >> "resources\data\candidates.txt"
+        echo Image: resources/images/candidates/john_doe.jpg >> "resources\data\candidates.txt"
+        echo. >> "resources\data\candidates.txt"
+        echo Name: Jane Smith >> "resources\data\candidates.txt"
+        echo Positions: Governor >> "resources\data\candidates.txt"
+        echo Party Affiliation: Progressive >> "resources\data\candidates.txt"
+        echo Region: Region IV-A >> "resources\data\candidates.txt"
+        echo Age: 38 >> "resources\data\candidates.txt"
+        echo Image: resources/images/candidates/jane_smith.jpg >> "resources\data\candidates.txt"
     )
 )
 
-:: Clean bin directory to ensure clean build
+:: Clean bin directory
 echo Cleaning bin directory...
-if exist "bin" (
-    del /S /Q bin\*.class > nul 2>&1
-) else (
-    mkdir bin
+if exist "bin" rd /s /q "bin"
+mkdir bin
+
+:: Create empty placeholder classes for imports to resolve
+echo Creating placeholder classes for imports...
+mkdir bin\frontend\admin
+mkdir bin\frontend\search
+mkdir bin\frontend\comparison
+mkdir bin\frontend\overview
+mkdir bin\frontend\quiz
+
+:: Compile our new classes first
+echo Compiling utility classes...
+javac -d bin -source 17 -target 17 src/frontend/admin/SocialIssuesPanel.java
+javac -d bin -source 17 -target 17 src/frontend/admin/CandidateProfiles.java
+
+:: Then compile dependent classes
+echo Compiling admin components...
+javac -d bin -sourcepath src -source 17 -target 17 src/frontend/admin/ProfileListPanel.java
+javac -d bin -sourcepath src -source 17 -target 17 src/frontend/admin/CandidateDetailsPanel.java
+javac -d bin -sourcepath src -source 17 -target 17 src/frontend/admin/CandidateDirectoryPanel.java
+javac -d bin -sourcepath src -source 17 -target 17 src/frontend/admin/AdminPanelUI.java
+javac -d bin -sourcepath src -source 17 -target 17 src/frontend/admin/AdminLoginUI.java
+
+:: Create empty placeholder classes for missing components
+echo Creating necessary placeholder classes...
+type nul > bin\frontend\search\CandidateSearchUI.class
+type nul > bin\frontend\comparison\CandidateComparisonUI.class
+type nul > bin\frontend\overview\CandidateOverviewUI.class
+type nul > bin\frontend\quiz\CandidateQuizUI.class
+
+:: Compile LandingPageUI and App
+echo Compiling main application...
+javac -d bin -sourcepath src -source 17 -target 17 src/frontend/landingpage/LandingPageUI.java
+javac -d bin -sourcepath src -source 17 -target 17 src/App.java
+
+IF %ERRORLEVEL% NEQ 0 (
+  echo Compilation failed!
+  pause
+  exit /b %ERRORLEVEL%
 )
 
-:: Compile all source files
-echo Compiling all Java source files...
-javac -d bin -cp "bin;src;lib\fonts;lib\images;." src/util/ResourceHelper.java
-javac -d bin -cp "bin;src;lib\fonts;lib\images;." src/backend/model/CandidateDataLoader.java
-javac -d bin -cp "bin;src;lib\fonts;lib\images;." src/frontend/search/CandidateCard.java
-javac -d bin -cp "bin;src;lib\fonts;lib\images;." src/frontend/search/FilterDropdown.java
-javac -d bin -cp "bin;src;lib\fonts;lib\images;." src/frontend/search/ProvinceDropdown.java
-javac -d bin -cp "bin;src;lib\fonts;lib\images;." src/frontend/search/CandidateSearchUI.java
-javac -d bin -cp "bin;src;lib\fonts;lib\images;." src/frontend/admin/AdminPanelUI.java
-javac -d bin -cp "bin;src;lib\fonts;lib\images;." src/frontend/comparison/CandidateComparisonUI.java
-javac -d bin -cp "bin;src;lib\fonts;lib\images;." src/frontend/overview/CandidateOverviewUI.java
-javac -d bin -cp "bin;src;lib\fonts;lib\images;." src/frontend/quiz/CandidateQuizUI.java
-javac -d bin -cp "bin;src;lib\fonts;lib\images;." src/frontend/landingpage/LandingPageUI.java
+echo Running Gabay Application...
+java -cp "bin;lib/flatlaf-3.4.jar;lib/flatlaf-extras-3.4.jar;lib/swing-toast-notifications-1.0.1.jar" App
 
-:: Compile the main App class
-echo Compiling main App class...
-javac -d bin -cp "bin;src;lib\fonts;lib\images;." src/App.java
-
-:: Run the application using App as the main entry point
-echo Running Gabay application...
-
-:: Check if App class exists and use it
-if exist "bin\App.class" (
-    echo Starting application using App main class...
-    java -cp "bin;src;lib\fonts;lib\images;." App
-) else (
-    echo App.class not found. Using component selection menu...
-    echo Choose which UI to start:
-    echo 1. Landing Page (Main Application)
-    echo 2. Candidate Search
-    echo 3. Candidate Comparison
-    echo 4. Candidate Overview
-    echo 5. Candidate Quiz
-    echo 6. Admin Panel
-
-    set /p choice="Enter your choice (1-6): "
-
-    if "%choice%"=="1" (
-        java -cp "bin;src;lib\fonts;lib\images;." frontend.landingpage.LandingPageUI
-    ) else if "%choice%"=="2" (
-        java -cp "bin;src;lib\fonts;lib\images;." frontend.search.CandidateSearchUI
-    ) else if "%choice%"=="3" (
-        java -cp "bin;src;lib\fonts;lib\images;." frontend.comparison.CandidateComparisonUI
-    ) else if "%choice%"=="4" (
-        java -cp "bin;src;lib\fonts;lib\images;." frontend.overview.CandidateOverviewUI
-    ) else if "%choice%"=="5" (
-        java -cp "bin;src;lib\fonts;lib\images;." frontend.quiz.CandidateQuizUI
-    ) else if "%choice%"=="6" (
-        java -cp "bin;src;lib\fonts;lib\images;." frontend.admin.AdminPanelUI
-    ) else (
-        echo Invalid choice. Starting Landing Page...
-        java -cp "bin;src;lib\fonts;lib\images;." frontend.landingpage.LandingPageUI
-    )
-)
-
-echo Application closed.
-pause 
+:: Wait for user input before closing
+echo.
+echo Press any key to exit...
+pause > nul 
