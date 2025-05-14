@@ -297,6 +297,7 @@ public class CandidateSearchUI extends JFrame {
             }
         };
         mainPanel.setLayout(new BorderLayout());
+        mainPanel.setOpaque(true); // Make panel opaque with white background
         
         // Create header panel
         JPanel headerPanel = new JPanel(new BorderLayout());
@@ -1439,7 +1440,7 @@ public class CandidateSearchUI extends JFrame {
         );
         
         // Set very low background opacity (10%)
-        cardPanel.setBackgroundOpacity(0.0f);
+        cardPanel.setBackgroundOpacity(100f);
         
         // Calculate proper height - either fixed height or fill available space
         int availableHeight = parentPanel.getHeight() - startY - 20;

@@ -66,7 +66,8 @@ public class CandidateCardPanel extends JPanel {
     private void initializeUI() {
         // Set up the main panel with BorderLayout
         setLayout(new BorderLayout());
-        setOpaque(false);
+        setOpaque(true);
+        setBackground(Color.WHITE); // White background
         
         // Create content panel with null layout for absolute positioning
         contentPanel = new JPanel(null) {
@@ -110,7 +111,8 @@ public class CandidateCardPanel extends JPanel {
                 }
             }
         };
-        contentPanel.setOpaque(false);
+        contentPanel.setOpaque(true);
+        contentPanel.setBackground(Color.WHITE); // White background
         
         // Create scroll pane with better visibility settings
         scrollPane = new JScrollPane(contentPanel) {
@@ -123,10 +125,12 @@ public class CandidateCardPanel extends JPanel {
             }
         };
         
-        scrollPane.setOpaque(false);
-        scrollPane.getViewport().setOpaque(false);
+        scrollPane.setOpaque(true);
+        scrollPane.getViewport().setOpaque(true);
         scrollPane.setBorder(BorderFactory.createEmptyBorder());
         scrollPane.getVerticalScrollBar().setUnitIncrement(16); // Smoother scrolling
+        scrollPane.setBackground(Color.WHITE); // White background
+        scrollPane.getViewport().setBackground(Color.WHITE); // White background
         
         // Enable double buffering on the viewport to reduce flickering
         scrollPane.getViewport().setScrollMode(JViewport.BLIT_SCROLL_MODE);
@@ -366,7 +370,7 @@ public class CandidateCardPanel extends JPanel {
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         
         // Fill with very light background - now using 15% opacity instead of 30%
-        g2d.setColor(new Color(FFFFFF)); // Very light blue with reduced opacity
+        g2d.setColor(new Color(255, 255, 255, 15));
         g2d.fillRect(0, 0, getWidth(), getHeight());
         
         // Draw subtle border - reduced opacity from 50% to 20%
