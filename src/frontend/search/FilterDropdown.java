@@ -24,8 +24,8 @@ public class FilterDropdown {
     private boolean isDropdownVisible = false;
     private int currentDropdownHeight = 0;
     private int dropdownTargetHeight = 208;
-    private final int ANIMATION_DURATION = 60; // Reduced for even faster animation
-    private final int ANIMATION_FRAMES = 8; // Reduced for smoother and faster animation
+    private final int ANIMATION_DURATION = 20; // Reduced from 60 to 20 for faster animation
+    private final int ANIMATION_FRAMES = 4; // Reduced from 8 to 4 for faster animation with fewer frames
     private Timer dropdownAnimationTimer;
     
     // Styling properties
@@ -246,44 +246,13 @@ public class FilterDropdown {
             int dropdownX = centerX - ((200 + extraWidth) / 2);
             int dropdownY = bounds.y + bounds.height;
             
-            // Set initial position with 0 height for animation, centered under button
-            // Position needs to account for shadow size to avoid visual jumping
-            dropdownPanel.setBounds(dropdownX, dropdownY, 200 + extraWidth, 0);
+            // Set position with full height immediately (no animation)
+            dropdownPanel.setBounds(dropdownX, dropdownY, 200 + extraWidth, dynamicHeight + extraHeight);
             
             // Add to container and ensure it's at the top of the z-order
             containerPanel.add(dropdownPanel);
             containerPanel.setComponentZOrder(dropdownPanel, 0);
-            
-            currentDropdownHeight = 0;
-            
-            // Update target height for animation
-            dropdownTargetHeight = dynamicHeight + extraHeight;
-            
-            // Start animation
-            dropdownAnimationTimer = new Timer(ANIMATION_DURATION / ANIMATION_FRAMES, new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    currentDropdownHeight += dropdownTargetHeight / ANIMATION_FRAMES;
-                    if (currentDropdownHeight >= dropdownTargetHeight) {
-                        currentDropdownHeight = dropdownTargetHeight;
-                        dropdownAnimationTimer.stop();
-                        
-                        // Ensure the dropdown stays at the top of the z-order after animation completes
-                        containerPanel.setComponentZOrder(dropdownPanel, 0);
-                    }
-                    
-                    // Get the current position of the filter rectangle in case it moved
-                    Rectangle currentBounds = filterRectangle.getBounds();
-                    int currentCenterX = currentBounds.x + (currentBounds.width / 2);
-                    int currentDropdownX = currentCenterX - ((200 + extraWidth) / 2);
-                    
-                    // Keep dropdown centered during animation
-                    dropdownPanel.setBounds(currentDropdownX, currentBounds.y + currentBounds.height, 
-                                         200 + extraWidth, currentDropdownHeight);
-                    containerPanel.repaint();
-                }
-            });
-            dropdownAnimationTimer.start();
+            containerPanel.repaint();
         }
         
         // Force a new layer for the dropdown to ensure it appears above other components

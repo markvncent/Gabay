@@ -51,9 +51,12 @@ public class CandidateCard extends JPanel {
     private final int ANIMATION_DURATION = 150; // milliseconds
     private final int ANIMATION_STEPS = 10;
     
-    // Normal and hover sizes
-    private final Dimension NORMAL_SIZE = new Dimension(275, 94);
-    private final Dimension HOVER_SIZE = new Dimension(280, 98);
+    // Card sizes - just use one fixed size
+    private final Dimension CARD_SIZE = new Dimension(275, 94);
+    
+    // Highlight colors
+    private final Color NORMAL_BACKGROUND = new Color(255, 255, 255);
+    private final Color HOVER_BACKGROUND = new Color(0xF8, 0xFA, 0xFC); // Light blue-gray highlight
     
     // Fonts
     private Font interRegular;
@@ -128,13 +131,9 @@ public class CandidateCard extends JPanel {
                 Graphics2D g2d = (Graphics2D) g;
                 g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
                 
-                // Draw shadow first (subtle shadow effect) - reduced for compact card
-                int baseShadowSize = 4;
-                float baseShadowOpacity = 0.08f;
-                
-                // Calculate shadow properties based on hover state
-                float shadowOpacity = baseShadowOpacity + (0.07f * hoverState);
-                int shadowSize = baseShadowSize + Math.round(2 * hoverState);
+                // Draw shadow first (subtle shadow effect)
+                int shadowSize = 4;
+                float shadowOpacity = 0.08f;
                 
                 // Create shadow gradient
                 for (int i = 0; i < shadowSize; i++) {
@@ -149,8 +148,15 @@ public class CandidateCard extends JPanel {
                     ));
                 }
                 
-                // Draw white background with rounded corners
-                g2d.setColor(cardBackground);
+                // Interpolate background color based on hover state
+                Color bgColor = new Color(
+                    (int)(NORMAL_BACKGROUND.getRed() + (HOVER_BACKGROUND.getRed() - NORMAL_BACKGROUND.getRed()) * hoverState),
+                    (int)(NORMAL_BACKGROUND.getGreen() + (HOVER_BACKGROUND.getGreen() - NORMAL_BACKGROUND.getGreen()) * hoverState),
+                    (int)(NORMAL_BACKGROUND.getBlue() + (HOVER_BACKGROUND.getBlue() - NORMAL_BACKGROUND.getBlue()) * hoverState)
+                );
+                
+                // Draw background with rounded corners
+                g2d.setColor(bgColor);
                 g2d.fill(new RoundRectangle2D.Float(
                     shadowSize, shadowSize, 
                     getWidth() - 2 * shadowSize, 
@@ -158,8 +164,13 @@ public class CandidateCard extends JPanel {
                     CORNER_RADIUS, CORNER_RADIUS
                 ));
                 
-                // Draw subtle border
-                g2d.setColor(cardBorder);
+                // Draw border - make border darker when hovering
+                Color borderColor = new Color(
+                    (int)(cardBorder.getRed() + ((cardBorder.getRed() - 40) - cardBorder.getRed()) * hoverState),
+                    (int)(cardBorder.getGreen() + ((cardBorder.getGreen() - 40) - cardBorder.getGreen()) * hoverState),
+                    (int)(cardBorder.getBlue() + ((cardBorder.getBlue() - 40) - cardBorder.getBlue()) * hoverState)
+                );
+                g2d.setColor(borderColor);
                 g2d.setStroke(new BasicStroke(1));
                 g2d.draw(new RoundRectangle2D.Float(
                     shadowSize, shadowSize, 
@@ -239,8 +250,8 @@ public class CandidateCard extends JPanel {
         // Add main card panel to this panel
         add(mainCardPanel, BorderLayout.CENTER);
         
-        // Set exact size to 275x94
-        setPreferredSize(NORMAL_SIZE);
+        // Set fixed size
+        setPreferredSize(CARD_SIZE);
     }
     
     /**
@@ -274,10 +285,8 @@ public class CandidateCard extends JPanel {
         // Interpolate font sizes
         updateFonts();
         
-        // Interpolate card size between NORMAL_SIZE and HOVER_SIZE
-        int width = (int)(NORMAL_SIZE.width + (HOVER_SIZE.width - NORMAL_SIZE.width) * hoverState);
-        int height = (int)(NORMAL_SIZE.height + (HOVER_SIZE.height - NORMAL_SIZE.height) * hoverState);
-        setPreferredSize(new Dimension(width, height));
+        // Use fixed card size, no resizing
+        setPreferredSize(CARD_SIZE);
         
         // Repaint all components
         revalidate();
@@ -402,6 +411,14 @@ public class CandidateCard extends JPanel {
                 listener.accept(hovering);
             }
         }
+    }
+    
+    /**
+     * Check if the card is currently being hovered
+     * @return True if the card is being hovered, false otherwise
+     */
+    public boolean isHovering() {
+        return hovering;
     }
     
     /**

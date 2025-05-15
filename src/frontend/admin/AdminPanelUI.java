@@ -49,8 +49,8 @@ public class AdminPanelUI extends JFrame {
     private final Color TITLE_COLOR = new Color(0x2B, 0x37, 0x80); // #2B3780
     
     // Window dimensions
-    private int initialWindowWidth = 1440;
-    private int initialWindowHeight = 1024;
+    private int initialWindowWidth = 1411; // Fixed window width
+    private int initialWindowHeight = 970; // Fixed window height
     
     // Add member variables for the panels
     private CandidateDirectoryPanel directoryPanel;
@@ -69,6 +69,7 @@ public class AdminPanelUI extends JFrame {
         // Set up the window
         setTitle("Gabáy - Admin Panel");
         setSize(initialWindowWidth, initialWindowHeight);
+        setResizable(false); // Make window non-resizable
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         

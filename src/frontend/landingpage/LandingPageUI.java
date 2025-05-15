@@ -17,9 +17,9 @@ import java.util.List;
 import java.util.ArrayList;
 import frontend.admin.AdminLoginUI;
 import frontend.search.CandidateSearchUI;
-// import frontend.comparison.CandidateComparisonUI;
-// import frontend.overview.CandidateOverviewUI;
-// import frontend.quiz.CandidateQuizUI;
+import frontend.comparison.CandidateComparisonUI;
+import frontend.overview.CandidateOverviewUI;
+import frontend.quiz.CandidateQuizUI;
 import frontend.admin.AdminPanelUI;
 
 public class LandingPageUI extends JFrame {
@@ -61,8 +61,8 @@ public class LandingPageUI extends JFrame {
     
     // Header positioning
     private int headerY = 48; // Default Y position when window is large enough
-    private int initialWindowWidth = 1440; // Initial window width for reference
-    private int initialWindowHeight = 1024; // Initial window height for reference
+    private int initialWindowWidth = 1411; // Fixed window width
+    private int initialWindowHeight = 970; // Fixed window height
     private int baseMinimumHeaderButtonSpace = 50; // Base minimum space between header bottom and buttons
     
     // Button panel positioning
@@ -110,7 +110,8 @@ public class LandingPageUI extends JFrame {
         
         // Set up the window
         setTitle("Gabáy Landing Page");
-        setSize(1440, 1024); // Window size
+        setSize(1411, 970); // Fixed window size
+        setResizable(false); // Make window non-resizable
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         
@@ -514,42 +515,30 @@ public class LandingPageUI extends JFrame {
         button2.addActionListener(e -> {
             Dimension currentSize = getSize();
             dispose(); // Close current window
-            // CandidateComparisonUI comparisonUI = new CandidateComparisonUI();
-            // comparisonUI.setSize(currentSize); // Set the same size as current window
-            // comparisonUI.setLocationRelativeTo(null); // Center on screen
-            // comparisonUI.setVisible(true);
-            // For now, just show a message
-            System.out.println("Comparison feature not yet implemented");
-            // Reopen landing page
-            reopenLandingPage(currentSize, getLocation());
+            CandidateComparisonUI comparisonUI = new CandidateComparisonUI();
+            comparisonUI.setSize(currentSize); // Set the same size as current window
+            comparisonUI.setLocationRelativeTo(null); // Center on screen
+            comparisonUI.setVisible(true);
         });
         
         // Add action listener for Overview button
         button3.addActionListener(e -> {
             Dimension currentSize = getSize();
             dispose(); // Close current window
-            // CandidateOverviewUI overviewUI = new CandidateOverviewUI();
-            // overviewUI.setSize(currentSize); // Set the same size as current window
-            // overviewUI.setLocationRelativeTo(null); // Center on screen
-            // overviewUI.setVisible(true);
-            // For now, just show a message
-            System.out.println("Overview feature not yet implemented");
-            // Reopen landing page
-            reopenLandingPage(currentSize, getLocation());
+            CandidateOverviewUI overviewUI = new CandidateOverviewUI();
+            overviewUI.setSize(currentSize); // Set the same size as current window
+            overviewUI.setLocationRelativeTo(null); // Center on screen
+            overviewUI.setVisible(true);
         });
         
         // Add action listener for Quiz button
         button4.addActionListener(e -> {
             Dimension currentSize = getSize();
             dispose(); // Close current window
-            // CandidateQuizUI quizUI = new CandidateQuizUI();
-            // quizUI.setSize(currentSize); // Set the same size as current window
-            // quizUI.setLocationRelativeTo(null); // Center on screen
-            // quizUI.setVisible(true);
-            // For now, just show a message
-            System.out.println("Quiz feature not yet implemented");
-            // Reopen landing page
-            reopenLandingPage(currentSize, getLocation());
+            CandidateQuizUI quizUI = new CandidateQuizUI();
+            quizUI.setSize(currentSize); // Set the same size as current window
+            quizUI.setLocationRelativeTo(null); // Center on screen
+            quizUI.setVisible(true);
         });
         
         // Add buttons to panel
@@ -575,13 +564,8 @@ public class LandingPageUI extends JFrame {
         // Set content pane
         setContentPane(layeredPane);
         
-        // Add component listener for window resize
-        addComponentListener(new ComponentAdapter() {
-            @Override
-            public void componentResized(ComponentEvent e) {
+        // Initial layout setup (no dynamic resizing since window is fixed size)
                 adjustLayoutForWindowSize();
-            }
-        });
         
         // Add key listener for background toggle
         addKeyListener(new KeyAdapter() {

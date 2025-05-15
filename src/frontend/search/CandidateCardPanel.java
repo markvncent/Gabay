@@ -2,6 +2,7 @@ package frontend.search;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.MouseInputAdapter;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 import java.awt.*;
 import java.awt.event.*;
@@ -38,6 +39,12 @@ public class CandidateCardPanel extends JPanel {
     // View profile callback
     private Consumer<String> onViewProfile;
     
+    // Track if any card is currently being hovered
+    private boolean isAnyCardHovered = false;
+    
+    // Track if the scrollbar is being interacted with
+    private boolean isScrollbarBeingUsed = false;
+    
     /**
      * Create a scrollable panel that displays candidate cards
      * 
@@ -66,8 +73,8 @@ public class CandidateCardPanel extends JPanel {
     private void initializeUI() {
         // Set up the main panel with BorderLayout
         setLayout(new BorderLayout());
-        setOpaque(true);
-        setBackground(Color.WHITE); // White background
+        setOpaque(false); // Make panel completely transparent
+        setBackground(new Color(0, 0, 0, 0)); // Transparent background
         
         // Create content panel with null layout for absolute positioning
         contentPanel = new JPanel(null) {
@@ -89,48 +96,48 @@ public class CandidateCardPanel extends JPanel {
             }
             
             @Override
+            protected void paintComponent(Graphics g) {
+                // Completely transparent - don't call super.paintComponent
+                // This avoids any potential background filling
+            }
+            
+            @Override
             public void paint(Graphics g) {
-                // Create a buffer for double-buffering to prevent artifacts
-                Image offscreen = createImage(getWidth(), getHeight());
-                if (offscreen != null) {
-                    Graphics offscreenG = offscreen.getGraphics();
-                    // Enable anti-aliasing for smoother rendering
-                    if (offscreenG instanceof Graphics2D) {
-                        Graphics2D g2d = (Graphics2D) offscreenG;
-                        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, 
-                                           RenderingHints.VALUE_ANTIALIAS_ON);
-                    }
-                    // Paint to the offscreen buffer
-                    super.paint(offscreenG);
-                    // Draw the buffer to the screen
-                    g.drawImage(offscreen, 0, 0, this);
-                    offscreenG.dispose();
-                } else {
-                    // Fallback if offscreen buffer couldn't be created
-                    super.paint(g);
-                }
+                // We still need to paint children without any background
+                Graphics2D g2d = (Graphics2D)g;
+                g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                
+                // Paint only the children, not the background
+                paintChildren(g);
             }
         };
-        contentPanel.setOpaque(true);
-        contentPanel.setBackground(Color.WHITE); // White background
+        contentPanel.setOpaque(false); // Make content panel transparent 
+        contentPanel.setBackground(new Color(0, 0, 0, 0)); // Transparent background
         
         // Create scroll pane with better visibility settings
         scrollPane = new JScrollPane(contentPanel) {
             @Override
+            protected void paintComponent(Graphics g) {
+                // Skip the standard scroll pane background painting
+                // Only paint children components
+                paintChildren(g);
+            }
+            
+            @Override
             public void paint(Graphics g) {
-                // Force full repaint of the viewport during scrolling
+                // Only paint children without any background
                 Graphics2D g2d = (Graphics2D) g;
                 g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-                super.paint(g);
+                paintChildren(g);
             }
         };
         
-        scrollPane.setOpaque(true);
-        scrollPane.getViewport().setOpaque(true);
+        scrollPane.setOpaque(false); // Transparent scrollpane
+        scrollPane.getViewport().setOpaque(false); // Transparent viewport
         scrollPane.setBorder(BorderFactory.createEmptyBorder());
         scrollPane.getVerticalScrollBar().setUnitIncrement(16); // Smoother scrolling
-        scrollPane.setBackground(Color.WHITE); // White background
-        scrollPane.getViewport().setBackground(Color.WHITE); // White background
+        scrollPane.setBackground(new Color(0, 0, 0, 0)); // Transparent background
+        scrollPane.getViewport().setBackground(new Color(0, 0, 0, 0)); // Transparent viewport background
         
         // Enable double buffering on the viewport to reduce flickering
         scrollPane.getViewport().setScrollMode(JViewport.BLIT_SCROLL_MODE);
@@ -141,12 +148,12 @@ public class CandidateCardPanel extends JPanel {
         // Make sure we show vertical scrollbar when needed
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         
-        // Custom scroll bar for a modern look
+        // Custom scroll bar for a modern look - completely transparent track
         scrollPane.getVerticalScrollBar().setUI(new BasicScrollBarUI() {
             @Override
             protected void configureScrollBarColors() {
-                this.thumbColor = new Color(0xCB, 0xD5, 0xE1); // Light gray thumb
-                this.trackColor = new Color(0xF1, 0xF5, 0xF9); // Even lighter track
+                this.thumbColor = new Color(0xCB, 0xD5, 0xE1, 100); // Light gray thumb with transparency
+                this.trackColor = new Color(0, 0, 0, 0); // Transparent track
             }
             
             @Override
@@ -165,6 +172,11 @@ public class CandidateCardPanel extends JPanel {
                 button.setMinimumSize(new Dimension(0, 0));
                 button.setMaximumSize(new Dimension(0, 0));
                 return button;
+            }
+            
+            @Override
+            protected void paintTrack(Graphics g, JComponent c, Rectangle trackBounds) {
+                // Do not paint the track at all - completely transparent
             }
             
             @Override
@@ -197,8 +209,107 @@ public class CandidateCardPanel extends JPanel {
             }
         });
         
+        // Track when scrollbar is being used
+        scrollPane.getVerticalScrollBar().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                isScrollbarBeingUsed = true;
+            }
+            
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                isScrollbarBeingUsed = false;
+            }
+        });
+        
+        // Add a global event listener for mouse wheel events
+        // This will capture wheel events at the window level
+        Toolkit.getDefaultToolkit().addAWTEventListener(event -> {
+            if (event instanceof MouseWheelEvent) {
+                MouseWheelEvent wheelEvent = (MouseWheelEvent) event;
+                
+                // If any card is being hovered and we're not using the scrollbar
+                if (isAnyCardHovered && !isScrollbarBeingUsed) {
+                    // Check if we're over the scrollbar
+                    Point p = wheelEvent.getPoint();
+                    SwingUtilities.convertPointToScreen(p, wheelEvent.getComponent());
+                    
+                    // Get scrollbar bounds in screen coordinates
+                    JScrollBar scrollBar = scrollPane.getVerticalScrollBar();
+                    Rectangle scrollBarBounds = scrollBar.getBounds();
+                    Point scrollBarLocationOnScreen = scrollBar.getLocationOnScreen();
+                    scrollBarBounds.setLocation(scrollBarLocationOnScreen);
+                    
+                    // If not over the scrollbar, consume the event
+                    if (!scrollBarBounds.contains(p)) {
+                        wheelEvent.consume();
+                    }
+                }
+            }
+        }, AWTEvent.MOUSE_WHEEL_EVENT_MASK);
+        
+        // Add another mouse wheel listener directly to the viewport for double protection
+        scrollPane.getViewport().addMouseWheelListener(new MouseWheelListener() {
+            @Override
+            public void mouseWheelMoved(MouseWheelEvent e) {
+                if (isAnyCardHovered && !isScrollbarBeingUsed) {
+                    e.consume();
+                }
+            }
+        });
+        
+        // Track mouse movement over the scrollbar
+        scrollPane.getVerticalScrollBar().addMouseMotionListener(new MouseMotionAdapter() {
+            @Override
+            public void mouseMoved(MouseEvent e) {
+                isScrollbarBeingUsed = true;
+            }
+        });
+        
+        scrollPane.getVerticalScrollBar().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseExited(MouseEvent e) {
+                isScrollbarBeingUsed = false;
+            }
+        });
+        
+        // Add mouse listener to reset hover states when mouse exits the panel
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseExited(MouseEvent e) {
+                // Reset all hover states
+                resetAllHoverStates();
+            }
+        });
+        
+        // Add the same listener to content panel
+        contentPanel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseExited(MouseEvent e) {
+                // Check if we really exited (not just entered a child component)
+                Point p = e.getPoint();
+                if (p.x < 0 || p.y < 0 || p.x >= contentPanel.getWidth() || p.y >= contentPanel.getHeight()) {
+                    resetAllHoverStates();
+                }
+            }
+        });
+        
         // Add scroll pane to main panel
         add(scrollPane, BorderLayout.CENTER);
+    }
+    
+    /**
+     * Reset all hover states on cards
+     */
+    private void resetAllHoverStates() {
+        isAnyCardHovered = false;
+        
+        for (CandidateCard card : candidateCards) {
+            card.setHovering(false);
+        }
+        
+        // Force repaint to ensure clean rendering
+        contentPanel.repaint();
     }
     
     /**
@@ -280,6 +391,19 @@ public class CandidateCardPanel extends JPanel {
                         otherCard.setHovering(false);
                     }
                 }
+                // Set flag that a card is being hovered
+                isAnyCardHovered = true;
+            } else {
+                // Check if any other card is still being hovered
+                boolean anyOtherCardHovered = false;
+                for (CandidateCard otherCard : candidateCards) {
+                    if (otherCard.isHovering()) {
+                        anyOtherCardHovered = true;
+                        break;
+                    }
+                }
+                // Update the flag
+                isAnyCardHovered = anyOtherCardHovered;
             }
             // Ensure proper rendering after hover state changes
             contentPanel.repaint();
@@ -365,20 +489,8 @@ public class CandidateCardPanel extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         
-        // Draw a subtle background to help with visibility debugging
-        Graphics2D g2d = (Graphics2D) g.create();
-        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        
-        // Fill with very light background - now using 15% opacity instead of 30%
-        g2d.setColor(new Color(255, 255, 255, 15));
-        g2d.fillRect(0, 0, getWidth(), getHeight());
-        
-        // Draw subtle border - reduced opacity from 50% to 20%
-        g2d.setColor(new Color(200, 210, 230, 20)); // Light blue-gray with reduced opacity
-        g2d.setStroke(new BasicStroke(1));
-        g2d.drawRect(0, 0, getWidth()-1, getHeight()-1);
-        
-        g2d.dispose();
+        // No background or border - completely transparent
+        // Leave empty to make panel completely transparent
     }
     
     /**
@@ -413,6 +525,27 @@ public class CandidateCardPanel extends JPanel {
         // This would filter cards by province
         // For now, just reset the view
         loadCandidateData();
+    }
+    
+    /**
+     * Reset all filters and reload the original data
+     */
+    public void resetFilters() {
+        // Clear the current cards
+        candidateCards.clear();
+        contentPanel.removeAll();
+        
+        // Reload the original candidate data
+        loadCandidateData();
+        
+        // Update the layout
+        updateLayout();
+        
+        // Force revalidation to ensure content is displayed
+        revalidate();
+        repaint();
+        
+        System.out.println("All filters have been reset and data reloaded");
     }
     
     /**
@@ -456,16 +589,12 @@ public class CandidateCardPanel extends JPanel {
      * @param opacity Value between 0.0 (fully transparent) and 1.0 (fully opaque)
      */
     public void setBackgroundOpacity(float opacity) {
-        // Ensure opacity is between 0 and 1
-        opacity = Math.max(0.0f, Math.min(1.0f, opacity));
+        // Always set to transparent, ignoring the opacity parameter
+        setBackground(new Color(0, 0, 0, 0));
         
-        // Create a background color with the desired opacity
-        int alpha = (int)(opacity * 255);
-        setBackground(new Color(240, 245, 250, alpha));
-        
-        // Also update content panel background with the same opacity
+        // Also update content panel background to transparent
         if (contentPanel != null) {
-            contentPanel.setBackground(new Color(240, 245, 250, alpha));
+            contentPanel.setBackground(new Color(0, 0, 0, 0));
         }
         
         // Force repaint to show changes
