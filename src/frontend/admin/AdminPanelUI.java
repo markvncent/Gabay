@@ -547,6 +547,27 @@ public class AdminPanelUI extends JFrame {
         UIManager.put("ComboBox.font", font);
     }
     
+    /**
+     * Gets the CandidateDirectoryPanel
+     * @return The directory panel
+     */
+    public CandidateDirectoryPanel getDirectoryPanel() {
+        return directoryPanel;
+    }
+    
+    /**
+     * Refreshes the candidate directory panel by clearing and reloading candidates.
+     * This method should be called after adding, editing, or deleting candidates.
+     */
+    public void refreshDirectoryPanel() {
+        if (directoryPanel != null) {
+            directoryPanel.clearCandidates();
+            directoryPanel.loadCandidatesFromProfiles();
+            directoryPanel.revalidate();
+            directoryPanel.repaint();
+        }
+    }
+    
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             @Override

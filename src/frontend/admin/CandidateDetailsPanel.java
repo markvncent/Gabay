@@ -1914,6 +1914,19 @@ public class CandidateDetailsPanel extends JPanel {
                                          "Candidate " + (isEditMode ? "updated" : "added") + " successfully", 
                                          "Success", 
                                          JOptionPane.INFORMATION_MESSAGE);
+            
+            // Get reference to the directory panel and refresh it directly
+            CandidateDirectoryPanel directoryPanel = findDirectoryPanel();
+            if (directoryPanel != null) {
+                // Clear and reload the candidate list
+                directoryPanel.clearCandidates();
+                directoryPanel.loadCandidatesFromProfiles();
+                
+                // Force a repaint to show changes immediately
+                directoryPanel.revalidate();
+                directoryPanel.repaint();
+            }
+            
             clearForm(); // Reset form for next entry
         } else {
             JOptionPane.showMessageDialog(this, 
@@ -1921,6 +1934,64 @@ public class CandidateDetailsPanel extends JPanel {
                                          "Error", 
                                          JOptionPane.ERROR_MESSAGE);
         }
+    }
+    
+    /**
+     * Helper method to find the CandidateDirectoryPanel in the parent hierarchy
+     */
+    private CandidateDirectoryPanel findDirectoryPanel() {
+        // Start from parent and search upward until we find a JLayeredPane
+        Container parent = getParent();
+        JLayeredPane layeredPane = null;
+        
+        while (parent != null) {
+            if (parent instanceof JLayeredPane) {
+                layeredPane = (JLayeredPane) parent;
+                break;
+            }
+            parent = parent.getParent();
+        }
+        
+        // If we found a layered pane, look for the directory panel among its components
+        if (layeredPane != null) {
+            // Search through all components in the layered pane
+            Component[] components = layeredPane.getComponents();
+            for (Component comp : components) {
+                if (comp instanceof CandidateDirectoryPanel) {
+                    return (CandidateDirectoryPanel) comp;
+                }
+            }
+        }
+        
+        // Fallback: try to get it through the JFrame top level container
+        parent = getParent();
+        while (parent != null && !(parent instanceof JFrame)) {
+            parent = parent.getParent();
+        }
+        
+        if (parent instanceof JFrame) {
+            JFrame frame = (JFrame) parent;
+            
+            // If it's AdminPanelUI, use the getter method
+            if (frame instanceof AdminPanelUI) {
+                return ((AdminPanelUI) frame).getDirectoryPanel();
+            }
+            
+            // Try to access it directly through the content pane
+            Container contentPane = frame.getContentPane();
+            for (Component comp : contentPane.getComponents()) {
+                if (comp instanceof JLayeredPane) {
+                    JLayeredPane pane = (JLayeredPane) comp;
+                    for (Component c : pane.getComponents()) {
+                        if (c instanceof CandidateDirectoryPanel) {
+                            return (CandidateDirectoryPanel) c;
+                        }
+                    }
+                }
+            }
+        }
+        
+        return null;
     }
     
     /**

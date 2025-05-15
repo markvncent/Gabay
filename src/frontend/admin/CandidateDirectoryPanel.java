@@ -10,6 +10,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 import java.util.List;
 import java.util.Map;
+import java.util.ArrayList;
 
 /**
  * A simplified rectangle component for the admin panel.
@@ -75,6 +76,9 @@ public class CandidateDirectoryPanel extends JPanel {
     // Selected candidate index
     private int selectedCandidateIndex = -1;
     
+    // Timer for delayed search
+    private Timer searchTimer;
+    
     /**
      * Creates a new CandidateDirectoryPanel as a simple rectangle
      */
@@ -93,6 +97,10 @@ public class CandidateDirectoryPanel extends JPanel {
             // Use original specified position
             setBounds(PANEL_X, PANEL_Y, PANEL_WIDTH, PANEL_HEIGHT);
         }
+        
+        // Initialize search timer with 300ms delay (adjust as needed)
+        searchTimer = new Timer(300, e -> performSearch());
+        searchTimer.setRepeats(false); // Only fire once when triggered
         
         // Load fonts
         loadFonts();
@@ -251,6 +259,9 @@ public class CandidateDirectoryPanel extends JPanel {
                     searchField.requestFocus();
                     clearIconLabel.setVisible(false);
                     clearIconVisible = false;
+                    
+                    // When cleared, reload all candidates
+                    loadCandidatesFromProfiles();
                 }
             });
             
@@ -287,6 +298,9 @@ public class CandidateDirectoryPanel extends JPanel {
                     searchField.setText("Search candidates...");
                     searchField.setForeground(Color.GRAY);
                     updateClearIconVisibility(false);
+                    
+                    // When search text is cleared (by losing focus with empty field), reload all candidates
+                    loadCandidatesFromProfiles();
                 }
             }
         });
@@ -296,17 +310,44 @@ public class CandidateDirectoryPanel extends JPanel {
             @Override
             public void insertUpdate(javax.swing.event.DocumentEvent e) {
                 updateClearIconVisibility(!searchField.getText().equals("Search candidates..."));
+                // Schedule search after a delay
+                if (!searchField.getText().equals("Search candidates...")) {
+                    // Restart the timer on each keystroke
+                    searchTimer.restart();
+                }
             }
             
             @Override
             public void removeUpdate(javax.swing.event.DocumentEvent e) {
                 updateClearIconVisibility(!searchField.getText().isEmpty());
+                // If empty, load all candidates
+                if (searchField.getText().isEmpty()) {
+                    searchTimer.stop(); // Stop any pending search
+                    loadCandidatesFromProfiles();
+                } else if (!searchField.getText().equals("Search candidates...")) {
+                    // Otherwise schedule a new search
+                    searchTimer.restart();
+                }
             }
             
             @Override
             public void changedUpdate(javax.swing.event.DocumentEvent e) {
                 updateClearIconVisibility(!searchField.getText().isEmpty() && 
                                          !searchField.getText().equals("Search candidates..."));
+                // Schedule search after a delay
+                if (!searchField.getText().equals("Search candidates...")) {
+                    searchTimer.restart();
+                }
+            }
+        });
+        
+        // Add enter key listener to perform search when Enter is pressed
+        searchField.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    performSearch();
+                }
             }
         });
         
@@ -408,8 +449,7 @@ public class CandidateDirectoryPanel extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 // Perform search action
-                System.out.println("Find button clicked");
-                // Implement search functionality as needed
+                performSearch();
             }
         });
         
@@ -699,9 +739,18 @@ public class CandidateDirectoryPanel extends JPanel {
     }
     
     /**
+     * Clear all candidates from the profile list panel
+     */
+    public void clearCandidates() {
+        if (profileListPanel != null) {
+            profileListPanel.clearCandidates();
+        }
+    }
+    
+    /**
      * Load candidates from CandidateProfiles
      */
-    private void loadCandidatesFromProfiles() {
+    public void loadCandidatesFromProfiles() {
         // Clear any existing candidates first to avoid duplicates
         profileListPanel.clearCandidates();
         
@@ -753,13 +802,116 @@ public class CandidateDirectoryPanel extends JPanel {
         // Update the details panel if it's connected
         if (detailsPanel != null) {
             if (index >= 0) {
-                // Use displayCandidate instead of loadCandidate to show data without enabling edit mode
-                detailsPanel.displayCandidate(index);
+                // Use loadCandidate instead of displayCandidate to enable edit mode
+                detailsPanel.loadCandidate(index);
             } else {
                 detailsPanel.clearForm();
             }
         } else {
             System.out.println("Details panel not connected");
+        }
+    }
+    
+    /**
+     * Perform search based on the current search text
+     */
+    private void performSearch() {
+        String searchQuery = searchField.getText();
+        
+        // Don't search if text is empty, placeholder, or very short
+        if (searchQuery.isEmpty() || searchQuery.equals("Search candidates...") || searchQuery.length() < 2) {
+            if (searchQuery.length() < 2 && searchQuery.length() > 0) {
+                // If search query is too short, show message but don't search yet
+                profileListPanel.clearCandidates();
+                profileListPanel.setPlaceholderText("Type at least 2 characters to search.");
+                return;
+            }
+            
+            // If empty or placeholder, show all candidates
+            loadCandidatesFromProfiles();
+            return;
+        }
+        
+        // Make search case-insensitive
+        searchQuery = searchQuery.toLowerCase();
+        
+        // Get all candidates
+        List<Map<String, String>> allCandidates = CandidateProfiles.loadCandidates();
+        List<Map<String, String>> filteredCandidates = new ArrayList<>();
+        List<Integer> filteredIndices = new ArrayList<>();
+        
+        // Filter candidates based on search query
+        for (int i = 0; i < allCandidates.size(); i++) {
+            Map<String, String> candidate = allCandidates.get(i);
+            
+            // Check various fields for matches
+            boolean matches = false;
+            
+            // Check name
+            String name = candidate.getOrDefault("Name", "").toLowerCase();
+            if (name.contains(searchQuery)) {
+                matches = true;
+            }
+            
+            // Check position
+            String position = candidate.getOrDefault("Position", "").toLowerCase();
+            if (position.contains(searchQuery)) {
+                matches = true;
+            }
+            
+            // Check party
+            String party = candidate.getOrDefault("Party Affiliation", "").toLowerCase();
+            if (party.contains(searchQuery)) {
+                matches = true;
+            }
+            
+            // Check region
+            String region = candidate.getOrDefault("Region", "").toLowerCase();
+            if (region.contains(searchQuery)) {
+                matches = true;
+            }
+            
+            // Add to filtered list if there's a match
+            if (matches) {
+                filteredCandidates.add(candidate);
+                filteredIndices.add(i);
+            }
+        }
+        
+        // Display the filtered candidates
+        displayFilteredCandidates(filteredCandidates, filteredIndices);
+    }
+    
+    /**
+     * Display the filtered candidates in the profile list panel
+     * @param filteredCandidates List of candidate data that match the search
+     * @param originalIndices List of original indices for the filtered candidates
+     */
+    private void displayFilteredCandidates(List<Map<String, String>> filteredCandidates, List<Integer> originalIndices) {
+        // Clear the current profile list
+        profileListPanel.clearCandidates();
+        
+        // If no matches, show a message
+        if (filteredCandidates.isEmpty()) {
+            profileListPanel.setPlaceholderText("No candidates match your search criteria.");
+            return;
+        }
+        
+        // Add each filtered candidate to the profile list
+        for (int i = 0; i < filteredCandidates.size(); i++) {
+            Map<String, String> candidate = filteredCandidates.get(i);
+            final int originalIndex = originalIndices.get(i); // Get the original index for selection
+            
+            String name = candidate.getOrDefault("Name", "Unknown");
+            String position = candidate.getOrDefault("Position", "");
+            String party = candidate.getOrDefault("Party Affiliation", "");
+            String imagePath = candidate.getOrDefault("Image", "resources/images/candidates/default.png");
+            
+            // Add candidate to the list with click handler
+            profileListPanel.addCandidate(name, position, party, imagePath, e -> {
+                selectedCandidateIndex = originalIndex; // Use the original index for proper selection
+                selectCandidate(originalIndex);
+            });
         }
     }
     
