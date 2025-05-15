@@ -10,8 +10,6 @@ import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 import java.util.List;
 import java.util.Map;
-import backend.candidate.CandidateDataManager;
-import backend.candidate.Candidate;
 
 /**
  * A simplified rectangle component for the admin panel.
@@ -482,7 +480,7 @@ public class CandidateDirectoryPanel extends JPanel {
         profileListPanel.setBounds(margin, profileListY, profileListWidth, profileListHeight);
         
         // Load candidates
-        loadCandidatesFromBackend();
+        loadCandidatesFromProfiles();
         
         // Add listener to update profile count when candidates are added or removed
         profileListPanel.addProfileCountListener(count -> {
@@ -628,9 +626,9 @@ public class CandidateDirectoryPanel extends JPanel {
             System.err.println("Details panel not set");
             return;
         }
+        
+        // Clear the form for a new candidate
         detailsPanel.clearForm();
-        // Optionally, you can refresh the list after adding
-        loadCandidatesFromBackend();
     }
     
     /**
@@ -641,6 +639,8 @@ public class CandidateDirectoryPanel extends JPanel {
             System.err.println("Details panel not set");
             return;
         }
+        
+        // Check if a candidate is selected
         if (selectedCandidateIndex < 0) {
             JOptionPane.showMessageDialog(this, 
                                         "Please select a candidate to edit", 
@@ -648,57 +648,88 @@ public class CandidateDirectoryPanel extends JPanel {
                                         JOptionPane.INFORMATION_MESSAGE);
             return;
         }
+        
+        // Load the candidate data for editing
         detailsPanel.loadCandidate(selectedCandidateIndex);
-        // Optionally, refresh the list after editing
-        loadCandidatesFromBackend();
     }
     
     /**
      * Handle Delete button click
      */
     private void handleDeleteButton() {
+        // Check if a candidate is selected
         if (selectedCandidateIndex < 0) {
-            JOptionPane.showMessageDialog(this, "Please select a candidate to delete.", "No Selection", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, 
+                                        "Please select a candidate to delete", 
+                                        "No Selection", 
+                                        JOptionPane.INFORMATION_MESSAGE);
             return;
         }
-        int result = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete this candidate?", "Confirm Delete", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        
+        // Ask for confirmation
+        int result = JOptionPane.showConfirmDialog(this,
+                                                "Are you sure you want to delete this candidate?",
+                                                "Confirm Deletion",
+                                                JOptionPane.YES_NO_OPTION,
+                                                JOptionPane.WARNING_MESSAGE);
+        
         if (result == JOptionPane.YES_OPTION) {
-            CandidateDataManager manager = App.getCandidateManager();
-            String error = manager.deleteCandidate(selectedCandidateIndex);
-            if (error == null) {
-                JOptionPane.showMessageDialog(this, "Candidate deleted successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
-                loadCandidatesFromBackend();
-                if (detailsPanel != null) {
-                    detailsPanel.clearForm();
-                }
+            // Delete the candidate
+            boolean success = CandidateProfiles.deleteCandidate(selectedCandidateIndex);
+            
+            if (success) {
+                JOptionPane.showMessageDialog(this, 
+                                            "Candidate deleted successfully", 
+                                            "Success", 
+                                            JOptionPane.INFORMATION_MESSAGE);
+                
+                // Update the profile list
+                profileListPanel.clearCandidates();
+                loadCandidatesFromProfiles();
+                
+                // Reset selection
+                selectedCandidateIndex = -1;
             } else {
-                JOptionPane.showMessageDialog(this, error, "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, 
+                                            "Failed to delete candidate", 
+                                            "Error", 
+                                            JOptionPane.ERROR_MESSAGE);
             }
         }
     }
     
     /**
-     * Load candidates from backend
+     * Load candidates from CandidateProfiles
      */
-    public void loadCandidatesFromBackend() {
-        CandidateDataManager manager = App.getCandidateManager();
-        List<Candidate> candidates = manager.getAllCandidates();
+    private void loadCandidatesFromProfiles() {
+        // Clear any existing candidates first to avoid duplicates
         profileListPanel.clearCandidates();
-        for (int i = 0; i < candidates.size(); i++) {
-            Candidate c = candidates.get(i);
-            profileListPanel.addCandidate(
-                c.getName(),
-                c.getPosition(),
-                c.getPartyAffiliation(),
-                c.getImagePath(),
-                e -> {
-                    selectedCandidateIndex = i;
-                    selectCandidate(i);
-                }
-            );
+        
+        // Load all candidates
+        List<Map<String, String>> candidates = CandidateProfiles.loadCandidates();
+        
+        // If no candidates found, load sample data
+        if (candidates.isEmpty()) {
+            profileListPanel.loadSampleData();
+            return;
         }
-        profileCount = candidates.size();
-        profileListPanel.repaint();
+        
+        // Add each candidate to the profile list panel
+        for (int i = 0; i < candidates.size(); i++) {
+            Map<String, String> candidate = candidates.get(i);
+            final int index = i; // Final copy for use in lambda
+            
+            String name = candidate.getOrDefault("Name", "Unknown");
+            String position = candidate.getOrDefault("Position", "");
+            String party = candidate.getOrDefault("Party Affiliation", "");
+            String imagePath = candidate.getOrDefault("Image", "resources/images/candidates/default.png");
+            
+            // Add candidate to the list with click handler
+            profileListPanel.addCandidate(name, position, party, imagePath, e -> {
+                selectedCandidateIndex = index;
+                selectCandidate(index);
+            });
+        }
     }
     
     /**

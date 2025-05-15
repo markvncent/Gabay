@@ -61,8 +61,8 @@ public class LandingPageUI extends JFrame {
     
     // Header positioning
     private int headerY = 48; // Default Y position when window is large enough
-    private int initialWindowWidth = 1440; // Initial window width for reference
-    private int initialWindowHeight = 1024; // Initial window height for reference
+    private int initialWindowWidth = 1411; // Fixed window width
+    private int initialWindowHeight = 970; // Fixed window height
     private int baseMinimumHeaderButtonSpace = 50; // Base minimum space between header bottom and buttons
     
     // Button panel positioning
@@ -110,7 +110,8 @@ public class LandingPageUI extends JFrame {
         
         // Set up the window
         setTitle("Gabáy Landing Page");
-        setSize(1440, 1024); // Window size
+        setSize(1411, 970); // Fixed window size
+        setResizable(false); // Make window non-resizable
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         
@@ -575,13 +576,8 @@ public class LandingPageUI extends JFrame {
         // Set content pane
         setContentPane(layeredPane);
         
-        // Add component listener for window resize
-        addComponentListener(new ComponentAdapter() {
-            @Override
-            public void componentResized(ComponentEvent e) {
+        // Initial layout setup (no dynamic resizing since window is fixed size)
                 adjustLayoutForWindowSize();
-            }
-        });
         
         // Add key listener for background toggle
         addKeyListener(new KeyAdapter() {

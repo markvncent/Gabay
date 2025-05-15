@@ -58,6 +58,9 @@ public class CandidateSearchUI extends JFrame {
     // Search icon
     private BufferedImage searchIconImage;
     
+    // Refresh icon
+    private BufferedImage refreshIconImage;
+    
     // Clear icon for search field
     private BufferedImage clearIconImage;
     private JLabel clearIconLabel;
@@ -76,8 +79,8 @@ public class CandidateSearchUI extends JFrame {
     private final int CONTENT_SIDE_MARGIN = 140; // Side margin to maintain on each side
     
     // Divider line properties - adding these for better responsiveness
-    private int initialWindowWidth = 1440;
-    private int initialWindowHeight = 1024;
+    private int initialWindowWidth = 1411; // Fixed window width
+    private int initialWindowHeight = 970; // Fixed window height
     
     // Filter dropdown component
     private FilterDropdown filterDropdown;
@@ -89,6 +92,7 @@ public class CandidateSearchUI extends JFrame {
     private JPanel secondRectangle;
     private JPanel thirdRectangle;
     private JTextField searchField;
+    private JPanel refreshButton; // Add refresh button
     
     // Repositioning variables
     private int cardMarginTop = 20; // Margin between divider and cards
@@ -111,9 +115,13 @@ public class CandidateSearchUI extends JFrame {
         // Load search icon
         loadSearchIconImage();
         
+        // Load refresh icon
+        loadRefreshIconImage();
+        
         // Set up the window
         setTitle("Gabáy - Candidate Search");
-        setSize(1440, 1024);
+        setSize(initialWindowWidth, initialWindowHeight);
+        setResizable(false); // Make window non-resizable
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         
@@ -427,10 +435,17 @@ public class CandidateSearchUI extends JFrame {
         thirdRectangle = createFindButton(90, 45);
         thirdRectangle.setBounds(startX + 217 + gap1 + 827 + gap2, rectanglesY, 90, 45);
         
+        // Create refresh button - square shape with icon
+        refreshButton = createRefreshButton(45, 45);
+        // Position it to the left of the provinceRectangle, same vertical align, with 10px gap
+        refreshButton.setBounds(provinceRectangle.getX() - 45 - 10, 
+                              provinceRectangle.getY(), 45, 45);
+        
         // Add the rectangles directly to the content panel
         contentPanel.add(filterRectangle);
         contentPanel.add(secondRectangle);
         contentPanel.add(thirdRectangle);
+        contentPanel.add(refreshButton);
         contentPanel.add(provinceRectangle);
         
         // Set the correct z-order for the province rectangle
@@ -469,6 +484,16 @@ public class CandidateSearchUI extends JFrame {
                 adjustLayoutForWindowSize();
                 revalidate();
                 repaint();
+            }
+        });
+
+        // Add a global mouse listener to ensure dropdowns are always in front
+        // when interacting with any part of the UI
+        addMouseMotionListener(new MouseMotionAdapter() {
+            @Override
+            public void mouseMoved(MouseEvent e) {
+                // Ensure proper z-ordering
+                adjustDividerForDropdowns();
             }
         });
 
@@ -839,9 +864,11 @@ public class CandidateSearchUI extends JFrame {
                         int firstWidth = (int)(217 * widthScaleFactor);
                         int secondWidth = (int)(827 * widthScaleFactor);
                         int thirdWidth = (int)(90 * widthScaleFactor);
+                        int refreshWidth = (int)(90 * widthScaleFactor);
                         int gap1 = (int)(10 * widthScaleFactor); // Gap between first and second rectangle
                         int gap2 = (int)(10 * widthScaleFactor); // Gap between second and third rectangle
-                        int totalWidth = firstWidth + secondWidth + thirdWidth + gap1 + gap2;
+                        int gap3 = (int)(10 * widthScaleFactor); // Gap between third rectangle and refresh button
+                        int totalWidth = firstWidth + secondWidth + thirdWidth + refreshWidth + gap1 + gap2 + gap3;
                         
                         // Calculate starting X position to center all rectangles
                         int startX = (windowWidth - totalWidth) / 2;
@@ -855,15 +882,23 @@ public class CandidateSearchUI extends JFrame {
                         // Third rectangle (90x45)
                         thirdRectangle.setBounds(startX + firstWidth + gap1 + secondWidth + gap2, rectanglesY, thirdWidth, height);
                         
+                        // Refresh button (90x45)
+                        refreshButton.setBounds(startX + firstWidth + gap1 + secondWidth + gap2 + thirdWidth + gap3, rectanglesY, refreshWidth, height);
+                        
                         // Update province dropdown position
                         if (provinceDropdown != null) {
                             JPanel provinceRectangle = provinceDropdown.getProvinceRectangle();
-                            // Position with right edge aligned to Find button, 5px below, 200px width
-                            int findButtonRightEdge = startX + firstWidth + gap1 + secondWidth + gap2 + thirdWidth;
+                            // Position with right edge aligned to Refresh button, 5px below, 200px width
+                            int refreshButtonRightEdge = startX + firstWidth + gap1 + secondWidth + gap2 + thirdWidth + gap3 + refreshWidth;
                             int provinceWidth = (int)(200 * widthScaleFactor);
-                            int provinceX = findButtonRightEdge - provinceWidth;
+                            int provinceX = refreshButtonRightEdge - provinceWidth;
                             provinceRectangle.setBounds(provinceX, rectanglesY + height + 5, provinceWidth, height);
                             provinceDropdown.updatePositionOnResize();
+                            
+                            // Position refresh button to the left of the province dropdown with 10px gap
+                            int refreshSize = (int)(45 * heightScaleFactor); // Square size, same height as dropdown
+                            refreshButton.setBounds(provinceRectangle.getX() - refreshSize - 10, 
+                                                  provinceRectangle.getY(), refreshSize, refreshSize);
                         }
                         
                         // Find and update divider line position
@@ -1061,58 +1096,22 @@ public class CandidateSearchUI extends JFrame {
      */
     private void loadSearchIconImage() {
         try {
-            // Try to load the search icon image from the specific path
-            File searchFile = new File("resources/images/Candidate Search/search.png");
-            if (searchFile.exists()) {
-                searchIconImage = ImageIO.read(searchFile);
-                System.out.println("Search icon loaded successfully from: " + searchFile.getAbsolutePath());
-            } else {
-                System.out.println("Search icon not found at: " + searchFile.getAbsolutePath());
-                
-                // Try alternative locations as backup
-                String[] alternativePaths = {
-                    "resources/images/Buttons Icon/search_masked.png",
-                    "resources/images/search.png",
-                    "search.png",
-                    "images/search.png"
-                };
-                
-                for (String path : alternativePaths) {
-                    File altFile = new File(path);
-                    if (altFile.exists()) {
-                        searchIconImage = ImageIO.read(altFile);
-                        System.out.println("Search icon loaded from alternative path: " + altFile.getAbsolutePath());
-                        break;
-                    }
-                }
-            }
-            
-            // Load clear icon (x.png)
-            File clearFile = new File("resources/images/Candidate Search/x.png");
-            if (clearFile.exists()) {
-                clearIconImage = ImageIO.read(clearFile);
-                System.out.println("Clear icon loaded successfully from: " + clearFile.getAbsolutePath());
-            }
-            
-            // If we still couldn't find the icon, use a different approach with resource stream
-            if (searchIconImage == null) {
-                System.out.println("Still looking for search icon in additional locations...");
-                
-                // Try using class loader resource stream as a last resort
-                try {
-                    ClassLoader classLoader = getClass().getClassLoader();
-                    java.net.URL resourceURL = classLoader.getResource("resources/images/Candidate Search/search.png");
-                    if (resourceURL != null) {
-                        searchIconImage = ImageIO.read(resourceURL);
-                        System.out.println("Search icon loaded using class loader.");
-                    }
-                } catch (Exception e) {
-                    System.out.println("Error loading search icon with class loader: " + e.getMessage());
-                }
-            }
+            // Try to load the search icon
+            searchIconImage = ImageIO.read(new File("resources/images/Candidate Search/search-icon.png"));
         } catch (IOException e) {
             System.out.println("Error loading search icon: " + e.getMessage());
-            e.printStackTrace();
+        }
+    }
+    
+    /**
+     * Load the refresh icon image
+     */
+    private void loadRefreshIconImage() {
+        try {
+            // Try to load the refresh icon
+            refreshIconImage = ImageIO.read(new File("resources/images/Candidate Search/refresh.png"));
+        } catch (IOException e) {
+            System.out.println("Error loading refresh icon: " + e.getMessage());
         }
     }
     
@@ -1127,6 +1126,10 @@ public class CandidateSearchUI extends JFrame {
                 if (((BorderLayout)getContentPane().getLayout()).getConstraints(comp) == BorderLayout.CENTER) {
                     JPanel contentPanel = (JPanel) panel;
                     
+                    // Calculate scale factors based on window size
+                    double widthScaleFactor = Math.min(1.0, getWidth() / (double)initialWindowWidth);
+                    double heightScaleFactor = Math.min(1.0, getHeight() / (double)initialWindowHeight);
+                    
                     // Get the filter rectangle from our modular component
                     JPanel filterRect = filterDropdown.getFilterRectangle();
                     
@@ -1135,7 +1138,7 @@ public class CandidateSearchUI extends JFrame {
                     Rectangle secondBounds = secondRectangle.getBounds();
                     Rectangle thirdBounds = thirdRectangle.getBounds();
                     
-                    // Calculate total width including gaps
+                    // Calculate total width including gaps (excluding refresh button)
                     int width1 = firstBounds.width;
                     int width2 = secondBounds.width;
                     int width3 = thirdBounds.width;
@@ -1151,22 +1154,43 @@ public class CandidateSearchUI extends JFrame {
                     int dividerWidth = (int)(windowWidth * 0.8);
                     int dividerX = (windowWidth - dividerWidth) / 2;
                     
-                    // Update positions
+                    // Update positions for main search elements
                     filterRect.setBounds(newStartX, firstBounds.y, width1, firstBounds.height);
                     secondRectangle.setBounds(newStartX + width1 + gap1, secondBounds.y, width2, secondBounds.height);
                     thirdRectangle.setBounds(newStartX + width1 + gap1 + width2 + gap2, thirdBounds.y, width3, thirdBounds.height);
+                    
+                    // Update province dropdown position 
+                    if (provinceDropdown != null) {
+                        JPanel provinceRectangle = provinceDropdown.getProvinceRectangle();
+                        // Position it under the find button with 5px gap
+                        provinceRectangle.setBounds(
+                            thirdBounds.x - 200 + thirdBounds.width,  // Right align with Find button
+                            thirdBounds.y + thirdBounds.height + 5,   // 5px below Find button
+                            200, 45);
+                        provinceDropdown.updatePositionOnResize();
+                        
+                        // Position refresh button to the left of the province dropdown with 10px gap
+                        int refreshSize = (int)(45 * heightScaleFactor); // Square size, same height as dropdown
+                        refreshButton.setBounds(
+                            provinceRectangle.getX() - refreshSize - 10,
+                            provinceRectangle.getY(), refreshSize, refreshSize);
+                        
+                        // Ensure province rectangle is at the top of the z-order
+                        contentPanel.setComponentZOrder(provinceRectangle, 0);
+                    }
                     
                     // Update divider line position
                     Component[] components = contentPanel.getComponents();
                     for (Component c : components) {
                         if (c instanceof JPanel && c != filterRect && c != secondRectangle && 
-                            c != thirdRectangle && c != provinceDropdown.getProvinceRectangle() &&
+                            c != thirdRectangle && c != refreshButton && c != provinceDropdown.getProvinceRectangle() &&
                             "dividerLine".equals(c.getName())) {
                             
-                            // Calculate position 10px below province dropdown
+                            // Calculate position 10px below province dropdown and refresh button
                             JPanel provinceRect = provinceDropdown.getProvinceRectangle();
                             Rectangle provinceBounds = provinceRect.getBounds();
-                            int dividerY = Math.max(thirdBounds.y + thirdBounds.height + 10, 
+                            Rectangle refreshBounds = refreshButton.getBounds();
+                            int dividerY = Math.max(refreshBounds.y + refreshBounds.height + 10, 
                                                   provinceBounds.y + provinceBounds.height + 10);
                             
                             // Update divider position with centered position
@@ -1178,23 +1202,8 @@ public class CandidateSearchUI extends JFrame {
                     // Update dropdown position
                     filterDropdown.updatePositionOnResize();
                     
-                    // Update province dropdown position - place under Find button
-                    if (provinceDropdown != null) {
-                        JPanel provinceRectangle = provinceDropdown.getProvinceRectangle();
-                        // Position with right edge aligned to Find button, 5px gap below, 200px width
-                        int findButtonRightEdge = newStartX + width1 + gap1 + width2 + gap2 + width3;
-                        int provinceX = findButtonRightEdge - 200; // Right align with 200px width
-                        provinceRectangle.setBounds(provinceX, thirdBounds.y + thirdBounds.height + 5, 200, 45);
-                        provinceDropdown.updatePositionOnResize();
-                        
-                        // Ensure province rectangle is at the top of the z-order
-                        contentPanel.setComponentZOrder(provinceRectangle, 0);
-                    }
-                    
                     // Also update the candidate card position if it exists
-                    if (cardPanel == null) {
-                        // No candidate cards to update
-                    } else {
+                    if (cardPanel != null) {
                         // Update candidate cards positioning, centering them below the divider line
                         updateCandidateCardsLayout(dividerX, dividerWidth);
                     }
@@ -1318,6 +1327,123 @@ public class CandidateSearchUI extends JFrame {
     }
     
     /**
+     * Creates a "Refresh" button with the same style as the filter dropdown
+     */
+    private JPanel createRefreshButton(int width, int height) {
+        // Create darker shades for hover and click effects
+        final Color hoverBlue = new Color(0x22, 0x2C, 0x66); // Darker shade for hover
+        final Color clickBlue = new Color(0x1A, 0x21, 0x4D); // Even darker for click
+        
+        // Track mouse states with boolean flags
+        final boolean[] isHovering = {false};
+        final boolean[] isClicking = {false};
+        
+        JPanel panel = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                Graphics2D g2d = (Graphics2D) g;
+                g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                
+                // Choose color based on mouse state
+                if (isClicking[0]) {
+                    g2d.setColor(clickBlue);
+                } else if (isHovering[0]) {
+                    g2d.setColor(hoverBlue);
+                } else {
+                    g2d.setColor(filterBlue);
+                }
+                
+                // Draw rounded rectangle with 10px corner radius to match filter dropdown
+                g2d.fillRoundRect(0, 0, getWidth(), getHeight(), 10, 10);
+                
+                // Draw refresh icon centered if available
+                if (refreshIconImage != null) {
+                    // Calculate position to center the icon
+                    int iconSize = Math.min(getWidth(), getHeight()) / 2; // 50% of button size
+                    int x = (getWidth() - iconSize) / 2;
+                    int y = (getHeight() - iconSize) / 2;
+                    
+                    // Apply 1px downward shift when clicking for push effect
+                    if (isClicking[0]) {
+                        y += 1;
+                    }
+                    
+                    // Draw the icon with anti-aliasing
+                    g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, 
+                                        RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+                    g2d.drawImage(refreshIconImage, x, y, iconSize, iconSize, this);
+                } else {
+                    // Fallback to text if icon is not available
+                    g2d.setColor(Color.WHITE);
+                    Font refreshFont = interMedium != null ? 
+                        interMedium.deriveFont(16f) : 
+                        new Font("Sans-Serif", Font.BOLD, 16);
+                    g2d.setFont(refreshFont);
+                    
+                    FontMetrics fm = g2d.getFontMetrics();
+                    String text = "R";
+                    int textWidth = fm.stringWidth(text);
+                    int textHeight = fm.getHeight();
+                    int x = (getWidth() - textWidth) / 2;
+                    int y = ((getHeight() - textHeight) / 2) + fm.getAscent();
+                    
+                    if (isClicking[0]) {
+                        y += 1;
+                    }
+                    
+                    g2d.drawString(text, x, y);
+                }
+            }
+        };
+        
+        // Set cursor to hand to indicate it's clickable
+        panel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        panel.setPreferredSize(new Dimension(width, height));
+        panel.setOpaque(false);
+        
+        // Add mouse listeners for interaction effects
+        panel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                isHovering[0] = true;
+                panel.repaint();
+            }
+            
+            @Override
+            public void mouseExited(MouseEvent e) {
+                isHovering[0] = false;
+                isClicking[0] = false; // Reset clicking state when mouse exits
+                panel.repaint();
+            }
+            
+            @Override
+            public void mousePressed(MouseEvent e) {
+                isClicking[0] = true;
+                panel.repaint();
+            }
+            
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                isClicking[0] = false;
+                panel.repaint();
+            }
+            
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                // Perform refresh action when button is clicked
+                if (cardPanel != null) {
+                    // Reset any filters and reload data
+                    cardPanel.resetFilters();
+                    System.out.println("Refresh button clicked: Resetting filters and reloading data");
+                }
+            }
+        });
+        
+        return panel;
+    }
+    
+    /**
      * Creates a horizontal divider line
      */
     private JPanel createDividerLine() {
@@ -1390,36 +1516,44 @@ public class CandidateSearchUI extends JFrame {
             contentPanel.setComponentZOrder(cardPanel, contentPanel.getComponentCount() - 2);
         }
         
-        // FIRST: Process regular dropdowns
+        // IMPORTANT: Make sure any dropdown content is always at the top of the z-order
+        // Process all dropdown-related components - ensuring proper z-ordering
+        
+        // First put all components at normal z-ordering
+        for (Component comp : components) {
+            // Default z-order for non-dropdown components
+            if (comp != cardPanel && comp != dividerLine) {
+                contentPanel.setComponentZOrder(comp, 1);
+            }
+        }
+        
+        // Identify all dropdown-related components
+        List<Component> dropdownComponents = new ArrayList<>();
+        
+        // Find all dropdown components
         for (Component comp : components) {
             String name = comp.getName();
             if (name != null && (
                 name.contains("dropdown") || 
                 name.contains("Dropdown") || 
                 name.equals("dropdown") || 
-                name.equals("dropdown-content")
-            )) {
-                // Regular dropdown components get z-order 1
-                contentPanel.setComponentZOrder(comp, 1);
-            }
-        }
-        
-        // SECOND: Process the provinceRect separately
-        JPanel provinceRect = provinceDropdown.getProvinceRectangle();
-        if (provinceRect != null) {
-            contentPanel.setComponentZOrder(provinceRect, 0);
-        }
-        
-        // THIRD: Process province dropdowns - they get highest priority
-        for (Component comp : components) {
-            String name = comp.getName();
-            if (name != null && (
+                name.equals("dropdown-content") ||
                 name.equals("province-dropdown-content") ||
                 name.equals("province-dropdown-scrollpane")
             )) {
-                // Province dropdown components always on top (z-order 0)
-                contentPanel.setComponentZOrder(comp, 0);
+                dropdownComponents.add(comp);
             }
+        }
+        
+        // Also add the specific rectangles for dropdowns
+        JPanel filterRect = filterDropdown.getFilterRectangle();
+        JPanel provinceRect = provinceDropdown.getProvinceRectangle();
+        dropdownComponents.add(filterRect);
+        dropdownComponents.add(provinceRect);
+        
+        // Set all dropdown components to the top of the z-order
+        for (Component comp : dropdownComponents) {
+            contentPanel.setComponentZOrder(comp, 0);
         }
         
         // Request repainting for changes to take effect
@@ -1453,11 +1587,17 @@ public class CandidateSearchUI extends JFrame {
         // Set top margin
         cardPanel.setTopMargin(5);
         
+        // Add mouse listeners to ensure dropdowns stay on top
+        setupCardPanelEventHandlers();
+        
         // Add the panel to the parent
         parentPanel.add(cardPanel);
         
         // Set component priority to ensure proper layering
         parentPanel.setComponentZOrder(cardPanel, parentPanel.getComponentCount() - 2);
+        
+        // Ensure dropdowns are always on top
+        adjustDividerForDropdowns();
         
         // Force visualization
         cardPanel.revalidate();
@@ -1468,6 +1608,36 @@ public class CandidateSearchUI extends JFrame {
         System.out.println("Successfully added CandidateCardPanel: " + 
                          "x=" + startX + ", y=" + startY + 
                          ", width=" + width + ", height=" + cardPanelHeight);
+    }
+    
+    /**
+     * Set up event handlers for the candidate card panel to ensure dropdowns stay on top
+     */
+    private void setupCardPanelEventHandlers() {
+        if (cardPanel == null) return;
+        
+        // Add mouse listeners to ensure dropdowns stay visible
+        cardPanel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                // Make sure dropdowns are always in front when hovering over cards
+                adjustDividerForDropdowns();
+            }
+            
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                // Ensure dropdowns stay on top when clicking cards
+                adjustDividerForDropdowns();
+            }
+        });
+        
+        // Also add a listener for scrolling to maintain proper z-order
+        cardPanel.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                adjustDividerForDropdowns();
+            }
+        });
     }
     
     /**

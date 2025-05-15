@@ -36,7 +36,8 @@ public class AdminLoginUI extends JFrame {
         
         // Set up the window
         setTitle("Gabáy - Admin Login");
-        setSize(1440, 1024);
+        setSize(1411, 970); // Fixed window size
+        setResizable(false); // Make window non-resizable
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         
