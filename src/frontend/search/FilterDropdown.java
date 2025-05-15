@@ -24,9 +24,18 @@ public class FilterDropdown {
     private boolean isDropdownVisible = false;
     private int currentDropdownHeight = 0;
     private int dropdownTargetHeight = 208;
-    private final int ANIMATION_DURATION = 20; // Reduced from 60 to 20 for faster animation
-    private final int ANIMATION_FRAMES = 4; // Reduced from 8 to 4 for faster animation with fewer frames
+    private final int ANIMATION_DURATION = 10; // Reduced from 20 to 10 for faster animation
+    private final int ANIMATION_FRAMES = 4;    // Already optimized animation frames
     private Timer dropdownAnimationTimer;
+    
+    // Cache rendered components for better performance
+    private BufferedImage cachedFilterRectangle = null;
+    private boolean needsFilterRectangleRedraw = true;
+    
+    // Debounce timer for filter changes
+    private Timer filterChangeTimer;
+    private final int FILTER_DEBOUNCE_MS = 50; // 50ms debounce for smoother experience
+    private String pendingFilter = null;
     
     // Styling properties
     private final Color primaryBlue = new Color(0x2B, 0x37, 0x80); // #2B3780
@@ -45,6 +54,9 @@ public class FilterDropdown {
     private String selectedFilter = null;
     private int selectedIndex = -1;
     
+    // Cache the arrow image
+    private static BufferedImage cachedArrowImage = null;
+    
     /**
      * Creates a new filter dropdown component
      * 
@@ -58,6 +70,19 @@ public class FilterDropdown {
         this.interMedium = interMedium;
         this.interRegular = interRegular;
         this.onSelectionChanged = onSelectionChanged;
+        
+        // Create a debounce timer for filter changes
+        filterChangeTimer = new Timer(FILTER_DEBOUNCE_MS, e -> {
+            filterChangeTimer.stop();
+            if (pendingFilter != null) {
+                // Execute the actual callback
+                if (this.onSelectionChanged != null) {
+                    this.onSelectionChanged.accept(pendingFilter);
+                }
+                pendingFilter = null;
+            }
+        });
+        filterChangeTimer.setRepeats(false);
         
         createFilterRectangle();
     }
@@ -362,50 +387,134 @@ public class FilterDropdown {
         for (int i = 0; i < labels.length; i++) {
             final String label = labels[i];
             final int index = i;
-            final boolean[] isHovering = {false}; // Track hover state
             
+            // Create a panel for this subsection with hover effects
             JPanel subsection = new JPanel() {
+                // Cache for the rendered state
+                private BufferedImage cachedNormal = null;
+                private BufferedImage cachedHover = null;
+                private boolean isHovering = false;
+                
+                @Override
+                public void setBounds(int x, int y, int width, int height) {
+                    if (getWidth() != width || getHeight() != height) {
+                        // Reset caches when size changes
+                        cachedNormal = null;
+                        cachedHover = null;
+                    }
+                    super.setBounds(x, y, width, height);
+                }
+                
                 @Override
                 protected void paintComponent(Graphics g) {
-                    super.paintComponent(g);
-                    Graphics2D g2d = (Graphics2D) g;
+                    if (!isVisible()) return;
+                    
+                    // Check if we need to create/update the cached images
+                    if (cachedNormal == null || cachedHover == null) {
+                        createCachedImages();
+                    }
+                    
+                    // Draw from the appropriate cached image
+                    if (isHovering) {
+                        g.drawImage(cachedHover, 0, 0, null);
+                    } else {
+                        g.drawImage(cachedNormal, 0, 0, null);
+                    }
+                }
+                
+                private void createCachedImages() {
+                    if (getWidth() <= 0 || getHeight() <= 0) return;
+                    
+                    // Create the normal state image
+                    cachedNormal = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_ARGB);
+                    Graphics2D g2d = cachedNormal.createGraphics();
                     g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                    g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
                     
-                    // Fill background with rounded corners
-                    if (isHovering[0]) {
-                        g2d.setColor(HOVER_COLOR);
-                    } else {
-                        g2d.setColor(DEFAULT_BG_COLOR);
+                    // Draw background
+                    g2d.setColor(DEFAULT_BG_COLOR);
+                    g2d.fillRoundRect(0, 0, getWidth(), getHeight(), CORNER_RADIUS, CORNER_RADIUS);
+                    
+                    // Draw checkmark if this is the selected filter
+                    if (selectedIndex == index) {
+                        if (finalCheckmarkImage != null) {
+                            int checkmarkY = (getHeight() - checkmarkHeight) / 2;
+                            g2d.drawImage(finalCheckmarkImage, CHECKMARK_PADDING, checkmarkY, 
+                                        checkmarkWidth, checkmarkHeight, null);
+                        } else {
+                            // Draw fallback checkmark
+                            g2d.setColor(new Color(0x2B, 0x37, 0x80)); // Blue color for checkmark
+                            g2d.setStroke(new BasicStroke(2));
+                            
+                            int x1 = CHECKMARK_PADDING;
+                            int y1 = getHeight() / 2;
+                            int x2 = x1 + 5;
+                            int y2 = y1 + 5;
+                            int x3 = x1 + 10;
+                            int y3 = y1 - 5;
+                            
+                            g2d.drawLine(x1, y1, x2, y2);
+                            g2d.drawLine(x2, y2, x3, y3);
+                        }
                     }
                     
-                    // Create rounded rectangle for background
-                    RoundRectangle2D roundedRect = new RoundRectangle2D.Float(
-                        0, 0, getWidth(), getHeight(), CORNER_RADIUS, CORNER_RADIUS);
-                    g2d.fill(roundedRect);
-                    
-                    // Draw checkmark if this is the selected item
-                    if (selectedIndex == index && finalCheckmarkImage != null) {
-                        int checkX = CHECKMARK_PADDING;
-                        int checkY = (getHeight() - checkmarkHeight) / 2;
-                        g2d.drawImage(finalCheckmarkImage, checkX, checkY, checkmarkWidth, checkmarkHeight, null);
-                    }
-                    
-                    // Draw text (moved to the right to make room for checkmark)
+                    // Draw label
                     g2d.setColor(TEXT_COLOR);
-                    
-                    // Set font to Inter Medium 14pt
-                    Font textFont = interMedium;
-                    if (textFont != null) {
-                        textFont = textFont.deriveFont(14f);
+                    if (interRegular != null) {
+                        g2d.setFont(interRegular.deriveFont(14f));
                     } else {
-                        textFont = new Font("Sans-Serif", Font.PLAIN, 14);
+                        g2d.setFont(new Font("Sans-Serif", Font.PLAIN, 14));
                     }
-                    g2d.setFont(textFont);
                     
                     FontMetrics fm = g2d.getFontMetrics();
                     int textY = (getHeight() - fm.getHeight()) / 2 + fm.getAscent();
                     
                     g2d.drawString(label, TEXT_PADDING, textY);
+                    g2d.dispose();
+                    
+                    // Create the hover state image
+                    cachedHover = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_ARGB);
+                    g2d = cachedHover.createGraphics();
+                    g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                    g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+                    
+                    // Draw hover background
+                    g2d.setColor(HOVER_COLOR);
+                    g2d.fillRoundRect(0, 0, getWidth(), getHeight(), CORNER_RADIUS, CORNER_RADIUS);
+                    
+                    // Draw checkmark if this is the selected filter
+                    if (selectedIndex == index) {
+                        if (finalCheckmarkImage != null) {
+                            int checkmarkY = (getHeight() - checkmarkHeight) / 2;
+                            g2d.drawImage(finalCheckmarkImage, CHECKMARK_PADDING, checkmarkY, 
+                                        checkmarkWidth, checkmarkHeight, null);
+                        } else {
+                            // Draw fallback checkmark
+                            g2d.setColor(new Color(0x2B, 0x37, 0x80)); // Blue color for checkmark
+                            g2d.setStroke(new BasicStroke(2));
+                            
+                            int x1 = CHECKMARK_PADDING;
+                            int y1 = getHeight() / 2;
+                            int x2 = x1 + 5;
+                            int y2 = y1 + 5;
+                            int x3 = x1 + 10;
+                            int y3 = y1 - 5;
+                            
+                            g2d.drawLine(x1, y1, x2, y2);
+                            g2d.drawLine(x2, y2, x3, y3);
+                        }
+                    }
+                    
+                    // Draw label
+                    g2d.setColor(TEXT_COLOR);
+                    if (interRegular != null) {
+                        g2d.setFont(interRegular.deriveFont(14f));
+                    } else {
+                        g2d.setFont(new Font("Sans-Serif", Font.PLAIN, 14));
+                    }
+                    
+                    g2d.drawString(label, TEXT_PADDING, textY);
+                    g2d.dispose();
                 }
             };
             
@@ -430,35 +539,45 @@ public class FilterDropdown {
                         selectedFilter = label;
                     }
                     
-                    // Notify the callback if provided
-                    if (onSelectionChanged != null) {
-                        onSelectionChanged.accept(selectedFilter);
+                    // Use debouncing for the callback
+                    pendingFilter = selectedFilter;
+                    if (filterChangeTimer.isRunning()) {
+                        filterChangeTimer.restart();
+                    } else {
+                        filterChangeTimer.start();
                     }
                     
                     // Update the filter rectangle text to show the selection
+                    needsFilterRectangleRedraw = true;
                     filterRectangle.repaint();
                     
                     // Repaint all subsections to update the checkmarks
                     for (JPanel panel : subsectionPanels) {
                         panel.repaint();
                     }
+                    
+                    // Close the dropdown with a small delay to avoid UI jank
+                    SwingUtilities.invokeLater(() -> toggleDropdown());
                 }
                 
                 @Override
                 public void mouseEntered(MouseEvent e) {
-                    isHovering[0] = true;
-                    subsection.setCursor(new Cursor(Cursor.HAND_CURSOR));
+                    // Set the hovering flag
+                    ((JPanel)e.getSource()).putClientProperty("hovering", true);
                     subsection.repaint();
                 }
                 
                 @Override
                 public void mouseExited(MouseEvent e) {
-                    isHovering[0] = false;
+                    // Clear the hovering flag
+                    ((JPanel)e.getSource()).putClientProperty("hovering", false);
                     subsection.repaint();
                 }
             });
             
-            // Add to dropdown panel
+            // Set tooltip text to provide additional information
+            subsection.setToolTipText(getTooltipForLabel(label));
+            
             dropdownPanel.add(subsection);
         }
     }
@@ -552,5 +671,28 @@ public class FilterDropdown {
         if (isDropdownVisible) {
             toggleDropdown();
         }
+    }
+    
+    /**
+     * Get the tooltip for a given label
+     * @param label The label for which to get the tooltip
+     * @return The tooltip text for the given label
+     */
+    private String getTooltipForLabel(String label) {
+        String[] labels = {"Name", "Partylist", "Issue", "Position"};
+        String[] tooltips = {
+            "Search by candidate name",
+            "Search by political party affiliation",
+            "Search through issues, stances, and social positions (SOGIE, divorce, ROTC, etc.)",
+            "Search by political position"
+        };
+        
+        for (int i = 0; i < labels.length; i++) {
+            if (labels[i].equals(label)) {
+                return tooltips[i];
+            }
+        }
+        
+        return ""; // Default tooltip if label not found
     }
 } 

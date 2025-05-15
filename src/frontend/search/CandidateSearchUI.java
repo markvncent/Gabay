@@ -499,11 +499,20 @@ public class CandidateSearchUI extends JFrame {
 
         // Add key listener to search field for live filtering
         searchField.addKeyListener(new KeyAdapter() {
-            // Delay timer for smoother search experience
-            private Timer searchTimer = new Timer(300, e -> performSearch());
+            // Use a shorter delay timer for smoother search experience (150ms instead of 300ms)
+            private Timer searchTimer = new Timer(150, e -> performSearch());
             
             @Override
             public void keyReleased(KeyEvent e) {
+                // If Enter key, perform search immediately
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    if (searchTimer.isRunning()) {
+                        searchTimer.stop();
+                    }
+                    performSearch();
+                    return;
+                }
+                
                 // Reset and restart timer on each keystroke
                 if (searchTimer.isRunning()) {
                     searchTimer.restart();
@@ -518,9 +527,11 @@ public class CandidateSearchUI extends JFrame {
                     query = "";
                 }
                 
-                // Apply search to card panel
+                final String finalQuery = query.toLowerCase().trim();
+                
+                // Apply search to card panel using SwingUtilities.invokeLater for better UI responsiveness
                 if (cardPanel != null) {
-                    cardPanel.filterCards(query);
+                    SwingUtilities.invokeLater(() -> cardPanel.filterCards(finalQuery));
                 }
             }
         });
@@ -658,7 +669,7 @@ public class CandidateSearchUI extends JFrame {
             };
             searchBarPanel.setLayout(new BorderLayout());
             
-            // Create text field
+            // Create text field with simpler guidance, removing social stances mention
             searchField = new JTextField("Search for candidates or issues...");
             searchField.setForeground(Color.GRAY);
             searchField.setFont(interRegular.deriveFont(14f));
@@ -692,6 +703,11 @@ public class CandidateSearchUI extends JFrame {
                         searchField.requestFocus();
                         clearIconLabel.setVisible(false);
                         clearIconVisible = false;
+                        
+                        // Perform search with empty query to update results
+                        if (cardPanel != null) {
+                            cardPanel.filterCards("");
+                        }
                     }
                 });
             }
@@ -715,7 +731,7 @@ public class CandidateSearchUI extends JFrame {
             searchBarPanel.add(paddingPanel, BorderLayout.CENTER);
             searchPanel.add(searchBarPanel, BorderLayout.CENTER);
             
-            // Add focus listener for placeholder behavior
+            // Update focus listener for placeholder behavior
             searchField.addFocusListener(new FocusAdapter() {
                 @Override
                 public void focusGained(FocusEvent e) {
@@ -784,11 +800,45 @@ public class CandidateSearchUI extends JFrame {
         // Handle the filter selection here
         System.out.println("Selected filter: " + (selectedFilter != null ? selectedFilter : "None"));
         
-        // Apply filters to card panel
+        // Apply filters to card panel with debouncing for better UI responsiveness
         if (cardPanel != null) {
-            // Filter cards by category (if relevant functionality is implemented)
-            // For now, just refresh the data
-            cardPanel.filterCards(searchField.getText());
+            // First update the filter type
+            if (selectedFilter != null) {
+                // Log if switching to Issue filter for debugging
+                if ("Issue".equals(selectedFilter)) {
+                    System.out.println("SWITCHING TO ISSUE FILTER - this will search through social stances, supported/opposed issues");
+                }
+                
+                cardPanel.setFilterType(selectedFilter);
+            } else {
+                // Default to "Name" if no filter is selected
+                cardPanel.setFilterType("Name");
+            }
+            
+            // Get current search text to maintain search filter
+            String searchText = searchField.getText();
+            if (searchText.equals("Search for candidates or issues...")) {
+                searchText = "";
+            }
+            
+            // Use SwingUtilities.invokeLater to apply filters asynchronously
+            final String finalSearchText = searchText;
+            SwingUtilities.invokeLater(() -> {
+                try {
+                    // Apply both filters - first filter by filter type, then search query will be applied in the cardPanel
+                    cardPanel.filterCards(finalSearchText);
+                } catch (Exception e) {
+                    System.err.println("Error applying filters: " + e.getMessage());
+                    e.printStackTrace();
+                    
+                    // Attempt to reset filters in case of error
+                    try {
+                        cardPanel.resetFilters();
+                    } catch (Exception ex) {
+                        System.err.println("Error resetting filters: " + ex.getMessage());
+                    }
+                }
+            });
         }
     }
     
@@ -799,9 +849,20 @@ public class CandidateSearchUI extends JFrame {
         // Handle the province selection here
         System.out.println("Selected province: " + (selectedProvince != null ? selectedProvince : "None"));
         
-        // Apply province filter to card panel
+        // Apply province filter to card panel with debouncing
         if (cardPanel != null && selectedProvince != null) {
-            cardPanel.filterByProvince(selectedProvince);
+            // Store the current province selection and apply filter asynchronously
+            SwingUtilities.invokeLater(() -> {
+                cardPanel.filterByProvince(selectedProvince);
+                
+                // Re-apply the current search query to maintain both filters
+                String searchText = searchField.getText();
+                if (searchText.equals("Search for candidates or issues...")) {
+                    searchText = "";
+                }
+                
+                // Since filterByProvince already applies combined filtering, we don't need to call filterCards again
+            });
         }
     }
     
@@ -1431,12 +1492,25 @@ public class CandidateSearchUI extends JFrame {
             
             @Override
             public void mouseClicked(MouseEvent e) {
-                // Perform refresh action when button is clicked
-                if (cardPanel != null) {
-                    // Reset any filters and reload data
-                    cardPanel.resetFilters();
-                    System.out.println("Refresh button clicked: Resetting filters and reloading data");
-                }
+                // Perform refresh action when button is clicked - use SwingUtilities.invokeLater for better UI responsiveness
+                SwingUtilities.invokeLater(() -> {
+                    if (cardPanel != null) {
+                        // Reset province dropdown to default if possible
+                        if (provinceDropdown != null) {
+                            provinceDropdown.selectOption("All");
+                        }
+                        
+                        // Reset search text to placeholder
+                        searchField.setText("Search for candidates or issues...");
+                        searchField.setForeground(Color.GRAY);
+                        updateClearIconVisibility(false);
+                        
+                        // Reset any filters and reload data
+                        cardPanel.resetFilters();
+                        
+                        System.out.println("Refresh button clicked: Filters reset");
+                    }
+                });
             }
         });
         

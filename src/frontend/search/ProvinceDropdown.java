@@ -27,6 +27,17 @@ public class ProvinceDropdown {
     // State variables
     private boolean isOpen = false;
     
+    // Caching for better performance
+    private BufferedImage cachedRectangleNormal = null;
+    private BufferedImage cachedRectangleHover = null;
+    private boolean isRectangleHovering = false;
+    private boolean needsRectangleRedraw = true;
+    
+    // Debounce timer for region changes
+    private Timer regionChangeTimer;
+    private final int REGION_DEBOUNCE_MS = 50; // 50ms debounce
+    private String pendingRegion = null;
+    
     // Styling properties
     private final Color primaryBlue = new Color(0x2B, 0x37, 0x80); // #2B3780
     private final Color hoverBlue = new Color(0x22, 0x2C, 0x66); // Darker blue for hover
@@ -45,6 +56,7 @@ public class ProvinceDropdown {
     
     // Regions array
     private final String[] regions = {
+        "All",  // Add an option to show all regions
         "Region I (Ilocos Region)",
         "Region II (Cagayan Valley)",
         "Region III (Central Luzon)",
@@ -80,6 +92,19 @@ public class ProvinceDropdown {
         this.interMedium = interMedium;
         this.interRegular = interRegular;
         this.onSelectionChanged = onSelectionChanged;
+        
+        // Create a debounce timer for region changes
+        regionChangeTimer = new Timer(REGION_DEBOUNCE_MS, e -> {
+            regionChangeTimer.stop();
+            if (pendingRegion != null) {
+                // Execute the actual callback
+                if (this.onSelectionChanged != null) {
+                    this.onSelectionChanged.accept(pendingRegion);
+                }
+                pendingRegion = null;
+            }
+        });
+        regionChangeTimer.setRepeats(false);
         
         // Create the rectangle for the dropdown
         provinceRectangle = createProvinceRectangle();
@@ -331,10 +356,26 @@ public class ProvinceDropdown {
             
             @Override
             public void mouseClicked(MouseEvent e) {
-                selectedProvince = region;
-                onSelectionChanged.accept(region);
-                closeDropdown();
-                provinceRectangle.repaint();
+                // Store selected region
+                final String selected = region;
+                
+                // Use SwingUtilities.invokeLater for better UI responsiveness
+                SwingUtilities.invokeLater(() -> {
+                    selectedProvince = selected;
+                    closeDropdown();
+                    
+                    // Mark for redraw
+                    needsRectangleRedraw = true;
+                    provinceRectangle.repaint();
+                    
+                    // Use debounce for callback to prevent rapid multiple selections
+                    pendingRegion = selected;
+                    if (regionChangeTimer.isRunning()) {
+                        regionChangeTimer.restart();
+                    } else {
+                        regionChangeTimer.start();
+                    }
+                });
             }
         });
         
@@ -402,5 +443,34 @@ public class ProvinceDropdown {
      */
     public String getSelectedProvince() {
         return selectedProvince;
+    }
+    
+    /**
+     * Programmatically select a region option
+     * @param region The region to select
+     */
+    public void selectOption(String region) {
+        // Use SwingUtilities.invokeLater for better UI responsiveness
+        SwingUtilities.invokeLater(() -> {
+            // Update selection
+            selectedProvince = region;
+            
+            // Mark for redraw
+            needsRectangleRedraw = true;
+            provinceRectangle.repaint();
+            
+            // Close dropdown if it's open
+            if (isOpen) {
+                closeDropdown();
+            }
+            
+            // Use debounce for callback
+            pendingRegion = region;
+            if (regionChangeTimer.isRunning()) {
+                regionChangeTimer.restart();
+            } else {
+                regionChangeTimer.start();
+            }
+        });
     }
 } 

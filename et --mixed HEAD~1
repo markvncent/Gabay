@@ -1,0 +1,71 @@
+[33mcommit e6d3ece4085955aa245b989928e762abb34bebe8[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mbackup[m[33m)[m
+Author: Rhenel Jhon Sajol <sajol.rhenel123@gmail.com>
+Date:   Thu May 15 20:40:59 2025 +0800
+
+    Search fucntion and optimization
+
+[33mcommit 4963a3c6361f56eb10a9eb27f1d0debfc6cb7229[m[33m ([m[1;31morigin/backup[m[33m)[m
+Author: markvncent <limpahan.mark45@gmail.com>
+Date:   Thu May 15 18:46:53 2025 +0800
+
+    Backup of Gabay_v2 with UI enhancements
+
+[33mcommit d10657367489b04c714df1d78319250d8030b008[m
+Author: punyeeta <locsin.roxanne235@gmail.com>
+Date:   Wed May 14 23:00:54 2025 +0800
+
+    Admin Functionalities
+
+[33mcommit 5ca6d5b8871a4fcf37d717fb7ca78c95145a9c91[m
+Author: markvncent <markvncent@github.com>
+Date:   Wed May 14 21:07:07 2025 +0800
+
+    Removed unused batch files
+
+[33mcommit 55355a77a103bda01a0eb0cb7ea31649744d8df0[m
+Author: markvncent <markvncent@github.com>
+Date:   Wed May 14 20:53:09 2025 +0800
+
+    Fixed position and region display issues in ProfileListPanel and CandidateDetailsPanel by handling different format variations like 'Running Position:' and 'Hometown Region:'
+
+[33mcommit 1427870ec2449d81d3d21d3a940adc4d7f14723c[m
+Author: markvncent <markvncent@github.com>
+Date:   Wed May 14 20:43:38 2025 +0800
+
+    Fixed issues with candidate data display: 1) Added support for 'Running Position:' format in candidate data, 2) Fixed handling of different social stance formats including 'Stances On Social Issues:' sections, 3) Added normalization for misspelled 'Nuetral' stance values
+
+[33mcommit 72dc2c4639b37d8013b93c11a3e64c469250d4ce[m
+Author: markvncent <markvncent@github.com>
+Date:   Wed May 14 20:35:26 2025 +0800
+
+    Changed UI panels to use white backgrounds instead of transparent
+
+[33mcommit 378fd02d7da51d25880d0e542664656f5c3d605e[m
+Author: markvncent <markvncent@github.com>
+Date:   Wed May 14 20:17:41 2025 +0800
+
+    Reduced background opacity in CandidateCardPanel and enabled navigation back to landing page
+
+[33mcommit 97ddfa3ccbbda01b8305a4bf7a94f5b2421b580c[m
+Author: markvncent <markvncent@github.com>
+Date:   Wed May 14 19:48:22 2025 +0800
+
+    Center panels on window resize in AdminPanelUI and improve UI responsiveness
+
+[33mcommit 69997aef631cac9ecc0224d1369da9edff5df0ea[m
+Author: punyeeta <locsin.roxanne235@gmail.com>
+Date:   Wed May 14 19:21:02 2025 +0800
+
+    List of Candidates
+
+[33mcommit 6b53a22a716b0e88cbe661a036ec6de6e8f88d36[m
+Author: markvncent <markvncent@github.com>
+Date:   Wed May 14 06:35:33 2025 +0800
+
+    Implement admin navigation flow and UI improvements
+
+[33mcommit 8b90a43edb13a95418e6cf8e7df8feb754c96838[m
+Author: markvncent <markvncent@github.com>
+Date:   Tue May 13 21:58:40 2025 +0800
+
+    Initial commit: Fresh project version
