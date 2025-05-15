@@ -55,7 +55,11 @@ Social Stance: Passing the SOGIE Equality Bill - Agree
 Name: Roberto "Bert" Gonzales Jr.
 Age: 65
 Position: President
+Position: President
 Party Affiliation: Lakas ng Bayan (LNB)
+Region: CALABARZON
+Notable Laws: National Defense Enhancement Act; Investment Liberalization Law; Tax Reform Acceleration Program
+Campaign Slogan: Karanasan at Katapatan para sa Bayan
 Region: CALABARZON
 Notable Laws: National Defense Enhancement Act; Investment Liberalization Law; Tax Reform Acceleration Program
 Campaign Slogan: Karanasan at Katapatan para sa Bayan
@@ -76,12 +80,29 @@ Social Stance: Same-Sex Marriage - Disagree
 Social Stance: Reinstating the Death Penalty - Agree
 Social Stance: Foreign Investment in Land Ownership - Agree
 Social Stance: Passing the SOGIE Equality Bill - Disagree
+Social Stance: Universal Healthcare Funding - Agree
+Social Stance: Mandatory Sex Education - No Data
+Social Stance: Legalization of Divorce - Disagree
+Social Stance: Mandatory ROTC for Senior High Students - No Data
+Social Stance: Anti-Terror Law - Neutral
+Social Stance: Federalism - Agree
+Social Stance: Jeepney Modernization Program - Disagree
+Social Stance: Minimum Wage Standardization - Disagree
+Social Stance: Lowering the Age of Criminal Responsibility - No Data
+Social Stance: Same-Sex Marriage - Disagree
+Social Stance: Reinstating the Death Penalty - Agree
+Social Stance: Foreign Investment in Land Ownership - Agree
+Social Stance: Passing the SOGIE Equality Bill - Disagree
 
 
 Name: Danilo "Danny" Macaraig
 Age: 54
 Position: Vice President
+Position: Vice President
 Party Affiliation: Partido ng Pagbabago at Pag-asa (PPP)
+Region: Region VII
+Notable Laws: OFW Protection and Benefits Act; Digital Education Framework Law; Youth Employment Act
+Campaign Slogan: Kasama Mo sa Pagsulong
 Region: Region VII
 Notable Laws: OFW Protection and Benefits Act; Digital Education Framework Law; Youth Employment Act
 Campaign Slogan: Kasama Mo sa Pagsulong
@@ -103,12 +124,30 @@ Social Stance: Foreign Investment in Land Ownership - Disagree
 Social Stance: Universal Healthcare Funding - Agree
 Social Stance: Mandatory Sex Education - Agree
 Social Stance: Minimum Wage Standardization - No Data
+Image: resources/images/candidates/default.png
+Social Stance: Legalization of Divorce - Agree
+Social Stance: Passing the SOGIE Equality Bill - Agree
+Social Stance: Reinstating the Death Penalty - Disagree
+Social Stance: Lowering the Age of Criminal Responsibility - Neutral
+Social Stance: Federalism - Disagree
+Social Stance: Mandatory ROTC for Senior High Students - Neutral
+Social Stance: Same-Sex Marriage - Agree
+Social Stance: Anti-Terror Law - Disagree
+Social Stance: Jeepney Modernization Program - No Data
+Social Stance: Foreign Investment in Land Ownership - Disagree
+Social Stance: Universal Healthcare Funding - Agree
+Social Stance: Mandatory Sex Education - Agree
+Social Stance: Minimum Wage Standardization - No Data
 
 
 Name: Rosario "Charo" Lim-Tan
 Age: 60
 Position: Vice President
+Position: Vice President
 Party Affiliation: Partido Demokratiko ng Pilipinas (PDP)
+Region: Region X
+Notable Laws: Comprehensive Poverty Reduction Act; Rural Health Improvement Program; Affordable Housing for All Law
+Campaign Slogan: Puso para sa Mahihirap
 Region: Region X
 Notable Laws: Comprehensive Poverty Reduction Act; Rural Health Improvement Program; Affordable Housing for All Law
 Campaign Slogan: Puso para sa Mahihirap
@@ -129,12 +168,29 @@ Social Stance: Same-Sex Marriage - Disagree
 Social Stance: Reinstating the Death Penalty - Agree
 Social Stance: Foreign Investment in Land Ownership - No Data
 Social Stance: Passing the SOGIE Equality Bill - Disagree
+Social Stance: Universal Healthcare Funding - Agree
+Social Stance: Mandatory Sex Education - Disagree
+Social Stance: Legalization of Divorce - Disagree
+Social Stance: Mandatory ROTC for Senior High Students - Neutral
+Social Stance: Anti-Terror Law - Agree
+Social Stance: Federalism - Agree
+Social Stance: Jeepney Modernization Program - Agree
+Social Stance: Minimum Wage Standardization - Neutral
+Social Stance: Lowering the Age of Criminal Responsibility - No Data
+Social Stance: Same-Sex Marriage - Disagree
+Social Stance: Reinstating the Death Penalty - Agree
+Social Stance: Foreign Investment in Land Ownership - No Data
+Social Stance: Passing the SOGIE Equality Bill - Disagree
 
 
 Name: Jose "Joey" Mendoza
 Age: 48
 Position: Senator
+Position: Senator
 Party Affiliation: Independent
+Region: Region V
+Notable Laws: Workers' Protection Act; Public Transport Modernization Law; Consumer Protection Enhancement Act
+Campaign Slogan: Boses ng Masang Pilipino
 Region: Region V
 Notable Laws: Workers' Protection Act; Public Transport Modernization Law; Consumer Protection Enhancement Act
 Campaign Slogan: Boses ng Masang Pilipino
@@ -155,12 +211,29 @@ Social Stance: Same-Sex Marriage - Disagree
 Social Stance: Reinstating the Death Penalty - No Data
 Social Stance: Foreign Investment in Land Ownership - Neutral
 Social Stance: Passing the SOGIE Equality Bill - Disagree
+Social Stance: Universal Healthcare Funding - No Data
+Social Stance: Mandatory Sex Education - Neutral
+Social Stance: Legalization of Divorce - Neutral
+Social Stance: Mandatory ROTC for Senior High Students - Neutral
+Social Stance: Anti-Terror Law - Neutral
+Social Stance: Federalism - Agree
+Social Stance: Jeepney Modernization Program - Disagree
+Social Stance: Minimum Wage Standardization - Agree
+Social Stance: Lowering the Age of Criminal Responsibility - Disagree
+Social Stance: Same-Sex Marriage - Disagree
+Social Stance: Reinstating the Death Penalty - No Data
+Social Stance: Foreign Investment in Land Ownership - Neutral
+Social Stance: Passing the SOGIE Equality Bill - Disagree
 
 
 Name: Georgina "Gigi" Santos-Cruz
 Age: 43
 Position: Senator
+Position: Senator
 Party Affiliation: Lakas ng Bayan (LNB)
+Region: Region VI
+Notable Laws: Family Welfare Enhancement Act; Senior Citizens' Benefits Expansion; Maternal Care Improvement Law
+Campaign Slogan: Para sa Pamilyang Pilipino
 Region: Region VI
 Notable Laws: Family Welfare Enhancement Act; Senior Citizens' Benefits Expansion; Maternal Care Improvement Law
 Campaign Slogan: Para sa Pamilyang Pilipino
@@ -181,12 +254,30 @@ Social Stance: Same-Sex Marriage - Disagree
 Social Stance: Reinstating the Death Penalty - No Data
 Social Stance: Foreign Investment in Land Ownership - Agree
 Social Stance: Passing the SOGIE Equality Bill - Disagree
+Opposed Issues: Comprehensive sex education; Same-sex unions; Liberal abortion laws
+Social Stance: Universal Healthcare Funding - No Data
+Social Stance: Mandatory Sex Education - Disagree
+Social Stance: Legalization of Divorce - Disagree
+Social Stance: Mandatory ROTC for Senior High Students - Agree
+Social Stance: Anti-Terror Law - Agree
+Social Stance: Federalism - Agree
+Social Stance: Jeepney Modernization Program - No Data
+Social Stance: Minimum Wage Standardization - Agree
+Social Stance: Lowering the Age of Criminal Responsibility - Agree
+Social Stance: Same-Sex Marriage - Disagree
+Social Stance: Reinstating the Death Penalty - No Data
+Social Stance: Foreign Investment in Land Ownership - Agree
+Social Stance: Passing the SOGIE Equality Bill - Disagree
 
 
 Name: Benjamin "Benny" Trinidad
 Age: 55
 Position: Senator
+Position: Senator
 Party Affiliation: Partido ng Pagbabago at Pag-asa (PPP)
+Region: Region VIII
+Notable Laws: SME Development Act; Local Industry Protection Law; Export Enhancement Program
+Campaign Slogan: Ekonomiya Para sa Lahat
 Region: Region VIII
 Notable Laws: SME Development Act; Local Industry Protection Law; Export Enhancement Program
 Campaign Slogan: Ekonomiya Para sa Lahat
@@ -207,12 +298,29 @@ Social Stance: Same-Sex Marriage - Neutral
 Social Stance: Reinstating the Death Penalty - No Data
 Social Stance: Foreign Investment in Land Ownership - Neutral
 Social Stance: Passing the SOGIE Equality Bill - Neutral
+Social Stance: Universal Healthcare Funding - Agree
+Social Stance: Mandatory Sex Education - Neutral
+Social Stance: Legalization of Divorce - Neutral
+Social Stance: Mandatory ROTC for Senior High Students - No Data
+Social Stance: Anti-Terror Law - Disagree
+Social Stance: Federalism - Disagree
+Social Stance: Jeepney Modernization Program - Disagree
+Social Stance: Minimum Wage Standardization - Disagree
+Social Stance: Lowering the Age of Criminal Responsibility - Agree
+Social Stance: Same-Sex Marriage - Neutral
+Social Stance: Reinstating the Death Penalty - No Data
+Social Stance: Foreign Investment in Land Ownership - Neutral
+Social Stance: Passing the SOGIE Equality Bill - Neutral
 
 
 Name: Monica "Monic" Estrella
 Age: 38
 Position: Senator
+Position: Senator
 Party Affiliation: Partido Demokratiko ng Pilipinas (PDP)
+Region: NCR
+Notable Laws: Clean Air Act Amendment; Renewable Energy Incentives Law; Disaster Preparedness Enhancement Act
+Campaign Slogan: Bagong Mukha, Bagong Pag-asa
 Region: NCR
 Notable Laws: Clean Air Act Amendment; Renewable Energy Incentives Law; Disaster Preparedness Enhancement Act
 Campaign Slogan: Bagong Mukha, Bagong Pag-asa
@@ -233,12 +341,29 @@ Social Stance: Same-Sex Marriage - Agree
 Social Stance: Reinstating the Death Penalty - Agree
 Social Stance: Foreign Investment in Land Ownership - Disagree
 Social Stance: Passing the SOGIE Equality Bill - Agree
+Social Stance: Universal Healthcare Funding - Agree
+Social Stance: Mandatory Sex Education - Agree
+Social Stance: Legalization of Divorce - Agree
+Social Stance: Mandatory ROTC for Senior High Students - No Data
+Social Stance: Anti-Terror Law - Disagree
+Social Stance: Federalism - Agree
+Social Stance: Jeepney Modernization Program - Disagree
+Social Stance: Minimum Wage Standardization - Agree
+Social Stance: Lowering the Age of Criminal Responsibility - Agree
+Social Stance: Same-Sex Marriage - Agree
+Social Stance: Reinstating the Death Penalty - Agree
+Social Stance: Foreign Investment in Land Ownership - Disagree
+Social Stance: Passing the SOGIE Equality Bill - Agree
 
 
 Name: Ricardo "Ricky" Villafuerte III
 Age: 46
 Position: Senator
+Position: Senator
 Party Affiliation: Nacionalista Party (NP)
+Region: CALABARZON
+Notable Laws: No Enacted Laws
+Campaign Slogan: Disiplina at Kaunlaran
 Region: CALABARZON
 Notable Laws: No Enacted Laws
 Campaign Slogan: Disiplina at Kaunlaran
@@ -259,12 +384,30 @@ Social Stance: Same-Sex Marriage - No Data
 Social Stance: Reinstating the Death Penalty - Agree
 Social Stance: Foreign Investment in Land Ownership - Agree
 Social Stance: Passing the SOGIE Equality Bill - No Data
+Social Stance: Universal Healthcare Funding - Agree
+Social Stance: Mandatory Sex Education - Disagree
+Social Stance: Legalization of Divorce - Disagree
+Social Stance: Mandatory ROTC for Senior High Students - Agree
+Social Stance: Anti-Terror Law - Agree
+Social Stance: Federalism - Neutral
+Social Stance: Jeepney Modernization Program - Disagree
+Social Stance: Minimum Wage Standardization - Disagree
+Social Stance: Lowering the Age of Criminal Responsibility - Neutral
+Social Stance: Same-Sex Marriage - No Data
+Social Stance: Reinstating the Death Penalty - Agree
+Social Stance: Foreign Investment in Land Ownership - Agree
+Social Stance: Passing the SOGIE Equality Bill - No Data
 
 
 Name: Ramon "Monching" Delos Reyes
+Name: Ramon "Monching" Delos Reyes
 Age: 56
 Position: Senator
+Position: Senator
 Party Affiliation: Bagong Alyansa ng Bayan
+Region: NCR
+Notable Laws: None (first-time candidate)
+Campaign Slogan: Galing sa Masa, Para sa Masa!
 Region: NCR
 Notable Laws: None (first-time candidate)
 Campaign Slogan: Galing sa Masa, Para sa Masa!
@@ -285,12 +428,29 @@ Social Stance: Same-Sex Marriage - No Data
 Social Stance: Reinstating the Death Penalty - No Data
 Social Stance: Foreign Investment in Land Ownership - Neutral
 Social Stance: Passing the SOGIE Equality Bill - No Data
+Social Stance: Universal Healthcare Funding - No Data
+Social Stance: Mandatory Sex Education - No Data
+Social Stance: Legalization of Divorce - No Data
+Social Stance: Mandatory ROTC for Senior High Students - Neutral
+Social Stance: Anti-Terror Law - Neutral
+Social Stance: Federalism - No Data
+Social Stance: Jeepney Modernization Program - No Data
+Social Stance: Minimum Wage Standardization - Neutral
+Social Stance: Lowering the Age of Criminal Responsibility - No Data
+Social Stance: Same-Sex Marriage - No Data
+Social Stance: Reinstating the Death Penalty - No Data
+Social Stance: Foreign Investment in Land Ownership - Neutral
+Social Stance: Passing the SOGIE Equality Bill - No Data
 
 
 Name: Alyssa Marie Gutierrez
 Age: 34
 Position: Senator
+Position: Senator
 Party Affiliation: Puso at Serbisyo Party
+Region: Region IV-A
+Notable Laws: None
+Campaign Slogan: Beauty with a Heart, Leadership with Grace
 Region: Region IV-A
 Notable Laws: None
 Campaign Slogan: Beauty with a Heart, Leadership with Grace
@@ -311,12 +471,30 @@ Social Stance: Same-Sex Marriage - Neutral
 Social Stance: Reinstating the Death Penalty - No Data
 Social Stance: Foreign Investment in Land Ownership - No Data
 Social Stance: Passing the SOGIE Equality Bill - Neutral
+Social Stance: Universal Healthcare Funding - No Data
+Social Stance: Mandatory Sex Education - No Data
+Social Stance: Legalization of Divorce - Neutral
+Social Stance: Mandatory ROTC for Senior High Students - No Data
+Social Stance: Anti-Terror Law - No Data
+Social Stance: Federalism - No Data
+Social Stance: Jeepney Modernization Program - Neutral
+Social Stance: Minimum Wage Standardization - Neutral
+Social Stance: Lowering the Age of Criminal Responsibility - No Data
+Social Stance: Same-Sex Marriage - Neutral
+Social Stance: Reinstating the Death Penalty - No Data
+Social Stance: Foreign Investment in Land Ownership - No Data
+Social Stance: Passing the SOGIE Equality Bill - Neutral
 
 
 Name: Enrico "DJ Rico" Alvarez
+Name: Enrico "DJ Rico" Alvarez
 Age: 42
 Position: Senator
+Position: Senator
 Party Affiliation: Independent
+Region: Region VII
+Notable Laws: None
+Campaign Slogan: Making sa Tunay na Boses ng Bayan!
 Region: Region VII
 Notable Laws: None
 Campaign Slogan: Making sa Tunay na Boses ng Bayan!
@@ -340,9 +518,29 @@ Social Stance: Passing the SOGIE Equality Bill - No Data
 
 
 Name: Samuel "Kuya Sam" Villena
+Social Stance: Universal Healthcare Funding - No Data
+Social Stance: Mandatory Sex Education - No Data
+Social Stance: Legalization of Divorce - No Data
+Social Stance: Mandatory ROTC for Senior High Students - No Data
+Social Stance: Anti-Terror Law - No Data
+Social Stance: Federalism - No Data
+Social Stance: Jeepney Modernization Program - Neutral
+Social Stance: Minimum Wage Standardization - No Data
+Social Stance: Lowering the Age of Criminal Responsibility - No Data
+Social Stance: Same-Sex Marriage - No Data
+Social Stance: Reinstating the Death Penalty - No Data
+Social Stance: Foreign Investment in Land Ownership - No Data
+Social Stance: Passing the SOGIE Equality Bill - No Data
+
+
+Name: Samuel "Kuya Sam" Villena
 Age: 61
 Position: Senator
+Position: Senator
 Party Affiliation: Tapat at Makabayan Party
+Region: Region II
+Notable Laws: None
+Campaign Slogan: Ang Simpleng Alagad ng Bayan
 Region: Region II
 Notable Laws: None
 Campaign Slogan: Ang Simpleng Alagad ng Bayan
@@ -363,12 +561,29 @@ Social Stance: Same-Sex Marriage - Disagree
 Social Stance: Reinstating the Death Penalty - Agree
 Social Stance: Foreign Investment in Land Ownership - Agree
 Social Stance: Passing the SOGIE Equality Bill - Disagree
+Social Stance: Universal Healthcare Funding - Agree
+Social Stance: Mandatory Sex Education - Disagree
+Social Stance: Legalization of Divorce - Disagree
+Social Stance: Mandatory ROTC for Senior High Students - Agree
+Social Stance: Anti-Terror Law - Neutral
+Social Stance: Federalism - Neutral
+Social Stance: Jeepney Modernization Program - Neutral
+Social Stance: Minimum Wage Standardization - Agree
+Social Stance: Lowering the Age of Criminal Responsibility - Agree
+Social Stance: Same-Sex Marriage - Disagree
+Social Stance: Reinstating the Death Penalty - Agree
+Social Stance: Foreign Investment in Land Ownership - Agree
+Social Stance: Passing the SOGIE Equality Bill - Disagree
 
 
 Name: Katrina dela Cruz
 Age: 38
 Position: Senator
+Position: Senator
 Party Affiliation: Para sa Pamilya Coalition
+Region: Region VI
+Notable Laws: None
+Campaign Slogan: Ang Tinig ng Kabataan at Negosyante
 Region: Region VI
 Notable Laws: None
 Campaign Slogan: Ang Tinig ng Kabataan at Negosyante
@@ -389,12 +604,30 @@ Social Stance: Same-Sex Marriage - Neutral
 Social Stance: Reinstating the Death Penalty - No Data
 Social Stance: Foreign Investment in Land Ownership - Neutral
 Social Stance: Passing the SOGIE Equality Bill - Neutral
+Social Stance: Universal Healthcare Funding - Neutral
+Social Stance: Mandatory Sex Education - Neutral
+Social Stance: Legalization of Divorce - Neutral
+Social Stance: Mandatory ROTC for Senior High Students - Neutral
+Social Stance: Anti-Terror Law - No Data
+Social Stance: Federalism - No Data
+Social Stance: Jeepney Modernization Program - No Data
+Social Stance: Minimum Wage Standardization - Neutral
+Social Stance: Lowering the Age of Criminal Responsibility - No Data
+Social Stance: Same-Sex Marriage - Neutral
+Social Stance: Reinstating the Death Penalty - No Data
+Social Stance: Foreign Investment in Land Ownership - Neutral
+Social Stance: Passing the SOGIE Equality Bill - Neutral
 
 
 Name: Rosario "Chay" Mendoza
+Name: Rosario "Chay" Mendoza
 Age: 52
 Position: Governor
+Position: Governor
 Party Affiliation: Partido ng Bagong Pag-asa
+Region: Region I
+Notable Laws: Ilocos Green Energy Act; Local Enterprise Support Law
+Campaign Slogan: Ilocos Una sa Serbisyo
 Region: Region I
 Notable Laws: Ilocos Green Energy Act; Local Enterprise Support Law
 Campaign Slogan: Ilocos Una sa Serbisyo
@@ -418,16 +651,50 @@ Social Stance: Passing the SOGIE Equality Bill - Disagree
 
 
 Name: Jaime "Jimmy" Fontanilla
+Social Stance: Universal Healthcare Funding - No Data
+Social Stance: Mandatory Sex Education - Agree
+Social Stance: Legalization of Divorce - Neutral
+Social Stance: Mandatory ROTC for Senior High Students - Neutral
+Social Stance: Anti-Terror Law - Agree
+Social Stance: Federalism - No Data
+Social Stance: Jeepney Modernization Program - Neutral
+Social Stance: Minimum Wage Standardization - Agree
+Social Stance: Lowering the Age of Criminal Responsibility - Agree
+Social Stance: Same-Sex Marriage - Disagree
+Social Stance: Reinstating the Death Penalty - No Data
+Social Stance: Foreign Investment in Land Ownership - Disagree
+Social Stance: Passing the SOGIE Equality Bill - Disagree
+
+
+Name: Jaime "Jimmy" Fontanilla
 Age: 60
 Position: Governor
+Position: Governor
 Party Affiliation: National Unity Movement
+Region: Region I
+Notable Laws: Ilocos Health Access Program; Agricultural Modernization Act
+Campaign Slogan: Tapat sa Ilocano, Serbisyo Sigurado
 Region: Region I
 Notable Laws: Ilocos Health Access Program; Agricultural Modernization Act
 Campaign Slogan: Tapat sa Ilocano, Serbisyo Sigurado
 Years of Experience: 25
 Platforms: Agriculture modernization; Healthcare system strengthening
 Supported Issues: Universal healthcare; Farmers’ subsidy; Disaster preparedness
+Supported Issues: Universal healthcare; Farmers’ subsidy; Disaster preparedness
 Opposed Issues: Charter change (Cha-Cha); Importation of staple goods
+Social Stance: Universal Healthcare Funding - Agree
+Social Stance: Mandatory Sex Education - Neutral
+Social Stance: Legalization of Divorce - Agree
+Social Stance: Mandatory ROTC for Senior High Students - No Data
+Social Stance: Anti-Terror Law - Disagree
+Social Stance: Federalism - Disagree
+Social Stance: Jeepney Modernization Program - Disagree
+Social Stance: Minimum Wage Standardization - Agree
+Social Stance: Lowering the Age of Criminal Responsibility - Agree
+Social Stance: Same-Sex Marriage - Neutral
+Social Stance: Reinstating the Death Penalty - Disagree
+Social Stance: Foreign Investment in Land Ownership - Disagree
+Social Stance: Passing the SOGIE Equality Bill - Neutral
 Social Stance: Universal Healthcare Funding - Agree
 Social Stance: Mandatory Sex Education - Neutral
 Social Stance: Legalization of Divorce - Agree
@@ -444,16 +711,35 @@ Social Stance: Passing the SOGIE Equality Bill - Neutral
 
 
 Name: Leticia "Letty" Domingo
+Name: Leticia "Letty" Domingo
 Age: 48
 Position: Vice Governor
+Position: Vice Governor
 Party Affiliation: Partido ng Bagong Pag-asa
+Region: Region I
+Notable Laws: Women's Employment Access Act
+Campaign Slogan: Tinig ng Mamamayan, Lakas ng Batas
 Region: Region I
 Notable Laws: Women's Employment Access Act
 Campaign Slogan: Tinig ng Mamamayan, Lakas ng Batas
 Years of Experience: 10
 Platforms: Legislative transparency; Support for small-scale industries
 Supported Issues: Livelihood programs; Women’s rights; Inclusive education
+Supported Issues: Livelihood programs; Women’s rights; Inclusive education
 Opposed Issues: Political dynasties; Red-tagging
+Social Stance: Universal Healthcare Funding - Agree
+Social Stance: Mandatory Sex Education - Agree
+Social Stance: Legalization of Divorce - Agree
+Social Stance: Mandatory ROTC for Senior High Students - Disagree
+Social Stance: Anti-Terror Law - No Data
+Social Stance: Federalism - Disagree
+Social Stance: Jeepney Modernization Program - Disagree
+Social Stance: Minimum Wage Standardization - Agree
+Social Stance: Lowering the Age of Criminal Responsibility - Disagree
+Social Stance: Same-Sex Marriage - Neutral
+Social Stance: Reinstating the Death Penalty - No Data
+Social Stance: Foreign Investment in Land Ownership - Agree
+Social Stance: Passing the SOGIE Equality Bill - Agree
 Social Stance: Universal Healthcare Funding - Agree
 Social Stance: Mandatory Sex Education - Agree
 Social Stance: Legalization of Divorce - Agree
@@ -470,9 +756,14 @@ Social Stance: Passing the SOGIE Equality Bill - Agree
 
 
 Name: Ernesto "Ernie" Galvez
+Name: Ernesto "Ernie" Galvez
 Age: 55
 Position: Vice Governor
+Position: Vice Governor
 Party Affiliation: National Unity Movement
+Region: Region I
+Notable Laws: Elder Rights Protection Bill
+Campaign Slogan: Siguradong Aksyon, Serbisyong Galvez
 Region: Region I
 Notable Laws: Elder Rights Protection Bill
 Campaign Slogan: Siguradong Aksyon, Serbisyong Galvez
@@ -493,12 +784,30 @@ Social Stance: Same-Sex Marriage - Neutral
 Social Stance: Reinstating the Death Penalty - Agree
 Social Stance: Foreign Investment in Land Ownership - Agree
 Social Stance: Passing the SOGIE Equality Bill - Neutral
+Social Stance: Universal Healthcare Funding - Agree
+Social Stance: Mandatory Sex Education - Agree
+Social Stance: Legalization of Divorce - Neutral
+Social Stance: Mandatory ROTC for Senior High Students - Disagree
+Social Stance: Anti-Terror Law - No Data
+Social Stance: Federalism - Agree
+Social Stance: Jeepney Modernization Program - Disagree
+Social Stance: Minimum Wage Standardization - No Data
+Social Stance: Lowering the Age of Criminal Responsibility - Disagree
+Social Stance: Same-Sex Marriage - Neutral
+Social Stance: Reinstating the Death Penalty - Agree
+Social Stance: Foreign Investment in Land Ownership - Agree
+Social Stance: Passing the SOGIE Equality Bill - Neutral
 
 
 Name: Maria Teresa "Tessie" De Guzman
+Name: Maria Teresa "Tessie" De Guzman
 Age: 52
 Position: Governor
+Position: Governor
 Party Affiliation: Partido Makabayan
+Region: Region II
+Notable Laws: Rural Agricultural Modernization Act; IP Rights Strengthening Act
+Campaign Slogan: Sa Puso ng Lambak, Serbisyo ang Kaakibat
 Region: Region II
 Notable Laws: Rural Agricultural Modernization Act; IP Rights Strengthening Act
 Campaign Slogan: Sa Puso ng Lambak, Serbisyo ang Kaakibat
@@ -522,9 +831,32 @@ Social Stance: Passing the SOGIE Equality Bill - No Data
 
 
 Name: Engr. Rolando "Rolly" Mallari
+Platforms: Agricultural modernization; Disaster preparedness; Livelihood programs; Indigenous people's rights
+Supported Issues: Agrarian reform; Rural healthcare; Education access in remote areas
+Opposed Issues: Illegal logging; Political dynasties
+Social Stance: Universal Healthcare Funding - Agree
+Social Stance: Mandatory Sex Education - Agree
+Social Stance: Legalization of Divorce - Agree
+Social Stance: Mandatory ROTC for Senior High Students - Neutral
+Social Stance: Anti-Terror Law - Agree
+Social Stance: Federalism - Neutral
+Social Stance: Jeepney Modernization Program - Disagree
+Social Stance: Minimum Wage Standardization - No Data
+Social Stance: Lowering the Age of Criminal Responsibility - Neutral
+Social Stance: Same-Sex Marriage - Neutral
+Social Stance: Reinstating the Death Penalty - Agree
+Social Stance: Foreign Investment in Land Ownership - Disagree
+Social Stance: Passing the SOGIE Equality Bill - No Data
+
+
+Name: Engr. Rolando "Rolly" Mallari
 Age: 60
 Position: Governor
+Position: Governor
 Party Affiliation: Bagong Bayan Coalition
+Region: Region II
+Notable Laws: Provincial Infra Boost Bill
+Campaign Slogan: Inhenyero Para sa Kaunlaran
 Region: Region II
 Notable Laws: Provincial Infra Boost Bill
 Campaign Slogan: Inhenyero Para sa Kaunlaran
@@ -545,12 +877,33 @@ Social Stance: Same-Sex Marriage - Neutral
 Social Stance: Reinstating the Death Penalty - Disagree
 Social Stance: Foreign Investment in Land Ownership - Disagree
 Social Stance: Passing the SOGIE Equality Bill - Neutral
+Platforms: Infrastructure development; Flood control systems; Road connectivity
+Supported Issues: Public-private partnerships; Climate-resilient infrastructure
+Opposed Issues: Overreliance on imported goods; Bureaucratic red tape
+Social Stance: Universal Healthcare Funding - Agree
+Social Stance: Mandatory Sex Education - Agree
+Social Stance: Legalization of Divorce - Neutral
+Social Stance: Mandatory ROTC for Senior High Students - Neutral
+Social Stance: Anti-Terror Law - Disagree
+Social Stance: Federalism - Neutral
+Social Stance: Jeepney Modernization Program - Neutral
+Social Stance: Minimum Wage Standardization - Agree
+Social Stance: Lowering the Age of Criminal Responsibility - Agree
+Social Stance: Same-Sex Marriage - Neutral
+Social Stance: Reinstating the Death Penalty - Disagree
+Social Stance: Foreign Investment in Land Ownership - Disagree
+Social Stance: Passing the SOGIE Equality Bill - Neutral
 
 
 Name: Alfredo "Fred" Macaraeg
+Name: Alfredo "Fred" Macaraeg
 Age: 48
 Position: Vice Governor
+Position: Vice Governor
 Party Affiliation: Partido Makabayan
+Region: Region II
+Notable Laws: Youth Cooperative Support Act
+Campaign Slogan: Kakayahan, Karanasan, Kaakibat
 Region: Region II
 Notable Laws: Youth Cooperative Support Act
 Campaign Slogan: Kakayahan, Karanasan, Kaakibat
@@ -574,13 +927,38 @@ Social Stance: Passing the SOGIE Equality Bill - Agree
 
 
 Name: Carolina "Car" Domingo
+Platforms: Health center upgrades; Cooperative funding; Youth empowerment
+Supported Issues: Free public education; Local business incentives
+Opposed Issues: Corporate mining; Political violence
+Social Stance: Universal Healthcare Funding - Agree
+Social Stance: Mandatory Sex Education - Agree
+Social Stance: Legalization of Divorce - Agree
+Social Stance: Mandatory ROTC for Senior High Students - Neutral
+Social Stance: Anti-Terror Law - Disagree
+Social Stance: Federalism - Agree
+Social Stance: Jeepney Modernization Program - Neutral
+Social Stance: Minimum Wage Standardization - Agree
+Social Stance: Lowering the Age of Criminal Responsibility - Agree
+Social Stance: Same-Sex Marriage - Agree
+Social Stance: Reinstating the Death Penalty - Disagree
+Social Stance: Foreign Investment in Land Ownership - Disagree
+Social Stance: Passing the SOGIE Equality Bill - Agree
+
+
+Name: Carolina "Car" Domingo
 Age: 43
+Position: Vice Governor
 Position: Vice Governor
 Party Affiliation: Bagong Bayan Coalition
 Region: Region II
 Notable Laws: Local Government Transparency Ordinance
 Campaign Slogan: Babaeng May Gawa, Hindi Lang Salita
+Region: Region II
+Notable Laws: Local Government Transparency Ordinance
+Campaign Slogan: Babaeng May Gawa, Hindi Lang Salita
 Years of Experience: 7
+Platforms: Microenterprise support; Anti-corruption education programs
+Supported Issues: Gender equality; Digital governance
 Platforms: Microenterprise support; Anti-corruption education programs
 Supported Issues: Gender equality; Digital governance
 Opposed Issues: Misuse of LGU funds
@@ -597,12 +975,30 @@ Social Stance: Same-Sex Marriage - Disagree
 Social Stance: Reinstating the Death Penalty - Agree
 Social Stance: Foreign Investment in Land Ownership - Agree
 Social Stance: Passing the SOGIE Equality Bill - Disagree
+Social Stance: Universal Healthcare Funding - Agree
+Social Stance: Mandatory Sex Education - Disagree
+Social Stance: Legalization of Divorce - Disagree
+Social Stance: Mandatory ROTC for Senior High Students - Neutral
+Social Stance: Anti-Terror Law - Agree
+Social Stance: Federalism - Agree
+Social Stance: Jeepney Modernization Program - Agree
+Social Stance: Minimum Wage Standardization - Neutral
+Social Stance: Lowering the Age of Criminal Responsibility - Agree
+Social Stance: Same-Sex Marriage - Disagree
+Social Stance: Reinstating the Death Penalty - Agree
+Social Stance: Foreign Investment in Land Ownership - Agree
+Social Stance: Passing the SOGIE Equality Bill - Disagree
 
 
 Name: Renato "Nato" Calderon
+Name: Renato "Nato" Calderon
 Age: 55
 Position: Governor
+Position: Governor
 Party Affiliation: Partido ng Masang Manggagawa
+Region: Region III
+Notable Laws: Central Luzon Labor Protection Bill
+Campaign Slogan: Gobyerno Para sa Gawa, Hindi sa Porma
 Region: Region III
 Notable Laws: Central Luzon Labor Protection Bill
 Campaign Slogan: Gobyerno Para sa Gawa, Hindi sa Porma
@@ -624,11 +1020,33 @@ Social Stance: Reinstating the Death Penalty - Agree
 Social Stance: Foreign Investment in Land Ownership - Agree
 Social Stance: Passing the SOGIE Equality Bill - Disagree
 
+Platforms: Industrial growth; Labor protection; Local job creation
+Supported Issues: Workers' rights; Social pension reform
+Opposed Issues: Contractualization; Labor exploitation
+Social Stance: Universal Healthcare Funding - Agree
+Social Stance: Mandatory Sex Education - Disagree
+Social Stance: Legalization of Divorce - Agree
+Social Stance: Mandatory ROTC for Senior High Students - Agree
+Social Stance: Anti-Terror Law - Agree
+Social Stance: Federalism - Agree
+Social Stance: Jeepney Modernization Program - Neutral
+Social Stance: Minimum Wage Standardization - Agree
+Social Stance: Lowering the Age of Criminal Responsibility - Disagree
+Social Stance: Same-Sex Marriage - Disagree
+Social Stance: Reinstating the Death Penalty - Agree
+Social Stance: Foreign Investment in Land Ownership - Agree
+Social Stance: Passing the SOGIE Equality Bill - Disagree
 
+
+Name: Atty. Julianne "Jules" Pascual
 Name: Atty. Julianne "Jules" Pascual
 Age: 39
 Position: Governor
+Position: Governor
 Party Affiliation: Tinig ng Bayan
+Region: Region III
+Notable Laws: Legal Aid Enhancement Act
+Campaign Slogan: Karapatang Laban, Karapatang Ipaglaban
 Region: Region III
 Notable Laws: Legal Aid Enhancement Act
 Campaign Slogan: Karapatang Laban, Karapatang Ipaglaban
@@ -652,13 +1070,38 @@ Social Stance: Passing the SOGIE Equality Bill - Neutral
 
 
 Name: Rico "Kap" Guzman
+Platforms: Legal aid access; Rule of law; Anti-land grabbing
+Supported Issues: Judicial reform; Human rights
+Opposed Issues: Extra-judicial killings; Authoritarian policies
+Social Stance: Universal Healthcare Funding - Agree
+Social Stance: Mandatory Sex Education - Agree
+Social Stance: Legalization of Divorce - Neutral
+Social Stance: Mandatory ROTC for Senior High Students - No Data
+Social Stance: Anti-Terror Law - Disagree
+Social Stance: Federalism - Disagree
+Social Stance: Jeepney Modernization Program - Agree
+Social Stance: Minimum Wage Standardization - Disagree
+Social Stance: Lowering the Age of Criminal Responsibility - Agree
+Social Stance: Same-Sex Marriage - Neutral
+Social Stance: Reinstating the Death Penalty - No Data
+Social Stance: Foreign Investment in Land Ownership - Disagree
+Social Stance: Passing the SOGIE Equality Bill - Neutral
+
+
+Name: Rico "Kap" Guzman
 Age: 49
+Position: Vice Governor
 Position: Vice Governor
 Party Affiliation: Partido ng Masang Manggagawa
 Region: Region III
 Notable Laws: Barangay Assistance Equity Bill
 Campaign Slogan: Kap na Maaasahan sa Lahat ng Panahon
+Region: Region III
+Notable Laws: Barangay Assistance Equity Bill
+Campaign Slogan: Kap na Maaasahan sa Lahat ng Panahon
 Years of Experience: 15
+Platforms: Barangay support fund; Senior citizen aid; Farmers’ subsidy
+Supported Issues: Social welfare; Basic service delivery
 Platforms: Barangay support fund; Senior citizen aid; Farmers’ subsidy
 Supported Issues: Social welfare; Basic service delivery
 Opposed Issues: Misuse of calamity funds
@@ -678,13 +1121,35 @@ Social Stance: Passing the SOGIE Equality Bill - Neutral
 
 
 Name: Dr. Felisa "Doc Liza" Gatchalian
+Social Stance: Universal Healthcare Funding - Neutral
+Social Stance: Mandatory Sex Education - Disagree
+Social Stance: Legalization of Divorce - Agree
+Social Stance: Mandatory ROTC for Senior High Students - Neutral
+Social Stance: Anti-Terror Law - Agree
+Social Stance: Federalism - Disagree
+Social Stance: Jeepney Modernization Program - Agree
+Social Stance: Minimum Wage Standardization - Disagree
+Social Stance: Lowering the Age of Criminal Responsibility - Agree
+Social Stance: Same-Sex Marriage - Neutral
+Social Stance: Reinstating the Death Penalty - Disagree
+Social Stance: Foreign Investment in Land Ownership - Disagree
+Social Stance: Passing the SOGIE Equality Bill - Neutral
+
+
+Name: Dr. Felisa "Doc Liza" Gatchalian
 Age: 44
+Position: Vice Governor
 Position: Vice Governor
 Party Affiliation: Tinig ng Bayan
 Region: Region III
 Notable Laws: Central Luzon Mental Wellness Act
 Campaign Slogan: Gobyernong May Malasakit at Galing
+Region: Region III
+Notable Laws: Central Luzon Mental Wellness Act
+Campaign Slogan: Gobyernong May Malasakit at Galing
 Years of Experience: 10
+Platforms: Health system upgrade; Free medicine access
+Supported Issues: Universal healthcare; Mental health
 Platforms: Health system upgrade; Free medicine access
 Supported Issues: Universal healthcare; Mental health
 Opposed Issues: Health budget cuts
@@ -701,16 +1166,36 @@ Social Stance: Same-Sex Marriage - Agree
 Social Stance: Reinstating the Death Penalty - Disagree
 Social Stance: Foreign Investment in Land Ownership - Disagree
 Social Stance: Passing the SOGIE Equality Bill - Agree
+Social Stance: Universal Healthcare Funding - Agree
+Social Stance: Mandatory Sex Education - Agree
+Social Stance: Legalization of Divorce - Neutral
+Social Stance: Mandatory ROTC for Senior High Students - Neutral
+Social Stance: Anti-Terror Law - Disagree
+Social Stance: Federalism - Disagree
+Social Stance: Jeepney Modernization Program - Neutral
+Social Stance: Minimum Wage Standardization - Agree
+Social Stance: Lowering the Age of Criminal Responsibility - Agree
+Social Stance: Same-Sex Marriage - Agree
+Social Stance: Reinstating the Death Penalty - Disagree
+Social Stance: Foreign Investment in Land Ownership - Disagree
+Social Stance: Passing the SOGIE Equality Bill - Agree
 
 
 Name: Edgardo "Ed" Ramos
+Name: Edgardo "Ed" Ramos
 Age: 58
+Position: Governor
 Position: Governor
 Party Affiliation: Partido Para sa Masa
 Region: Region IV-A
 Notable Laws: Urban Housing Equity Act
 Campaign Slogan: Serbisyong Totoo, Hindi Pampapogi
+Region: Region IV-A
+Notable Laws: Urban Housing Equity Act
+Campaign Slogan: Serbisyong Totoo, Hindi Pampapogi
 Years of Experience: 22
+Platforms: Affordable housing; Urban transport solutions; Youth training programs
+Supported Issues: Housing for informal settlers; Anti-traffic programs
 Platforms: Affordable housing; Urban transport solutions; Youth training programs
 Supported Issues: Housing for informal settlers; Anti-traffic programs
 Opposed Issues: Urban congestion negligence
@@ -728,15 +1213,36 @@ Social Stance: Reinstating the Death Penalty - Agree
 Social Stance: Foreign Investment in Land Ownership - Neutral
 Social Stance: Passing the SOGIE Equality Bill - Disagree
 
+Social Stance: Universal Healthcare Funding - Agree
+Social Stance: Mandatory Sex Education - Disagree
+Social Stance: Legalization of Divorce - Disagree
+Social Stance: Mandatory ROTC for Senior High Students - Agree
+Social Stance: Anti-Terror Law - No Data
+Social Stance: Federalism - Neutral
+Social Stance: Jeepney Modernization Program - Disagree
+Social Stance: Minimum Wage Standardization - Agree
+Social Stance: Lowering the Age of Criminal Responsibility - Agree
+Social Stance: Same-Sex Marriage - Disagree
+Social Stance: Reinstating the Death Penalty - Agree
+Social Stance: Foreign Investment in Land Ownership - Neutral
+Social Stance: Passing the SOGIE Equality Bill - Disagree
+
 
 Name: Katrina "Trina" San Jose
+Name: Katrina "Trina" San Jose
 Age: 42
+Position: Governor
 Position: Governor
 Party Affiliation: Bayanihan Unity Party
 Region: Region IV-A
 Notable Laws: Provincial Child Welfare Ordinance
 Campaign Slogan: Babaeng May Puso at Plano
+Region: Region IV-A
+Notable Laws: Provincial Child Welfare Ordinance
+Campaign Slogan: Babaeng May Puso at Plano
 Years of Experience: 14
+Platforms: Women's rights; Education reform; Child welfare
+Supported Issues: SOGIE Bill; Maternal health
 Platforms: Women's rights; Education reform; Child welfare
 Supported Issues: SOGIE Bill; Maternal health
 Opposed Issues: Gender-based violence
@@ -754,16 +1260,37 @@ Social Stance: Foreign Investment in Land Ownership - Disagree
 Social Stance: Universal Healthcare Funding - Agree
 Social Stance: Mandatory Sex Education - Agree
 Social Stance: Minimum Wage Standardization - Disagree
+Image: resources/images/candidates/default.png
+Social Stance: Legalization of Divorce - Agree
+Social Stance: Passing the SOGIE Equality Bill - Agree
+Social Stance: Reinstating the Death Penalty - Neutral
+Social Stance: Lowering the Age of Criminal Responsibility - Neutral
+Social Stance: Federalism - Disagree
+Social Stance: Mandatory ROTC for Senior High Students - Disagree
+Social Stance: Same-Sex Marriage - Agree
+Social Stance: Anti-Terror Law - Agree
+Social Stance: Jeepney Modernization Program - Neutral
+Social Stance: Foreign Investment in Land Ownership - Disagree
+Social Stance: Universal Healthcare Funding - Agree
+Social Stance: Mandatory Sex Education - Agree
+Social Stance: Minimum Wage Standardization - Disagree
 
 
 Name: Ernesto "Nesty" Guevarra
+Name: Ernesto "Nesty" Guevarra
 Age: 51
+Position: Vice Governor
 Position: Vice Governor
 Party Affiliation: Partido Para sa Masa
 Region: Region IV-A
 Notable Laws: Barangay Development Fund Act
 Campaign Slogan: Kasangga ng Mamamayan, Kaagapay ng Kaunlaran
+Region: Region IV-A
+Notable Laws: Barangay Development Fund Act
+Campaign Slogan: Kasangga ng Mamamayan, Kaagapay ng Kaunlaran
 Years of Experience: 16
+Platforms: Cooperative funding; Barangay education support
+Supported Issues: Barangay development; Food security
 Platforms: Cooperative funding; Barangay education support
 Supported Issues: Barangay development; Food security
 Opposed Issues: Delayed LGU project releases
@@ -782,15 +1309,37 @@ Social Stance: Universal Healthcare Funding - Agree
 Social Stance: Mandatory Sex Education - Agree
 Social Stance: Minimum Wage Standardization - Neutral
 
+Image: resources/images/candidates/default.png
+Social Stance: Legalization of Divorce - Agree
+Social Stance: Passing the SOGIE Equality Bill - Disagree
+Social Stance: Reinstating the Death Penalty - No Data
+Social Stance: Lowering the Age of Criminal Responsibility - Neutral
+Social Stance: Federalism - Agree
+Social Stance: Mandatory ROTC for Senior High Students - Agree
+Social Stance: Same-Sex Marriage - Disagree
+Social Stance: Anti-Terror Law - Agree
+Social Stance: Jeepney Modernization Program - Agree
+Social Stance: Foreign Investment in Land Ownership - Neutral
+Social Stance: Universal Healthcare Funding - Agree
+Social Stance: Mandatory Sex Education - Agree
+Social Stance: Minimum Wage Standardization - Neutral
+
 
 Name: Joanna "Jowa" Castillo
+Name: Joanna "Jowa" Castillo
 Age: 36
+Position: Vice Governor
 Position: Vice Governor
 Party Affiliation: Bayanihan Unity Party
 Region: Region IV-A
 Notable Laws: CALABARZON Women's Shelter Initiative
 Campaign Slogan: Tunay na Pagbabago Mula sa Babae
+Region: Region IV-A
+Notable Laws: CALABARZON Women's Shelter Initiative
+Campaign Slogan: Tunay na Pagbabago Mula sa Babae
 Years of Experience: 8
+Platforms: Health outreach programs; Skills training for women
+Supported Issues: Women empowerment; Universal health
 Platforms: Health outreach programs; Skills training for women
 Supported Issues: Women empowerment; Universal health
 Opposed Issues: Domestic abuse tolerance
@@ -808,12 +1357,31 @@ Social Stance: Foreign Investment in Land Ownership - Agree
 Social Stance: Universal Healthcare Funding - Agree
 Social Stance: Mandatory Sex Education - Agree
 Social Stance: Minimum Wage Standardization - No Data
+Image: resources/images/candidates/default.png
+Social Stance: Legalization of Divorce - No Data
+Social Stance: Passing the SOGIE Equality Bill - No Data
+Social Stance: Reinstating the Death Penalty - Agree
+Social Stance: Lowering the Age of Criminal Responsibility - No Data
+Social Stance: Federalism - No Data
+Social Stance: Mandatory ROTC for Senior High Students - Agree
+Social Stance: Same-Sex Marriage - Agree
+Social Stance: Anti-Terror Law - Agree
+Social Stance: Jeepney Modernization Program - No Data
+Social Stance: Foreign Investment in Land Ownership - Agree
+Social Stance: Universal Healthcare Funding - Agree
+Social Stance: Mandatory Sex Education - Agree
+Social Stance: Minimum Wage Standardization - No Data
 
 
 Name: Ricardo "Carding" Velasquez
+Name: Ricardo "Carding" Velasquez
 Age: 59
 Position: Governor
+Position: Governor
 Party Affiliation: Makabayan Bloc
+Region: Region IV-B (MIMAROPA)
+Notable Laws: Island Development Fund Act; Marine Protection Initiative
+Campaign Slogan: Serbisyo Mula sa Puso
 Region: Region IV-B (MIMAROPA)
 Notable Laws: Island Development Fund Act; Marine Protection Initiative
 Campaign Slogan: Serbisyo Mula sa Puso
@@ -836,11 +1404,31 @@ Social Stance: Universal Healthcare Funding - Agree
 Social Stance: Mandatory Sex Education - Agree
 Social Stance: Minimum Wage Standardization - Agree
 
+Image: resources/images/candidates/default.png
+Social Stance: Legalization of Divorce - Disagree
+Social Stance: Passing the SOGIE Equality Bill - Agree
+Social Stance: Reinstating the Death Penalty - Disagree
+Social Stance: Lowering the Age of Criminal Responsibility - Disagree
+Social Stance: Federalism - Agree
+Social Stance: Mandatory ROTC for Senior High Students - Neutral
+Social Stance: Same-Sex Marriage - No Data
+Social Stance: Anti-Terror Law - Agree
+Social Stance: Jeepney Modernization Program - Disagree
+Social Stance: Foreign Investment in Land Ownership - Disagree
+Social Stance: Universal Healthcare Funding - Agree
+Social Stance: Mandatory Sex Education - Agree
+Social Stance: Minimum Wage Standardization - Agree
 
+
+Name: Maria Andrea "Andeng" Cruz
 Name: Maria Andrea "Andeng" Cruz
 Age: 44
 Position: Governor
+Position: Governor
 Party Affiliation: Partido Bagong Bansa
+Region: Region IV-B (MIMAROPA)
+Notable Laws: Provincial Tech Grants Act
+Campaign Slogan: MIMAROPA Una sa Lahat!
 Region: Region IV-B (MIMAROPA)
 Notable Laws: Provincial Tech Grants Act
 Campaign Slogan: MIMAROPA Una sa Lahat!
@@ -862,12 +1450,31 @@ Social Stance: Foreign Investment in Land Ownership - Disagree
 Social Stance: Universal Healthcare Funding - Agree
 Social Stance: Mandatory Sex Education - Neutral
 Social Stance: Minimum Wage Standardization - Agree
+Image: resources/images/candidates/default.png
+Social Stance: Legalization of Divorce - Agree
+Social Stance: Passing the SOGIE Equality Bill - Agree
+Social Stance: Reinstating the Death Penalty - Disagree
+Social Stance: Lowering the Age of Criminal Responsibility - Agree
+Social Stance: Federalism - Agree
+Social Stance: Mandatory ROTC for Senior High Students - Neutral
+Social Stance: Same-Sex Marriage - Agree
+Social Stance: Anti-Terror Law - Neutral
+Social Stance: Jeepney Modernization Program - Neutral
+Social Stance: Foreign Investment in Land Ownership - Disagree
+Social Stance: Universal Healthcare Funding - Agree
+Social Stance: Mandatory Sex Education - Neutral
+Social Stance: Minimum Wage Standardization - Agree
 
 
 Name: Ernesto "Erning" Diaz
+Name: Ernesto "Erning" Diaz
 Age: 52
 Position: Vice Governor
+Position: Vice Governor
 Party Affiliation: Makabayan Bloc
+Region: Region IV-B (MIMAROPA)
+Notable Laws: None
+Campaign Slogan: Kaagapay ng Mamamayan
 Region: Region IV-B (MIMAROPA)
 Notable Laws: None
 Campaign Slogan: Kaagapay ng Mamamayan
@@ -890,11 +1497,31 @@ Social Stance: Universal Healthcare Funding - Neutral
 Social Stance: Mandatory Sex Education - Neutral
 Social Stance: Minimum Wage Standardization - Agree
 
+Image: resources/images/candidates/default.png
+Social Stance: Legalization of Divorce - Neutral
+Social Stance: Passing the SOGIE Equality Bill - Disagree
+Social Stance: Reinstating the Death Penalty - Neutral
+Social Stance: Lowering the Age of Criminal Responsibility - Disagree
+Social Stance: Federalism - Neutral
+Social Stance: Mandatory ROTC for Senior High Students - Disagree
+Social Stance: Same-Sex Marriage - Disagree
+Social Stance: Anti-Terror Law - Disagree
+Social Stance: Jeepney Modernization Program - Disagree
+Social Stance: Foreign Investment in Land Ownership - Neutral
+Social Stance: Universal Healthcare Funding - Neutral
+Social Stance: Mandatory Sex Education - Neutral
+Social Stance: Minimum Wage Standardization - Agree
 
+
+Name: Luisito "Louie" Gonzaga
 Name: Luisito "Louie" Gonzaga
 Age: 39
 Position: Vice Governor
+Position: Vice Governor
 Party Affiliation: Partido Bagong Bansa
+Region: Region IV-B (MIMAROPA)
+Notable Laws: None
+Campaign Slogan: MIMAROPA, Sama-Sama
 Region: Region IV-B (MIMAROPA)
 Notable Laws: None
 Campaign Slogan: MIMAROPA, Sama-Sama
@@ -916,12 +1543,31 @@ Social Stance: Foreign Investment in Land Ownership - Neutral
 Social Stance: Universal Healthcare Funding - No Data
 Social Stance: Mandatory Sex Education - Neutral
 Social Stance: Minimum Wage Standardization - Neutral
+Image: resources/images/candidates/default.png
+Social Stance: Legalization of Divorce - Disagree
+Social Stance: Passing the SOGIE Equality Bill - Neutral
+Social Stance: Reinstating the Death Penalty - No Data
+Social Stance: Lowering the Age of Criminal Responsibility - Neutral
+Social Stance: Federalism - Disagree
+Social Stance: Mandatory ROTC for Senior High Students - Agree
+Social Stance: Same-Sex Marriage - Disagree
+Social Stance: Anti-Terror Law - Agree
+Social Stance: Jeepney Modernization Program - Neutral
+Social Stance: Foreign Investment in Land Ownership - Neutral
+Social Stance: Universal Healthcare Funding - No Data
+Social Stance: Mandatory Sex Education - Neutral
+Social Stance: Minimum Wage Standardization - Neutral
 
 
 Name: Genaro "Gerry" Abundo
+Name: Genaro "Gerry" Abundo
 Age: 55
 Position: Governor
+Position: Governor
 Party Affiliation: Partido ng Masa
+Region: Region V – Bicol Region
+Notable Laws: Bicol Fisherfolk Assistance Act
+Campaign Slogan: Sa Bicol, Para sa Masa!
 Region: Region V – Bicol Region
 Notable Laws: Bicol Fisherfolk Assistance Act
 Campaign Slogan: Sa Bicol, Para sa Masa!
@@ -944,11 +1590,34 @@ Social Stance: Universal Healthcare Funding - Neutral
 Social Stance: Mandatory Sex Education - No Data
 Social Stance: Minimum Wage Standardization - Neutral
 
+Platforms: Disaster preparedness; Livelihood programs; Sustainable agriculture
+Supported Issues: Climate resilience; Poverty reduction; Fisherfolk support
+Opposed Issues: Coal power expansion; Foreign fishing access
+Image: resources/images/candidates/default.png
+Social Stance: Legalization of Divorce - No Data
+Social Stance: Passing the SOGIE Equality Bill - Disagree
+Social Stance: Reinstating the Death Penalty - Neutral
+Social Stance: Lowering the Age of Criminal Responsibility - Neutral
+Social Stance: Federalism - Agree
+Social Stance: Mandatory ROTC for Senior High Students - Disagree
+Social Stance: Same-Sex Marriage - Neutral
+Social Stance: Anti-Terror Law - No Data
+Social Stance: Jeepney Modernization Program - Neutral
+Social Stance: Foreign Investment in Land Ownership - Disagree
+Social Stance: Universal Healthcare Funding - Neutral
+Social Stance: Mandatory Sex Education - No Data
+Social Stance: Minimum Wage Standardization - Neutral
 
+
+Name: Felicita "Fely" Remulla
 Name: Felicita "Fely" Remulla
 Age: 60
 Position: Governor
+Position: Governor
 Party Affiliation: Nacionalista Party
+Region: Region V – Bicol Region
+Notable Laws: Regional Tourism Growth Act
+Campaign Slogan: Maunlad na Bicol, Ating Abutin
 Region: Region V – Bicol Region
 Notable Laws: Regional Tourism Growth Act
 Campaign Slogan: Maunlad na Bicol, Ating Abutin
@@ -970,16 +1639,40 @@ Social Stance: Foreign Investment in Land Ownership - Agree
 Social Stance: Universal Healthcare Funding - Agree
 Social Stance: Mandatory Sex Education - Neutral
 Social Stance: Minimum Wage Standardization - Neutral
+Platforms: Road infrastructure; Provincial tourism; Public health centers
+Supported Issues: Road access; Maternal health; Local investment
+Opposed Issues: Political insurgency; Unregulated small-scale mining
+Image: resources/images/candidates/default.png
+Social Stance: Legalization of Divorce - Neutral
+Social Stance: Passing the SOGIE Equality Bill - Neutral
+Social Stance: Reinstating the Death Penalty - Disagree
+Social Stance: Lowering the Age of Criminal Responsibility - Agree
+Social Stance: Federalism - No Data
+Social Stance: Mandatory ROTC for Senior High Students - Disagree
+Social Stance: Same-Sex Marriage - Neutral
+Social Stance: Anti-Terror Law - Neutral
+Social Stance: Jeepney Modernization Program - No Data
+Social Stance: Foreign Investment in Land Ownership - Agree
+Social Stance: Universal Healthcare Funding - Agree
+Social Stance: Mandatory Sex Education - Neutral
+Social Stance: Minimum Wage Standardization - Neutral
 
 
 Name: Ramon "Mon" Berroya
+Name: Ramon "Mon" Berroya
 Age: 47
+Position: Vice Governor
 Position: Vice Governor
 Party Affiliation: Partido ng Masa
 Region: Region V – Bicol Region
 Notable Laws: Youth Empowerment Fund Act
 Campaign Slogan: Karugtong ng Pagbabago
+Region: Region V – Bicol Region
+Notable Laws: Youth Empowerment Fund Act
+Campaign Slogan: Karugtong ng Pagbabago
 Years of Experience: 8
+Platforms: Youth employment; Education grants; Community cooperatives
+Supported Issues: Scholarship expansion; Youth development; Anti-drug campaigns
 Platforms: Youth employment; Education grants; Community cooperatives
 Supported Issues: Scholarship expansion; Youth development; Anti-drug campaigns
 Opposed Issues: Education budget cuts
@@ -998,15 +1691,37 @@ Social Stance: Universal Healthcare Funding - No Data
 Social Stance: Mandatory Sex Education - Neutral
 Social Stance: Minimum Wage Standardization - Agree
 
+Image: resources/images/candidates/default.png
+Social Stance: Legalization of Divorce - Disagree
+Social Stance: Passing the SOGIE Equality Bill - No Data
+Social Stance: Reinstating the Death Penalty - Neutral
+Social Stance: Lowering the Age of Criminal Responsibility - Disagree
+Social Stance: Federalism - Neutral
+Social Stance: Mandatory ROTC for Senior High Students - No Data
+Social Stance: Same-Sex Marriage - Neutral
+Social Stance: Anti-Terror Law - Neutral
+Social Stance: Jeepney Modernization Program - Agree
+Social Stance: Foreign Investment in Land Ownership - Disagree
+Social Stance: Universal Healthcare Funding - No Data
+Social Stance: Mandatory Sex Education - Neutral
+Social Stance: Minimum Wage Standardization - Agree
+
 
 Name: Ligaya "Joy" Imperial
+Name: Ligaya "Joy" Imperial
 Age: 52
+Position: Vice Governor
 Position: Vice Governor
 Party Affiliation: Nacionalista Party
 Region: Region V – Bicol Region
 Notable Laws: Bicol Women Livelihood Fund Act
 Campaign Slogan: Serbisyong Bicolano, Buong Puso
+Region: Region V – Bicol Region
+Notable Laws: Bicol Women Livelihood Fund Act
+Campaign Slogan: Serbisyong Bicolano, Buong Puso
 Years of Experience: 10
+Platforms: Health caravans; Women’s livelihood; Water system upgrades
+Supported Issues: Women's rights; Rural healthcare
 Platforms: Health caravans; Women’s livelihood; Water system upgrades
 Supported Issues: Women's rights; Rural healthcare
 Opposed Issues: Delayed LGU fund transfers
@@ -1024,16 +1739,37 @@ Social Stance: Foreign Investment in Land Ownership - No Data
 Social Stance: Universal Healthcare Funding - Agree
 Social Stance: Mandatory Sex Education - Agree
 Social Stance: Minimum Wage Standardization - Neutral
+Image: resources/images/candidates/default.png
+Social Stance: Legalization of Divorce - Neutral
+Social Stance: Passing the SOGIE Equality Bill - Agree
+Social Stance: Reinstating the Death Penalty - Disagree
+Social Stance: Lowering the Age of Criminal Responsibility - Neutral
+Social Stance: Federalism - No Data
+Social Stance: Mandatory ROTC for Senior High Students - Neutral
+Social Stance: Same-Sex Marriage - No Data
+Social Stance: Anti-Terror Law - Agree
+Social Stance: Jeepney Modernization Program - Disagree
+Social Stance: Foreign Investment in Land Ownership - No Data
+Social Stance: Universal Healthcare Funding - Agree
+Social Stance: Mandatory Sex Education - Agree
+Social Stance: Minimum Wage Standardization - Neutral
 
 
 Name: Alejandro "Jun" Padilla
+Name: Alejandro "Jun" Padilla
 Age: 50
+Position: Governor
 Position: Governor
 Party Affiliation: Aksyon Demokratiko
 Region: Region VI – Western Visayas
 Notable Laws: Iloilo Agro-Export Act
 Campaign Slogan: Visayas Para sa Lahat
+Region: Region VI – Western Visayas
+Notable Laws: Iloilo Agro-Export Act
+Campaign Slogan: Visayas Para sa Lahat
 Years of Experience: 15
+Platforms: Agro-industrial development; Anti-smuggling; Port modernization
+Supported Issues: Farmer cooperatives; Export zones
 Platforms: Agro-industrial development; Anti-smuggling; Port modernization
 Supported Issues: Farmer cooperatives; Export zones
 Opposed Issues: Import-heavy policies
@@ -1052,15 +1788,37 @@ Social Stance: Universal Healthcare Funding - Disagree
 Social Stance: Mandatory Sex Education - Neutral
 Social Stance: Minimum Wage Standardization - Neutral
 
+Image: resources/images/candidates/default.png
+Social Stance: Legalization of Divorce - Neutral
+Social Stance: Passing the SOGIE Equality Bill - Agree
+Social Stance: Reinstating the Death Penalty - Disagree
+Social Stance: Lowering the Age of Criminal Responsibility - Neutral
+Social Stance: Federalism - Neutral
+Social Stance: Mandatory ROTC for Senior High Students - No Data
+Social Stance: Same-Sex Marriage - Agree
+Social Stance: Anti-Terror Law - No Data
+Social Stance: Jeepney Modernization Program - Neutral
+Social Stance: Foreign Investment in Land Ownership - Disagree
+Social Stance: Universal Healthcare Funding - Disagree
+Social Stance: Mandatory Sex Education - Neutral
+Social Stance: Minimum Wage Standardization - Neutral
+
 
 Name: Beatrice "Bea" Villaruel
+Name: Beatrice "Bea" Villaruel
 Age: 53
+Position: Governor
 Position: Governor
 Party Affiliation: PDP-Laban
 Region: Region VI – Western Visayas
 Notable Laws: Visayas Green Coast Initiative
 Campaign Slogan: Kauswagan sa Tanan!
+Region: Region VI – Western Visayas
+Notable Laws: Visayas Green Coast Initiative
+Campaign Slogan: Kauswagan sa Tanan!
 Years of Experience: 12
+Platforms: Job generation; Coastal cleanup programs
+Supported Issues: Job fairs; Marine biodiversity
 Platforms: Job generation; Coastal cleanup programs
 Supported Issues: Job fairs; Marine biodiversity
 Opposed Issues: Overdevelopment of beaches
@@ -1079,15 +1837,37 @@ Social Stance: Universal Healthcare Funding - Agree
 Social Stance: Mandatory Sex Education - Neutral
 Social Stance: Minimum Wage Standardization - Neutral
 
+Image: resources/images/candidates/default.png
+Social Stance: Legalization of Divorce - Neutral
+Social Stance: Passing the SOGIE Equality Bill - Agree
+Social Stance: Reinstating the Death Penalty - Neutral
+Social Stance: Lowering the Age of Criminal Responsibility - Disagree
+Social Stance: Federalism - Neutral
+Social Stance: Mandatory ROTC for Senior High Students - Agree
+Social Stance: Same-Sex Marriage - No Data
+Social Stance: Anti-Terror Law - Neutral
+Social Stance: Jeepney Modernization Program - Neutral
+Social Stance: Foreign Investment in Land Ownership - Disagree
+Social Stance: Universal Healthcare Funding - Agree
+Social Stance: Mandatory Sex Education - Neutral
+Social Stance: Minimum Wage Standardization - Neutral
+
 
 Name: Christian "Xian" Tagle
+Name: Christian "Xian" Tagle
 Age: 38
+Position: Vice Governor
 Position: Vice Governor
 Party Affiliation: Aksyon Demokratiko
 Region: Region VI – Western Visayas
 Notable Laws: Startup Hubs for Provinces Act
 Campaign Slogan: Kabataan, Kaakibat ng Pag-unlad
+Region: Region VI – Western Visayas
+Notable Laws: Startup Hubs for Provinces Act
+Campaign Slogan: Kabataan, Kaakibat ng Pag-unlad
 Years of Experience: 6
+Platforms: ICT education; Startup incubation; Rural innovation
+Supported Issues: STEM education; Tech funding
 Platforms: ICT education; Startup incubation; Rural innovation
 Supported Issues: STEM education; Tech funding
 Opposed Issues: Provincial underemployment
@@ -1106,15 +1886,37 @@ Social Stance: Universal Healthcare Funding - Agree
 Social Stance: Mandatory Sex Education - Neutral
 Social Stance: Minimum Wage Standardization - No Data
 
+Image: resources/images/candidates/default.png
+Social Stance: Legalization of Divorce - Neutral
+Social Stance: Passing the SOGIE Equality Bill - No Data
+Social Stance: Reinstating the Death Penalty - Agree
+Social Stance: Lowering the Age of Criminal Responsibility - Neutral
+Social Stance: Federalism - No Data
+Social Stance: Mandatory ROTC for Senior High Students - Neutral
+Social Stance: Same-Sex Marriage - Neutral
+Social Stance: Anti-Terror Law - Neutral
+Social Stance: Jeepney Modernization Program - Disagree
+Social Stance: Foreign Investment in Land Ownership - Neutral
+Social Stance: Universal Healthcare Funding - Agree
+Social Stance: Mandatory Sex Education - Neutral
+Social Stance: Minimum Wage Standardization - No Data
+
 
 Name: Lourdes "Daisy" Marasigan
+Name: Lourdes "Daisy" Marasigan
 Age: 44
+Position: Vice Governor
 Position: Vice Governor
 Party Affiliation: PDP-Laban
 Region: Region VI – Western Visayas
 Notable Laws: Provincial Health Extension Act
 Campaign Slogan: Lingkod Probinsya, Lingkod Pamilya
+Region: Region VI – Western Visayas
+Notable Laws: Provincial Health Extension Act
+Campaign Slogan: Lingkod Probinsya, Lingkod Pamilya
 Years of Experience: 9
+Platforms: Health insurance access; Barangay medical units
+Supported Issues: Universal healthcare; Barangay empowerment
 Platforms: Health insurance access; Barangay medical units
 Supported Issues: Universal healthcare; Barangay empowerment
 Opposed Issues: Centralized health services
@@ -1132,12 +1934,31 @@ Social Stance: Foreign Investment in Land Ownership - Agree
 Social Stance: Universal Healthcare Funding - Agree
 Social Stance: Mandatory Sex Education - Neutral
 Social Stance: Minimum Wage Standardization - No Data
+Image: resources/images/candidates/default.png
+Social Stance: Legalization of Divorce - Disagree
+Social Stance: Passing the SOGIE Equality Bill - Agree
+Social Stance: Reinstating the Death Penalty - Neutral
+Social Stance: Lowering the Age of Criminal Responsibility - Neutral
+Social Stance: Federalism - Neutral
+Social Stance: Mandatory ROTC for Senior High Students - Disagree
+Social Stance: Same-Sex Marriage - Agree
+Social Stance: Anti-Terror Law - Neutral
+Social Stance: Jeepney Modernization Program - No Data
+Social Stance: Foreign Investment in Land Ownership - Agree
+Social Stance: Universal Healthcare Funding - Agree
+Social Stance: Mandatory Sex Education - Neutral
+Social Stance: Minimum Wage Standardization - No Data
 
 
 Name: Celestino "Tino" Uy
+Name: Celestino "Tino" Uy
 Age: 61
 Position: Governor
+Position: Governor
 Party Affiliation: Lakas ng Masa
+Region: Region VII – Central Visayas
+Notable Laws: Cebu-Bohol Coastal Management Act; Tech4Farmers Bill
+Campaign Slogan: Ginhawa Para sa Bisaya
 Region: Region VII – Central Visayas
 Notable Laws: Cebu-Bohol Coastal Management Act; Tech4Farmers Bill
 Campaign Slogan: Ginhawa Para sa Bisaya
@@ -1160,11 +1981,31 @@ Social Stance: Universal Healthcare Funding - Agree
 Social Stance: Mandatory Sex Education - No Data
 Social Stance: Minimum Wage Standardization - Neutral
 
+Image: resources/images/candidates/default.png
+Social Stance: Legalization of Divorce - Neutral
+Social Stance: Passing the SOGIE Equality Bill - Agree
+Social Stance: Reinstating the Death Penalty - Neutral
+Social Stance: Lowering the Age of Criminal Responsibility - Disagree
+Social Stance: Federalism - Disagree
+Social Stance: Mandatory ROTC for Senior High Students - No Data
+Social Stance: Same-Sex Marriage - Neutral
+Social Stance: Anti-Terror Law - Agree
+Social Stance: Jeepney Modernization Program - Disagree
+Social Stance: Foreign Investment in Land Ownership - Neutral
+Social Stance: Universal Healthcare Funding - Agree
+Social Stance: Mandatory Sex Education - No Data
+Social Stance: Minimum Wage Standardization - Neutral
 
+
+Name: Liza May "Lime" Bantugon
 Name: Liza May "Lime" Bantugon
 Age: 47
 Position: Governor
+Position: Governor
 Party Affiliation: Partido Makabago
+Region: Region VII – Central Visayas
+Notable Laws: Women in Public Leadership Program Act
+Campaign Slogan: Bisaya Bangon!
 Region: Region VII – Central Visayas
 Notable Laws: Women in Public Leadership Program Act
 Campaign Slogan: Bisaya Bangon!
@@ -1186,12 +2027,31 @@ Social Stance: Foreign Investment in Land Ownership - Disagree
 Social Stance: Universal Healthcare Funding - No Data
 Social Stance: Mandatory Sex Education - Neutral
 Social Stance: Minimum Wage Standardization - Neutral
+Image: resources/images/candidates/default.png
+Social Stance: Legalization of Divorce - Agree
+Social Stance: Passing the SOGIE Equality Bill - Neutral
+Social Stance: Reinstating the Death Penalty - Disagree
+Social Stance: Lowering the Age of Criminal Responsibility - Neutral
+Social Stance: Federalism - Neutral
+Social Stance: Mandatory ROTC for Senior High Students - Neutral
+Social Stance: Same-Sex Marriage - No Data
+Social Stance: Anti-Terror Law - Agree
+Social Stance: Jeepney Modernization Program - Neutral
+Social Stance: Foreign Investment in Land Ownership - Disagree
+Social Stance: Universal Healthcare Funding - No Data
+Social Stance: Mandatory Sex Education - Neutral
+Social Stance: Minimum Wage Standardization - Neutral
 
 
 Name: Paulo "Paong" Ramos
+Name: Paulo "Paong" Ramos
 Age: 50
 Position: Vice Governor
+Position: Vice Governor
 Party Affiliation: Lakas ng Masa
+Region: Region VII – Central Visayas
+Notable Laws: Local Business Empowerment Ordinance
+Campaign Slogan: Ang Bisaya, Palaban!
 Region: Region VII – Central Visayas
 Notable Laws: Local Business Empowerment Ordinance
 Campaign Slogan: Ang Bisaya, Palaban!
@@ -1214,11 +2074,31 @@ Social Stance: Universal Healthcare Funding - Agree
 Social Stance: Mandatory Sex Education - No Data
 Social Stance: Minimum Wage Standardization - Neutral
 
+Image: resources/images/candidates/default.png
+Social Stance: Legalization of Divorce - Neutral
+Social Stance: Passing the SOGIE Equality Bill - Neutral
+Social Stance: Reinstating the Death Penalty - Disagree
+Social Stance: Lowering the Age of Criminal Responsibility - Neutral
+Social Stance: Federalism - Disagree
+Social Stance: Mandatory ROTC for Senior High Students - Neutral
+Social Stance: Same-Sex Marriage - Agree
+Social Stance: Anti-Terror Law - No Data
+Social Stance: Jeepney Modernization Program - Agree
+Social Stance: Foreign Investment in Land Ownership - Neutral
+Social Stance: Universal Healthcare Funding - Agree
+Social Stance: Mandatory Sex Education - No Data
+Social Stance: Minimum Wage Standardization - Neutral
 
+
+Name: Katrina "Kat" del Rosario
 Name: Katrina "Kat" del Rosario
 Age: 35
 Position: Vice Governor
+Position: Vice Governor
 Party Affiliation: Partido Makabago
+Region: Region VII – Central Visayas
+Notable Laws: None
+Campaign Slogan: Bagong Boses, Bagong Pananaw
 Region: Region VII – Central Visayas
 Notable Laws: None
 Campaign Slogan: Bagong Boses, Bagong Pananaw
@@ -1241,11 +2121,30 @@ Social Stance: Universal Healthcare Funding - Agree
 Social Stance: Mandatory Sex Education - Disagree
 Social Stance: Minimum Wage Standardization - Agree
 
+Image: resources/images/candidates/default.png
+Social Stance: Legalization of Divorce - Neutral
+Social Stance: Passing the SOGIE Equality Bill - Disagree
+Social Stance: Reinstating the Death Penalty - Neutral
+Social Stance: Lowering the Age of Criminal Responsibility - Neutral
+Social Stance: Federalism - Agree
+Social Stance: Mandatory ROTC for Senior High Students - No Data
+Social Stance: Same-Sex Marriage - Agree
+Social Stance: Anti-Terror Law - Agree
+Social Stance: Jeepney Modernization Program - Neutral
+Social Stance: Foreign Investment in Land Ownership - Neutral
+Social Stance: Universal Healthcare Funding - Agree
+Social Stance: Mandatory Sex Education - Disagree
+Social Stance: Minimum Wage Standardization - Agree
+
 
 Name: Alfredo "Alfie" Villanueva
 Age: 57
 Position: Governor
+Position: Governor
 Party Affiliation: Partido Makabayan
+Region: Region VIII – Eastern Visayas
+Notable Laws: Eastern Visayas Rehabilitation Act
+Campaign Slogan: Tulay ng Kaunlaran
 Region: Region VIII – Eastern Visayas
 Notable Laws: Eastern Visayas Rehabilitation Act
 Campaign Slogan: Tulay ng Kaunlaran
@@ -1268,11 +2167,31 @@ Social Stance: Universal Healthcare Funding - Disagree
 Social Stance: Mandatory Sex Education - Neutral
 Social Stance: Minimum Wage Standardization - Agree
 
+Image: resources/images/candidates/default.png
+Social Stance: Legalization of Divorce - Agree
+Social Stance: Passing the SOGIE Equality Bill - Neutral
+Social Stance: Reinstating the Death Penalty - Neutral
+Social Stance: Lowering the Age of Criminal Responsibility - Disagree
+Social Stance: Federalism - No Data
+Social Stance: Mandatory ROTC for Senior High Students - Agree
+Social Stance: Same-Sex Marriage - No Data
+Social Stance: Anti-Terror Law - Neutral
+Social Stance: Jeepney Modernization Program - Agree
+Social Stance: Foreign Investment in Land Ownership - Neutral
+Social Stance: Universal Healthcare Funding - Disagree
+Social Stance: Mandatory Sex Education - Neutral
+Social Stance: Minimum Wage Standardization - Agree
 
+
+Name: Marian "Yanyan" Robles
 Name: Marian "Yanyan" Robles
 Age: 44
 Position: Governor
+Position: Governor
 Party Affiliation: Nacionalista Reform Movement
+Region: Region VIII – Eastern Visayas
+Notable Laws: Local MSME Incentive Act
+Campaign Slogan: Bago, Mabilis, Epektibo!
 Region: Region VIII – Eastern Visayas
 Notable Laws: Local MSME Incentive Act
 Campaign Slogan: Bago, Mabilis, Epektibo!
@@ -1295,11 +2214,31 @@ Social Stance: Universal Healthcare Funding - Neutral
 Social Stance: Mandatory Sex Education - Agree
 Social Stance: Minimum Wage Standardization - Neutral
 
+Image: resources/images/candidates/default.png
+Social Stance: Legalization of Divorce - Agree
+Social Stance: Passing the SOGIE Equality Bill - Neutral
+Social Stance: Reinstating the Death Penalty - Disagree
+Social Stance: Lowering the Age of Criminal Responsibility - Neutral
+Social Stance: Federalism - No Data
+Social Stance: Mandatory ROTC for Senior High Students - Neutral
+Social Stance: Same-Sex Marriage - Agree
+Social Stance: Anti-Terror Law - Disagree
+Social Stance: Jeepney Modernization Program - Neutral
+Social Stance: Foreign Investment in Land Ownership - Disagree
+Social Stance: Universal Healthcare Funding - Neutral
+Social Stance: Mandatory Sex Education - Agree
+Social Stance: Minimum Wage Standardization - Neutral
 
+
+Name: Ronald "Dong" Coloma
 Name: Ronald "Dong" Coloma
 Age: 49
 Position: Vice Governor
+Position: Vice Governor
 Party Affiliation: Partido Makabayan
+Region: Region VIII – Eastern Visayas
+Notable Laws: Barangay Development Assistance Program
+Campaign Slogan: Boses ng Probinsya, Aksyon sa Kapitolyo
 Region: Region VIII – Eastern Visayas
 Notable Laws: Barangay Development Assistance Program
 Campaign Slogan: Boses ng Probinsya, Aksyon sa Kapitolyo
@@ -1322,11 +2261,31 @@ Social Stance: Universal Healthcare Funding - Agree
 Social Stance: Mandatory Sex Education - Neutral
 Social Stance: Minimum Wage Standardization - Agree
 
+Image: resources/images/candidates/default.png
+Social Stance: Legalization of Divorce - Agree
+Social Stance: Passing the SOGIE Equality Bill - Neutral
+Social Stance: Reinstating the Death Penalty - Disagree
+Social Stance: Lowering the Age of Criminal Responsibility - No Data
+Social Stance: Federalism - Neutral
+Social Stance: Mandatory ROTC for Senior High Students - Disagree
+Social Stance: Same-Sex Marriage - Neutral
+Social Stance: Anti-Terror Law - Neutral
+Social Stance: Jeepney Modernization Program - Agree
+Social Stance: Foreign Investment in Land Ownership - No Data
+Social Stance: Universal Healthcare Funding - Agree
+Social Stance: Mandatory Sex Education - Neutral
+Social Stance: Minimum Wage Standardization - Agree
 
+
+Name: Clarisse "Cai" Mondragon
 Name: Clarisse "Cai" Mondragon
 Age: 37
 Position: Vice Governor
+Position: Vice Governor
 Party Affiliation: Nacionalista Reform Movement
+Region: Region VIII – Eastern Visayas
+Notable Laws: Regional Youth Leadership Fund
+Campaign Slogan: Kabataan Una Sa Lahat
 Region: Region VIII – Eastern Visayas
 Notable Laws: Regional Youth Leadership Fund
 Campaign Slogan: Kabataan Una Sa Lahat
@@ -1348,12 +2307,31 @@ Social Stance: Foreign Investment in Land Ownership - Disagree
 Social Stance: Universal Healthcare Funding - Neutral
 Social Stance: Mandatory Sex Education - No Data
 Social Stance: Minimum Wage Standardization - Neutral
+Image: resources/images/candidates/default.png
+Social Stance: Legalization of Divorce - Agree
+Social Stance: Passing the SOGIE Equality Bill - Disagree
+Social Stance: Reinstating the Death Penalty - Neutral
+Social Stance: Lowering the Age of Criminal Responsibility - Disagree
+Social Stance: Federalism - Neutral
+Social Stance: Mandatory ROTC for Senior High Students - Agree
+Social Stance: Same-Sex Marriage - No Data
+Social Stance: Anti-Terror Law - Neutral
+Social Stance: Jeepney Modernization Program - Agree
+Social Stance: Foreign Investment in Land Ownership - Disagree
+Social Stance: Universal Healthcare Funding - Neutral
+Social Stance: Mandatory Sex Education - No Data
+Social Stance: Minimum Wage Standardization - Neutral
 
 
 Name: Ricardo "Carding" Dela Peña
+Name: Ricardo "Carding" Dela Peña
 Age: 60
 Position: Governor
+Position: Governor
 Party Affiliation: Partido Makabayan
+Region: Region IX – Zamboanga Peninsula
+Notable Laws: Peace and Livelihood Integration Act
+Campaign Slogan: Serbisyong Walang Kinikilingan
 Region: Region IX – Zamboanga Peninsula
 Notable Laws: Peace and Livelihood Integration Act
 Campaign Slogan: Serbisyong Walang Kinikilingan
@@ -1376,11 +2354,31 @@ Social Stance: Universal Healthcare Funding - Neutral
 Social Stance: Mandatory Sex Education - Neutral
 Social Stance: Minimum Wage Standardization - No Data
 
+Image: resources/images/candidates/default.png
+Social Stance: Legalization of Divorce - Disagree
+Social Stance: Passing the SOGIE Equality Bill - Agree
+Social Stance: Reinstating the Death Penalty - Neutral
+Social Stance: Lowering the Age of Criminal Responsibility - No Data
+Social Stance: Federalism - Agree
+Social Stance: Mandatory ROTC for Senior High Students - Neutral
+Social Stance: Same-Sex Marriage - Disagree
+Social Stance: Anti-Terror Law - Neutral
+Social Stance: Jeepney Modernization Program - No Data
+Social Stance: Foreign Investment in Land Ownership - Agree
+Social Stance: Universal Healthcare Funding - Neutral
+Social Stance: Mandatory Sex Education - Neutral
+Social Stance: Minimum Wage Standardization - No Data
 
+
+Name: Donna "D" Lagrosa
 Name: Donna "D" Lagrosa
 Age: 50
 Position: Governor
+Position: Governor
 Party Affiliation: Bagong Bayan Coalition
+Region: Region IX – Zamboanga Peninsula
+Notable Laws: Regional Water Access Expansion Law
+Campaign Slogan: Progress Beyond Politics
 Region: Region IX – Zamboanga Peninsula
 Notable Laws: Regional Water Access Expansion Law
 Campaign Slogan: Progress Beyond Politics
@@ -1402,12 +2400,31 @@ Social Stance: Foreign Investment in Land Ownership - Disagree
 Social Stance: Universal Healthcare Funding - No Data
 Social Stance: Mandatory Sex Education - Neutral
 Social Stance: Minimum Wage Standardization - Agree
+Image: resources/images/candidates/default.png
+Social Stance: Legalization of Divorce - Neutral
+Social Stance: Passing the SOGIE Equality Bill - Neutral
+Social Stance: Reinstating the Death Penalty - Disagree
+Social Stance: Lowering the Age of Criminal Responsibility - Disagree
+Social Stance: Federalism - Neutral
+Social Stance: Mandatory ROTC for Senior High Students - Agree
+Social Stance: Same-Sex Marriage - No Data
+Social Stance: Anti-Terror Law - Neutral
+Social Stance: Jeepney Modernization Program - Agree
+Social Stance: Foreign Investment in Land Ownership - Disagree
+Social Stance: Universal Healthcare Funding - No Data
+Social Stance: Mandatory Sex Education - Neutral
+Social Stance: Minimum Wage Standardization - Agree
 
 
 Name: Amado "Madz" Maturan
+Name: Amado "Madz" Maturan
 Age: 55
 Position: Vice Governor
+Position: Vice Governor
 Party Affiliation: Partido Makabayan
+Region: Region IX – Zamboanga Peninsula
+Notable Laws: Rural Legal Aid Act
+Campaign Slogan: Para sa Probinsyang Payapa
 Region: Region IX – Zamboanga Peninsula
 Notable Laws: Rural Legal Aid Act
 Campaign Slogan: Para sa Probinsyang Payapa
@@ -1429,17 +2446,37 @@ Social Stance: Foreign Investment in Land Ownership - No Data
 Social Stance: Universal Healthcare Funding - Neutral
 Social Stance: Mandatory Sex Education - Disagree
 Social Stance: Minimum Wage Standardization - Neutral
+Image: resources/images/candidates/default.png
+Social Stance: Legalization of Divorce - Neutral
+Social Stance: Passing the SOGIE Equality Bill - Neutral
+Social Stance: Reinstating the Death Penalty - No Data
+Social Stance: Lowering the Age of Criminal Responsibility - Agree
+Social Stance: Federalism - No Data
+Social Stance: Mandatory ROTC for Senior High Students - Neutral
+Social Stance: Same-Sex Marriage - Agree
+Social Stance: Anti-Terror Law - Neutral
+Social Stance: Jeepney Modernization Program - Disagree
+Social Stance: Foreign Investment in Land Ownership - No Data
+Social Stance: Universal Healthcare Funding - Neutral
+Social Stance: Mandatory Sex Education - Disagree
+Social Stance: Minimum Wage Standardization - Neutral
 
 
 Name: Jamie "J-Me" Santos
+Name: Jamie "J-Me" Santos
 Age: 41
+Position: Vice Governor
 Position: Vice Governor
 Party Affiliation: Bagong Bayan Coalition
 Region: Region IX – Zamboanga Peninsula
 Notable Laws: Digital Barangay Access Act
 Campaign Slogan: Makatao, Makabago
+Region: Region IX – Zamboanga Peninsula
+Notable Laws: Digital Barangay Access Act
+Campaign Slogan: Makatao, Makabago
 Years of Experience: 6
 Platforms: Digital governance; women's empowerment
+Supported Issues: Digital literacy; women’s rights
 Supported Issues: Digital literacy; women’s rights
 Opposed Issues: Traditional bureaucratic delays
 Image: resources/images/candidates/default.png
@@ -1457,11 +2494,31 @@ Social Stance: Universal Healthcare Funding - Neutral
 Social Stance: Mandatory Sex Education - Agree
 Social Stance: Minimum Wage Standardization - Neutral
 
+Image: resources/images/candidates/default.png
+Social Stance: Legalization of Divorce - Neutral
+Social Stance: Passing the SOGIE Equality Bill - Agree
+Social Stance: Reinstating the Death Penalty - Disagree
+Social Stance: Lowering the Age of Criminal Responsibility - Agree
+Social Stance: Federalism - No Data
+Social Stance: Mandatory ROTC for Senior High Students - Agree
+Social Stance: Same-Sex Marriage - Neutral
+Social Stance: Anti-Terror Law - No Data
+Social Stance: Jeepney Modernization Program - Disagree
+Social Stance: Foreign Investment in Land Ownership - Disagree
+Social Stance: Universal Healthcare Funding - Neutral
+Social Stance: Mandatory Sex Education - Agree
+Social Stance: Minimum Wage Standardization - Neutral
 
+
+Name: Manuel "Manny" B. Andrada
 Name: Manuel "Manny" B. Andrada
 Age: 56
 Position: Governor
+Position: Governor
 Party Affiliation: Partido Makabayan
+Region: Region X – Northern Mindanao
+Notable Laws: Mindanao Agrarian Strengthening Act
+Campaign Slogan: Bangon Mindanao, Para sa Masa!
 Region: Region X – Northern Mindanao
 Notable Laws: Mindanao Agrarian Strengthening Act
 Campaign Slogan: Bangon Mindanao, Para sa Masa!
@@ -1483,13 +2540,34 @@ Social Stance: Foreign Investment in Land Ownership - Neutral
 Social Stance: Universal Healthcare Funding - Agree
 Social Stance: Mandatory Sex Education - Disagree
 Social Stance: Minimum Wage Standardization - No Data
+Image: resources/images/candidates/default.png
+Social Stance: Legalization of Divorce - Disagree
+Social Stance: Passing the SOGIE Equality Bill - Neutral
+Social Stance: Reinstating the Death Penalty - Neutral
+Social Stance: Lowering the Age of Criminal Responsibility - Disagree
+Social Stance: Federalism - No Data
+Social Stance: Mandatory ROTC for Senior High Students - Neutral
+Social Stance: Same-Sex Marriage - Agree
+Social Stance: Anti-Terror Law - No Data
+Social Stance: Jeepney Modernization Program - Agree
+Social Stance: Foreign Investment in Land Ownership - Neutral
+Social Stance: Universal Healthcare Funding - Agree
+Social Stance: Mandatory Sex Education - Disagree
+Social Stance: Minimum Wage Standardization - No Data
 
+
+Veronica "Vee" Salcedo
+Name: Veronica "Vee" Salcedo
 
 Veronica "Vee" Salcedo
 Name: Veronica "Vee" Salcedo
 Age: 45
 Position: Governor
+Position: Governor
 Party Affiliation: Lakas ng Bayan Movement
+Region: Region X – Northern Mindanao
+Notable Laws: Regional Investment Acceleration Act
+Campaign Slogan: Para sa Siguradong Pag-unlad
 Region: Region X – Northern Mindanao
 Notable Laws: Regional Investment Acceleration Act
 Campaign Slogan: Para sa Siguradong Pag-unlad
@@ -1511,13 +2589,33 @@ Social Stance: Foreign Investment in Land Ownership - Neutral
 Social Stance: Universal Healthcare Funding - Agree
 Social Stance: Mandatory Sex Education - Agree
 Social Stance: Minimum Wage Standardization - Neutral
+Image: resources/images/candidates/default.png
+Social Stance: Legalization of Divorce - Agree
+Social Stance: Passing the SOGIE Equality Bill - Neutral
+Social Stance: Reinstating the Death Penalty - Disagree
+Social Stance: Lowering the Age of Criminal Responsibility - Neutral
+Social Stance: Federalism - No Data
+Social Stance: Mandatory ROTC for Senior High Students - Disagree
+Social Stance: Same-Sex Marriage - Neutral
+Social Stance: Anti-Terror Law - Agree
+Social Stance: Jeepney Modernization Program - No Data
+Social Stance: Foreign Investment in Land Ownership - Neutral
+Social Stance: Universal Healthcare Funding - Agree
+Social Stance: Mandatory Sex Education - Agree
+Social Stance: Minimum Wage Standardization - Neutral
 
 
 Romulo "Romy" De Castro
 Name: Romulo "Romy" De Castro
+Romulo "Romy" De Castro
+Name: Romulo "Romy" De Castro
 Age: 60
 Position: Vice Governor
+Position: Vice Governor
 Party Affiliation: Partido Makabayan
+Region: Region X – Northern Mindanao
+Notable Laws: Senior Aid Plus Law
+Campaign Slogan: Tunay na Serbisyo, Hindi Promises!
 Region: Region X – Northern Mindanao
 Notable Laws: Senior Aid Plus Law
 Campaign Slogan: Tunay na Serbisyo, Hindi Promises!
@@ -1539,17 +2637,39 @@ Social Stance: Foreign Investment in Land Ownership - Neutral
 Social Stance: Universal Healthcare Funding - Agree
 Social Stance: Mandatory Sex Education - No Data
 Social Stance: Minimum Wage Standardization - Neutral
+Image: resources/images/candidates/default.png
+Social Stance: Legalization of Divorce - Neutral
+Social Stance: Passing the SOGIE Equality Bill - Disagree
+Social Stance: Reinstating the Death Penalty - Disagree
+Social Stance: Lowering the Age of Criminal Responsibility - Neutral
+Social Stance: Federalism - Neutral
+Social Stance: Mandatory ROTC for Senior High Students - Agree
+Social Stance: Same-Sex Marriage - Agree
+Social Stance: Anti-Terror Law - Agree
+Social Stance: Jeepney Modernization Program - No Data
+Social Stance: Foreign Investment in Land Ownership - Neutral
+Social Stance: Universal Healthcare Funding - Agree
+Social Stance: Mandatory Sex Education - No Data
+Social Stance: Minimum Wage Standardization - Neutral
 
+
+Kristine "Kaye" Montalban
+Name: Kristine "Kaye" Montalban
 
 Kristine "Kaye" Montalban
 Name: Kristine "Kaye" Montalban
 Age: 38
 Position: Vice Governor
+Position: Vice Governor
 Party Affiliation: Lakas ng Bayan Movement
 Region: Region X – Northern Mindanao
 Notable Laws: eBaryo Access Act
 Campaign Slogan: Modernong Serbisyo, Malinis na Pamamahala
+Region: Region X – Northern Mindanao
+Notable Laws: eBaryo Access Act
+Campaign Slogan: Modernong Serbisyo, Malinis na Pamamahala
 Years of Experience: 5
+Platforms: E-governance; women’s health; road projects
 Platforms: E-governance; women’s health; road projects
 Supported Issues: Digital governance; reproductive rights
 Opposed Issues: Bureaucratic corruption
@@ -1567,12 +2687,31 @@ Social Stance: Foreign Investment in Land Ownership - Agree
 Social Stance: Universal Healthcare Funding - Disagree
 Social Stance: Mandatory Sex Education - Agree
 Social Stance: Minimum Wage Standardization - Neutral
+Image: resources/images/candidates/default.png
+Social Stance: Legalization of Divorce - No Data
+Social Stance: Passing the SOGIE Equality Bill - Disagree
+Social Stance: Reinstating the Death Penalty - Disagree
+Social Stance: Lowering the Age of Criminal Responsibility - Neutral
+Social Stance: Federalism - Agree
+Social Stance: Mandatory ROTC for Senior High Students - Agree
+Social Stance: Same-Sex Marriage - Neutral
+Social Stance: Anti-Terror Law - No Data
+Social Stance: Jeepney Modernization Program - Agree
+Social Stance: Foreign Investment in Land Ownership - Agree
+Social Stance: Universal Healthcare Funding - Disagree
+Social Stance: Mandatory Sex Education - Agree
+Social Stance: Minimum Wage Standardization - Neutral
 
 
 Name: Delfin "Ping" Robledo
+Name: Delfin "Ping" Robledo
 Age: 63
 Position: Governor
+Position: Governor
 Party Affiliation: Partido Progresibo ng Masa
+Region: Region XI – Davao Region
+Notable Laws: Honest Governance Act
+Campaign Slogan: Pagbabago na, Hindi Palusot!
 Region: Region XI – Davao Region
 Notable Laws: Honest Governance Act
 Campaign Slogan: Pagbabago na, Hindi Palusot!
@@ -1595,11 +2734,31 @@ Social Stance: Universal Healthcare Funding - No Data
 Social Stance: Mandatory Sex Education - Disagree
 Social Stance: Minimum Wage Standardization - Agree
 
+Image: resources/images/candidates/default.png
+Social Stance: Legalization of Divorce - Neutral
+Social Stance: Passing the SOGIE Equality Bill - Disagree
+Social Stance: Reinstating the Death Penalty - Neutral
+Social Stance: Lowering the Age of Criminal Responsibility - Agree
+Social Stance: Federalism - Disagree
+Social Stance: Mandatory ROTC for Senior High Students - Neutral
+Social Stance: Same-Sex Marriage - Agree
+Social Stance: Anti-Terror Law - Disagree
+Social Stance: Jeepney Modernization Program - Neutral
+Social Stance: Foreign Investment in Land Ownership - Disagree
+Social Stance: Universal Healthcare Funding - No Data
+Social Stance: Mandatory Sex Education - Disagree
+Social Stance: Minimum Wage Standardization - Agree
 
+
+Name: Bianca "BB" Sison
 Name: Bianca "BB" Sison
 Age: 40
 Position: Governor
+Position: Governor
 Party Affiliation: Federal Unity Party
+Region: Region XI – Davao Region
+Notable Laws: Local Farm Subsidy Act
+Campaign Slogan: Kaunlaran sa Bagong Sistema
 Region: Region XI – Davao Region
 Notable Laws: Local Farm Subsidy Act
 Campaign Slogan: Kaunlaran sa Bagong Sistema
@@ -1621,12 +2780,31 @@ Social Stance: Foreign Investment in Land Ownership - Agree
 Social Stance: Universal Healthcare Funding - Neutral
 Social Stance: Mandatory Sex Education - Disagree
 Social Stance: Minimum Wage Standardization - No Data
+Image: resources/images/candidates/default.png
+Social Stance: Legalization of Divorce - Neutral
+Social Stance: Passing the SOGIE Equality Bill - Disagree
+Social Stance: Reinstating the Death Penalty - Neutral
+Social Stance: Lowering the Age of Criminal Responsibility - No Data
+Social Stance: Federalism - Agree (Supports federalism)
+Social Stance: Mandatory ROTC for Senior High Students - Disagree
+Social Stance: Same-Sex Marriage - Disagree
+Social Stance: Anti-Terror Law - Agree
+Social Stance: Jeepney Modernization Program - Disagree
+Social Stance: Foreign Investment in Land Ownership - Agree
+Social Stance: Universal Healthcare Funding - Neutral
+Social Stance: Mandatory Sex Education - Disagree
+Social Stance: Minimum Wage Standardization - No Data
 
 
 Name: Elmer "Lolo Em" Sevilla
+Name: Elmer "Lolo Em" Sevilla
 Age: 67
 Position: Vice Governor
+Position: Vice Governor
 Party Affiliation: Partido Progresibo ng Masa
+Region: Region XI – Davao Region
+Notable Laws: Public Transport Reform Law
+Campaign Slogan: Serbisyong Bukal sa Puso
 Region: Region XI – Davao Region
 Notable Laws: Public Transport Reform Law
 Campaign Slogan: Serbisyong Bukal sa Puso
@@ -1649,11 +2827,31 @@ Social Stance: Universal Healthcare Funding - Agree
 Social Stance: Mandatory Sex Education - No Data
 Social Stance: Minimum Wage Standardization - Disagree
 
+Image: resources/images/candidates/default.png
+Social Stance: Legalization of Divorce - Disagree
+Social Stance: Passing the SOGIE Equality Bill - Neutral
+Social Stance: Reinstating the Death Penalty - Agree
+Social Stance: Lowering the Age of Criminal Responsibility - Neutral
+Social Stance: Federalism - Disagree
+Social Stance: Mandatory ROTC for Senior High Students - Disagree
+Social Stance: Same-Sex Marriage - Neutral
+Social Stance: Anti-Terror Law - Disagree
+Social Stance: Jeepney Modernization Program - Agree
+Social Stance: Foreign Investment in Land Ownership - Agree
+Social Stance: Universal Healthcare Funding - Agree
+Social Stance: Mandatory Sex Education - No Data
+Social Stance: Minimum Wage Standardization - Disagree
 
+
+Name: Melchor "Mek" Gonzaga
 Name: Melchor "Mek" Gonzaga
 Age: 35
 Position: Vice Governor
+Position: Vice Governor
 Party Affiliation: Federal Unity Party
+Region: Region XI – Davao Region
+Notable Laws: Regional Youth Fund Act
+Campaign Slogan: Isang Probinsya, Isang Pananaw
 Region: Region XI – Davao Region
 Notable Laws: Regional Youth Fund Act
 Campaign Slogan: Isang Probinsya, Isang Pananaw
@@ -1675,12 +2873,31 @@ Social Stance: Foreign Investment in Land Ownership - Disagree
 Social Stance: Universal Healthcare Funding - No Data
 Social Stance: Mandatory Sex Education - Agree
 Social Stance: Minimum Wage Standardization - Disagree
+Image: resources/images/candidates/default.png
+Social Stance: Legalization of Divorce - Neutral
+Social Stance: Passing the SOGIE Equality Bill - Disagree
+Social Stance: Reinstating the Death Penalty - Agree
+Social Stance: Lowering the Age of Criminal Responsibility - Neutral
+Social Stance: Federalism - Neutral
+Social Stance: Mandatory ROTC for Senior High Students - Neutral
+Social Stance: Same-Sex Marriage - Agree
+Social Stance: Anti-Terror Law - No Data
+Social Stance: Jeepney Modernization Program - Disagree
+Social Stance: Foreign Investment in Land Ownership - Disagree
+Social Stance: Universal Healthcare Funding - No Data
+Social Stance: Mandatory Sex Education - Agree
+Social Stance: Minimum Wage Standardization - Disagree
 
 
 Name: Eduardo "Edong" Calibugan
+Name: Eduardo "Edong" Calibugan
 Age: 58
 Position: Governor
+Position: Governor
 Party Affiliation: Makabayan Unity Party
+Region: Region XII – Soccsksargen
+Notable Laws: Ancestral Land Security Act
+Campaign Slogan: Serbisyo, Hindi Pulitika
 Region: Region XII – Soccsksargen
 Notable Laws: Ancestral Land Security Act
 Campaign Slogan: Serbisyo, Hindi Pulitika
@@ -1703,11 +2920,31 @@ Social Stance: Universal Healthcare Funding - Neutral
 Social Stance: Mandatory Sex Education - Disagree
 Social Stance: Minimum Wage Standardization - No Data
 
+Image: resources/images/candidates/default.png
+Social Stance: Legalization of Divorce - Disagree
+Social Stance: Passing the SOGIE Equality Bill - Neutral
+Social Stance: Reinstating the Death Penalty - Neutral
+Social Stance: Lowering the Age of Criminal Responsibility - Disagree
+Social Stance: Federalism - Disagree
+Social Stance: Mandatory ROTC for Senior High Students - Disagree
+Social Stance: Same-Sex Marriage - Neutral
+Social Stance: Anti-Terror Law - Agree
+Social Stance: Jeepney Modernization Program - Agree
+Social Stance: Foreign Investment in Land Ownership - Disagree
+Social Stance: Universal Healthcare Funding - Neutral
+Social Stance: Mandatory Sex Education - Disagree
+Social Stance: Minimum Wage Standardization - No Data
 
+
+Name: Sofia "Sophie" Lanusa
 Name: Sofia "Sophie" Lanusa
 Age: 42
 Position: Governor
+Position: Governor
 Party Affiliation: Tapat na Lingkod Movement
+Region: Region XII – Soccsksargen
+Notable Laws: Women’s Safety Zone Act
+Campaign Slogan: Gobyerno para sa Tao
 Region: Region XII – Soccsksargen
 Notable Laws: Women’s Safety Zone Act
 Campaign Slogan: Gobyerno para sa Tao
@@ -1730,11 +2967,31 @@ Social Stance: Universal Healthcare Funding - Agree
 Social Stance: Mandatory Sex Education - Agree
 Social Stance: Minimum Wage Standardization - Neutral
 
+Image: resources/images/candidates/default.png
+Social Stance: Legalization of Divorce - Agree
+Social Stance: Passing the SOGIE Equality Bill - Agree
+Social Stance: Reinstating the Death Penalty - Neutral
+Social Stance: Lowering the Age of Criminal Responsibility - Disagree
+Social Stance: Federalism - Disagree
+Social Stance: Mandatory ROTC for Senior High Students - Agree
+Social Stance: Same-Sex Marriage - No Data
+Social Stance: Anti-Terror Law - Disagree
+Social Stance: Jeepney Modernization Program - Agree
+Social Stance: Foreign Investment in Land Ownership - Neutral
+Social Stance: Universal Healthcare Funding - Agree
+Social Stance: Mandatory Sex Education - Agree
+Social Stance: Minimum Wage Standardization - Neutral
 
+
+Name: Noel "Nonoy" Pitogo
 Name: Noel "Nonoy" Pitogo
 Age: 59
 Position: Vice Governor
+Position: Vice Governor
 Party Affiliation: Makabayan Unity Party
+Region: Region XII – Soccsksargen
+Notable Laws: Regional Food Security Bill
+Campaign Slogan: Sama-Samang Sulong SOCCSKSARGEN
 Region: Region XII – Soccsksargen
 Notable Laws: Regional Food Security Bill
 Campaign Slogan: Sama-Samang Sulong SOCCSKSARGEN
@@ -1757,11 +3014,31 @@ Social Stance: Universal Healthcare Funding - Neutral
 Social Stance: Mandatory Sex Education - Disagree
 Social Stance: Minimum Wage Standardization - Agree
 
+Image: resources/images/candidates/default.png
+Social Stance: Legalization of Divorce - Disagree
+Social Stance: Passing the SOGIE Equality Bill - No Data
+Social Stance: Reinstating the Death Penalty - Agree
+Social Stance: Lowering the Age of Criminal Responsibility - Neutral
+Social Stance: Federalism - Disagree
+Social Stance: Mandatory ROTC for Senior High Students - Agree
+Social Stance: Same-Sex Marriage - No Data
+Social Stance: Anti-Terror Law - Neutral
+Social Stance: Jeepney Modernization Program - Agree
+Social Stance: Foreign Investment in Land Ownership - Disagree
+Social Stance: Universal Healthcare Funding - Neutral
+Social Stance: Mandatory Sex Education - Disagree
+Social Stance: Minimum Wage Standardization - Agree
 
+
+Name: Charina "Cha" Guinto
 Name: Charina "Cha" Guinto
 Age: 36
 Position: Vice Governor
+Position: Vice Governor
 Party Affiliation: Tapat na Lingkod Movement
+Region: Region XII – Soccsksargen
+Notable Laws: IP Health Empowerment Act
+Campaign Slogan: Makabago, Makatao
 Region: Region XII – Soccsksargen
 Notable Laws: IP Health Empowerment Act
 Campaign Slogan: Makabago, Makatao
@@ -1783,12 +3060,31 @@ Social Stance: Foreign Investment in Land Ownership - Disagree
 Social Stance: Universal Healthcare Funding - Agree
 Social Stance: Mandatory Sex Education - Neutral
 Social Stance: Minimum Wage Standardization - Agree
+Image: resources/images/candidates/default.png
+Social Stance: Legalization of Divorce - Agree
+Social Stance: Passing the SOGIE Equality Bill - Disagree
+Social Stance: Reinstating the Death Penalty - Agree
+Social Stance: Lowering the Age of Criminal Responsibility - Disagree
+Social Stance: Federalism - Neutral
+Social Stance: Mandatory ROTC for Senior High Students - No Data
+Social Stance: Same-Sex Marriage - No Data
+Social Stance: Anti-Terror Law - Disagree
+Social Stance: Jeepney Modernization Program - Neutral
+Social Stance: Foreign Investment in Land Ownership - Disagree
+Social Stance: Universal Healthcare Funding - Agree
+Social Stance: Mandatory Sex Education - Neutral
+Social Stance: Minimum Wage Standardization - Agree
 
 
 Name: Antonio "Tonyo" Lucban
+Name: Antonio "Tonyo" Lucban
 Age: 61
 Position: Governor
+Position: Governor
 Party Affiliation: Partido Demokratiko ng Masa
+Region: Region XIII – Caraga
+Notable Laws: Forest and Ancestral Preservation Act
+Campaign Slogan: Ang Gawa, Hindi Salita!
 Region: Region XIII – Caraga
 Notable Laws: Forest and Ancestral Preservation Act
 Campaign Slogan: Ang Gawa, Hindi Salita!
@@ -1811,11 +3107,31 @@ Social Stance: Universal Healthcare Funding - Agree
 Social Stance: Mandatory Sex Education - Neutral
 Social Stance: Minimum Wage Standardization - Neutral
 
+Image: resources/images/candidates/default.png
+Social Stance: Legalization of Divorce - Agree
+Social Stance: Passing the SOGIE Equality Bill - Disagree
+Social Stance: Reinstating the Death Penalty - No Data
+Social Stance: Lowering the Age of Criminal Responsibility - Agree
+Social Stance: Federalism - Disagree
+Social Stance: Mandatory ROTC for Senior High Students - Agree
+Social Stance: Same-Sex Marriage - Neutral
+Social Stance: Anti-Terror Law - No Data
+Social Stance: Jeepney Modernization Program - Disagree
+Social Stance: Foreign Investment in Land Ownership - Disagree
+Social Stance: Universal Healthcare Funding - Agree
+Social Stance: Mandatory Sex Education - Neutral
+Social Stance: Minimum Wage Standardization - Neutral
 
+
+Name: Luzviminda "Luz" Cordero
 Name: Luzviminda "Luz" Cordero
 Age: 46
 Position: Governor
+Position: Governor
 Party Affiliation: People First Alliance
+Region: Region XIII – Caraga
+Notable Laws: Women’s Rural Welfare Act
+Campaign Slogan: Babae Para sa Pagbabago
 Region: Region XIII – Caraga
 Notable Laws: Women’s Rural Welfare Act
 Campaign Slogan: Babae Para sa Pagbabago
@@ -1837,12 +3153,32 @@ Social Stance: Foreign Investment in Land Ownership - Agree
 Social Stance: Universal Healthcare Funding - Agree
 Social Stance: Mandatory Sex Education - Neutral
 Social Stance: Minimum Wage Standardization - Agree
+Opposed Issues: Underfunded women’s shelters
+Image: resources/images/candidates/default.png
+Social Stance: Legalization of Divorce - Disagree
+Social Stance: Passing the SOGIE Equality Bill - Agree
+Social Stance: Reinstating the Death Penalty - Neutral
+Social Stance: Lowering the Age of Criminal Responsibility - Agree
+Social Stance: Federalism - Disagree
+Social Stance: Mandatory ROTC for Senior High Students - Agree
+Social Stance: Same-Sex Marriage - No Data
+Social Stance: Anti-Terror Law - Disagree
+Social Stance: Jeepney Modernization Program - Neutral
+Social Stance: Foreign Investment in Land Ownership - Agree
+Social Stance: Universal Healthcare Funding - Agree
+Social Stance: Mandatory Sex Education - Neutral
+Social Stance: Minimum Wage Standardization - Agree
 
 
 Name: Isagani "Gani" Plaridel
+Name: Isagani "Gani" Plaridel
 Age: 54
 Position: Vice Governor
+Position: Vice Governor
 Party Affiliation: Partido Demokratiko ng Masa
+Region: Region XIII – Caraga
+Notable Laws: Regional Eco-Tourism Act
+Campaign Slogan: Serbisyo Mula Probinsya, Para sa Lahat
 Region: Region XIII – Caraga
 Notable Laws: Regional Eco-Tourism Act
 Campaign Slogan: Serbisyo Mula Probinsya, Para sa Lahat
@@ -1865,11 +3201,31 @@ Social Stance: Universal Healthcare Funding - Neutral
 Social Stance: Mandatory Sex Education - Disagree
 Social Stance: Minimum Wage Standardization - Neutral
 
+Image: resources/images/candidates/default.png
+Social Stance: Legalization of Divorce - Disagree
+Social Stance: Passing the SOGIE Equality Bill - Neutral
+Social Stance: Reinstating the Death Penalty - Agree
+Social Stance: Lowering the Age of Criminal Responsibility - Agree
+Social Stance: Federalism - Disagree
+Social Stance: Mandatory ROTC for Senior High Students - Agree
+Social Stance: Same-Sex Marriage - No Data
+Social Stance: Anti-Terror Law - Disagree
+Social Stance: Jeepney Modernization Program - Agree
+Social Stance: Foreign Investment in Land Ownership - Agree
+Social Stance: Universal Healthcare Funding - Neutral
+Social Stance: Mandatory Sex Education - Disagree
+Social Stance: Minimum Wage Standardization - Neutral
 
+
+Name: Catherine "Cathy" Baldelomar
 Name: Catherine "Cathy" Baldelomar
 Age: 39
 Position: Vice Governor
+Position: Vice Governor
 Party Affiliation: People First Alliance
+Region: Region XIII – Caraga
+Notable Laws: Open Budget Transparency Law
+Campaign Slogan: Malinis, Maasahan, Makabayan
 Region: Region XIII – Caraga
 Notable Laws: Open Budget Transparency Law
 Campaign Slogan: Malinis, Maasahan, Makabayan
@@ -1891,12 +3247,31 @@ Social Stance: Foreign Investment in Land Ownership - Disagree
 Social Stance: Universal Healthcare Funding - Agree
 Social Stance: Mandatory Sex Education - Agree
 Social Stance: Minimum Wage Standardization - Neutral
+Image: resources/images/candidates/default.png
+Social Stance: Legalization of Divorce - Agree
+Social Stance: Passing the SOGIE Equality Bill - Neutral
+Social Stance: Reinstating the Death Penalty - No Data
+Social Stance: Lowering the Age of Criminal Responsibility - Disagree
+Social Stance: Federalism - Agree
+Social Stance: Mandatory ROTC for Senior High Students - Disagree
+Social Stance: Same-Sex Marriage - Neutral
+Social Stance: Anti-Terror Law - Agree
+Social Stance: Jeepney Modernization Program - No Data
+Social Stance: Foreign Investment in Land Ownership - Disagree
+Social Stance: Universal Healthcare Funding - Agree
+Social Stance: Mandatory Sex Education - Agree
+Social Stance: Minimum Wage Standardization - Neutral
 
 
 Name: Amira "Ami" Alonto
+Name: Amira "Ami" Alonto
 Age: 51
 Position: Governor
+Position: Governor
 Party Affiliation: Bangsamoro Unity Front
+Region: BARMM
+Notable Laws: Bangsamoro Economic Empowerment Act
+Campaign Slogan: Para sa Kapayapaan at Pag-unlad ng Bangsamoro
 Region: BARMM
 Notable Laws: Bangsamoro Economic Empowerment Act
 Campaign Slogan: Para sa Kapayapaan at Pag-unlad ng Bangsamoro
@@ -1919,11 +3294,31 @@ Social Stance: Universal Healthcare Funding - Agree
 Social Stance: Mandatory Sex Education - Agree
 Social Stance: Minimum Wage Standardization - Neutral
 
+Image: resources/images/candidates/default.png
+Social Stance: Legalization of Divorce - Disagree
+Social Stance: Passing the SOGIE Equality Bill - Agree
+Social Stance: Reinstating the Death Penalty - Neutral
+Social Stance: Lowering the Age of Criminal Responsibility - Disagree
+Social Stance: Federalism - Agree
+Social Stance: Mandatory ROTC for Senior High Students - Agree
+Social Stance: Same-Sex Marriage - Disagree
+Social Stance: Anti-Terror Law - Agree
+Social Stance: Jeepney Modernization Program - Disagree
+Social Stance: Foreign Investment in Land Ownership - Neutral
+Social Stance: Universal Healthcare Funding - Agree
+Social Stance: Mandatory Sex Education - Agree
+Social Stance: Minimum Wage Standardization - Neutral
 
+
+Name: Omar "Omi" Pendatun
 Name: Omar "Omi" Pendatun
 Age: 47
 Position: Governor
+Position: Governor
 Party Affiliation: Pagkakaisa ng Mindanao
+Region: BARMM
+Notable Laws: Women in Ulama Council Act
+Campaign Slogan: Bangsamoro, Sama-Sama Tayo
 Region: BARMM
 Notable Laws: Women in Ulama Council Act
 Campaign Slogan: Bangsamoro, Sama-Sama Tayo
@@ -1945,12 +3340,31 @@ Social Stance: Foreign Investment in Land Ownership - Disagree
 Social Stance: Universal Healthcare Funding - Neutral
 Social Stance: Mandatory Sex Education - Agree
 Social Stance: Minimum Wage Standardization - Neutral
+Image: resources/images/candidates/default.png
+Social Stance: Legalization of Divorce - Disagree
+Social Stance: Passing the SOGIE Equality Bill - Neutral
+Social Stance: Reinstating the Death Penalty - Neutral
+Social Stance: Lowering the Age of Criminal Responsibility - Agree
+Social Stance: Federalism - Agree
+Social Stance: Mandatory ROTC for Senior High Students - Neutral
+Social Stance: Same-Sex Marriage - Disagree
+Social Stance: Anti-Terror Law - Agree
+Social Stance: Jeepney Modernization Program - Agree
+Social Stance: Foreign Investment in Land Ownership - Disagree
+Social Stance: Universal Healthcare Funding - Neutral
+Social Stance: Mandatory Sex Education - Agree
+Social Stance: Minimum Wage Standardization - Neutral
 
 
 Name: Yasmin "Min" Hassan
+Name: Yasmin "Min" Hassan
 Age: 43
 Position: Vice Governor
+Position: Vice Governor
 Party Affiliation: Bangsamoro Unity Front
+Region: BARMM
+Notable Laws: Youth Development Mandate Act
+Campaign Slogan: Tiwala at Tapang para sa Bangsamoro
 Region: BARMM
 Notable Laws: Youth Development Mandate Act
 Campaign Slogan: Tiwala at Tapang para sa Bangsamoro
@@ -1973,11 +3387,31 @@ Social Stance: Universal Healthcare Funding - Agree
 Social Stance: Mandatory Sex Education - Agree
 Social Stance: Minimum Wage Standardization - Neutral
 
+Image: resources/images/candidates/default.png
+Social Stance: Legalization of Divorce - Disagree
+Social Stance: Passing the SOGIE Equality Bill - Neutral
+Social Stance: Reinstating the Death Penalty - Agree
+Social Stance: Lowering the Age of Criminal Responsibility - Disagree
+Social Stance: Federalism - Agree
+Social Stance: Mandatory ROTC for Senior High Students - Disagree
+Social Stance: Same-Sex Marriage - Disagree
+Social Stance: Anti-Terror Law - Neutral
+Social Stance: Jeepney Modernization Program - No Data
+Social Stance: Foreign Investment in Land Ownership - Disagree
+Social Stance: Universal Healthcare Funding - Agree
+Social Stance: Mandatory Sex Education - Agree
+Social Stance: Minimum Wage Standardization - Neutral
 
+
+Name: Abdul "Dul" Karim
 Name: Abdul "Dul" Karim
 Age: 36
 Position: Vice Governor
+Position: Vice Governor
 Party Affiliation: Pagkakaisa ng Mindanao
+Region: BARMM
+Notable Laws: Faith-based Online Access Act
+Campaign Slogan: Kapayapaan, Kaalaman, Kaunlaran
 Region: BARMM
 Notable Laws: Faith-based Online Access Act
 Campaign Slogan: Kapayapaan, Kaalaman, Kaunlaran
@@ -1999,14 +3433,31 @@ Social Stance: Foreign Investment in Land Ownership - Neutral
 Social Stance: Universal Healthcare Funding - Agree
 Social Stance: Mandatory Sex Education - Agree
 Social Stance: Minimum Wage Standardization - No Data
+Image: resources/images/candidates/default.png
+Social Stance: Legalization of Divorce - Disagree
+Social Stance: Passing the SOGIE Equality Bill - No Data
+Social Stance: Reinstating the Death Penalty - Neutral
+Social Stance: Lowering the Age of Criminal Responsibility - Neutral
+Social Stance: Federalism - Agree
+Social Stance: Mandatory ROTC for Senior High Students - Agree
+Social Stance: Same-Sex Marriage - Disagree
+Social Stance: Anti-Terror Law - Disagree
+Social Stance: Jeepney Modernization Program - Neutral
+Social Stance: Foreign Investment in Land Ownership - Neutral
+Social Stance: Universal Healthcare Funding - Agree
+Social Stance: Mandatory Sex Education - Agree
+Social Stance: Minimum Wage Standardization - No Data
 
 
+Name: Atty. Maribel "Belle" Soriano
 Name: Atty. Maribel "Belle" Soriano
 Age: 52
 Region: NCR
 Party Affiliation: Tamang Katarungan Partylist (Justice Sector)
 Running Position: Party-list Representative
 Years of Experience: 18
+Campaign Slogan: Katarungan Para sa Lahat, Hindi Para sa Iilan
+Platforms: Strengthening the Public Attorney’s Office; Free legal aid nationwide; Protection of whistleblowers
 Campaign Slogan: Katarungan Para sa Lahat, Hindi Para sa Iilan
 Platforms: Strengthening the Public Attorney’s Office; Free legal aid nationwide; Protection of whistleblowers
 Supported Issues: Human rights defense; Anti-red tape; Support for judicial reform
@@ -2026,13 +3477,29 @@ Social Stance: Universal Healthcare Funding - Agree
 Social Stance: Mandatory Sex Education - Neutral
 Social Stance: Minimum Wage Standardization - Agree
 
+Social Stance: Legalization of Divorce - Neutral
+Social Stance: Passing the SOGIE Equality Bill - Agree
+Social Stance: Reinstating the Death Penalty - Disagree
+Social Stance: Lowering the Age of Criminal Responsibility - Disagree
+Social Stance: Federalism - Neutral
+Social Stance: Mandatory ROTC for Senior High Students - Neutral
+Social Stance: Same-Sex Marriage - Agree
+Social Stance: Anti-Terror Law - Disagree
+Social Stance: Jeepney Modernization Program - Disagree
+Social Stance: Foreign Investment in Land Ownership - Disagree
+Social Stance: Universal Healthcare Funding - Agree
+Social Stance: Mandatory Sex Education - Neutral
+Social Stance: Minimum Wage Standardization - Agree
 
+
+Name: Pastor Daniel "Danny" Silang
 Name: Pastor Daniel "Danny" Silang
 Age: 58
 Region: Region IV-A
 Party Affiliation: Buhay at Pananampalataya Partylist (Faith-Based Sector)
 Running Position: Party-list Representative
 Years of Experience: 12
+Campaign Slogan: Maka-Diyos, Maka-Tao, Maka-Bayan
 Campaign Slogan: Maka-Diyos, Maka-Tao, Maka-Bayan
 Platforms: Religious freedoms; Community values education; Moral and ethical governance
 Supported Issues: Mandatory moral education; Anti-abortion; SOGIE Bill
@@ -2052,7 +3519,24 @@ Social Stance: Universal Healthcare Funding - Neutral
 Social Stance: Mandatory Sex Education - Agree
 Social Stance: Minimum Wage Standardization - Neutral
 
+Opposed Issues: Divorce law; Same-sex marriage
+Notable Laws Enacted: Religious Freedom and Ethics Education Act
+Social Stance: Legalization of Divorce - Disagree
+Social Stance: Passing the SOGIE Equality Bill - Agree
+Social Stance: Reinstating the Death Penalty - Disagree
+Social Stance: Lowering the Age of Criminal Responsibility - Neutral
+Social Stance: Federalism - Agree
+Social Stance: Mandatory ROTC for Senior High Students - Agree
+Social Stance: Same-Sex Marriage - Disagree
+Social Stance: Anti-Terror Law - Disagree
+Social Stance: Jeepney Modernization Program - No Data
+Social Stance: Foreign Investment in Land Ownership - Neutral
+Social Stance: Universal Healthcare Funding - Neutral
+Social Stance: Mandatory Sex Education - Agree
+Social Stance: Minimum Wage Standardization - Neutral
 
+
+Name: Rica "Kikay" Escaño
 Name: Rica "Kikay" Escaño
 Age: 39
 Region: Region VI
@@ -2060,7 +3544,9 @@ Party Affiliation: Kabataang Makabayan Partylist (Youth & Student Sector)
 Running Position: Party-list Representative
 Years of Experience: 6
 Campaign Slogan: Kabataan, Kakampi ng Bayan!
+Campaign Slogan: Kabataan, Kakampi ng Bayan!
 Platforms: Free tertiary education; Expanded mental health access in schools; Internet access in rural campuses
+Supported Issues: Mental health rights; Education budget increase; Climate action
 Supported Issues: Mental health rights; Education budget increase; Climate action
 Opposed Issues: Mandatory ROTC; Tuition fee hikes
 Notable Laws Enacted: Campus Mental Wellness Act; Youth Scholarship and Connectivity Law
@@ -2078,13 +3564,29 @@ Social Stance: Universal Healthcare Funding - Agree
 Social Stance: Mandatory Sex Education - Agree
 Social Stance: Minimum Wage Standardization - Neutral
 
+Social Stance: Legalization of Divorce - Agree
+Social Stance: Passing the SOGIE Equality Bill - Agree
+Social Stance: Reinstating the Death Penalty - Agree
+Social Stance: Lowering the Age of Criminal Responsibility - Disagree
+Social Stance: Federalism - Neutral
+Social Stance: Mandatory ROTC for Senior High Students - Disagree
+Social Stance: Same-Sex Marriage - Agree
+Social Stance: Anti-Terror Law - Disagree
+Social Stance: Jeepney Modernization Program - Neutral
+Social Stance: Foreign Investment in Land Ownership - Disagree
+Social Stance: Universal Healthcare Funding - Agree
+Social Stance: Mandatory Sex Education - Agree
+Social Stance: Minimum Wage Standardization - Neutral
 
+
+Name: Captain Tomas "Tommy" Laxa (Ret.)
 Name: Captain Tomas "Tommy" Laxa (Ret.)
 Age: 64
 Region: Region I
 Party Affiliation: Sundalo at Pulis Para sa Bayan Partylist (Uniformed Personnel Sector)
 Running Position: Party-list Representative
 Years of Experience: 20
+Campaign Slogan: Karangalan ng Serbisyo, Proteksyon sa Bayan
 Campaign Slogan: Karangalan ng Serbisyo, Proteksyon sa Bayan
 Platforms: Benefits for retired and active servicemen; Medical coverage for military families; Housing for uniformed personnel
 Supported Issues: Expanded veteran pensions; Anti-insurgency modernization
@@ -2104,13 +3606,30 @@ Social Stance: Universal Healthcare Funding - Agree
 Social Stance: Mandatory Sex Education - Disagree
 Social Stance: Minimum Wage Standardization - Neutral
 
+Notable Laws Enacted: Uniformed Services Housing Act; Health and Education Support Act for Soldiers’ Dependents
+Social Stance: Legalization of Divorce - Neutral
+Social Stance: Passing the SOGIE Equality Bill - Neutral
+Social Stance: Reinstating the Death Penalty - Agree
+Social Stance: Lowering the Age of Criminal Responsibility - Agree
+Social Stance: Federalism - Neutral
+Social Stance: Mandatory ROTC for Senior High Students - Agree
+Social Stance: Same-Sex Marriage - Disagree
+Social Stance: Anti-Terror Law - Agree
+Social Stance: Jeepney Modernization Program - Disagree
+Social Stance: Foreign Investment in Land Ownership - Disagree
+Social Stance: Universal Healthcare Funding - Agree
+Social Stance: Mandatory Sex Education - Disagree
+Social Stance: Minimum Wage Standardization - Neutral
 
+
+Name: Jessica "Jecka" De Guzman
 Name: Jessica "Jecka" De Guzman
 Age: 44
 Region: Region VIII
 Party Affiliation: OFW Tayo Partylist (Migrant Workers Sector)
 Running Position: Party-list Representative
 Years of Experience: 10
+Campaign Slogan: Alaga ng Gobyerno ang OFW
 Campaign Slogan: Alaga ng Gobyerno ang OFW
 Platforms: Legal aid desks in embassies; Reintegration programs for returning OFWs; Family support programs
 Supported Issues: OFW bill of rights; Mandatory financial education
@@ -2129,3 +3648,6 @@ Social Stance: Foreign Investment in Land Ownership - Disagree
 Social Stance: Universal Healthcare Funding - Agree
 Social Stance: Mandatory Sex Education - Agree
 Social Stance: Minimum Wage Standardization - Agree
+
+
+ 

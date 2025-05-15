@@ -17,9 +17,9 @@ import java.util.List;
 import java.util.ArrayList;
 import frontend.admin.AdminLoginUI;
 import frontend.search.CandidateSearchUI;
-// import frontend.comparison.CandidateComparisonUI;
-// import frontend.overview.CandidateOverviewUI;
-// import frontend.quiz.CandidateQuizUI;
+import frontend.comparison.CandidateComparisonUI;
+import frontend.overview.CandidateOverviewUI;
+import frontend.quiz.CandidateQuizUI;
 import frontend.admin.AdminPanelUI;
 
 public class LandingPageUI extends JFrame {
@@ -515,42 +515,30 @@ public class LandingPageUI extends JFrame {
         button2.addActionListener(e -> {
             Dimension currentSize = getSize();
             dispose(); // Close current window
-            // CandidateComparisonUI comparisonUI = new CandidateComparisonUI();
-            // comparisonUI.setSize(currentSize); // Set the same size as current window
-            // comparisonUI.setLocationRelativeTo(null); // Center on screen
-            // comparisonUI.setVisible(true);
-            // For now, just show a message
-            System.out.println("Comparison feature not yet implemented");
-            // Reopen landing page
-            reopenLandingPage(currentSize, getLocation());
+            CandidateComparisonUI comparisonUI = new CandidateComparisonUI();
+            comparisonUI.setSize(currentSize); // Set the same size as current window
+            comparisonUI.setLocationRelativeTo(null); // Center on screen
+            comparisonUI.setVisible(true);
         });
         
         // Add action listener for Overview button
         button3.addActionListener(e -> {
             Dimension currentSize = getSize();
             dispose(); // Close current window
-            // CandidateOverviewUI overviewUI = new CandidateOverviewUI();
-            // overviewUI.setSize(currentSize); // Set the same size as current window
-            // overviewUI.setLocationRelativeTo(null); // Center on screen
-            // overviewUI.setVisible(true);
-            // For now, just show a message
-            System.out.println("Overview feature not yet implemented");
-            // Reopen landing page
-            reopenLandingPage(currentSize, getLocation());
+            CandidateOverviewUI overviewUI = new CandidateOverviewUI();
+            overviewUI.setSize(currentSize); // Set the same size as current window
+            overviewUI.setLocationRelativeTo(null); // Center on screen
+            overviewUI.setVisible(true);
         });
         
         // Add action listener for Quiz button
         button4.addActionListener(e -> {
             Dimension currentSize = getSize();
             dispose(); // Close current window
-            // CandidateQuizUI quizUI = new CandidateQuizUI();
-            // quizUI.setSize(currentSize); // Set the same size as current window
-            // quizUI.setLocationRelativeTo(null); // Center on screen
-            // quizUI.setVisible(true);
-            // For now, just show a message
-            System.out.println("Quiz feature not yet implemented");
-            // Reopen landing page
-            reopenLandingPage(currentSize, getLocation());
+            CandidateQuizUI quizUI = new CandidateQuizUI();
+            quizUI.setSize(currentSize); // Set the same size as current window
+            quizUI.setLocationRelativeTo(null); // Center on screen
+            quizUI.setVisible(true);
         });
         
         // Add buttons to panel
