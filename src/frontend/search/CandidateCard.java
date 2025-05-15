@@ -69,6 +69,9 @@ public class CandidateCard extends JPanel {
     // Hover state listener for external control
     private List<Consumer<Boolean>> hoverListeners = new ArrayList<>();
     
+    // Variable to track scrolling state
+    private static boolean isScrolling = false;
+    
     /**
      * Create a new candidate card
      * 
@@ -125,10 +128,31 @@ public class CandidateCard extends JPanel {
         
         // Create the main card panel with shadow effect
         mainCardPanel = new JPanel() {
+            // Use a buffered image for the background to improve performance
+            private BufferedImage cachedBackground = null;
+            private boolean needsRefresh = true;
+            private int lastWidth = 0;
+            private int lastHeight = 0;
+            private float lastHoverState = -1;
+            
             @Override
-            protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                Graphics2D g2d = (Graphics2D) g;
+            public void setBounds(int x, int y, int width, int height) {
+                if (width != lastWidth || height != lastHeight) {
+                    needsRefresh = true;
+                    lastWidth = width;
+                    lastHeight = height;
+                }
+                super.setBounds(x, y, width, height);
+            }
+            
+            /**
+             * Pre-render the card background to a buffer
+             */
+            private void updateCachedBackground() {
+                if (getWidth() <= 0 || getHeight() <= 0) return;
+                
+                cachedBackground = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_ARGB);
+                Graphics2D g2d = cachedBackground.createGraphics();
                 g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
                 
                 // Draw shadow first (subtle shadow effect)
@@ -178,6 +202,25 @@ public class CandidateCard extends JPanel {
                     getHeight() - 2 * shadowSize,
                     CORNER_RADIUS, CORNER_RADIUS
                 ));
+                g2d.dispose();
+                
+                needsRefresh = false;
+                lastHoverState = hoverState;
+            }
+            
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                
+                // Check if we need to update the cached background (size changed or hover state changed)
+                if (cachedBackground == null || needsRefresh || Math.abs(lastHoverState - hoverState) > 0.01f) {
+                    updateCachedBackground();
+                }
+                
+                // Draw the cached background with fast painting
+                if (cachedBackground != null) {
+                    g.drawImage(cachedBackground, 0, 0, null);
+                }
             }
         };
         
@@ -186,7 +229,7 @@ public class CandidateCard extends JPanel {
         mainCardPanel.setOpaque(false);
         mainCardPanel.setBorder(BorderFactory.createEmptyBorder(CARD_PADDING, CARD_PADDING, CARD_PADDING, CARD_PADDING));
         
-        // Create circular image panel
+        // Create circular image panel with optimizations
         imagePanel = createImagePanel();
         imagePanel.setPreferredSize(new Dimension(60, 60)); // Square size for circular image
         
@@ -399,14 +442,29 @@ public class CandidateCard extends JPanel {
     }
     
     /**
-     * Sets the hovering state of this card and notifies listeners
-     * @param hovering True if the card is being hovered over, false otherwise
+     * Set hovering state and animate transition
      */
     public void setHovering(boolean hovering) {
         if (this.hovering != hovering) {
             this.hovering = hovering;
             
-            // Notify any hover listeners
+            // Stop any existing animation
+            if (animationTimer != null && animationTimer.isRunning()) {
+                animationTimer.stop();
+            }
+            
+            // Only start animation if component is visible and not in a scrolling operation
+            if (isVisible() && isShowing() && !isScrolling) {
+                animationDirection = hovering ? 1 : -1;
+                animationTimer.start();
+            } else {
+                // If scrolling or not visible, skip animation and just set final state
+                hoverState = hovering ? 1.0f : 0.0f;
+                updateComponentsForHoverState();
+                mainCardPanel.repaint();
+            }
+            
+            // Notify hover listeners
             for (Consumer<Boolean> listener : hoverListeners) {
                 listener.accept(hovering);
             }
@@ -444,70 +502,105 @@ public class CandidateCard extends JPanel {
      */
     private JPanel createImagePanel() {
         JPanel panel = new JPanel() {
+            // Cache for the circular image
+            private BufferedImage cachedImage = null;
+            private int lastWidth = 0;
+            private int lastHeight = 0;
+            
+            @Override
+            public void setBounds(int x, int y, int width, int height) {
+                if (width != lastWidth || height != lastHeight) {
+                    cachedImage = null;  // Reset cached image when size changes
+                    lastWidth = width;
+                    lastHeight = height;
+                }
+                super.setBounds(x, y, width, height);
+            }
+
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                Graphics2D g2d = (Graphics2D) g;
+                if (getWidth() <= 0 || getHeight() <= 0) return;
+                
+                // Create cached image if needed
+                if (cachedImage == null) {
+                    cachedImage = createCircularImage();
+                }
+                
+                // Draw the cached image
+                g.drawImage(cachedImage, 0, 0, null);
+            }
+            
+            /**
+             * Create a circular image for caching
+             */
+            private BufferedImage createCircularImage() {
+                BufferedImage result = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_ARGB);
+                Graphics2D g2d = result.createGraphics();
                 g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-                g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
                 
-                // Create a perfect circle for background
-                int baseDiameter = Math.min(getWidth(), getHeight());
+                // Draw background as transparent
+                g2d.setComposite(AlphaComposite.Clear);
+                g2d.fillRect(0, 0, getWidth(), getHeight());
+                g2d.setComposite(AlphaComposite.SrcOver);
                 
-                // Calculate diameter based on hover state - add up to 4 pixels when fully hovered
-                int diameter = baseDiameter + Math.round(4 * hoverState);
-                int x = (getWidth() - diameter) / 2;
-                int y = (getHeight() - diameter) / 2;
-                
-                // Draw light gray background circle
-                g2d.setColor(new Color(0xF1, 0xF5, 0xF9));
-                g2d.fillOval(x, y, diameter, diameter);
+                int diameter = Math.min(getWidth(), getHeight());
                 
                 if (candidateImage != null) {
-                    // Create circular clip
-                    Shape clip = new java.awt.geom.Ellipse2D.Float(x, y, diameter, diameter);
+                    // Create a circular clip
+                    Shape clip = new java.awt.geom.Ellipse2D.Double(0, 0, diameter, diameter);
                     g2d.setClip(clip);
                     
-                    // Draw the candidate image scaled to fit in the circle
-                    int imgWidth = candidateImage.getWidth();
-                    int imgHeight = candidateImage.getHeight();
-                    
-                    // Calculate scaling to ensure image covers the circle
+                    // Calculate scaled image dimensions
                     double scale = Math.max(
-                        (double) diameter / imgWidth,
-                        (double) diameter / imgHeight
+                        (double) diameter / candidateImage.getWidth(),
+                        (double) diameter / candidateImage.getHeight()
                     );
                     
-                    int scaledWidth = (int) (imgWidth * scale);
-                    int scaledHeight = (int) (imgHeight * scale);
+                    int scaledWidth = (int) (candidateImage.getWidth() * scale);
+                    int scaledHeight = (int) (candidateImage.getHeight() * scale);
                     
-                    // Center the image
-                    int imgX = x + (diameter - scaledWidth) / 2;
-                    int imgY = y + (diameter - scaledHeight) / 2;
+                    // Draw image centered in the circle
+                    int x = (diameter - scaledWidth) / 2;
+                    int y = (diameter - scaledHeight) / 2;
                     
-                    // Draw the scaled image
-                    g2d.drawImage(candidateImage, imgX, imgY, scaledWidth, scaledHeight, null);
+                    g2d.drawImage(candidateImage, x, y, scaledWidth, scaledHeight, null);
                     
-                    // Reset clip
+                    // Reset clip and draw border
                     g2d.setClip(null);
+                    g2d.setColor(cardBorder);
+                    g2d.setStroke(new BasicStroke(1));
+                    g2d.draw(clip);
                 } else {
-                    // Draw a placeholder silhouette if no image is available
-                    g2d.setColor(new Color(0xD1, 0xD5, 0xDB));
-                    int iconSize = (int)(diameter * 0.6);
+                    // If no image, draw a colored circle with initials
+                    g2d.setColor(getColorFromName(candidateName));
+                    g2d.fillOval(0, 0, diameter, diameter);
                     
-                    // Draw a simple person silhouette
-                    int headSize = iconSize / 2;
-                    int headX = x + (diameter - headSize) / 2;
-                    int headY = y + diameter / 6;
-                    g2d.fillOval(headX, headY, headSize, headSize);
+                    // Draw initials
+                    String initials = getInitials(candidateName);
+                    g2d.setColor(Color.WHITE);
                     
-                    // Draw body
-                    int bodyWidth = headSize * 2/3;
-                    int bodyHeight = headSize;
-                    int bodyX = x + (diameter - bodyWidth) / 2;
-                    int bodyY = headY + headSize - 2;
-                    g2d.fillOval(bodyX, bodyY, bodyWidth, bodyHeight);
+                    // Use a simple font to avoid font loading overhead
+                    Font font = new Font(Font.SANS_SERIF, Font.BOLD, diameter / 3);
+                    g2d.setFont(font);
+                    
+                    // Center the text
+                    FontMetrics fm = g2d.getFontMetrics();
+                    int textWidth = fm.stringWidth(initials);
+                    int textHeight = fm.getHeight();
+                    int textX = (diameter - textWidth) / 2;
+                    int textY = (diameter - textHeight) / 2 + fm.getAscent();
+                    
+                    g2d.drawString(initials, textX, textY);
+                    
+                    // Draw border
+                    g2d.setColor(cardBorder);
+                    g2d.setStroke(new BasicStroke(1));
+                    g2d.drawOval(0, 0, diameter - 1, diameter - 1);
                 }
+                
+                g2d.dispose();
+                return result;
             }
         };
         
@@ -684,6 +777,29 @@ public class CandidateCard extends JPanel {
                     }
                 }
             });
+        }
+    }
+    
+    /**
+     * Override the paintComponent method to use cached images and optimize rendering
+     */
+    @Override
+    public void paintComponent(Graphics g) {
+        // Only paint if visible
+        if (!isVisible()) return;
+        
+        super.paintComponent(g);
+    }
+    
+    /**
+     * Pause animations during scrolling
+     */
+    public static void setScrolling(boolean scrolling) {
+        isScrolling = scrolling;
+        
+        // When scrolling starts, immediately stop all animations to save resources
+        if (scrolling) {
+            // Animation pause is handled by hover state changes
         }
     }
 } 

@@ -100,6 +100,7 @@ public class CandidateComparisonUI extends JFrame {
         setTitle("Gabáy - Candidate Comparison");
         setSize(initialWindowWidth, initialWindowHeight);
         setResizable(false); // Make window non-resizable
+        setResizable(false); // Make window non-resizable
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         

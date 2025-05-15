@@ -10,6 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 import backend.model.CandidateDataLoader;
+import java.util.Map;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.HashMap;
 
 /**
  * A scrollable panel that displays candidate cards in a grid layout.
@@ -44,6 +48,23 @@ public class CandidateCardPanel extends JPanel {
     
     // Track if the scrollbar is being interacted with
     private boolean isScrollbarBeingUsed = false;
+    
+    // Store the original unfiltered candidates
+    private List<CandidateDataLoader.Candidate> allCandidates = new ArrayList<>();
+    // Store the currently filtered candidates
+    private List<CandidateDataLoader.Candidate> filteredCandidates = new ArrayList<>();
+    // Current filter values
+    private String currentSearchQuery = "";
+    private String currentProvince = "";
+    
+    // Class level variable for tracking scrollbar adjustment state
+    private boolean isAdjusting = false;
+    
+    // Add a field for the selected filter type
+    private String currentFilterType = "Name"; // Default to "Name" filter
+    
+    // Add a cache for issue filtering results
+    private Map<String, Set<CandidateDataLoader.Candidate>> issueFilterCache = new HashMap<>();
     
     /**
      * Create a scrollable panel that displays candidate cards
@@ -103,9 +124,11 @@ public class CandidateCardPanel extends JPanel {
             
             @Override
             public void paint(Graphics g) {
-                // We still need to paint children without any background
+                // Enable higher quality rendering only when not scrolling to improve performance
                 Graphics2D g2d = (Graphics2D)g;
-                g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                if (!isAdjusting) {
+                    g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                }
                 
                 // Paint only the children, not the background
                 paintChildren(g);
@@ -127,7 +150,9 @@ public class CandidateCardPanel extends JPanel {
             public void paint(Graphics g) {
                 // Only paint children without any background
                 Graphics2D g2d = (Graphics2D) g;
-                g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                if (!isAdjusting) {
+                    g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                }
                 paintChildren(g);
             }
         };
@@ -186,8 +211,12 @@ public class CandidateCardPanel extends JPanel {
                 }
                 
                 Graphics2D g2 = (Graphics2D) g.create();
-                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, 
-                                  RenderingHints.VALUE_ANTIALIAS_ON);
+                
+                // Use anti-aliasing only when not scrolling
+                if (!isAdjusting) {
+                    g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, 
+                                    RenderingHints.VALUE_ANTIALIAS_ON);
+                }
                 
                 // Use rounded rectangle for thumb with smoother corners
                 g2.setColor(thumbColor);
@@ -197,14 +226,25 @@ public class CandidateCardPanel extends JPanel {
             }
         });
         
+        // Track scrolling state
+        isAdjusting = false;
+        
         // Add listener to clear hover states when scrolling starts
         scrollPane.getVerticalScrollBar().addAdjustmentListener(e -> {
-            if (e.getValueIsAdjusting()) {
+            isAdjusting = e.getValueIsAdjusting();
+            
+            // Update the global scrolling state in CandidateCard
+            CandidateCard.setScrolling(isAdjusting);
+            
+            if (isAdjusting) {
                 // Clear hover states on all cards when scrolling
                 for (CandidateCard card : candidateCards) {
                     card.setHovering(false);
                 }
-                // Force repaint to ensure clean rendering
+            }
+            
+            // Only repaint when the adjustment is complete
+            if (!isAdjusting) {
                 contentPanel.repaint();
             }
         });
@@ -219,42 +259,41 @@ public class CandidateCardPanel extends JPanel {
             @Override
             public void mouseReleased(MouseEvent e) {
                 isScrollbarBeingUsed = false;
+                // Force one repaint after user releases scrollbar
+                contentPanel.repaint();
             }
         });
         
-        // Add a global event listener for mouse wheel events
-        // This will capture wheel events at the window level
-        Toolkit.getDefaultToolkit().addAWTEventListener(event -> {
-            if (event instanceof MouseWheelEvent) {
-                MouseWheelEvent wheelEvent = (MouseWheelEvent) event;
-                
-                // If any card is being hovered and we're not using the scrollbar
-                if (isAnyCardHovered && !isScrollbarBeingUsed) {
-                    // Check if we're over the scrollbar
-                    Point p = wheelEvent.getPoint();
-                    SwingUtilities.convertPointToScreen(p, wheelEvent.getComponent());
-                    
-                    // Get scrollbar bounds in screen coordinates
-                    JScrollBar scrollBar = scrollPane.getVerticalScrollBar();
-                    Rectangle scrollBarBounds = scrollBar.getBounds();
-                    Point scrollBarLocationOnScreen = scrollBar.getLocationOnScreen();
-                    scrollBarBounds.setLocation(scrollBarLocationOnScreen);
-                    
-                    // If not over the scrollbar, consume the event
-                    if (!scrollBarBounds.contains(p)) {
-                        wheelEvent.consume();
-                    }
-                }
-            }
-        }, AWTEvent.MOUSE_WHEEL_EVENT_MASK);
+        // Optimized wheel listener with throttling
+        final long[] lastWheelEvent = new long[1];
+        final int THROTTLE_MS = 40; // Throttle wheel events to avoid too frequent updates
         
-        // Add another mouse wheel listener directly to the viewport for double protection
-        scrollPane.getViewport().addMouseWheelListener(new MouseWheelListener() {
+        scrollPane.addMouseWheelListener(new MouseWheelListener() {
             @Override
             public void mouseWheelMoved(MouseWheelEvent e) {
-                if (isAnyCardHovered && !isScrollbarBeingUsed) {
-                    e.consume();
+                // Throttle wheel events to reduce excessive updates
+                long now = System.currentTimeMillis();
+                if (now - lastWheelEvent[0] < THROTTLE_MS) {
+                    return;
                 }
+                lastWheelEvent[0] = now;
+                
+                // Allow normal scrolling behavior
+                JScrollBar verticalScrollBar = scrollPane.getVerticalScrollBar();
+                int direction = e.getWheelRotation();
+                int increment = verticalScrollBar.getUnitIncrement() * direction * 3; // Faster scrolling
+                
+                // Get the current position
+                int value = verticalScrollBar.getValue();
+                
+                // Calculate new position
+                int newValue = value + increment;
+                
+                // Ensure it's within bounds
+                newValue = Math.max(0, Math.min(newValue, verticalScrollBar.getMaximum() - verticalScrollBar.getVisibleAmount()));
+                
+                // Set the new position
+                verticalScrollBar.setValue(newValue);
             }
         });
         
@@ -321,10 +360,11 @@ public class CandidateCardPanel extends JPanel {
         contentPanel.removeAll();
         
         // Load candidate data from the data loader
-        List<CandidateDataLoader.Candidate> candidates = CandidateDataLoader.loadCandidates();
+        allCandidates = CandidateDataLoader.loadCandidates();
+        filteredCandidates = new ArrayList<>(allCandidates);
         
         // If no candidates were loaded, use placeholder data
-        if (candidates.isEmpty()) {
+        if (allCandidates.isEmpty()) {
             System.out.println("Warning: No candidates loaded from file. Using placeholder candidates.");
             // Placeholder data
             Object[][] placeholderData = {
@@ -346,8 +386,8 @@ public class CandidateCardPanel extends JPanel {
             }
         } else {
             // Create cards from loaded candidate data
-            for (int i = 0; i < candidates.size(); i++) {
-                CandidateDataLoader.Candidate candidate = candidates.get(i);
+            for (int i = 0; i < filteredCandidates.size(); i++) {
+                CandidateDataLoader.Candidate candidate = filteredCandidates.get(i);
                 createCard(
                     candidate.getName(),
                     candidate.getPosition(),
@@ -513,39 +553,303 @@ public class CandidateCardPanel extends JPanel {
      * Filter the displayed cards based on a search query
      */
     public void filterCards(String query) {
-        // This would implement search/filter functionality
-        // For now, just reset the view
-        loadCandidateData();
+        // Save the current search query
+        this.currentSearchQuery = query.toLowerCase().trim();
+        
+        System.out.println("Filtering by search query: '" + this.currentSearchQuery + "'");
+        
+        // Apply filters
+        applyFilters();
     }
     
     /**
      * Filter the displayed cards based on a province
      */
     public void filterByProvince(String province) {
-        // This would filter cards by province
-        // For now, just reset the view
-        loadCandidateData();
+        // Save the current province filter
+        this.currentProvince = province;
+        
+        System.out.println("Filtering by province/region: '" + this.currentProvince + "'");
+        
+        // Apply filters
+        applyFilters();
+    }
+    
+    /**
+     * Safely get a string value that won't be null
+     * @param value The string value to check
+     * @return The original string or an empty string if null
+     */
+    private String safeString(String value) {
+        return value == null ? "" : value;
+    }
+    
+    /**
+     * Apply both search query and province filters
+     */
+    private void applyFilters() {
+        // Clear the filtered list
+        filteredCandidates.clear();
+        
+        // Apply both filters to all candidates
+        for (CandidateDataLoader.Candidate candidate : allCandidates) {
+            boolean matchesSearch = true;
+            boolean matchesProvince = true;
+            
+            // Apply search filter if we have a query
+            if (!currentSearchQuery.isEmpty()) {
+                // Process differently based on the filter type
+                if ("Issue".equals(currentFilterType)) {
+                    // Don't apply empty query filter
+                    if (currentSearchQuery.isEmpty()) {
+                        matchesSearch = true;
+                    } else {
+                        // Convert search query to lowercase for case-insensitive comparison
+                        String query = currentSearchQuery.toLowerCase();
+                        
+                        // Debug information
+                        System.out.println("Searching for issue: '" + query + "'");
+                        
+                        // First, specifically check if this is a social stance topic
+                        // This gives priority to social stances in the search
+                        boolean isMatchingSocialStance = false;
+                        
+                        // Check if candidate has a stance on this topic
+                        isMatchingSocialStance = candidate.hasStanceOnTopic(query);
+                        
+                        // If no direct match on topic, check if the query is part of any social stance
+                        if (!isMatchingSocialStance) {
+                            for (String stance : candidate.getSocialStances()) {
+                                if (stance.toLowerCase().contains(query)) {
+                                    isMatchingSocialStance = true;
+                                    break;
+                                }
+                            }
+                        }
+                        
+                        // Match if there's a matching social stance
+                        if (isMatchingSocialStance) {
+                            matchesSearch = true;
+                        } 
+                        // If not found in social stances, use the existing hasStanceOn method
+                        else {
+                            matchesSearch = candidate.hasStanceOn(query);
+                        }
+                        
+                        // If still no match, check in platforms and other fields
+                        if (!matchesSearch) {
+                            // Check in platforms (using reflection safely)
+                            try {
+                                java.lang.reflect.Method getPlatformsMethod = candidate.getClass().getMethod("getPlatforms");
+                                Object platformsObj = getPlatformsMethod.invoke(candidate);
+                                String platforms = (platformsObj != null) ? platformsObj.toString().toLowerCase() : "";
+                                if (!platforms.isEmpty() && containsWordOrPartial(platforms, query)) {
+                                    matchesSearch = true;
+                                }
+                            } catch (NoSuchMethodException e) {
+                                // Method doesn't exist, skip this check
+                            } catch (Exception e) {
+                                // Other exceptions, just log and continue
+                                System.out.println("Error checking platforms: " + e.getMessage());
+                            }
+                            
+                            // Check in notable laws if available
+                            try {
+                                java.lang.reflect.Method getNotableLawsMethod = candidate.getClass().getMethod("getNotableLaws");
+                                Object notableLawsObj = getNotableLawsMethod.invoke(candidate);
+                                String notableLaws = (notableLawsObj != null) ? notableLawsObj.toString().toLowerCase() : "";
+                                if (!notableLaws.isEmpty() && containsWordOrPartial(notableLaws, query)) {
+                                    matchesSearch = true;
+                                }
+                            } catch (NoSuchMethodException e) {
+                                // Method doesn't exist, skip this check
+                            } catch (Exception e) {
+                                // Other exceptions, just log and continue
+                                System.out.println("Error checking notable laws: " + e.getMessage());
+                            }
+                        }
+                        
+                        // Debug logging
+                        if (matchesSearch) {
+                            System.out.println("Issue match for candidate: " + candidate.getName());
+                            System.out.println("  - Supported Issues: " + safeString(candidate.getSupportedIssues()));
+                            System.out.println("  - Opposed Issues: " + safeString(candidate.getOpposedIssues()));
+                            
+                            // Use the new formatted social stances method
+                            System.out.println("  - Social Stances: " + candidate.getFormattedSocialStances());
+                            
+                            // Print the specific social stance topics
+                            System.out.println("  - Social Stance Topics: " + candidate.getSocialStanceTopics());
+                            
+                            System.out.println("  - Search Query: " + currentSearchQuery);
+                            System.out.println("  - Related Issues: " + CandidateDataLoader.getRelatedIssues(query));
+                        }
+                    }
+                } else if ("Name".equals(currentFilterType)) {
+                    // Check only in candidate's name
+                    String candidateName = safeString(candidate.getName()).toLowerCase();
+                    
+                    // Check if the query matches the full name or just the first name
+                    String[] nameParts = candidateName.split(" ");
+                    boolean nameMatches = candidateName.contains(currentSearchQuery.toLowerCase());
+                    
+                    // Check if query matches first name only
+                    if (!nameMatches && nameParts.length > 0) {
+                        nameMatches = nameParts[0].contains(currentSearchQuery.toLowerCase());
+                    }
+                    
+                    matchesSearch = nameMatches;
+                } else if ("Partylist".equals(currentFilterType)) {
+                    // Check only in candidate's party
+                    String candidateParty = safeString(candidate.getParty()).toLowerCase();
+                    matchesSearch = candidateParty.contains(currentSearchQuery.toLowerCase());
+                } else if ("Position".equals(currentFilterType)) {
+                    // Check only in candidate's position
+                    String candidatePosition = safeString(candidate.getPosition()).toLowerCase();
+                    matchesSearch = candidatePosition.contains(currentSearchQuery.toLowerCase());
+                } else {
+                    // Default case (search across all fields if filter type not recognized)
+                    String candidateName = safeString(candidate.getName()).toLowerCase();
+                    String candidateParty = safeString(candidate.getParty()).toLowerCase();
+                    String candidatePosition = safeString(candidate.getPosition()).toLowerCase();
+                    
+                    // Check if the query matches the full name or just the first name
+                    String[] nameParts = candidateName.split(" ");
+                    boolean nameMatches = candidateName.contains(currentSearchQuery.toLowerCase());
+                    
+                    // Check if query matches first name only
+                    if (!nameMatches && nameParts.length > 0) {
+                        nameMatches = nameParts[0].contains(currentSearchQuery.toLowerCase());
+                    }
+                    
+                    // Check if the query matches the party or position
+                    boolean partyMatches = candidateParty.contains(currentSearchQuery.toLowerCase());
+                    boolean positionMatches = candidatePosition.contains(currentSearchQuery.toLowerCase());
+                    
+                    // Match if any of the fields contain the search query
+                    matchesSearch = nameMatches || partyMatches || positionMatches;
+                }
+            }
+            
+            // Apply province filter if we have a province (not empty, not "Select Region", not "All")
+            if (currentProvince != null && !currentProvince.isEmpty() && 
+                !"Select Region".equals(currentProvince) && !"All".equals(currentProvince)) {
+                
+                String candidateRegion = safeString(candidate.getRegion());
+                
+                // Skip region check if candidate has no region
+                if (!candidateRegion.isEmpty()) {
+                    // First try exact match with trimming and case insensitivity
+                    String trimmedCandidateRegion = candidateRegion.trim();
+                    String trimmedCurrentProvince = currentProvince.trim();
+                    
+                    if (trimmedCandidateRegion.equalsIgnoreCase(trimmedCurrentProvince)) {
+                        matchesProvince = true;
+                    } else {
+                        // Check for region number match (e.g., "Region IV-A" matches "Region IV-A (CALABARZON)")
+                        if (trimmedCurrentProvince.contains(" ")) {
+                            String regionNumber = trimmedCurrentProvince.split(" ")[0] + " " + 
+                                                  trimmedCurrentProvince.split(" ")[1];
+                            if (trimmedCandidateRegion.toLowerCase().contains(regionNumber.toLowerCase())) {
+                                matchesProvince = true;
+                            } else {
+                                // Extract region name from parentheses and check
+                                if (trimmedCurrentProvince.contains("(") && trimmedCurrentProvince.contains(")")) {
+                                    int startIndex = trimmedCurrentProvince.indexOf("(") + 1;
+                                    int endIndex = trimmedCurrentProvince.indexOf(")");
+                                    if (startIndex > 0 && endIndex > startIndex) {
+                                        String regionName = trimmedCurrentProvince.substring(startIndex, endIndex).trim();
+                                        // Check if region name is in candidate region (case insensitive)
+                                        matchesProvince = trimmedCandidateRegion.toLowerCase().contains(regionName.toLowerCase()) ||
+                                                          regionName.toLowerCase().contains(trimmedCandidateRegion.toLowerCase());
+                                    } else {
+                                        matchesProvince = false;
+                                    }
+                                } else {
+                                    // Try to match on substrings (e.g., "NCR" matches "National Capital Region")
+                                    matchesProvince = trimmedCandidateRegion.toLowerCase().contains(trimmedCurrentProvince.toLowerCase()) ||
+                                                      trimmedCurrentProvince.toLowerCase().contains(trimmedCandidateRegion.toLowerCase());
+                                }
+                            }
+                        } else {
+                            // For simple region names without spaces, do a case-insensitive contains check
+                            matchesProvince = trimmedCandidateRegion.toLowerCase().contains(trimmedCurrentProvince.toLowerCase()) ||
+                                              trimmedCurrentProvince.toLowerCase().contains(trimmedCandidateRegion.toLowerCase());
+                        }
+                    }
+                } else {
+                    matchesProvince = false;
+                }
+            }
+            
+            // Add to filtered list if it matches all active filters
+            if (matchesSearch && matchesProvince) {
+                filteredCandidates.add(candidate);
+            }
+        }
+        
+        // Rebuild the card list based on filtered candidates
+        rebuildCards();
+        
+        // Print debug info about how many candidates matched the filters
+        System.out.println("Filter results: " + filteredCandidates.size() + " candidates matched the criteria");
+        System.out.println("  - Search query: '" + currentSearchQuery + "'");
+        System.out.println("  - Filter type: '" + currentFilterType + "'");
+        System.out.println("  - Region filter: '" + currentProvince + "'");
+    }
+    
+    /**
+     * Rebuild the UI cards based on the filtered candidate list
+     */
+    private void rebuildCards() {
+        // Clear existing cards from UI
+        contentPanel.removeAll();
+        candidateCards.clear();
+        
+        // Create cards from filtered candidate data
+        for (int i = 0; i < filteredCandidates.size(); i++) {
+            CandidateDataLoader.Candidate candidate = filteredCandidates.get(i);
+            createCard(
+                candidate.getName(),
+                candidate.getPosition(),
+                candidate.getParty(),
+                candidate.getImagePath(),
+                i
+            );
+        }
+        
+        // Update layout 
+        updateLayout();
+        
+        // Force revalidation and repaint
+        SwingUtilities.invokeLater(() -> {
+            contentPanel.revalidate();
+            contentPanel.repaint();
+            scrollPane.revalidate();
+            scrollPane.repaint();
+            revalidate();
+            repaint();
+        });
     }
     
     /**
      * Reset all filters and reload the original data
      */
     public void resetFilters() {
-        // Clear the current cards
-        candidateCards.clear();
-        contentPanel.removeAll();
+        // Clear all filter values
+        currentSearchQuery = "";
+        currentProvince = "";
         
-        // Reload the original candidate data
-        loadCandidateData();
+        // Clear the issue filter cache
+        clearIssueFilterCache();
         
-        // Update the layout
-        updateLayout();
+        // Reset filteredCandidates to show all
+        filteredCandidates = new ArrayList<>(allCandidates);
         
-        // Force revalidation to ensure content is displayed
-        revalidate();
-        repaint();
+        // Rebuild the cards
+        rebuildCards();
         
-        System.out.println("All filters have been reset and data reloaded");
+        System.out.println("All filters have been reset. Showing " + filteredCandidates.size() + " candidates.");
     }
     
     /**
@@ -599,5 +903,81 @@ public class CandidateCardPanel extends JPanel {
         
         // Force repaint to show changes
         repaint();
+    }
+    
+    // Add a setter method for the filter type
+    public void setFilterType(String filterType) {
+        // Only clear cache if the filter type changes
+        if (!this.currentFilterType.equals(filterType)) {
+            // Reset the issue filter cache when changing filter types
+            clearIssueFilterCache();
+            System.out.println("Filter type changed from '" + this.currentFilterType + "' to '" + filterType + "' - cache cleared");
+        }
+        this.currentFilterType = filterType;
+        System.out.println("Filter type set to: " + filterType);
+        
+        // If we already have a search query, reapply the filter with the new type
+        if (!currentSearchQuery.isEmpty() && !currentSearchQuery.equals("Search for candidates or issues...")) {
+            // Use SwingUtilities.invokeLater for better UI responsiveness
+            SwingUtilities.invokeLater(() -> {
+                applyFilters();
+            });
+        }
+    }
+    
+    // Add method to clear the cache when needed
+    public void clearIssueFilterCache() {
+        issueFilterCache.clear();
+        System.out.println("Issue filter cache cleared");
+    }
+    
+    // Add optimized method to get candidates matching an issue
+    private Set<CandidateDataLoader.Candidate> getCandidatesMatchingIssue(String issue) {
+        // Check if we have cached results for this issue
+        if (issueFilterCache.containsKey(issue)) {
+            return issueFilterCache.get(issue);
+        }
+        
+        // If not cached, compute the result
+        Set<CandidateDataLoader.Candidate> matchingCandidates = new HashSet<>();
+        
+        for (CandidateDataLoader.Candidate candidate : allCandidates) {
+            if (candidate.hasStanceOn(issue)) {
+                matchingCandidates.add(candidate);
+            }
+        }
+        
+        // Cache the result for future use
+        issueFilterCache.put(issue, matchingCandidates);
+        
+        return matchingCandidates;
+    }
+    
+    // Add helper method to check for word or partial word matches
+    /**
+     * Check if a text contains a word or partial word match for query
+     * @param text The text to search in
+     * @param query The query to look for
+     * @return True if the text contains the query as a whole word or partial match
+     */
+    private boolean containsWordOrPartial(String text, String query) {
+        // First try exact match
+        if (text.contains(query)) {
+            return true;
+        }
+        
+        // For single-word queries, check if any word contains the query
+        if (!query.contains(" ")) {
+            String[] words = text.split("\\s+");
+            for (String word : words) {
+                // Remove punctuation
+                word = word.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
+                if (!word.isEmpty() && (word.contains(query) || query.contains(word))) {
+                    return true;
+                }
+            }
+        }
+        
+        return false;
     }
 } 

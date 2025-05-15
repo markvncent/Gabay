@@ -436,10 +436,10 @@ public class CandidateSearchUI extends JFrame {
         thirdRectangle.setBounds(startX + 217 + gap1 + 827 + gap2, rectanglesY, 90, 45);
         
         // Create refresh button - square shape with icon
-        refreshButton = createRefreshButton(35, 35);
+        refreshButton = createRefreshButton(45, 45);
         // Position it to the left of the provinceRectangle, same vertical align, with 10px gap
-        refreshButton.setBounds(provinceRectangle.getX() - 35 - 10, 
-                              provinceRectangle.getY() + 5, 35, 35);
+        refreshButton.setBounds(provinceRectangle.getX() - 45 - 10, 
+                              provinceRectangle.getY(), 45, 45);
         
         // Add the rectangles directly to the content panel
         contentPanel.add(filterRectangle);
@@ -499,11 +499,20 @@ public class CandidateSearchUI extends JFrame {
 
         // Add key listener to search field for live filtering
         searchField.addKeyListener(new KeyAdapter() {
-            // Delay timer for smoother search experience
-            private Timer searchTimer = new Timer(300, e -> performSearch());
+            // Use a shorter delay timer for smoother search experience (150ms instead of 300ms)
+            private Timer searchTimer = new Timer(150, e -> performSearch());
             
             @Override
             public void keyReleased(KeyEvent e) {
+                // If Enter key, perform search immediately
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    if (searchTimer.isRunning()) {
+                        searchTimer.stop();
+                    }
+                    performSearch();
+                    return;
+                }
+                
                 // Reset and restart timer on each keystroke
                 if (searchTimer.isRunning()) {
                     searchTimer.restart();
@@ -518,9 +527,11 @@ public class CandidateSearchUI extends JFrame {
                     query = "";
                 }
                 
-                // Apply search to card panel
+                final String finalQuery = query.toLowerCase().trim();
+                
+                // Apply search to card panel using SwingUtilities.invokeLater for better UI responsiveness
                 if (cardPanel != null) {
-                    cardPanel.filterCards(query);
+                    SwingUtilities.invokeLater(() -> cardPanel.filterCards(finalQuery));
                 }
             }
         });
@@ -658,7 +669,7 @@ public class CandidateSearchUI extends JFrame {
             };
             searchBarPanel.setLayout(new BorderLayout());
             
-            // Create text field
+            // Create text field with simpler guidance, removing social stances mention
             searchField = new JTextField("Search for candidates or issues...");
             searchField.setForeground(Color.GRAY);
             searchField.setFont(interRegular.deriveFont(14f));
@@ -692,6 +703,11 @@ public class CandidateSearchUI extends JFrame {
                         searchField.requestFocus();
                         clearIconLabel.setVisible(false);
                         clearIconVisible = false;
+                        
+                        // Perform search with empty query to update results
+                        if (cardPanel != null) {
+                            cardPanel.filterCards("");
+                        }
                     }
                 });
             }
@@ -715,7 +731,7 @@ public class CandidateSearchUI extends JFrame {
             searchBarPanel.add(paddingPanel, BorderLayout.CENTER);
             searchPanel.add(searchBarPanel, BorderLayout.CENTER);
             
-            // Add focus listener for placeholder behavior
+            // Update focus listener for placeholder behavior
             searchField.addFocusListener(new FocusAdapter() {
                 @Override
                 public void focusGained(FocusEvent e) {
@@ -784,11 +800,45 @@ public class CandidateSearchUI extends JFrame {
         // Handle the filter selection here
         System.out.println("Selected filter: " + (selectedFilter != null ? selectedFilter : "None"));
         
-        // Apply filters to card panel
+        // Apply filters to card panel with debouncing for better UI responsiveness
         if (cardPanel != null) {
-            // Filter cards by category (if relevant functionality is implemented)
-            // For now, just refresh the data
-            cardPanel.filterCards(searchField.getText());
+            // First update the filter type
+            if (selectedFilter != null) {
+                // Log if switching to Issue filter for debugging
+                if ("Issue".equals(selectedFilter)) {
+                    System.out.println("SWITCHING TO ISSUE FILTER - this will search through social stances, supported/opposed issues");
+                }
+                
+                cardPanel.setFilterType(selectedFilter);
+            } else {
+                // Default to "Name" if no filter is selected
+                cardPanel.setFilterType("Name");
+            }
+            
+            // Get current search text to maintain search filter
+            String searchText = searchField.getText();
+            if (searchText.equals("Search for candidates or issues...")) {
+                searchText = "";
+            }
+            
+            // Use SwingUtilities.invokeLater to apply filters asynchronously
+            final String finalSearchText = searchText;
+            SwingUtilities.invokeLater(() -> {
+                try {
+                    // Apply both filters - first filter by filter type, then search query will be applied in the cardPanel
+                    cardPanel.filterCards(finalSearchText);
+                } catch (Exception e) {
+                    System.err.println("Error applying filters: " + e.getMessage());
+                    e.printStackTrace();
+                    
+                    // Attempt to reset filters in case of error
+                    try {
+                        cardPanel.resetFilters();
+                    } catch (Exception ex) {
+                        System.err.println("Error resetting filters: " + ex.getMessage());
+                    }
+                }
+            });
         }
     }
     
@@ -799,9 +849,20 @@ public class CandidateSearchUI extends JFrame {
         // Handle the province selection here
         System.out.println("Selected province: " + (selectedProvince != null ? selectedProvince : "None"));
         
-        // Apply province filter to card panel
+        // Apply province filter to card panel with debouncing
         if (cardPanel != null && selectedProvince != null) {
-            cardPanel.filterByProvince(selectedProvince);
+            // Store the current province selection and apply filter asynchronously
+            SwingUtilities.invokeLater(() -> {
+                cardPanel.filterByProvince(selectedProvince);
+                
+                // Re-apply the current search query to maintain both filters
+                String searchText = searchField.getText();
+                if (searchText.equals("Search for candidates or issues...")) {
+                    searchText = "";
+                }
+                
+                // Since filterByProvince already applies combined filtering, we don't need to call filterCards again
+            });
         }
     }
     
@@ -896,10 +957,9 @@ public class CandidateSearchUI extends JFrame {
                             provinceDropdown.updatePositionOnResize();
                             
                             // Position refresh button to the left of the province dropdown with 10px gap
-                            int refreshSize = (int)(35 * heightScaleFactor); // Square size, same height as dropdown
-                            refreshButton.setBounds(
-                                provinceRectangle.getX() - refreshSize - 10,
-                                provinceRectangle.getY() + 5, refreshSize, refreshSize);
+                            int refreshSize = (int)(45 * heightScaleFactor); // Square size, same height as dropdown
+                            refreshButton.setBounds(provinceRectangle.getX() - refreshSize - 10, 
+                                                  provinceRectangle.getY(), refreshSize, refreshSize);
                         }
                         
                         // Find and update divider line position
@@ -1097,61 +1157,11 @@ public class CandidateSearchUI extends JFrame {
      */
     private void loadSearchIconImage() {
         try {
-            // Try to load the search icon from multiple paths
-            File searchFile = new File("resources/images/Candidate Search/search-icon.png");
-            if (searchFile.exists()) {
-                searchIconImage = ImageIO.read(searchFile);
-                System.out.println("Search icon loaded successfully from: " + searchFile.getAbsolutePath());
-            } else {
-                // Try alternative locations
-                String[] alternativePaths = {
-                    "resources/images/search-icon.png",
-                    "search-icon.png",
-                    "images/search-icon.png",
-                    "images/Candidate Search/search-icon.png",
-                    "../resources/images/Candidate Search/search-icon.png"
-                };
-                
-                for (String path : alternativePaths) {
-                    File altFile = new File(path);
-                    if (altFile.exists()) {
-                        searchIconImage = ImageIO.read(altFile);
-                        System.out.println("Search icon loaded from alternative path: " + altFile.getAbsolutePath());
-                        break;
-                    }
-                }
-            }
-            
-            // If still not found, create a simple search icon
-            if (searchIconImage == null) {
-                System.out.println("Creating fallback search icon");
-                searchIconImage = createFallbackSearchIcon();
-            }
+            // Try to load the search icon
+            searchIconImage = ImageIO.read(new File("resources/images/Candidate Search/search-icon.png"));
         } catch (IOException e) {
             System.out.println("Error loading search icon: " + e.getMessage());
-            searchIconImage = createFallbackSearchIcon();
         }
-    }
-    
-    /**
-     * Creates a simple search icon as fallback
-     */
-    private BufferedImage createFallbackSearchIcon() {
-        // Create a simple search icon - a magnifying glass
-        BufferedImage icon = new BufferedImage(24, 24, BufferedImage.TYPE_INT_ARGB);
-        Graphics2D g = icon.createGraphics();
-        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        
-        // Draw a circle for the magnifying glass
-        g.setColor(new Color(0x47, 0x55, 0x69)); // Use heading color
-        g.setStroke(new BasicStroke(2));
-        g.drawOval(4, 4, 11, 11);
-        
-        // Draw the handle
-        g.drawLine(14, 14, 19, 19);
-        
-        g.dispose();
-        return icon;
     }
     
     /**
@@ -1159,64 +1169,11 @@ public class CandidateSearchUI extends JFrame {
      */
     private void loadRefreshIconImage() {
         try {
-            // Try to load the refresh icon from multiple paths
-            File refreshFile = new File("resources/images/Candidate Search/refresh.png");
-            if (refreshFile.exists()) {
-                refreshIconImage = ImageIO.read(refreshFile);
-                System.out.println("Refresh icon loaded successfully from: " + refreshFile.getAbsolutePath());
-            } else {
-                // Try alternative locations
-                String[] alternativePaths = {
-                    "resources/images/refresh.png",
-                    "refresh.png",
-                    "images/refresh.png",
-                    "images/Candidate Search/refresh.png",
-                    "../resources/images/Candidate Search/refresh.png"
-                };
-                
-                for (String path : alternativePaths) {
-                    File altFile = new File(path);
-                    if (altFile.exists()) {
-                        refreshIconImage = ImageIO.read(altFile);
-                        System.out.println("Refresh icon loaded from alternative path: " + altFile.getAbsolutePath());
-                        break;
-                    }
-                }
-            }
-            
-            // If still not found, create a simple refresh icon
-            if (refreshIconImage == null) {
-                System.out.println("Creating fallback refresh icon");
-                refreshIconImage = createFallbackRefreshIcon();
-            }
+            // Try to load the refresh icon
+            refreshIconImage = ImageIO.read(new File("resources/images/Candidate Search/refresh.png"));
         } catch (IOException e) {
             System.out.println("Error loading refresh icon: " + e.getMessage());
-            refreshIconImage = createFallbackRefreshIcon();
         }
-    }
-    
-    /**
-     * Creates a simple refresh icon as fallback
-     */
-    private BufferedImage createFallbackRefreshIcon() {
-        // Create a simple refresh icon - a circular arrow
-        BufferedImage icon = new BufferedImage(24, 24, BufferedImage.TYPE_INT_ARGB);
-        Graphics2D g = icon.createGraphics();
-        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        
-        // Draw a circular arrow
-        g.setColor(Color.WHITE);
-        g.setStroke(new BasicStroke(2));
-        
-        // Draw 3/4 of a circle
-        g.drawArc(4, 4, 16, 16, 0, 270);
-        
-        // Draw the arrow head
-        g.drawLine(20, 12, 20, 8);
-        g.drawLine(20, 8, 16, 8);
-        
-        g.dispose();
-        return icon;
     }
     
     /**
@@ -1274,10 +1231,10 @@ public class CandidateSearchUI extends JFrame {
                         provinceDropdown.updatePositionOnResize();
                         
                         // Position refresh button to the left of the province dropdown with 10px gap
-                        int refreshSize = (int)(35 * heightScaleFactor); // Square size, same height as dropdown
+                        int refreshSize = (int)(45 * heightScaleFactor); // Square size, same height as dropdown
                         refreshButton.setBounds(
                             provinceRectangle.getX() - refreshSize - 10,
-                            provinceRectangle.getY() + 5, refreshSize, refreshSize);
+                            provinceRectangle.getY(), refreshSize, refreshSize);
                         
                         // Ensure province rectangle is at the top of the z-order
                         contentPanel.setComponentZOrder(provinceRectangle, 0);
@@ -1434,7 +1391,7 @@ public class CandidateSearchUI extends JFrame {
      * Creates a "Refresh" button with the same style as the filter dropdown
      */
     private JPanel createRefreshButton(int width, int height) {
-        // Create darker shades for hover and click effects - match the filter dropdown colors
+        // Create darker shades for hover and click effects
         final Color hoverBlue = new Color(0x22, 0x2C, 0x66); // Darker shade for hover
         final Color clickBlue = new Color(0x1A, 0x21, 0x4D); // Even darker for click
         
@@ -1449,7 +1406,7 @@ public class CandidateSearchUI extends JFrame {
                 Graphics2D g2d = (Graphics2D) g;
                 g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
                 
-                // Choose color based on mouse state - use same color as province dropdown
+                // Choose color based on mouse state
                 if (isClicking[0]) {
                     g2d.setColor(clickBlue);
                 } else if (isHovering[0]) {
@@ -1464,7 +1421,7 @@ public class CandidateSearchUI extends JFrame {
                 // Draw refresh icon centered if available
                 if (refreshIconImage != null) {
                     // Calculate position to center the icon
-                    int iconSize = Math.min(getWidth(), getHeight()) * 2/3; // 66% of button size for better sizing
+                    int iconSize = Math.min(getWidth(), getHeight()) / 2; // 50% of button size
                     int x = (getWidth() - iconSize) / 2;
                     int y = (getHeight() - iconSize) / 2;
                     
@@ -1481,8 +1438,8 @@ public class CandidateSearchUI extends JFrame {
                     // Fallback to text if icon is not available
                     g2d.setColor(Color.WHITE);
                     Font refreshFont = interMedium != null ? 
-                        interMedium.deriveFont(14f) : 
-                        new Font("Sans-Serif", Font.BOLD, 14);
+                        interMedium.deriveFont(16f) : 
+                        new Font("Sans-Serif", Font.BOLD, 16);
                     g2d.setFont(refreshFont);
                     
                     FontMetrics fm = g2d.getFontMetrics();
@@ -1535,12 +1492,25 @@ public class CandidateSearchUI extends JFrame {
             
             @Override
             public void mouseClicked(MouseEvent e) {
-                // Perform refresh action when button is clicked
-                if (cardPanel != null) {
-                    // Reset any filters and reload data
-                    cardPanel.resetFilters();
-                    System.out.println("Refresh button clicked: Resetting filters and reloading data");
-                }
+                // Perform refresh action when button is clicked - use SwingUtilities.invokeLater for better UI responsiveness
+                SwingUtilities.invokeLater(() -> {
+                    if (cardPanel != null) {
+                        // Reset province dropdown to default if possible
+                        if (provinceDropdown != null) {
+                            provinceDropdown.selectOption("All");
+                        }
+                        
+                        // Reset search text to placeholder
+                        searchField.setText("Search for candidates or issues...");
+                        searchField.setForeground(Color.GRAY);
+                        updateClearIconVisibility(false);
+                        
+                        // Reset any filters and reload data
+                        cardPanel.resetFilters();
+                        
+                        System.out.println("Refresh button clicked: Filters reset");
+                    }
+                });
             }
         });
         
