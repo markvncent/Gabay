@@ -1,7 +1,11 @@
 # Gabay: Political Candidate Information Application
+![Gabay_Background](https://github.com/user-attachments/assets/60ce9237-e712-4aad-9b50-ee7e96df3770)
 
 ## Overview
 Gabay is a Java Swing application designed to help users learn about political candidates, their stances on various issues, and compare candidates to make informed voting decisions.
+
+<h2 align="left">Languages and Tools:</h2>
+<p align="left"> <a href="https://www.figma.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/figma/figma-icon.svg" alt="figma" width="40" height="40"/> </a> <a href="https://www.java.com" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg" alt="java" width="40" height="40"/> </a> </p>
 
 ## Features
 - View detailed candidate information including personal details, party affiliation, and policy positions
@@ -9,27 +13,7 @@ Gabay is a Java Swing application designed to help users learn about political c
 - Social issue stance tracking with visual indicators (Agree, Disagree, Neutral)
 - Modern, responsive UI with consistent styling
 - Elegant page transitions with fading effects and emblem display
-- Intro splash screen with progress indicator for first-time launch
 - Streamlined search interface with intuitive controls
-
-## Components
-The application follows a modular design pattern with separate components for different aspects of the UI:
-
-### Admin Panel
-- **AdminPanelUI**: Main container for the admin interface
-- **AdminLoginUI**: Login interface for administrators
-- **CandidateDirectoryPanel**: Directory listing all candidates with search functionality
-- **CandidateDetailsPanel**: Form for viewing and editing candidate details
-- **ProfileListPanel**: Reusable component for displaying lists of candidate profiles
-- **SocialIssuesPanel**: Modular component for displaying and editing candidate positions on social issues
-
-### Main Application
-- **LandingPage**: Entry point to the application with navigation to main features
-- **CandidateSearch**: Interface for searching and filtering candidates
-- **CandidateCard**: Card component for displaying candidate summaries
-- **ProvinceDropdown**: Dropdown for selecting provinces/regions
-- **SplashScreen**: Intro loading screen with progress bar for first-time launch
-- **WindowTransitionManager**: Handles smooth transitions between application screens
 
 ## Code Structure
 - **src/**: Source code directory
