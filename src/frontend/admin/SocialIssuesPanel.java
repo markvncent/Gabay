@@ -443,4 +443,28 @@ public class SocialIssuesPanel extends JPanel {
             g2d.dispose();
         }
     }
+    
+    /**
+     * Sets all stance buttons in the panel to enabled or disabled state
+     */
+    @Override
+    public void setEnabled(boolean enabled) {
+        super.setEnabled(enabled);
+        
+        // Enable/disable all components in the content panel
+        enableComponents(contentPanel, enabled);
+    }
+    
+    /**
+     * Recursively enables or disables all components in a container
+     */
+    private void enableComponents(Container container, boolean enable) {
+        Component[] components = container.getComponents();
+        for (Component component : components) {
+            component.setEnabled(enable);
+            if (component instanceof Container) {
+                enableComponents((Container) component, enable);
+            }
+        }
+    }
 } 

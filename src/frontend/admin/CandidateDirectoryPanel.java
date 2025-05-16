@@ -667,7 +667,7 @@ public class CandidateDirectoryPanel extends JPanel {
             return;
         }
         
-        // Clear the form for a new candidate
+        // Clear the form for a new candidate and enable editing
         detailsPanel.clearForm();
     }
     
@@ -782,8 +782,8 @@ public class CandidateDirectoryPanel extends JPanel {
         // Update the details panel if it's connected
         if (detailsPanel != null) {
             if (index >= 0) {
-                // Use loadCandidate instead of displayCandidate to enable edit mode
-                detailsPanel.loadCandidate(index);
+                // Use displayCandidate instead of loadCandidate to enable view-only mode
+                detailsPanel.displayCandidate(index);
             } else {
                 detailsPanel.clearForm();
             }

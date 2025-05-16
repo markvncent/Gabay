@@ -1279,6 +1279,22 @@ public class CandidateDetailsPanel extends JPanel {
                 globalClickListener = null;
             }
         }
+        
+        /**
+         * Enables or disables the dropdown
+         */
+        public void setEnabled(boolean enabled) {
+            regionRectangle.setEnabled(enabled);
+            Component[] components = regionRectangle.getComponents();
+            for (Component component : components) {
+                component.setEnabled(enabled);
+            }
+            
+            // If disabled and open, close the dropdown
+            if (!enabled && isOpen) {
+                closeDropdown();
+            }
+        }
     }
     
     /**
@@ -1634,6 +1650,22 @@ public class CandidateDetailsPanel extends JPanel {
             if (globalClickListener != null) {
                 parentPanel.removeMouseListener(globalClickListener);
                 globalClickListener = null;
+            }
+        }
+        
+        /**
+         * Enables or disables the dropdown
+         */
+        public void setEnabled(boolean enabled) {
+            positionsRectangle.setEnabled(enabled);
+            Component[] components = positionsRectangle.getComponents();
+            for (Component component : components) {
+                component.setEnabled(enabled);
+            }
+            
+            // If disabled and open, close the dropdown
+            if (!enabled && isOpen) {
+                closeDropdown();
             }
         }
     }
@@ -2048,8 +2080,8 @@ public class CandidateDetailsPanel extends JPanel {
         selectedRegion = "Select Region";
         selectedPosition = "Select Position";
         
-        // Reset edit mode
-        isEditMode = false;
+        // Reset edit mode to true since we're creating a new candidate
+        isEditMode = true;
         editCandidateIndex = -1;
         
         // Reset social stances (by creating a new empty map)
@@ -2065,6 +2097,9 @@ public class CandidateDetailsPanel extends JPanel {
         
         // Switch back to page 1
         switchToPage(1);
+        
+        // Enable all fields since we're in create mode
+        setFieldsEnabled(true);
     }
     
     /**
@@ -2128,6 +2163,9 @@ public class CandidateDetailsPanel extends JPanel {
         
         // Switch to page 1
         switchToPage(1);
+        
+        // Enable all fields since we're in edit mode
+        setFieldsEnabled(true);
     }
     
     /**
@@ -2218,8 +2256,11 @@ public class CandidateDetailsPanel extends JPanel {
         // Update page 2 button to indicate if there are defined stances
         updatePage2ButtonIndicator(stances);
         
-        // Switch to page 2 (Social Stances) to immediately show the social stance positions
-        switchToPage(2);
+        // Switch to page 1
+        switchToPage(1);
+        
+        // Disable all fields since we're in view-only mode
+        setFieldsEnabled(false);
     }
     
     /**
@@ -2252,5 +2293,47 @@ public class CandidateDetailsPanel extends JPanel {
                 page2Button.repaint();
             }
         }
+    }
+    
+    /**
+     * Enable or disable all input fields based on edit mode
+     * @param enabled Whether fields should be enabled
+     */
+    private void setFieldsEnabled(boolean enabled) {
+        // Enable/disable all text fields
+        nameField.setEnabled(enabled);
+        ageField.setEnabled(enabled);
+        partyField.setEnabled(enabled);
+        yearsField.setEnabled(enabled);
+        sloganField.setEnabled(enabled);
+        platformsField.setEnabled(enabled);
+        supportedField.setEnabled(enabled);
+        lawsField.setEnabled(enabled);
+        opposedField.setEnabled(enabled);
+        
+        // Enable/disable dropdowns
+        if (regionDropdown != null) {
+            regionDropdown.setEnabled(enabled);
+        }
+        
+        if (positionsDropdown != null) {
+            positionsDropdown.setEnabled(enabled);
+        }
+        
+        // Enable/disable social issues panel
+        if (socialIssuesPanel != null) {
+            socialIssuesPanel.setEnabled(enabled);
+        }
+        
+        // Show or hide save button based on edit mode
+        for (Component component : getComponents()) {
+            if (component instanceof JButton && ((JButton) component).getText().equals("Save")) {
+                component.setVisible(enabled);
+            }
+        }
+        
+        // Refresh the panel
+        revalidate();
+        repaint();
     }
 } 
