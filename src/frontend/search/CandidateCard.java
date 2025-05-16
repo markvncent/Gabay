@@ -12,6 +12,7 @@ import javax.imageio.ImageIO;
 import java.util.function.Consumer;
 import java.util.ArrayList;
 import java.util.List;
+import frontend.comparison.CandidateDataManager;
 
 /**
  * A modular component to display candidate information in a card format.
@@ -43,13 +44,9 @@ public class CandidateCard extends JPanel {
     // Uniform padding
     private final int CARD_PADDING = 12;
     
-    // Animation properties
-    private float hoverState = 0.0f; // 0.0 = not hovering, 1.0 = fully hovering
+    // Animation properties - remove animation-related fields
     private boolean hovering = false; // Track if mouse is currently over the card
     private boolean selected = false;
-    private Timer animationTimer;
-    private final int ANIMATION_DURATION = 150; // milliseconds
-    private final int ANIMATION_STEPS = 10;
     
     // Card sizes - just use one fixed size
     private final Dimension CARD_SIZE = new Dimension(275, 94);
@@ -57,6 +54,7 @@ public class CandidateCard extends JPanel {
     // Highlight colors
     private final Color NORMAL_BACKGROUND = new Color(255, 255, 255);
     private final Color HOVER_BACKGROUND = new Color(0xF8, 0xFA, 0xFC); // Light blue-gray highlight
+    private final Color ACCENT_COLOR = new Color(0x2F, 0x39, 0x8E); // Primary blue accent for left border
     
     // Fonts
     private Font interRegular;
@@ -93,6 +91,7 @@ public class CandidateCard extends JPanel {
         this.interRegular = interRegular;
         this.interSemiBold = interSemiBold;
         this.interMedium = interMedium;
+        this.onViewProfile = onViewProfile;
         
         // Debug: Print the candidate information received
         System.out.println("--------------------------------------------------------------");
@@ -107,9 +106,6 @@ public class CandidateCard extends JPanel {
         
         // Initialize UI
         initializeUI();
-        
-        // Set up animation timer
-        setupAnimationTimer();
         
         // Add mouse listeners for hover effect
         addHoverListeners();
@@ -128,31 +124,11 @@ public class CandidateCard extends JPanel {
         
         // Create the main card panel with shadow effect
         mainCardPanel = new JPanel() {
-            // Use a buffered image for the background to improve performance
-            private BufferedImage cachedBackground = null;
-            private boolean needsRefresh = true;
-            private int lastWidth = 0;
-            private int lastHeight = 0;
-            private float lastHoverState = -1;
-            
             @Override
-            public void setBounds(int x, int y, int width, int height) {
-                if (width != lastWidth || height != lastHeight) {
-                    needsRefresh = true;
-                    lastWidth = width;
-                    lastHeight = height;
-                }
-                super.setBounds(x, y, width, height);
-            }
-            
-            /**
-             * Pre-render the card background to a buffer
-             */
-            private void updateCachedBackground() {
-                if (getWidth() <= 0 || getHeight() <= 0) return;
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
                 
-                cachedBackground = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_ARGB);
-                Graphics2D g2d = cachedBackground.createGraphics();
+                Graphics2D g2d = (Graphics2D)g;
                 g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
                 
                 // Draw shadow first (subtle shadow effect)
@@ -172,12 +148,8 @@ public class CandidateCard extends JPanel {
                     ));
                 }
                 
-                // Interpolate background color based on hover state
-                Color bgColor = new Color(
-                    (int)(NORMAL_BACKGROUND.getRed() + (HOVER_BACKGROUND.getRed() - NORMAL_BACKGROUND.getRed()) * hoverState),
-                    (int)(NORMAL_BACKGROUND.getGreen() + (HOVER_BACKGROUND.getGreen() - NORMAL_BACKGROUND.getGreen()) * hoverState),
-                    (int)(NORMAL_BACKGROUND.getBlue() + (HOVER_BACKGROUND.getBlue() - NORMAL_BACKGROUND.getBlue()) * hoverState)
-                );
+                // Set background color based on hover state
+                Color bgColor = hovering ? HOVER_BACKGROUND : NORMAL_BACKGROUND;
                 
                 // Draw background with rounded corners
                 g2d.setColor(bgColor);
@@ -188,12 +160,10 @@ public class CandidateCard extends JPanel {
                     CORNER_RADIUS, CORNER_RADIUS
                 ));
                 
-                // Draw border - make border darker when hovering
-                Color borderColor = new Color(
-                    (int)(cardBorder.getRed() + ((cardBorder.getRed() - 40) - cardBorder.getRed()) * hoverState),
-                    (int)(cardBorder.getGreen() + ((cardBorder.getGreen() - 40) - cardBorder.getGreen()) * hoverState),
-                    (int)(cardBorder.getBlue() + ((cardBorder.getBlue() - 40) - cardBorder.getBlue()) * hoverState)
-                );
+                // Draw border - darker when hovering
+                Color borderColor = hovering ? 
+                    new Color(cardBorder.getRed() - 40, cardBorder.getGreen() - 40, cardBorder.getBlue() - 40) : 
+                    cardBorder;
                 g2d.setColor(borderColor);
                 g2d.setStroke(new BasicStroke(1));
                 g2d.draw(new RoundRectangle2D.Float(
@@ -202,24 +172,19 @@ public class CandidateCard extends JPanel {
                     getHeight() - 2 * shadowSize,
                     CORNER_RADIUS, CORNER_RADIUS
                 ));
-                g2d.dispose();
                 
-                needsRefresh = false;
-                lastHoverState = hoverState;
-            }
-            
-            @Override
-            protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                
-                // Check if we need to update the cached background (size changed or hover state changed)
-                if (cachedBackground == null || needsRefresh || Math.abs(lastHoverState - hoverState) > 0.01f) {
-                    updateCachedBackground();
-                }
-                
-                // Draw the cached background with fast painting
-                if (cachedBackground != null) {
-                    g.drawImage(cachedBackground, 0, 0, null);
+                // Draw left accent border when hovering
+                if (hovering) {
+                    g2d.setColor(ACCENT_COLOR);
+                    g2d.setStroke(new BasicStroke(3));
+                    
+                    // Draw only the left portion of the border
+                    g2d.drawLine(
+                        shadowSize, 
+                        shadowSize + CORNER_RADIUS,
+                        shadowSize, 
+                        getHeight() - shadowSize - CORNER_RADIUS
+                    );
                 }
             }
         };
@@ -301,33 +266,13 @@ public class CandidateCard extends JPanel {
      * Set up animation timer for smooth hover transitions
      */
     private void setupAnimationTimer() {
-        // Create timer that fires every 16ms (roughly 60fps)
-        animationTimer = new Timer(16, e -> {
-            // Update hover state based on isHovering flag
-            if (hovering && hoverState < 1.0f) {
-                hoverState = Math.min(1.0f, hoverState + 0.15f);
-                updateFonts();
-                repaint();
-            } else if (!hovering && hoverState > 0.0f) {
-                hoverState = Math.max(0.0f, hoverState - 0.15f);
-                updateFonts();
-                repaint();
-            }
-        });
-        animationTimer.setRepeats(true);
-        animationTimer.start();
+        // No animation timer needed
     }
-    
-    // Animation direction: 1 for hover, -1 for un-hover
-    private int animationDirection = 0;
     
     /**
      * Update all components based on current hover state
      */
     private void updateComponentsForHoverState() {
-        // Interpolate font sizes
-        updateFonts();
-        
         // Use fixed card size, no resizing
         setPreferredSize(CARD_SIZE);
         
@@ -337,34 +282,28 @@ public class CandidateCard extends JPanel {
     }
     
     /**
-     * Update font sizes based on hover state
+     * Update font sizes based on hover state - no longer changes font size
      */
     private void updateFonts() {
-        // Name font: 14px normal to 15px on hover - using SemiBold
+        // Name font: fixed at 14px - using SemiBold
         if (interSemiBold != null) {
-            float nameSize = 14f + (1f * hoverState);
-            nameLabel.setFont(interSemiBold.deriveFont(nameSize));
+            nameLabel.setFont(interSemiBold.deriveFont(14f));
         } else {
-            int nameSize = 14 + Math.round(hoverState);
-            nameLabel.setFont(new Font("Sans-Serif", Font.BOLD, nameSize));
+            nameLabel.setFont(new Font("Sans-Serif", Font.BOLD, 14));
         }
         
-        // Position font: 12px normal to 13px on hover - using Regular
+        // Position font: fixed at 12px - using Regular
         if (interRegular != null) {
-            float positionSize = 12f + (1f * hoverState);
-            positionLabel.setFont(interRegular.deriveFont(positionSize));
+            positionLabel.setFont(interRegular.deriveFont(12f));
         } else {
-            int positionSize = 12 + Math.round(hoverState);
-            positionLabel.setFont(new Font("Sans-Serif", Font.PLAIN, positionSize));
+            positionLabel.setFont(new Font("Sans-Serif", Font.PLAIN, 12));
         }
         
-        // Party font: 11px normal to 12px on hover - using Regular
+        // Party font: fixed at 11px - using Regular
         if (interRegular != null) {
-            float partySize = 11f + (1f * hoverState);
-            partyLabel.setFont(interRegular.deriveFont(partySize));
+            partyLabel.setFont(interRegular.deriveFont(11f));
         } else {
-            int partySize = 11 + Math.round(hoverState);
-            partyLabel.setFont(new Font("Sans-Serif", Font.PLAIN, partySize));
+            partyLabel.setFont(new Font("Sans-Serif", Font.PLAIN, 11));
         }
     }
     
@@ -428,9 +367,10 @@ public class CandidateCard extends JPanel {
             
             @Override
             public void mouseClicked(MouseEvent e) {
-                // Trigger view profile action
-                if (onViewProfile != null) {
-                    onViewProfile.accept(candidateName);
+                // Show the ViewCandidate popup instead of using the callback
+                Window window = SwingUtilities.getWindowAncestor(CandidateCard.this);
+                if (window instanceof JFrame) {
+                    new ViewCandidate((JFrame) window, candidateName);
                 }
             }
         };
@@ -448,21 +388,8 @@ public class CandidateCard extends JPanel {
         if (this.hovering != hovering) {
             this.hovering = hovering;
             
-            // Stop any existing animation
-            if (animationTimer != null && animationTimer.isRunning()) {
-                animationTimer.stop();
-            }
-            
-            // Only start animation if component is visible and not in a scrolling operation
-            if (isVisible() && isShowing() && !isScrolling) {
-                animationDirection = hovering ? 1 : -1;
-                animationTimer.start();
-            } else {
-                // If scrolling or not visible, skip animation and just set final state
-                hoverState = hovering ? 1.0f : 0.0f;
-                updateComponentsForHoverState();
-                mainCardPanel.repaint();
-            }
+            // Just repaint immediately - no animation
+            repaint();
             
             // Notify hover listeners
             for (Consumer<Boolean> listener : hoverListeners) {
@@ -640,35 +567,41 @@ public class CandidateCard extends JPanel {
     private void createPlaceholderImage() {
         System.out.println("Creating placeholder image for: " + candidateName);
         
-        // Create a placeholder image with the candidate's initials
-        int size = 100; // Larger than needed for better quality when scaled down
-        candidateImage = new BufferedImage(size, size, BufferedImage.TYPE_INT_ARGB);
-        Graphics2D g2d = candidateImage.createGraphics();
+        // Use the default profile image from CandidateDataManager
+        candidateImage = CandidateDataManager.getDefaultProfileImage();
         
-        // Enable anti-aliasing for smoother text
-        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-        
-        // Create a colored background
-        Color bgColor = getColorFromName(candidateName);
-        g2d.setColor(bgColor);
-        g2d.fillOval(0, 0, size, size);
-        
-        // Draw the initials in white
-        g2d.setColor(Color.WHITE);
-        g2d.setFont(new Font("Sans-Serif", Font.BOLD, size / 3));
-        
-        String initials = getInitials(candidateName);
-        FontMetrics fm = g2d.getFontMetrics();
-        int textWidth = fm.stringWidth(initials);
-        int textHeight = fm.getHeight();
-        
-        // Center the text
-        int x = (size - textWidth) / 2;
-        int y = (size - textHeight) / 2 + fm.getAscent();
-        
-        g2d.drawString(initials, x, y);
-        g2d.dispose();
+        // If for some reason the default image is null, create a fallback
+        if (candidateImage == null) {
+            // Create a placeholder image with the candidate's initials as fallback
+            int size = 100; // Larger than needed for better quality when scaled down
+            candidateImage = new BufferedImage(size, size, BufferedImage.TYPE_INT_ARGB);
+            Graphics2D g2d = candidateImage.createGraphics();
+            
+            // Enable anti-aliasing for smoother text
+            g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+            
+            // Create a colored background
+            Color bgColor = getColorFromName(candidateName);
+            g2d.setColor(bgColor);
+            g2d.fillOval(0, 0, size, size);
+            
+            // Draw the initials in white
+            g2d.setColor(Color.WHITE);
+            g2d.setFont(new Font("Sans-Serif", Font.BOLD, size / 3));
+            
+            String initials = getInitials(candidateName);
+            FontMetrics fm = g2d.getFontMetrics();
+            int textWidth = fm.stringWidth(initials);
+            int textHeight = fm.getHeight();
+            
+            // Center the text
+            int x = (size - textWidth) / 2;
+            int y = (size - textHeight) / 2 + fm.getAscent();
+            
+            g2d.drawString(initials, x, y);
+            g2d.dispose();
+        }
     }
     
     /**
@@ -795,11 +728,7 @@ public class CandidateCard extends JPanel {
      * Pause animations during scrolling
      */
     public static void setScrolling(boolean scrolling) {
+        // No animations to pause
         isScrolling = scrolling;
-        
-        // When scrolling starts, immediately stop all animations to save resources
-        if (scrolling) {
-            // Animation pause is handled by hover state changes
-        }
     }
 } 

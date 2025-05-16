@@ -66,6 +66,9 @@ public class CandidateCardPanel extends JPanel {
     // Add a cache for issue filtering results
     private Map<String, Set<CandidateDataLoader.Candidate>> issueFilterCache = new HashMap<>();
     
+    // Keep track of any running workers
+    private SwingWorker<?, ?> currentWorker;
+    
     /**
      * Create a scrollable panel that displays candidate cards
      * 
@@ -588,214 +591,200 @@ public class CandidateCardPanel extends JPanel {
      * Apply both search query and province filters
      */
     private void applyFilters() {
-        // Clear the filtered list
-        filteredCandidates.clear();
+        // For performance reasons, create a local copy for thread safety
+        final String localSearchQuery = currentSearchQuery;
+        final String localProvince = currentProvince;
+        final String localFilterType = currentFilterType;
         
-        // Apply both filters to all candidates
-        for (CandidateDataLoader.Candidate candidate : allCandidates) {
-            boolean matchesSearch = true;
-            boolean matchesProvince = true;
+        // Don't run filtering if we're canceling operations
+        if (localSearchQuery == null || localProvince == null || localFilterType == null) {
+            return;
+        }
+        
+        // Use SwingWorker for background processing to reduce UI lag
+        currentWorker = new SwingWorker<List<CandidateDataLoader.Candidate>, Void>() {
+            @Override
+            protected List<CandidateDataLoader.Candidate> doInBackground() {
+                // Clear the filtered list
+                List<CandidateDataLoader.Candidate> results = new ArrayList<>();
+                
+                // Apply both filters to all candidates
+                for (CandidateDataLoader.Candidate candidate : allCandidates) {
+                    if (isCancelled()) {
+                        return new ArrayList<>(); // Return empty list if cancelled
+                    }
+                    
+                    boolean matchesSearch = applySearchFilter(candidate, localSearchQuery, localFilterType);
+                    boolean matchesProvince = applyProvinceFilter(candidate, localProvince);
+                    
+                    // Add candidate if it matches both filters
+                    if (matchesSearch && matchesProvince) {
+                        results.add(candidate);
+                    }
+                }
+                
+                return results;
+            }
             
-            // Apply search filter if we have a query
-            if (!currentSearchQuery.isEmpty()) {
-                // Process differently based on the filter type
-                if ("Issue".equals(currentFilterType)) {
-                    // Don't apply empty query filter
-                    if (currentSearchQuery.isEmpty()) {
-                        matchesSearch = true;
-                    } else {
-                        // Convert search query to lowercase for case-insensitive comparison
-                        String query = currentSearchQuery.toLowerCase();
-                        
-                        // Debug information
-                        System.out.println("Searching for issue: '" + query + "'");
-                        
-                        // First, specifically check if this is a social stance topic
-                        // This gives priority to social stances in the search
-                        boolean isMatchingSocialStance = false;
-                        
-                        // Check if candidate has a stance on this topic
-                        isMatchingSocialStance = candidate.hasStanceOnTopic(query);
-                        
-                        // If no direct match on topic, check if the query is part of any social stance
-                        if (!isMatchingSocialStance) {
-                            for (String stance : candidate.getSocialStances()) {
-                                if (stance.toLowerCase().contains(query)) {
-                                    isMatchingSocialStance = true;
-                                    break;
-                                }
-                            }
-                        }
-                        
-                        // Match if there's a matching social stance
-                        if (isMatchingSocialStance) {
-                            matchesSearch = true;
-                        } 
-                        // If not found in social stances, use the existing hasStanceOn method
-                        else {
-                            matchesSearch = candidate.hasStanceOn(query);
-                        }
-                        
-                        // If still no match, check in platforms and other fields
-                        if (!matchesSearch) {
-                            // Check in platforms (using reflection safely)
-                            try {
-                                java.lang.reflect.Method getPlatformsMethod = candidate.getClass().getMethod("getPlatforms");
-                                Object platformsObj = getPlatformsMethod.invoke(candidate);
-                                String platforms = (platformsObj != null) ? platformsObj.toString().toLowerCase() : "";
-                                if (!platforms.isEmpty() && containsWordOrPartial(platforms, query)) {
-                                    matchesSearch = true;
-                                }
-                            } catch (NoSuchMethodException e) {
-                                // Method doesn't exist, skip this check
-                            } catch (Exception e) {
-                                // Other exceptions, just log and continue
-                                System.out.println("Error checking platforms: " + e.getMessage());
-                            }
-                            
-                            // Check in notable laws if available
-                            try {
-                                java.lang.reflect.Method getNotableLawsMethod = candidate.getClass().getMethod("getNotableLaws");
-                                Object notableLawsObj = getNotableLawsMethod.invoke(candidate);
-                                String notableLaws = (notableLawsObj != null) ? notableLawsObj.toString().toLowerCase() : "";
-                                if (!notableLaws.isEmpty() && containsWordOrPartial(notableLaws, query)) {
-                                    matchesSearch = true;
-                                }
-                            } catch (NoSuchMethodException e) {
-                                // Method doesn't exist, skip this check
-                            } catch (Exception e) {
-                                // Other exceptions, just log and continue
-                                System.out.println("Error checking notable laws: " + e.getMessage());
-                            }
-                        }
-                        
-                        // Debug logging
-                        if (matchesSearch) {
-                            System.out.println("Issue match for candidate: " + candidate.getName());
-                            System.out.println("  - Supported Issues: " + safeString(candidate.getSupportedIssues()));
-                            System.out.println("  - Opposed Issues: " + safeString(candidate.getOpposedIssues()));
-                            
-                            // Use the new formatted social stances method
-                            System.out.println("  - Social Stances: " + candidate.getFormattedSocialStances());
-                            
-                            // Print the specific social stance topics
-                            System.out.println("  - Social Stance Topics: " + candidate.getSocialStanceTopics());
-                            
-                            System.out.println("  - Search Query: " + currentSearchQuery);
-                            System.out.println("  - Related Issues: " + CandidateDataLoader.getRelatedIssues(query));
-                        }
+            @Override
+            protected void done() {
+                try {
+                    if (!isCancelled()) {
+                        filteredCandidates = get();
+                        rebuildCards();
                     }
-                } else if ("Name".equals(currentFilterType)) {
-                    // Check only in candidate's name
-                    String candidateName = safeString(candidate.getName()).toLowerCase();
-                    
-                    // Check if the query matches the full name or just the first name
-                    String[] nameParts = candidateName.split(" ");
-                    boolean nameMatches = candidateName.contains(currentSearchQuery.toLowerCase());
-                    
-                    // Check if query matches first name only
-                    if (!nameMatches && nameParts.length > 0) {
-                        nameMatches = nameParts[0].contains(currentSearchQuery.toLowerCase());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        
+        // Execute the worker
+        currentWorker.execute();
+    }
+    
+    // Helper method to apply search filter
+    private boolean applySearchFilter(CandidateDataLoader.Candidate candidate, String query, String filterType) {
+        // If no query, match everything
+        if (query == null || query.isEmpty()) {
+            return true;
+        }
+        
+        // Process differently based on the filter type
+        if ("Issue".equals(filterType)) {
+            // First, specifically check if this is a social stance topic
+            // This gives priority to social stances in the search
+            boolean isMatchingSocialStance = candidate.hasStanceOnTopic(query);
+            
+            // If no direct match on topic, check if the query is part of any social stance
+            if (!isMatchingSocialStance) {
+                for (String stance : candidate.getSocialStances()) {
+                    if (stance.toLowerCase().contains(query)) {
+                        isMatchingSocialStance = true;
+                        break;
                     }
-                    
-                    matchesSearch = nameMatches;
-                } else if ("Partylist".equals(currentFilterType)) {
-                    // Check only in candidate's party
-                    String candidateParty = safeString(candidate.getParty()).toLowerCase();
-                    matchesSearch = candidateParty.contains(currentSearchQuery.toLowerCase());
-                } else if ("Position".equals(currentFilterType)) {
-                    // Check only in candidate's position
-                    String candidatePosition = safeString(candidate.getPosition()).toLowerCase();
-                    matchesSearch = candidatePosition.contains(currentSearchQuery.toLowerCase());
-                } else {
-                    // Default case (search across all fields if filter type not recognized)
-                    String candidateName = safeString(candidate.getName()).toLowerCase();
-                    String candidateParty = safeString(candidate.getParty()).toLowerCase();
-                    String candidatePosition = safeString(candidate.getPosition()).toLowerCase();
-                    
-                    // Check if the query matches the full name or just the first name
-                    String[] nameParts = candidateName.split(" ");
-                    boolean nameMatches = candidateName.contains(currentSearchQuery.toLowerCase());
-                    
-                    // Check if query matches first name only
-                    if (!nameMatches && nameParts.length > 0) {
-                        nameMatches = nameParts[0].contains(currentSearchQuery.toLowerCase());
-                    }
-                    
-                    // Check if the query matches the party or position
-                    boolean partyMatches = candidateParty.contains(currentSearchQuery.toLowerCase());
-                    boolean positionMatches = candidatePosition.contains(currentSearchQuery.toLowerCase());
-                    
-                    // Match if any of the fields contain the search query
-                    matchesSearch = nameMatches || partyMatches || positionMatches;
                 }
             }
             
-            // Apply province filter if we have a province (not empty, not "Select Region", not "All")
-            if (currentProvince != null && !currentProvince.isEmpty() && 
-                !"Select Region".equals(currentProvince) && !"All".equals(currentProvince)) {
-                
-                String candidateRegion = safeString(candidate.getRegion());
-                
-                // Skip region check if candidate has no region
-                if (!candidateRegion.isEmpty()) {
-                    // First try exact match with trimming and case insensitivity
-                    String trimmedCandidateRegion = candidateRegion.trim();
-                    String trimmedCurrentProvince = currentProvince.trim();
-                    
-                    if (trimmedCandidateRegion.equalsIgnoreCase(trimmedCurrentProvince)) {
-                        matchesProvince = true;
-                    } else {
-                        // Check for region number match (e.g., "Region IV-A" matches "Region IV-A (CALABARZON)")
-                        if (trimmedCurrentProvince.contains(" ")) {
-                            String regionNumber = trimmedCurrentProvince.split(" ")[0] + " " + 
-                                                  trimmedCurrentProvince.split(" ")[1];
-                            if (trimmedCandidateRegion.toLowerCase().contains(regionNumber.toLowerCase())) {
-                                matchesProvince = true;
-                            } else {
-                                // Extract region name from parentheses and check
-                                if (trimmedCurrentProvince.contains("(") && trimmedCurrentProvince.contains(")")) {
-                                    int startIndex = trimmedCurrentProvince.indexOf("(") + 1;
-                                    int endIndex = trimmedCurrentProvince.indexOf(")");
-                                    if (startIndex > 0 && endIndex > startIndex) {
-                                        String regionName = trimmedCurrentProvince.substring(startIndex, endIndex).trim();
-                                        // Check if region name is in candidate region (case insensitive)
-                                        matchesProvince = trimmedCandidateRegion.toLowerCase().contains(regionName.toLowerCase()) ||
-                                                          regionName.toLowerCase().contains(trimmedCandidateRegion.toLowerCase());
-                                    } else {
-                                        matchesProvince = false;
-                                    }
-                                } else {
-                                    // Try to match on substrings (e.g., "NCR" matches "National Capital Region")
-                                    matchesProvince = trimmedCandidateRegion.toLowerCase().contains(trimmedCurrentProvince.toLowerCase()) ||
-                                                      trimmedCurrentProvince.toLowerCase().contains(trimmedCandidateRegion.toLowerCase());
-                                }
-                            }
-                        } else {
-                            // For simple region names without spaces, do a case-insensitive contains check
-                            matchesProvince = trimmedCandidateRegion.toLowerCase().contains(trimmedCurrentProvince.toLowerCase()) ||
-                                              trimmedCurrentProvince.toLowerCase().contains(trimmedCandidateRegion.toLowerCase());
-                        }
-                    }
-                } else {
-                    matchesProvince = false;
+            // Match if there's a matching social stance
+            if (isMatchingSocialStance) {
+                return true;
+            } 
+            
+            // If still no match, check in platforms and other fields
+            try {
+                java.lang.reflect.Method getPlatformsMethod = candidate.getClass().getMethod("getPlatforms");
+                Object platformsObj = getPlatformsMethod.invoke(candidate);
+                String platforms = (platformsObj != null) ? platformsObj.toString().toLowerCase() : "";
+                if (!platforms.isEmpty() && containsWordOrPartial(platforms, query)) {
+                    return true;
                 }
+            } catch (Exception e) {
+                // Skip if error
             }
             
-            // Add to filtered list if it matches all active filters
-            if (matchesSearch && matchesProvince) {
-                filteredCandidates.add(candidate);
+            // Check in notable laws if available
+            try {
+                java.lang.reflect.Method getNotableLawsMethod = candidate.getClass().getMethod("getNotableLaws");
+                Object notableLawsObj = getNotableLawsMethod.invoke(candidate);
+                String notableLaws = (notableLawsObj != null) ? notableLawsObj.toString().toLowerCase() : "";
+                if (!notableLaws.isEmpty() && containsWordOrPartial(notableLaws, query)) {
+                    return true;
+                }
+            } catch (Exception e) {
+                // Skip if error
+            }
+            
+            return false;
+        } 
+        else if ("Name".equals(filterType)) {
+            // Check only in candidate's name
+            String candidateName = safeString(candidate.getName()).toLowerCase();
+            
+            // Check if the query matches the full name or just the first name
+            String[] nameParts = candidateName.split(" ");
+            boolean nameMatches = candidateName.contains(query.toLowerCase());
+            
+            // Check if query matches first name only
+            if (!nameMatches && nameParts.length > 0) {
+                nameMatches = nameParts[0].contains(query.toLowerCase());
+            }
+            
+            return nameMatches;
+        } 
+        else if ("Partylist".equals(filterType)) {
+            // Check only in candidate's party
+            String candidateParty = safeString(candidate.getParty()).toLowerCase();
+            return candidateParty.contains(query.toLowerCase());
+        } 
+        else if ("Position".equals(filterType)) {
+            // Check only in candidate's position
+            String candidatePosition = safeString(candidate.getPosition()).toLowerCase();
+            return candidatePosition.contains(query.toLowerCase());
+        } 
+        else {
+            // Default case (search across all fields if filter type not recognized)
+            String candidateName = safeString(candidate.getName()).toLowerCase();
+            String candidateParty = safeString(candidate.getParty()).toLowerCase();
+            String candidatePosition = safeString(candidate.getPosition()).toLowerCase();
+            
+            // Check if the query matches the full name or just the first name
+            String[] nameParts = candidateName.split(" ");
+            boolean nameMatches = candidateName.contains(query.toLowerCase());
+            
+            // Check if query matches first name only
+            if (!nameMatches && nameParts.length > 0) {
+                nameMatches = nameParts[0].contains(query.toLowerCase());
+            }
+            
+            // Check if the query matches the party or position
+            boolean partyMatches = candidateParty.contains(query.toLowerCase());
+            boolean positionMatches = candidatePosition.contains(query.toLowerCase());
+            
+            // Match if any of the fields contain the search query
+            return nameMatches || partyMatches || positionMatches;
+        }
+    }
+    
+    // Helper method to apply province filter
+    private boolean applyProvinceFilter(CandidateDataLoader.Candidate candidate, String province) {
+        // Apply province filter if we have a province (not empty, not "Select Region", not "All")
+        if (province == null || province.isEmpty() || 
+            "Select Region".equals(province) || "All".equals(province)) {
+            return true;
+        }
+        
+        String candidateRegion = safeString(candidate.getRegion());
+        
+        // Skip region check if candidate has no region
+        if (candidateRegion.isEmpty()) {
+            return false;
+        }
+        
+        // First try exact match with trimming and case insensitivity
+        String trimmedCandidateRegion = candidateRegion.trim();
+        String trimmedCurrentProvince = province.trim();
+        
+        if (trimmedCandidateRegion.equalsIgnoreCase(trimmedCurrentProvince)) {
+            return true;
+        }
+        
+        // Check for region number match (e.g., "Region IV-A" matches "Region IV-A (CALABARZON)")
+        // Extract region number part for comparison
+        String[] candidateParts = trimmedCandidateRegion.split(" ");
+        String[] provinceParts = trimmedCurrentProvince.split(" ");
+        
+        if (candidateParts.length >= 2 && provinceParts.length >= 2) {
+            String candidateRegionCode = candidateParts[1];
+            String provinceRegionCode = provinceParts[1];
+            
+            if (candidateRegionCode.equals(provinceRegionCode)) {
+                return true;
             }
         }
         
-        // Rebuild the card list based on filtered candidates
-        rebuildCards();
-        
-        // Print debug info about how many candidates matched the filters
-        System.out.println("Filter results: " + filteredCandidates.size() + " candidates matched the criteria");
-        System.out.println("  - Search query: '" + currentSearchQuery + "'");
-        System.out.println("  - Filter type: '" + currentFilterType + "'");
-        System.out.println("  - Region filter: '" + currentProvince + "'");
+        // No match found
+        return false;
     }
     
     /**
@@ -961,23 +950,37 @@ public class CandidateCardPanel extends JPanel {
      * @return True if the text contains the query as a whole word or partial match
      */
     private boolean containsWordOrPartial(String text, String query) {
-        // First try exact match
-        if (text.contains(query)) {
-            return true;
-        }
+        // Split text into words
+        String[] words = text.split("\\s+");
         
-        // For single-word queries, check if any word contains the query
-        if (!query.contains(" ")) {
-            String[] words = text.split("\\s+");
-            for (String word : words) {
-                // Remove punctuation
-                word = word.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
-                if (!word.isEmpty() && (word.contains(query) || query.contains(word))) {
-                    return true;
-                }
+        // Check if any word contains the query
+        for (String word : words) {
+            if (word.toLowerCase().contains(query)) {
+                return true;
             }
         }
         
         return false;
+    }
+    
+    /**
+     * Cancels any ongoing background operations to prevent lag when leaving the page
+     */
+    public void cancelBackgroundOperations() {
+        // Cancel any running worker
+        if (currentWorker != null && !currentWorker.isDone()) {
+            currentWorker.cancel(true);
+            currentWorker = null;
+        }
+        
+        // Clear caches to free memory
+        issueFilterCache.clear();
+        
+        // Cancel any running searches and reset state
+        currentSearchQuery = "";
+        currentProvince = "";
+        
+        // Allow garbage collection
+        filteredCandidates.clear();
     }
 } 

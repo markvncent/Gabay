@@ -11,6 +11,7 @@ import javax.imageio.ImageIO;
 import java.util.HashMap;
 import java.util.Map;
 import frontend.landingpage.LandingPageUI;
+import frontend.comparison.MinimalScrollBarUI;
 
 /**
  * Candidate Quiz UI for the Gabay application
@@ -34,8 +35,8 @@ public class CandidateQuizUI extends JFrame {
     private boolean showBackgroundImage = true;
     private final int BACKDROP_WIDTH = 2555;
     private final int BACKDROP_HEIGHT = 2154;
-    private final int BACKDROP_X = 206;
-    private final int BACKDROP_Y = -242;
+    private final int BACKDROP_X = -1250;
+    private final int BACKDROP_Y = -1250;
     
     // Header logo
     private BufferedImage headerLogoImage;
@@ -45,11 +46,14 @@ public class CandidateQuizUI extends JFrame {
     private final int TITLE_Y = 181; // Adjusted Y position to be closer to rectangles
     private final int PARAGRAPH_WIDTH = 1154; // Base width in reference window size
     private final int ELEMENT_SPACING = -5; // Negative spacing to create overlap
-    private final Color TITLE_COLOR = new Color(0x2B, 0x37, 0x80); // #2B3780
+    private final Color TITLE_COLOR = new Color(0xE9, 0x45, 0x40); // #E94540 - Changed from blue to red
     
     // Window dimensions
     private int initialWindowWidth = 1411; // Fixed window width
-    private int initialWindowHeight = 970; // Fixed window height
+    private int initialWindowHeight = 1050; // Increased height to fit quiz area
+    
+    // Quiz area component
+    private QuizArea quizArea;
     
     public CandidateQuizUI() {
         // Load fonts
@@ -157,7 +161,7 @@ public class CandidateQuizUI extends JFrame {
                 g2d.setColor(TITLE_COLOR);
                 
                 // Draw the title at calculated position
-                g2d.drawString("Candidate Quiz.", scaledTitleX, scaledTitleY);
+                g2d.drawString("Gabáy Quiz Match", scaledTitleX, scaledTitleY);
                 
                 // Draw paragraph text below the title
                 Font paragraphFont = interSemiBold;
@@ -188,6 +192,16 @@ public class CandidateQuizUI extends JFrame {
                 
                 // Draw wrapped paragraph text
                 drawWrappedText(g2d, paragraphText, scaledTitleX, paragraphY, scaledParagraphWidth);
+                
+                // Draw a divider line below the header text
+                int dividerY = paragraphY + 60; // Position below the paragraph text
+                int dividerWidth = Math.min(scaledParagraphWidth, getWidth() - 280);
+                int dividerX = (getWidth() - dividerWidth) / 2;
+                
+                // Draw the line with gray color to match other pages
+                g2d.setColor(new Color(0xD9, 0xD9, 0xD9)); // Light gray color #D9D9D9
+                g2d.setStroke(new BasicStroke(2f)); // 2px thickness
+                g2d.drawLine(dividerX, dividerY, dividerX + dividerWidth, dividerY);
             }
             
             /**
@@ -300,15 +314,26 @@ public class CandidateQuizUI extends JFrame {
         // Add components to panels
         headerPanel.add(logoPanel, BorderLayout.WEST);
         
-        // Add a content panel (empty for now)
-        JPanel contentPanel = new JPanel();
-        contentPanel.setLayout(null); // Use null layout for precise positioning
+        // Create a content panel with BorderLayout for proper centering
+        JPanel contentPanel = new JPanel(new BorderLayout());
         contentPanel.setOpaque(false);
         contentPanel.setBorder(BorderFactory.createEmptyBorder(20, 50, 20, 50));
         
         // Add panels to main panel
         mainPanel.add(headerPanel, BorderLayout.NORTH);
         mainPanel.add(contentPanel, BorderLayout.CENTER);
+        
+        // Create a wrapper panel for the QuizArea with FlowLayout for centering
+        JPanel quizWrapper = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        quizWrapper.setOpaque(false);
+        
+        // Create the QuizArea component
+        quizArea = new QuizArea();
+        quizWrapper.add(quizArea);
+        
+        // Add the wrapper to the content panel with NORTH alignment to position it below the header
+        contentPanel.add(Box.createVerticalStrut(180), BorderLayout.NORTH); // Space below header
+        contentPanel.add(quizWrapper, BorderLayout.CENTER);
         
         // Set content pane
         setContentPane(mainPanel);

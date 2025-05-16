@@ -11,6 +11,7 @@ import javax.imageio.ImageIO;
 import java.util.HashMap;
 import java.util.Map;
 import frontend.landingpage.LandingPageUI;
+import frontend.search.ViewCandidate;
 
 /**
  * Candidate Overview UI for the Gabay application
@@ -28,6 +29,7 @@ public class CandidateOverviewUI extends JFrame {
     private Color primaryBlue = new Color(0x2F, 0x39, 0x8E); // #2f398e
     private Color headingColor = new Color(0x47, 0x55, 0x69); // #475569
     private Color paragraphColor = new Color(0x8D, 0x8D, 0x8D); // #8D8D8D
+    private Color dividerColor = new Color(0xE2, 0xE8, 0xF0); // #E2E8F0
     
     // Background image
     private BufferedImage backgroundImage;
@@ -50,6 +52,15 @@ public class CandidateOverviewUI extends JFrame {
     // Window dimensions
     private int initialWindowWidth = 1411; // Fixed window width
     private int initialWindowHeight = 970; // Fixed window height
+    
+    // Candidate list panel
+    private CandidateListPanel candidateListPanel;
+    
+    // Navigation bar for positions
+    private NavigationBar navigationBar;
+    
+    // Store the divider Y position
+    private int dividerYPosition = 0;
     
     public CandidateOverviewUI() {
         // Load fonts
@@ -187,15 +198,34 @@ public class CandidateOverviewUI extends JFrame {
                 int paragraphY = scaledTitleY + (titleMetrics.getHeight() / 2) + scaledSpacing;
                 
                 // Draw wrapped paragraph text
-                drawWrappedText(g2d, paragraphText, scaledTitleX, paragraphY, scaledParagraphWidth);
+                int lastLineY = drawWrappedText(g2d, paragraphText, scaledTitleX, paragraphY, scaledParagraphWidth);
+                
+                // Draw divider line below the paragraph
+                FontMetrics paragraphMetrics = g2d.getFontMetrics(paragraphFont);
+                int dividerY = lastLineY + paragraphMetrics.getHeight() + 20; // 20px below last line of paragraph
+                
+                g2d.setColor(dividerColor);
+                g2d.setStroke(new BasicStroke(1));
+                g2d.drawLine(scaledTitleX, dividerY, scaledTitleX + scaledParagraphWidth, dividerY);
+                
+                // Store the divider position for layout purposes
+                dividerYPosition = dividerY;
+            }
+            
+            /**
+             * Get the Y position of the divider
+             */
+            private int getDividerYPosition() {
+                return dividerYPosition;
             }
             
             /**
              * Draw wrapped text with specified width, left-aligned
+             * @return The y-coordinate of the last line drawn
              */
-            private void drawWrappedText(Graphics2D g2d, String text, int x, int y, int maxWidth) {
+            private int drawWrappedText(Graphics2D g2d, String text, int x, int y, int maxWidth) {
                 if (text == null || text.isEmpty()) {
-                    return;
+                    return y;
                 }
                 
                 FontMetrics fm = g2d.getFontMetrics();
@@ -225,6 +255,8 @@ public class CandidateOverviewUI extends JFrame {
                 if (currentLine.length() > 0) {
                     g2d.drawString(currentLine.toString(), x, currentY);
                 }
+                
+                return currentY;
             }
         };
         mainPanel.setLayout(new BorderLayout());
@@ -232,7 +264,7 @@ public class CandidateOverviewUI extends JFrame {
         // Create header panel
         JPanel headerPanel = new JPanel(new BorderLayout());
         headerPanel.setOpaque(false);
-        headerPanel.setBorder(BorderFactory.createEmptyBorder(20, 30, 20, 30));
+        headerPanel.setBorder(BorderFactory.createEmptyBorder(20, 30, 10, 30));
         
         // Create logo panel
         JPanel logoPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
@@ -300,26 +332,115 @@ public class CandidateOverviewUI extends JFrame {
         // Add components to panels
         headerPanel.add(logoPanel, BorderLayout.WEST);
         
-        // Add a content panel (empty for now)
-        JPanel contentPanel = new JPanel();
-        contentPanel.setLayout(null); // Use null layout for precise positioning
+        // Create header container without divider
+        JPanel headerContainer = new JPanel(new BorderLayout());
+        headerContainer.setOpaque(false);
+        
+        // Add header panel to container
+        headerContainer.add(headerPanel, BorderLayout.CENTER);
+        
+        // Note: Divider is now drawn directly in the main panel below the header description
+        
+        // Create content panel with the candidate list
+        JPanel contentPanel = new JPanel(new BorderLayout());
         contentPanel.setOpaque(false);
-        contentPanel.setBorder(BorderFactory.createEmptyBorder(20, 50, 20, 50));
+        
+        // Set initial padding - will be updated after first paint
+        contentPanel.setBorder(BorderFactory.createEmptyBorder(0, 140, 20, 140));
+        
+        // Create a panel to hold both the navigation bar and candidate list panel
+        JPanel candidateContainer = new JPanel(new BorderLayout(20, 0)); // 20px gap between components
+        candidateContainer.setOpaque(false);
+        
+        // Create and add the navigation bar
+        navigationBar = new NavigationBar(
+            interRegular, 
+            interSemiBold, 
+            position -> {
+                // Handle position selection
+                if (candidateListPanel != null) {
+                    candidateListPanel.scrollToPosition(position);
+                }
+            }
+        );
+        navigationBar.setBarSize(200, 700); // Increased height to match the candidate list panel
+        candidateContainer.add(navigationBar, BorderLayout.WEST);
+        
+        // Create and add the candidate list panel
+        candidateListPanel = new CandidateListPanel(
+            interRegular, 
+            interSemiBold, 
+            interMedium, 
+            interBlack,
+            candidateName -> {
+                // Handle candidate profile view - now handled directly in CandidateListPanel
+                System.out.println("Selected candidate: " + candidateName);
+            }
+        );
+        
+        // Set panel properties to ensure scrolling works
+        candidateListPanel.setCardSize(100, 80); // Increased height to 80px while keeping width at 100px
+        candidateListPanel.setCardSpacing(8, 8); // Minimal spacing for compact layout
+        candidateListPanel.setColumns(3); // Changed to 3 columns as requested
+        candidateListPanel.setPanelSize(300, 700); // Further increased height to 700px for maximum visibility
+        
+        candidateContainer.add(candidateListPanel, BorderLayout.CENTER);
+        
+        // Add the candidate container to the content panel
+        contentPanel.add(candidateContainer, BorderLayout.CENTER);
+        
+        // Create a wrapper panel that will handle the dynamic positioning
+        JPanel dynamicPositionPanel = new JPanel() {
+            @Override
+            public void doLayout() {
+                // Position the content panel exactly at the divider line with no gap
+                if (dividerYPosition > 0) {
+                    int topMargin = dividerYPosition - 30; // Position 30px above the divider for maximum overlap
+                    contentPanel.setBounds(0, topMargin, getWidth(), getHeight() - topMargin + 30);
+                }
+                super.doLayout();
+            }
+        };
+        dynamicPositionPanel.setLayout(null); // Use absolute positioning
+        dynamicPositionPanel.setOpaque(false);
+        dynamicPositionPanel.add(contentPanel);
         
         // Add panels to main panel
-        mainPanel.add(headerPanel, BorderLayout.NORTH);
-        mainPanel.add(contentPanel, BorderLayout.CENTER);
+        mainPanel.add(headerContainer, BorderLayout.NORTH);
+        mainPanel.add(dynamicPositionPanel, BorderLayout.CENTER);
         
         // Set content pane
         setContentPane(mainPanel);
         
-        // Add component listener to handle resize events
+        // Add component listener to handle resize events and update content panel position
         addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
-                // Handle resizing if needed
-                revalidate();
-                repaint();
+                // Force layout recalculation
+                dynamicPositionPanel.revalidate();
+                dynamicPositionPanel.repaint();
+            }
+        });
+        
+        // Add a paint listener to ensure the panel is positioned correctly after painting
+        mainPanel.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentShown(ComponentEvent e) {
+                // Force a repaint after the component is shown
+                SwingUtilities.invokeLater(() -> {
+                    dynamicPositionPanel.revalidate();
+                    dynamicPositionPanel.repaint();
+                });
+            }
+        });
+        
+        // Update navigation bar with positions
+        SwingUtilities.invokeLater(() -> {
+            if (candidateListPanel != null && navigationBar != null) {
+                navigationBar.setPositionsWithOrder(candidateListPanel.getPositions());
+                if (!candidateListPanel.getPositions().isEmpty()) {
+                    navigationBar.setSelectedPosition(candidateListPanel.getPositions().get(0));
+                }
             }
         });
     }

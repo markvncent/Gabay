@@ -102,6 +102,8 @@ public class CandidateSearchUI extends JFrame {
     // CandidateCardPanel for displaying cards in a scrollable container
     private CandidateCardPanel cardPanel;
     
+    private Timer searchTimer;
+    
     public CandidateSearchUI() {
         // Load fonts
         loadFonts();
@@ -500,7 +502,11 @@ public class CandidateSearchUI extends JFrame {
         // Add key listener to search field for live filtering
         searchField.addKeyListener(new KeyAdapter() {
             // Use a shorter delay timer for smoother search experience (150ms instead of 300ms)
-            private Timer searchTimer = new Timer(150, e -> performSearch());
+            // Initialize the class-level searchTimer
+            {
+                searchTimer = new Timer(150, e -> performSearch());
+                searchTimer.setRepeats(false);
+            }
             
             @Override
             public void keyReleased(KeyEvent e) {
@@ -1764,6 +1770,9 @@ public class CandidateSearchUI extends JFrame {
     
     // Add the method to handle redirection to landing page
     private void navigateToLandingPage() {
+        // Stop any background operations first
+        stopBackgroundTasks();
+        
         // Save current window size before closing
         Dimension currentSize = getSize();
         Point currentLocation = getLocation();
@@ -1776,6 +1785,52 @@ public class CandidateSearchUI extends JFrame {
         landingPage.setSize(currentSize);
         landingPage.setLocation(currentLocation);
         landingPage.setVisible(true);
+    }
+    
+    /**
+     * Stops any background tasks to prevent lag when leaving the page
+     */
+    private void stopBackgroundTasks() {
+        // Stop the search timer if it exists and is running
+        if (searchTimer != null && searchTimer.isRunning()) {
+            searchTimer.stop();
+        }
+        
+        // Stop any ongoing operations in the card panel
+        if (cardPanel != null) {
+            cardPanel.cancelBackgroundOperations();
+        }
+    }
+    
+    /**
+     * Override dispose to ensure all resources are properly released
+     */
+    @Override
+    public void dispose() {
+        // Stop any background tasks when closing the window
+        stopBackgroundTasks();
+        
+        // Remove listeners that might prevent garbage collection
+        if (cardPanel != null) {
+            cardPanel.removeAll();
+            for (MouseListener listener : cardPanel.getMouseListeners()) {
+                cardPanel.removeMouseListener(listener);
+            }
+            for (ComponentListener listener : cardPanel.getComponentListeners()) {
+                cardPanel.removeComponentListener(listener);
+            }
+        }
+        
+        // Clear references to help with garbage collection
+        cardPanel = null;
+        backgroundImage = null;
+        headerLogoImage = null;
+        searchIconImage = null;
+        refreshIconImage = null;
+        clearIconImage = null;
+        
+        // Call parent dispose
+        super.dispose();
     }
     
     public static void main(String[] args) {

@@ -473,6 +473,29 @@ public class CandidateDataLoader {
     }
     
     /**
+     * Get a candidate by name
+     * 
+     * @param name The candidate name to search for
+     * @return The candidate with the matching name, or null if not found
+     */
+    public Candidate getCandidateByName(String name) {
+        if (name == null || name.isEmpty()) {
+            return null;
+        }
+        
+        List<Candidate> candidates = loadCandidates();
+        for (Candidate candidate : candidates) {
+            if (candidate.getName().equalsIgnoreCase(name) || 
+                candidate.getName().toLowerCase().contains(name.toLowerCase()) ||
+                name.toLowerCase().contains(candidate.getName().toLowerCase())) {
+                return candidate;
+            }
+        }
+        
+        return null;
+    }
+    
+    /**
      * Get related issues to a given query
      */
     public static List<String> getRelatedIssues(String query) {

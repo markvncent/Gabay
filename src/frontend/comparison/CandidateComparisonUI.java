@@ -11,6 +11,9 @@ import javax.imageio.ImageIO;
 import java.util.HashMap;
 import java.util.Map;
 import frontend.landingpage.LandingPageUI;
+import frontend.comparison.SearchCandidateCompare;
+import frontend.comparison.CompareSelection;
+import frontend.comparison.CandidateDataManager;
 
 /**
  * Candidate Comparison UI for the Gabay application
@@ -28,14 +31,15 @@ public class CandidateComparisonUI extends JFrame {
     private Color primaryBlue = new Color(0x2F, 0x39, 0x8E); // #2f398e
     private Color headingColor = new Color(0x47, 0x55, 0x69); // #475569
     private Color paragraphColor = new Color(0x8D, 0x8D, 0x8D); // #8D8D8D
+    private Color orangeAccent = new Color(0xF8, 0xB3, 0x48); // #F8B348
     
     // Background image
     private BufferedImage backgroundImage;
     private boolean showBackgroundImage = true;
-    private final int BACKDROP_WIDTH = 2555;
-    private final int BACKDROP_HEIGHT = 2154;
-    private final int BACKDROP_X = 206;
-    private final int BACKDROP_Y = -242;
+    private int BACKDROP_WIDTH = DEFAULT_BACKDROP_WIDTH;
+    private int BACKDROP_HEIGHT = DEFAULT_BACKDROP_HEIGHT;
+    private int BACKDROP_X = DEFAULT_BACKDROP_X;
+    private int BACKDROP_Y = DEFAULT_BACKDROP_Y;
     
     // Header logo
     private BufferedImage headerLogoImage;
@@ -45,11 +49,42 @@ public class CandidateComparisonUI extends JFrame {
     private final int TITLE_Y = 181; // Adjusted Y position to be closer to rectangles
     private final int PARAGRAPH_WIDTH = 1154; // Base width in reference window size
     private final int ELEMENT_SPACING = -5; // Negative spacing to create overlap
-    private final Color TITLE_COLOR = new Color(0x2B, 0x37, 0x80); // #2B3780
+    private final Color TITLE_COLOR = new Color(0xF8, 0xB3, 0x48); // #F8B348
     
     // Window dimensions
     private int initialWindowWidth = 1411; // Fixed window width
     private int initialWindowHeight = 970; // Fixed window height
+    
+    // Add searchPanel variable declaration after the header logo
+    private SearchCandidateCompare searchPanel;
+    
+    // Add selection panel for comparison categories
+    private CompareSelection selectionPanel;
+    
+    // Add comparison content panels
+    private ProfileBackgroundCompare profilePanel;
+    private FocusedAdvocaciesCompare advocaciesPanel;
+    private SocialStancesCompare socialPanel;
+    private JPanel currentContentPanel; // Currently displayed panel
+    
+    // Add a container for the content panels
+    private JPanel comparisonContentContainer;
+    
+    // Add these variables to make position adjustable
+    private int searchPanelXOffset = DEFAULT_SEARCH_PANEL_X_OFFSET;
+    private int searchPanelY = 180; // Custom value, different from default
+    
+    // Add opacity control
+    private float backdropOpacity = DEFAULT_BACKDROP_OPACITY;
+    
+    // Original default values for positions
+    private static final int DEFAULT_BACKDROP_X = -1250;
+    private static final int DEFAULT_BACKDROP_Y = -242;
+    private static final int DEFAULT_BACKDROP_WIDTH = 2555;
+    private static final int DEFAULT_BACKDROP_HEIGHT = 2154;
+    private static final float DEFAULT_BACKDROP_OPACITY = 0.05f;
+    private static final int DEFAULT_SEARCH_PANEL_X_OFFSET = 0;
+    private static final int DEFAULT_SEARCH_PANEL_Y = 270;
     
     public CandidateComparisonUI() {
         // Load fonts
@@ -64,6 +99,7 @@ public class CandidateComparisonUI extends JFrame {
         // Set up the window
         setTitle("Gabáy - Candidate Comparison");
         setSize(initialWindowWidth, initialWindowHeight);
+        setResizable(false); // Make window non-resizable
         setResizable(false); // Make window non-resizable
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -99,9 +135,9 @@ public class CandidateComparisonUI extends JFrame {
                     int scaledWidth = (int)(BACKDROP_WIDTH * scaleFactor);
                     int scaledHeight = (int)(BACKDROP_HEIGHT * scaleFactor);
                     
-                    // Set the opacity to 3%
+                    // Set the opacity to the value specified
                     AlphaComposite alphaComposite = AlphaComposite.getInstance(
-                        AlphaComposite.SRC_OVER, 0.03f);
+                        AlphaComposite.SRC_OVER, backdropOpacity);
                     g2d.setComposite(alphaComposite);
                     
                     g2d.drawImage(backgroundImage, imageX, imageY, scaledWidth, scaledHeight, this);
@@ -306,6 +342,51 @@ public class CandidateComparisonUI extends JFrame {
         contentPanel.setOpaque(false);
         contentPanel.setBorder(BorderFactory.createEmptyBorder(20, 50, 20, 50));
         
+        // Create the search panel
+        searchPanel = new SearchCandidateCompare(interRegular, interMedium, interSemiBold, this::handleCompareClicked);
+        
+        // Calculate paragraph bottom position - for proper placement below the title
+        FontMetrics titleMetrics = getFontMetrics(interBlack != null ? 
+                                                 interBlack.deriveFont(70f) : 
+                                                 new Font("Sans-Serif", Font.BOLD, 70));
+        int titleHeight = titleMetrics.getHeight();
+        FontMetrics paraMetrics = getFontMetrics(interSemiBold != null ? 
+                                                  interSemiBold.deriveFont(18f) : 
+                                                  new Font("Sans-Serif", Font.PLAIN, 18));
+        int paraHeight = paraMetrics.getHeight() * 3; // Approximate for 3 lines
+        int topMargin = 270; // Position below title content with some margin
+        
+        // Position the search panel
+        searchPanel.setBounds((getWidth() - 940) / 2 + searchPanelXOffset, searchPanelY, 940, 70);
+        contentPanel.add(searchPanel);
+        
+        // Add a divider line 20px below the search panel
+        JPanel divider = createDividerLine(940);
+        divider.setBounds((getWidth() - 940) / 2 + searchPanelXOffset, searchPanelY + 70 + 20, 940, 1);
+        contentPanel.add(divider);
+        
+        // Create and add the category selection panel 30px below the divider
+        selectionPanel = new CompareSelection(interRegular, interMedium, interSemiBold, this::handleCategorySelected);
+        int selectionWidth = 640; // Total width of the three buttons with spacing
+        selectionPanel.setBounds((getWidth() - selectionWidth) / 2, searchPanelY + 70 + 20 + 30, selectionWidth, 45);
+        contentPanel.add(selectionPanel);
+        
+        // Create the comparison content container 30px below the selection buttons
+        comparisonContentContainer = new JPanel();
+        comparisonContentContainer.setLayout(new BorderLayout());
+        comparisonContentContainer.setOpaque(false);
+        comparisonContentContainer.setBounds(100, searchPanelY + 70 + 20 + 30 + 45 + 30, getWidth() - 200, 350);
+        contentPanel.add(comparisonContentContainer);
+        
+        // Create all content panels
+        profilePanel = new ProfileBackgroundCompare(interRegular, interMedium, interSemiBold);
+        advocaciesPanel = new FocusedAdvocaciesCompare(interRegular, interMedium, interSemiBold);
+        socialPanel = new SocialStancesCompare(interRegular, interMedium, interSemiBold);
+        
+        // Default to profile panel
+        currentContentPanel = profilePanel;
+        comparisonContentContainer.add(currentContentPanel, BorderLayout.CENTER);
+        
         // Add panels to main panel
         mainPanel.add(headerPanel, BorderLayout.NORTH);
         mainPanel.add(contentPanel, BorderLayout.CENTER);
@@ -317,7 +398,45 @@ public class CandidateComparisonUI extends JFrame {
         addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
-                // Handle resizing if needed
+                // Update search panel position on resize
+                if (searchPanel != null) {
+                    searchPanel.setBounds((getWidth() - 940) / 2 + searchPanelXOffset, searchPanelY, 940, 70);
+                }
+                
+                // Update selection panel position on resize
+                if (selectionPanel != null) {
+                    int selectionWidth = 640;
+                    selectionPanel.setBounds((getWidth() - selectionWidth) / 2, searchPanelY + 70 + 20 + 30, selectionWidth, 45);
+                }
+                
+                // Update comparison content container
+                if (comparisonContentContainer != null) {
+                    comparisonContentContainer.setBounds(100, searchPanelY + 70 + 20 + 30 + 45 + 30, getWidth() - 200, 350);
+                }
+                
+                // Update divider line if present
+                for (Component c : getContentPane().getComponents()) {
+                    if (c instanceof JPanel) {
+                        JPanel panel = (JPanel) c;
+                        if (panel.getLayout() instanceof BorderLayout) {
+                            for (Component contentComp : panel.getComponents()) {
+                                if (contentComp instanceof JPanel && 
+                                    BorderLayout.CENTER.equals(((BorderLayout)panel.getLayout()).getConstraints(contentComp))) {
+                                    
+                                    // This should be the content panel
+                                    JPanel contentPanel = (JPanel) contentComp;
+                                    for (Component comp : contentPanel.getComponents()) {
+                                        // Check if this is the divider line
+                                        if (comp.getHeight() == 1 && comp.getWidth() > 500) {
+                                            comp.setBounds((getWidth() - 940) / 2 + searchPanelXOffset, comp.getY(), 940, 1);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                
                 revalidate();
                 repaint();
             }
@@ -462,6 +581,236 @@ public class CandidateComparisonUI extends JFrame {
         UIManager.put("TextField.font", font);
         UIManager.put("TextArea.font", font);
         UIManager.put("ComboBox.font", font);
+    }
+    
+    private void handleCompareClicked(String[] candidates) {
+        // Handle the comparison request
+        System.out.println("Comparing candidates: " + candidates[0] + " vs " + candidates[1]);
+        
+        // Set the candidate names in all comparison panels
+        if (!candidates[0].isEmpty() && !candidates[1].isEmpty()) {
+            // Load candidate images if available
+            BufferedImage leftImage = loadCandidateImage(candidates[0]);
+            BufferedImage rightImage = loadCandidateImage(candidates[1]);
+            
+            if (profilePanel != null) {
+                profilePanel.setLeftCandidate(candidates[0], leftImage);
+                profilePanel.setRightCandidate(candidates[1], rightImage);
+            }
+            
+            if (advocaciesPanel != null) {
+                advocaciesPanel.setLeftCandidate(candidates[0], leftImage);
+                advocaciesPanel.setRightCandidate(candidates[1], rightImage);
+            }
+            
+            if (socialPanel != null) {
+                socialPanel.setLeftCandidate(candidates[0], leftImage);
+                socialPanel.setRightCandidate(candidates[1], rightImage);
+            }
+        } else {
+            // Show error message if candidates are not selected
+            JOptionPane.showMessageDialog(this, 
+                "Please select two candidates to compare.", 
+                "Selection Required", 
+                JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+    
+    /**
+     * Load a candidate's image from the data
+     * @param candidateName Name of the candidate
+     * @return BufferedImage of candidate or null if not found
+     */
+    private BufferedImage loadCandidateImage(String candidateName) {
+        // Use the CandidateDataManager to get the candidate image
+        return CandidateDataManager.getCandidateImage(candidateName);
+    }
+    
+    /**
+     * Creates a horizontal divider line
+     */
+    private JPanel createDividerLine(int width) {
+        Color dividerColor = new Color(0xD9, 0xD9, 0xD9); // #D9D9D9
+        JPanel divider = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.setColor(dividerColor);
+                g.fillRect(0, 0, getWidth(), getHeight());
+            }
+        };
+        divider.setOpaque(false);
+        divider.setPreferredSize(new Dimension(width, 1));
+        return divider;
+    }
+    
+    /**
+     * Set the position of the search panel
+     * @param xOffset horizontal offset from center (negative moves left, positive moves right)
+     * @param y vertical position from top
+     */
+    public void setSearchPanelPosition(int xOffset, int y) {
+        this.searchPanelXOffset = xOffset;
+        this.searchPanelY = y;
+        
+        // Recalculate positions
+        if (searchPanel != null) {
+            int centerX = (getWidth() - 940) / 2;
+            searchPanel.setBounds(centerX + xOffset, y, 940, 70);
+            
+            // Find and update divider line position as well
+            for (Component comp : ((JPanel)getContentPane().getComponent(1)).getComponents()) {
+                if (comp.getHeight() == 1 && comp.getWidth() > 500) {
+                    comp.setBounds(centerX + xOffset, y + 70 + 20, 940, 1);
+                    break;
+                }
+            }
+            
+            revalidate();
+            repaint();
+        }
+    }
+    
+    /**
+     * Set the position and size of the backdrop image
+     * @param x X position of the backdrop
+     * @param y Y position of the backdrop
+     * @param width Width of the backdrop
+     * @param height Height of the backdrop
+     */
+    public void setBackdropPosition(int x, int y, int width, int height) {
+        this.BACKDROP_X = x;
+        this.BACKDROP_Y = y;
+        this.BACKDROP_WIDTH = width;
+        this.BACKDROP_HEIGHT = height;
+        
+        // Force repaint to show the changes
+        repaint();
+    }
+    
+    /**
+     * Adjust the backdrop position
+     * @param xOffset X offset to apply
+     * @param yOffset Y offset to apply
+     */
+    public void moveBackdrop(int xOffset, int yOffset) {
+        this.BACKDROP_X += xOffset;
+        this.BACKDROP_Y += yOffset;
+        
+        // Force repaint to show the changes
+        repaint();
+    }
+    
+    /**
+     * Set the opacity of the backdrop image
+     * @param opacity Value from 0.0 (transparent) to 1.0 (opaque)
+     */
+    public void setBackdropOpacity(float opacity) {
+        if (opacity < 0.0f) opacity = 0.0f;
+        if (opacity > 1.0f) opacity = 1.0f;
+        
+        this.backdropOpacity = opacity;
+        repaint();
+    }
+    
+    /**
+     * Set the dimensions of the profile image in all comparison panels
+     * @param width Width of the profile image
+     * @param height Height of the profile image
+     */
+    public void setProfileImageDimensions(int width, int height) {
+        // Update dimensions in all panels
+        if (profilePanel != null) {
+            profilePanel.setProfileImageDimensions(width, height);
+        }
+        
+        if (advocaciesPanel != null) {
+            advocaciesPanel.setProfileImageDimensions(width, height);
+        }
+        
+        if (socialPanel != null) {
+            socialPanel.setProfileImageDimensions(width, height);
+        }
+        
+        // Refresh the UI
+        if (comparisonContentContainer != null) {
+            comparisonContentContainer.revalidate();
+            comparisonContentContainer.repaint();
+        }
+    }
+    
+    /**
+     * Reset all positions to their original default values
+     */
+    public void resetPositions() {
+        // Reset backdrop
+        this.BACKDROP_X = DEFAULT_BACKDROP_X;
+        this.BACKDROP_Y = DEFAULT_BACKDROP_Y;
+        this.BACKDROP_WIDTH = DEFAULT_BACKDROP_WIDTH;
+        this.BACKDROP_HEIGHT = DEFAULT_BACKDROP_HEIGHT;
+        this.backdropOpacity = DEFAULT_BACKDROP_OPACITY;
+        
+        // Reset search panel
+        this.searchPanelXOffset = DEFAULT_SEARCH_PANEL_X_OFFSET;
+        this.searchPanelY = DEFAULT_SEARCH_PANEL_Y;
+        
+        // Update positions and repaint
+        if (searchPanel != null) {
+            int centerX = (getWidth() - 940) / 2;
+            searchPanel.setBounds(centerX, DEFAULT_SEARCH_PANEL_Y, 940, 70);
+            
+            // Find and update divider line position as well
+            for (Component comp : ((JPanel)getContentPane().getComponent(1)).getComponents()) {
+                if (comp.getHeight() == 1 && comp.getWidth() > 500) {
+                    comp.setBounds(centerX, DEFAULT_SEARCH_PANEL_Y + 70 + 20, 940, 1);
+                    break;
+                }
+            }
+            
+            // Update selection panel
+            if (selectionPanel != null) {
+                int selectionWidth = 640;
+                selectionPanel.setBounds((getWidth() - selectionWidth) / 2, 
+                                        DEFAULT_SEARCH_PANEL_Y + 70 + 20 + 30, 
+                                        selectionWidth, 45);
+            }
+            
+            // Update comparison content container
+            if (comparisonContentContainer != null) {
+                comparisonContentContainer.setBounds(100, 
+                                               DEFAULT_SEARCH_PANEL_Y + 70 + 20 + 30 + 45 + 30, 
+                                               getWidth() - 200, 350);
+            }
+        }
+        
+        revalidate();
+        repaint();
+    }
+    
+    // Add handling for selection changes
+    private void handleCategorySelected(String category) {
+        System.out.println("Category selected: " + category);
+        
+        if (comparisonContentContainer != null) {
+            // Remove current content
+            comparisonContentContainer.removeAll();
+            
+            // Determine which panel to show based on category
+            if (category.equals(CompareSelection.PROFILE)) {
+                currentContentPanel = profilePanel;
+            } else if (category.equals(CompareSelection.ADVOCACIES)) {
+                currentContentPanel = advocaciesPanel;
+            } else if (category.equals(CompareSelection.SOCIAL)) {
+                currentContentPanel = socialPanel;
+            }
+            
+            // Add the selected panel
+            if (currentContentPanel != null) {
+                comparisonContentContainer.add(currentContentPanel, BorderLayout.CENTER);
+                comparisonContentContainer.revalidate();
+                comparisonContentContainer.repaint();
+            }
+        }
     }
     
     public static void main(String[] args) {
