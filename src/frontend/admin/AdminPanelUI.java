@@ -568,6 +568,191 @@ public class AdminPanelUI extends JFrame {
         }
     }
     
+    /**
+     * Shows a custom notification dialog with modern styling.
+     * @param parent The parent component (can be null for center of screen)
+     * @param message The message to display
+     * @param title The title of the dialog
+     * @param type The type of notification: "info", "warning", or "error"
+     */
+    public static void showNotification(Component parent, String message, String title, String type) {
+        JDialog dialog = new JDialog(SwingUtilities.getWindowAncestor(parent));
+        dialog.setModal(true);
+        dialog.setUndecorated(true);
+        dialog.setLayout(new BorderLayout());
+        dialog.setSize(340, 140);
+        dialog.setLocationRelativeTo(parent);
+
+        // Colors and icons
+        Color bgColor = Color.WHITE;
+        Color borderColor = new Color(0x2B, 0x37, 0x80);
+        Color textColor = new Color(0x47, 0x55, 0x69);
+        Color titleColor = borderColor;
+        String iconPath = null;
+        if ("info".equalsIgnoreCase(type)) {
+            iconPath = "resources/images/info.png";
+        } else if ("warning".equalsIgnoreCase(type)) {
+            iconPath = "resources/images/warning.png";
+            titleColor = new Color(0xF59E42);
+        } else if ("error".equalsIgnoreCase(type)) {
+            iconPath = "resources/images/error.png";
+            titleColor = new Color(0xEF4444);
+        }
+
+        JPanel panel = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                Graphics2D g2d = (Graphics2D) g.create();
+                g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                // Shadow
+                g2d.setColor(new Color(0,0,0,30));
+                g2d.fillRoundRect(6, 6, getWidth()-12, getHeight()-12, 18, 18);
+                // Background
+                g2d.setColor(bgColor);
+                g2d.fillRoundRect(0, 0, getWidth()-1, getHeight()-1, 18, 18);
+                // Border
+                g2d.setColor(borderColor);
+                g2d.drawRoundRect(0, 0, getWidth()-1, getHeight()-1, 18, 18);
+                g2d.dispose();
+            }
+        };
+        panel.setLayout(null);
+        panel.setOpaque(false);
+
+        // Icon
+        JLabel iconLabel = new JLabel();
+        if (iconPath != null) {
+            File iconFile = new File(iconPath);
+            if (iconFile.exists()) {
+                ImageIcon icon = new ImageIcon(iconPath);
+                iconLabel.setIcon(new ImageIcon(icon.getImage().getScaledInstance(32, 32, Image.SCALE_SMOOTH)));
+            }
+        }
+        iconLabel.setBounds(24, 32, 32, 32);
+        panel.add(iconLabel);
+
+        // Title
+        JLabel titleLabel = new JLabel(title);
+        titleLabel.setForeground(titleColor);
+        titleLabel.setFont(new Font("Sans-Serif", Font.BOLD, 18));
+        titleLabel.setBounds(70, 18, 240, 28);
+        panel.add(titleLabel);
+
+        // Message
+        JLabel messageLabel = new JLabel("<html>" + message + "</html>");
+        messageLabel.setForeground(textColor);
+        messageLabel.setFont(new Font("Sans-Serif", Font.PLAIN, 15));
+        messageLabel.setBounds(70, 48, 240, 40);
+        panel.add(messageLabel);
+
+        // OK button
+        JButton okButton = new JButton("OK");
+        okButton.setFocusPainted(false);
+        okButton.setBackground(borderColor);
+        okButton.setForeground(Color.WHITE);
+        okButton.setFont(new Font("Sans-Serif", Font.BOLD, 14));
+        okButton.setBounds(220, 95, 80, 30);
+        okButton.setBorder(BorderFactory.createEmptyBorder(6, 18, 6, 18));
+        okButton.addActionListener(e -> dialog.dispose());
+        panel.add(okButton);
+
+        panel.setPreferredSize(new Dimension(340, 140));
+        dialog.setContentPane(panel);
+        dialog.pack();
+        dialog.setLocationRelativeTo(parent);
+        dialog.setVisible(true);
+    }
+    
+    /**
+     * Shows a custom confirmation dialog with modern styling.
+     * @param parent The parent component (can be null for center of screen)
+     * @param message The message to display
+     * @param title The title of the dialog
+     * @return true if Yes is clicked, false otherwise
+     */
+    public static boolean showConfirmDialog(Component parent, String message, String title) {
+        final boolean[] result = {false};
+        JDialog dialog = new JDialog(SwingUtilities.getWindowAncestor(parent));
+        dialog.setModal(true);
+        dialog.setUndecorated(true);
+        dialog.setLayout(new BorderLayout());
+        dialog.setSize(360, 150);
+        dialog.setLocationRelativeTo(parent);
+
+        Color bgColor = Color.WHITE;
+        Color borderColor = new Color(0x2B, 0x37, 0x80);
+        Color textColor = new Color(0x47, 0x55, 0x69);
+        Color titleColor = new Color(0xF59E42);
+        String iconPath = "resources/images/warning.png";
+
+        JPanel panel = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                Graphics2D g2d = (Graphics2D) g.create();
+                g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                g2d.setColor(new Color(0,0,0,30));
+                g2d.fillRoundRect(6, 6, getWidth()-12, getHeight()-12, 18, 18);
+                g2d.setColor(bgColor);
+                g2d.fillRoundRect(0, 0, getWidth()-1, getHeight()-1, 18, 18);
+                g2d.setColor(borderColor);
+                g2d.drawRoundRect(0, 0, getWidth()-1, getHeight()-1, 18, 18);
+                g2d.dispose();
+            }
+        };
+        panel.setLayout(null);
+        panel.setOpaque(false);
+
+        JLabel iconLabel = new JLabel();
+        File iconFile = new File(iconPath);
+        if (iconFile.exists()) {
+            ImageIcon icon = new ImageIcon(iconPath);
+            iconLabel.setIcon(new ImageIcon(icon.getImage().getScaledInstance(32, 32, Image.SCALE_SMOOTH)));
+        }
+        iconLabel.setBounds(24, 32, 32, 32);
+        panel.add(iconLabel);
+
+        JLabel titleLabel = new JLabel(title);
+        titleLabel.setForeground(titleColor);
+        titleLabel.setFont(new Font("Sans-Serif", Font.BOLD, 18));
+        titleLabel.setBounds(70, 18, 260, 28);
+        panel.add(titleLabel);
+
+        JLabel messageLabel = new JLabel("<html>" + message + "</html>");
+        messageLabel.setForeground(textColor);
+        messageLabel.setFont(new Font("Sans-Serif", Font.PLAIN, 15));
+        messageLabel.setBounds(70, 48, 260, 40);
+        panel.add(messageLabel);
+
+        JButton yesButton = new JButton("Yes");
+        yesButton.setFocusPainted(false);
+        yesButton.setBackground(borderColor);
+        yesButton.setForeground(Color.WHITE);
+        yesButton.setFont(new Font("Sans-Serif", Font.BOLD, 14));
+        yesButton.setBounds(160, 100, 80, 30);
+        yesButton.setBorder(BorderFactory.createEmptyBorder(6, 18, 6, 18));
+        yesButton.addActionListener(e -> { result[0] = true; dialog.dispose(); });
+        panel.add(yesButton);
+
+        JButton noButton = new JButton("No");
+        noButton.setFocusPainted(false);
+        noButton.setBackground(new Color(0xE2, 0xE8, 0xF0));
+        noButton.setForeground(borderColor);
+        noButton.setFont(new Font("Sans-Serif", Font.BOLD, 14));
+        noButton.setBounds(250, 100, 80, 30);
+        noButton.setBorder(BorderFactory.createEmptyBorder(6, 18, 6, 18));
+        noButton.addActionListener(e -> { result[0] = false; dialog.dispose(); });
+        panel.add(noButton);
+
+        panel.setPreferredSize(new Dimension(360, 150));
+        dialog.setContentPane(panel);
+        dialog.pack();
+        dialog.setLocationRelativeTo(parent);
+        dialog.setVisible(true);
+        return result[0];
+    }
+    
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             @Override

@@ -1856,13 +1856,13 @@ public class CandidateDetailsPanel extends JPanel {
         
         // Validate dropdown selections
         if (selectedRegion.equals("Select Region")) {
-            JOptionPane.showMessageDialog(this, "Please select a region", "Missing Data", JOptionPane.WARNING_MESSAGE);
+            AdminPanelUI.showNotification(this, "Please select a region", "Missing Data", "warning");
             switchToPage(1);
             return;
         }
         
         if (selectedPosition.equals("Select Position")) {
-            JOptionPane.showMessageDialog(this, "Please select a position", "Missing Data", JOptionPane.WARNING_MESSAGE);
+            AdminPanelUI.showNotification(this, "Please select a position", "Missing Data", "warning");
             switchToPage(1);
             return;
         }
@@ -1870,8 +1870,7 @@ public class CandidateDetailsPanel extends JPanel {
         // Validate social stances on page 2
         Map<String, String> stances = socialIssuesPanel.getSelectedStances();
         if (stances.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Please select at least one social stance position", 
-                                         "Missing Data", JOptionPane.WARNING_MESSAGE);
+            AdminPanelUI.showNotification(this, "Please select at least one social stance position", "Missing Data", "warning");
             switchToPage(2); // Switch to page 2 where social stances are
             return;
         }
@@ -1910,10 +1909,7 @@ public class CandidateDetailsPanel extends JPanel {
         
         // Show result message
         if (success) {
-            JOptionPane.showMessageDialog(this, 
-                                         "Candidate " + (isEditMode ? "updated" : "added") + " successfully", 
-                                         "Success", 
-                                         JOptionPane.INFORMATION_MESSAGE);
+            AdminPanelUI.showNotification(this, "Candidate " + (isEditMode ? "updated" : "added") + " successfully", "Success", "info");
             
             // Get reference to the directory panel and refresh it directly
             CandidateDirectoryPanel directoryPanel = findDirectoryPanel();
@@ -1929,10 +1925,7 @@ public class CandidateDetailsPanel extends JPanel {
             
             clearForm(); // Reset form for next entry
         } else {
-            JOptionPane.showMessageDialog(this, 
-                                         "Failed to " + (isEditMode ? "update" : "add") + " candidate", 
-                                         "Error", 
-                                         JOptionPane.ERROR_MESSAGE);
+            AdminPanelUI.showNotification(this, "Failed to " + (isEditMode ? "update" : "add") + " candidate", "Error", "error");
         }
     }
     
@@ -2003,10 +1996,7 @@ public class CandidateDetailsPanel extends JPanel {
      */
     private boolean validateField(JTextField field, String placeholder, String fieldName) {
         if (field.getText().isEmpty() || field.getText().equals(placeholder)) {
-            JOptionPane.showMessageDialog(this, 
-                "Please enter a " + fieldName + " for the candidate", 
-                "Missing Data", 
-                JOptionPane.WARNING_MESSAGE);
+            AdminPanelUI.showNotification(this, "Please enter a " + fieldName + " for the candidate", "Missing Data", "warning");
             switchToPage(1); // Go to page 1 where most fields are
             field.requestFocus();
             return false;

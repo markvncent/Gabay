@@ -680,12 +680,8 @@ public class CandidateDirectoryPanel extends JPanel {
             return;
         }
         
-        // Check if a candidate is selected
         if (selectedCandidateIndex < 0) {
-            JOptionPane.showMessageDialog(this, 
-                                        "Please select a candidate to edit", 
-                                        "No Selection", 
-                                        JOptionPane.INFORMATION_MESSAGE);
+            AdminPanelUI.showNotification(this, "Please select a candidate to edit", "No Selection", "info");
             return;
         }
         
@@ -697,31 +693,18 @@ public class CandidateDirectoryPanel extends JPanel {
      * Handle Delete button click
      */
     private void handleDeleteButton() {
-        // Check if a candidate is selected
         if (selectedCandidateIndex < 0) {
-            JOptionPane.showMessageDialog(this, 
-                                        "Please select a candidate to delete", 
-                                        "No Selection", 
-                                        JOptionPane.INFORMATION_MESSAGE);
+            AdminPanelUI.showNotification(this, "Please select a candidate to delete", "No Selection", "info");
             return;
         }
         
-        // Ask for confirmation
-        int result = JOptionPane.showConfirmDialog(this,
-                                                "Are you sure you want to delete this candidate?",
-                                                "Confirm Deletion",
-                                                JOptionPane.YES_NO_OPTION,
-                                                JOptionPane.WARNING_MESSAGE);
-        
-        if (result == JOptionPane.YES_OPTION) {
+        boolean confirmed = AdminPanelUI.showConfirmDialog(this, "Are you sure you want to delete this candidate?", "Confirm Deletion");
+        if (confirmed) {
             // Delete the candidate
             boolean success = CandidateProfiles.deleteCandidate(selectedCandidateIndex);
             
             if (success) {
-                JOptionPane.showMessageDialog(this, 
-                                            "Candidate deleted successfully", 
-                                            "Success", 
-                                            JOptionPane.INFORMATION_MESSAGE);
+                AdminPanelUI.showNotification(this, "Candidate deleted successfully", "Success", "info");
                 
                 // Update the profile list
                 profileListPanel.clearCandidates();
@@ -730,10 +713,7 @@ public class CandidateDirectoryPanel extends JPanel {
                 // Reset selection
                 selectedCandidateIndex = -1;
             } else {
-                JOptionPane.showMessageDialog(this, 
-                                            "Failed to delete candidate", 
-                                            "Error", 
-                                            JOptionPane.ERROR_MESSAGE);
+                AdminPanelUI.showNotification(this, "Failed to delete candidate", "Error", "error");
             }
         }
     }
