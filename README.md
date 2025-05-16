@@ -8,6 +8,9 @@ Gabay is a Java Swing application designed to help users learn about political c
 - Administrative panel for adding and managing candidate data
 - Social issue stance tracking with visual indicators (Agree, Disagree, Neutral)
 - Modern, responsive UI with consistent styling
+- Elegant page transitions with fading effects and emblem display
+- Intro splash screen with progress indicator for first-time launch
+- Streamlined search interface with intuitive controls
 
 ## Components
 The application follows a modular design pattern with separate components for different aspects of the UI:
@@ -25,6 +28,8 @@ The application follows a modular design pattern with separate components for di
 - **CandidateSearch**: Interface for searching and filtering candidates
 - **CandidateCard**: Card component for displaying candidate summaries
 - **ProvinceDropdown**: Dropdown for selecting provinces/regions
+- **SplashScreen**: Intro loading screen with progress bar for first-time launch
+- **WindowTransitionManager**: Handles smooth transitions between application screens
 
 ## Code Structure
 - **src/**: Source code directory
@@ -34,6 +39,8 @@ The application follows a modular design pattern with separate components for di
     - **comparison/**: Candidate comparison features
     - **overview/**: Candidate overview pages
     - **landingpage/**: Landing page components
+    - **utils/**: Utility UI components (transitions, splash screen)
+    - **quiz/**: Quiz-related components
   - **backend/**: Data handling and business logic
   - **util/**: Utility classes and helpers
 - **resources/**: Resource files
@@ -47,27 +54,31 @@ The application uses:
 - Java Swing for UI components
 - Custom-styled components with modern design
 - Modular architecture for reusable components
-- FlatLaf for improved Swing look and feel
+- Custom transition effects and animations
+- First-time launch detection with splash screen
 
 ### Styling Approach
 - Consistent color palette throughout the application
 - Custom-painted components for modern appearance
 - Rounded corners, drop shadows, and subtle animations
 - Standardized fonts (Inter family) for consistent typography
+- Smooth transitions between screens with fade effects
 
 ## Recent Updates
-- Added modular SocialIssuesPanel component for better code organization
-- Implemented pagination in CandidateDetailsPanel with basic info and social stances
-- Added form validation and user feedback
-- Improved component reusability
+- Added intro splash screen with progress bar for first-time application launch
+- Implemented elegant page transitions with fading effects and Gabay emblem display
+- Streamlined the search interface by removing unnecessary buttons and extending the search box
+- Added province filtering in the candidate search interface
+- Improved UI responsiveness and visual consistency across all screens
+- Enhanced button animations and hover effects
 
 ## Running the Application
 1. Ensure you have Java 17 or higher installed
-2. Run the application using the provided `run.bat` file
+2. Run the application using the provided `run_app.bat` file
 3. For development, you can compile and run manually:
    ```
-   javac -d bin -sourcepath src src/App.java
-   java -cp "bin;lib/flatlaf-3.4.jar;lib/flatlaf-extras-3.4.jar;lib/swing-toast-notifications-1.0.1.jar" App
+   javac -d bin -cp bin src/frontend/utils/*.java src/frontend/landingpage/*.java src/frontend/admin/*.java src/frontend/search/*.java src/frontend/comparison/*.java src/frontend/overview/*.java src/frontend/quiz/*.java src/backend/database/*.java src/backend/models/*.java src/util/*.java
+   java -cp bin frontend.utils.SplashScreenLauncher
    ```
 
 ## Development Guidelines
@@ -90,19 +101,24 @@ When contributing to the project:
 ## Directory Structure
 
 ```
-GabayApp/
+Gabay/
+├── bin/                  # Compiled class files
 ├── lib/                  # Libraries and fonts
 │   └── fonts/            # Inter font family
 ├── resources/            # Application resources
 │   └── images/           # Images and icons
 │       ├── Buttons Icon/ # Button icons
-│       └── Candidate Search/ # Search-related icons
+│       ├── Candidate Search/ # Search-related icons
+│       └── HeaderEmblem.png # Logo used in transitions and splash screen
 ├── src/                  # Source code
-│   ├── App.java          # Main application entry point
-│   ├── LandingPage.java  # Landing page UI
-│   ├── AdminLogin.java    # Admin login interface
-│   └── CandidateSearch.java # Candidate search interface
-└── README.md             # This file
+│   ├── frontend/         # UI components
+│   │   ├── landingpage/  # Landing page components
+│   │   ├── admin/        # Admin interface components
+│   │   ├── search/       # Search interface components
+│   │   ├── utils/        # Utility UI components
+│   │   └── quiz/         # Quiz components
+│   └── backend/          # Backend logic and data handling
+└── run_app.bat           # Batch file to compile and run the application
 ```
 
 ## Setup & Installation
@@ -116,36 +132,29 @@ GabayApp/
 
 2. Clone or download this repository
    ```
-   git clone https://github.com/yourusername/GabayApp.git
+   git clone https://github.com/markvncent/Gabay.git
    ```
 
 3. Navigate to the project directory
    ```
-   cd GabayApp
+   cd Gabay
    ```
 
-4. Compile the source code
+4. Run the application using the batch file
    ```
-   javac -d . src/*.java
-   ```
-
-5. Run the application
-   ```
-   java App
+   run_app.bat
    ```
 
-### Option 2: Running the JAR file (if available)
+### Option 2: Manual Compilation
 
-1. Ensure you have JRE 8 or higher installed
+1. Ensure you have JDK 8 or higher installed
+2. Compile the source code
    ```
-   java -version
+   javac -d bin -cp bin src/frontend/utils/*.java src/frontend/landingpage/*.java src/frontend/admin/*.java src/frontend/search/*.java src/frontend/comparison/*.java src/frontend/overview/*.java src/frontend/quiz/*.java src/backend/database/*.java src/backend/models/*.java src/util/*.java
    ```
-
-2. Download the `GabayApp.jar` file
-
-3. Run the JAR file
+3. Run the application
    ```
-   java -jar GabayApp.jar
+   java -cp bin frontend.utils.SplashScreenLauncher
    ```
 
 ## Troubleshooting
@@ -174,6 +183,9 @@ If the UI elements appear misaligned or cut off:
 
 ## Usage Guide
 
+### First Launch
+On first launch, you'll see a splash screen with the Gabay emblem and a progress bar. This screen appears only on the first run of the application.
+
 ### Landing Page
 The landing page displays four main options:
 - **Search Candidate**: Find candidates by specific issue keywords
@@ -184,8 +196,9 @@ The landing page displays four main options:
 ### Candidate Search
 1. Click the "Search Candidate" button from the landing page
 2. Type keywords into the search box to find specific issue positions
-3. Use the filters to narrow down results by region or other criteria
-4. Click on a candidate card for more detailed information
+3. Use the filter dropdown to narrow results by name, party, or issue
+4. Use the province dropdown to filter by geographic region
+5. Click on a candidate card for more detailed information
 
 ### Admin Page
 1. Click the "Admin" button in the top-right corner of the landing page
@@ -198,20 +211,14 @@ The landing page displays four main options:
 - Java SE 8+
 - Java Swing for UI
 - Custom animation framework
-
-### Building from Source
-To build the application from source:
-
-```
-javac -d build/ src/*.java
-```
-
-This will compile all Java files and place the resulting class files in the `build` directory.
+- Custom transition manager
 
 ### Project Structure
-- `LandingPage.java`: Main UI with buttons to navigate to different features
-- `CandidateSearch.java`: Interface for searching candidate information
-- `AdminLogin.java`: Administrative login interface for authentication
+- `SplashScreenLauncher.java`: Entry point that shows splash screen on first launch
+- `LandingPageUI.java`: Main UI with buttons to navigate to different features
+- `CandidateSearchUI.java`: Interface for searching candidate information
+- `AdminLoginUI.java`: Administrative login interface for authentication
+- `WindowTransitionManager.java`: Handles transitions between screens
 - Supporting UI components for filters, cards, and other elements
 
 ## License
@@ -220,7 +227,7 @@ All Rights Reserved, 2025
 
 ## Contact & Support
 
-For questions, issues, or support, please contact [your contact information here].
+For questions, issues, or support, please contact the development team.
 
 ---
 
