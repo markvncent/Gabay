@@ -632,17 +632,55 @@ public class AdminPanelUI extends JFrame {
         iconLabel.setBounds(24, 32, 32, 32);
         panel.add(iconLabel);
 
+        // Load Inter fonts
+        Font titleFont = new Font("Sans-Serif", Font.BOLD, 18);
+        Font messageFont = new Font("Sans-Serif", Font.PLAIN, 15);
+        Font buttonFont = new Font("Sans-Serif", Font.BOLD, 14);
+        
+        try {
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            Font interBold = null;
+            Font interRegular = null;
+            Font interMedium = null;
+            
+            File interBoldFile = new File("lib/fonts/Inter_18pt-Bold.ttf");
+            File interRegularFile = new File("lib/fonts/Inter_18pt-Regular.ttf");
+            File interMediumFile = new File("lib/fonts/Inter_18pt-Medium.ttf");
+            
+            if (interBoldFile.exists()) {
+                interBold = Font.createFont(Font.TRUETYPE_FONT, interBoldFile);
+                ge.registerFont(interBold);
+                titleFont = interBold.deriveFont(18f);
+                buttonFont = interBold.deriveFont(14f);
+            }
+            
+            if (interRegularFile.exists()) {
+                interRegular = Font.createFont(Font.TRUETYPE_FONT, interRegularFile);
+                ge.registerFont(interRegular);
+                messageFont = interRegular.deriveFont(15f);
+            }
+            
+            if (interMediumFile.exists()) {
+                interMedium = Font.createFont(Font.TRUETYPE_FONT, interMediumFile);
+                ge.registerFont(interMedium);
+            }
+            
+        } catch (FontFormatException | IOException e) {
+            e.printStackTrace();
+            // Fallback fonts already set above
+        }
+
         // Title
         JLabel titleLabel = new JLabel(title);
         titleLabel.setForeground(titleColor);
-        titleLabel.setFont(new Font("Sans-Serif", Font.BOLD, 18));
+        titleLabel.setFont(titleFont);
         titleLabel.setBounds(70, 18, 240, 28);
         panel.add(titleLabel);
 
         // Message
         JLabel messageLabel = new JLabel("<html>" + message + "</html>");
         messageLabel.setForeground(textColor);
-        messageLabel.setFont(new Font("Sans-Serif", Font.PLAIN, 15));
+        messageLabel.setFont(messageFont);
         messageLabel.setBounds(70, 48, 240, 40);
         panel.add(messageLabel);
 
@@ -651,7 +689,7 @@ public class AdminPanelUI extends JFrame {
         okButton.setFocusPainted(false);
         okButton.setBackground(borderColor);
         okButton.setForeground(Color.WHITE);
-        okButton.setFont(new Font("Sans-Serif", Font.BOLD, 14));
+        okButton.setFont(buttonFont);
         okButton.setBounds(220, 95, 80, 30);
         okButton.setBorder(BorderFactory.createEmptyBorder(6, 18, 6, 18));
         okButton.addActionListener(e -> dialog.dispose());
@@ -713,15 +751,53 @@ public class AdminPanelUI extends JFrame {
         iconLabel.setBounds(24, 32, 32, 32);
         panel.add(iconLabel);
 
+        // Load Inter fonts
+        Font titleFont = new Font("Sans-Serif", Font.BOLD, 18);
+        Font messageFont = new Font("Sans-Serif", Font.PLAIN, 15);
+        Font buttonFont = new Font("Sans-Serif", Font.BOLD, 14);
+        
+        try {
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            Font interBold = null;
+            Font interRegular = null;
+            Font interMedium = null;
+            
+            File interBoldFile = new File("lib/fonts/Inter_18pt-Bold.ttf");
+            File interRegularFile = new File("lib/fonts/Inter_18pt-Regular.ttf");
+            File interMediumFile = new File("lib/fonts/Inter_18pt-Medium.ttf");
+            
+            if (interBoldFile.exists()) {
+                interBold = Font.createFont(Font.TRUETYPE_FONT, interBoldFile);
+                ge.registerFont(interBold);
+                titleFont = interBold.deriveFont(18f);
+                buttonFont = interBold.deriveFont(14f);
+            }
+            
+            if (interRegularFile.exists()) {
+                interRegular = Font.createFont(Font.TRUETYPE_FONT, interRegularFile);
+                ge.registerFont(interRegular);
+                messageFont = interRegular.deriveFont(15f);
+            }
+            
+            if (interMediumFile.exists()) {
+                interMedium = Font.createFont(Font.TRUETYPE_FONT, interMediumFile);
+                ge.registerFont(interMedium);
+            }
+            
+        } catch (FontFormatException | IOException e) {
+            e.printStackTrace();
+            // Fallback fonts already set above
+        }
+
         JLabel titleLabel = new JLabel(title);
         titleLabel.setForeground(titleColor);
-        titleLabel.setFont(new Font("Sans-Serif", Font.BOLD, 18));
+        titleLabel.setFont(titleFont);
         titleLabel.setBounds(70, 18, 260, 28);
         panel.add(titleLabel);
 
         JLabel messageLabel = new JLabel("<html>" + message + "</html>");
         messageLabel.setForeground(textColor);
-        messageLabel.setFont(new Font("Sans-Serif", Font.PLAIN, 15));
+        messageLabel.setFont(messageFont);
         messageLabel.setBounds(70, 48, 260, 40);
         panel.add(messageLabel);
 
@@ -729,7 +805,7 @@ public class AdminPanelUI extends JFrame {
         yesButton.setFocusPainted(false);
         yesButton.setBackground(borderColor);
         yesButton.setForeground(Color.WHITE);
-        yesButton.setFont(new Font("Sans-Serif", Font.BOLD, 14));
+        yesButton.setFont(buttonFont);
         yesButton.setBounds(160, 100, 80, 30);
         yesButton.setBorder(BorderFactory.createEmptyBorder(6, 18, 6, 18));
         yesButton.addActionListener(e -> { result[0] = true; dialog.dispose(); });
@@ -739,7 +815,7 @@ public class AdminPanelUI extends JFrame {
         noButton.setFocusPainted(false);
         noButton.setBackground(new Color(0xE2, 0xE8, 0xF0));
         noButton.setForeground(borderColor);
-        noButton.setFont(new Font("Sans-Serif", Font.BOLD, 14));
+        noButton.setFont(buttonFont);
         noButton.setBounds(250, 100, 80, 30);
         noButton.setBorder(BorderFactory.createEmptyBorder(6, 18, 6, 18));
         noButton.addActionListener(e -> { result[0] = false; dialog.dispose(); });

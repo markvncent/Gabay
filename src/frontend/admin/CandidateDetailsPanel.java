@@ -2080,8 +2080,8 @@ public class CandidateDetailsPanel extends JPanel {
         selectedRegion = "Select Region";
         selectedPosition = "Select Position";
         
-        // Reset edit mode to true since we're creating a new candidate
-        isEditMode = true;
+        // Reset edit mode to false since we're creating a new candidate
+        isEditMode = false;
         editCandidateIndex = -1;
         
         // Reset social stances (by creating a new empty map)
