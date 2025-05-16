@@ -1,5 +1,23 @@
 # Gabay: Political Candidate Information Application
-![Gabay_Background](https://github.com/user-attachments/assets/60ce9237-e712-4aad-9b50-ee7e96df3770)
+![GamayLanding](https://github.com/user-attachments/assets/327294f7-5400-4d89-bb76-fd0083c891ce)
+<table>
+  <tr>
+    <td style="background-color:#2C3881; width:100px; height:40px;"></td>
+    <td><strong>#2C3881</strong> – Deep Indigo</td>
+  </tr>
+  <tr>
+    <td style="background-color:#E94540; width:100px; height:40px;"></td>
+    <td><strong>#E94540</strong> – Vivid Red</td>
+  </tr>
+  <tr>
+    <td style="background-color:#F8B346; width:100px; height:40px;"></td>
+    <td><strong>#F8B346</strong> – Amber Gold</td>
+  </tr>
+  <tr>
+    <td style="background-color:#FFFFFF; width:100px; height:40px; border:1px solid #ccc;"></td>
+    <td><strong>#FFFFFF</strong> – White</td>
+  </tr>
+</table>
 
 ## Overview
 Gabay is a Java Swing application designed to help users learn about political candidates, their stances on various issues, and compare candidates to make informed voting decisions.
