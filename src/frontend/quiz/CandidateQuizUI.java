@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 import frontend.landingpage.LandingPageUI;
 import frontend.comparison.MinimalScrollBarUI;
+import frontend.utils.WindowTransitionManager;
 
 /**
  * Candidate Quiz UI for the Gabay application
@@ -268,13 +269,9 @@ public class CandidateQuizUI extends JFrame {
             logoLabel.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    // Go back to landing page
-                    Dimension currentSize = getSize();
-                    dispose();
-                    LandingPageUI landingPage = new LandingPageUI();
-                    landingPage.setSize(currentSize); // Set the same size as current window
-                    landingPage.setLocationRelativeTo(null); // Center on screen
-                    landingPage.setVisible(true);
+                    // Redirect to LandingPageUI with fade transition
+                    System.out.println("Redirecting to Landing Page...");
+                    WindowTransitionManager.fadeTransition(CandidateQuizUI.this, () -> new LandingPageUI());
                 }
                 
                 @Override
@@ -298,13 +295,9 @@ public class CandidateQuizUI extends JFrame {
             logoLabel.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    // Go back to landing page
-                    Dimension currentSize = getSize();
-                    dispose();
-                    LandingPageUI landingPage = new LandingPageUI();
-                    landingPage.setSize(currentSize);
-                    landingPage.setLocationRelativeTo(null);
-                    landingPage.setVisible(true);
+                    // Redirect to LandingPageUI with fade transition
+                    System.out.println("Redirecting to Landing Page...");
+                    WindowTransitionManager.fadeTransition(CandidateQuizUI.this, () -> new LandingPageUI());
                 }
             });
         }

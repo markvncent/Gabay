@@ -405,16 +405,25 @@ public class AdminLoginUI extends JFrame {
                 
                 int width = getWidth();
                 int height = getHeight();
-                int cornerRadius = 8;
+                int cornerRadius = 8; // Corner radius for admin button
                 
+                // Apply zoom transformation
                 if (zoomFactor > 1.0f) {
+                    // Calculate scale parameters to zoom from center
                     float scaleX = zoomFactor;
                     float scaleY = zoomFactor;
+                    
+                    // Calculate translation to keep button centered during zoom
                     float transX = width * (1 - scaleX) / 2;
                     float transY = height * (1 - scaleY) / 2;
+                    
+                    // Apply the transformation
                     g2d.translate(transX, transY);
                     g2d.scale(scaleX, scaleY);
                 }
+                
+                // Create a clip to ensure nothing is drawn outside the button bounds
+                g2d.setClip(new RoundRectangle2D.Double(0, 0, width, height, cornerRadius, cornerRadius));
                 
                 g2d.setColor(getBackground());
                 
@@ -432,7 +441,7 @@ public class AdminLoginUI extends JFrame {
                     g2d.setColor(getBackground());
                     g2d.setClip(new RoundRectangle2D.Double(-slideOffset, 0, width, height, cornerRadius, cornerRadius));
                     g2d.fillRect(-slideOffset, 0, width, height);
-                    g2d.setClip(null);
+                    g2d.setClip(new RoundRectangle2D.Double(0, 0, width, height, cornerRadius, cornerRadius));
                     
                     Color darkerBg = getBackground().darker();
                     g2d.setColor(darkerBg);
@@ -446,7 +455,9 @@ public class AdminLoginUI extends JFrame {
                     g2d.drawString(beneathText, textX, textY);
                     
                     g2d.setColor(getBackground());
+                    g2d.setClip(new RoundRectangle2D.Double(-slideOffset, 0, width, height, cornerRadius, cornerRadius));
                     g2d.fill(new RoundRectangle2D.Double(-slideOffset, 0, width, height, cornerRadius, cornerRadius));
+                    g2d.setClip(new RoundRectangle2D.Double(0, 0, width, height, cornerRadius, cornerRadius));
                     
                     if (slideOffset < width) {
                         drawButtonText(g2d, -slideOffset);
@@ -454,6 +465,9 @@ public class AdminLoginUI extends JFrame {
                 } else {
                     drawButtonText(g2d, 0);
                 }
+                
+                // Reset clip to avoid affecting other components
+                g2d.setClip(null);
                 
                 g2d.dispose();
             }
@@ -468,10 +482,14 @@ public class AdminLoginUI extends JFrame {
                 int textY = (getHeight() + fm.getAscent() - fm.getDescent()) / 2;
                 
                 g2d.setColor(new Color(0, 0, 0, 50));
-                g2d.drawString(frontText, textX + xOffset + 1, textY + 1);
                 
-                g2d.setColor(getForeground());
-                g2d.drawString(frontText, textX + xOffset, textY);
+                // Only draw text if it's visible within the button bounds
+                if (textX + xOffset + textWidth > 0 && textX + xOffset < getWidth()) {
+                    g2d.drawString(frontText, textX + xOffset + 1, textY + 1);
+                    
+                    g2d.setColor(getForeground());
+                    g2d.drawString(frontText, textX + xOffset, textY);
+                }
             }
         }
         

@@ -1,9 +1,11 @@
 package frontend.admin;
 
 import javax.swing.*;
+import javax.swing.border.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.font.TextAttribute;
+import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -11,6 +13,7 @@ import javax.imageio.ImageIO;
 import java.util.HashMap;
 import java.util.Map;
 import frontend.landingpage.LandingPageUI;
+import frontend.utils.WindowTransitionManager;
 
 /**
  * Admin Panel UI for the Gabay application
@@ -259,20 +262,9 @@ public class AdminPanelUI extends JFrame {
             logoLabel.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    // Redirect to LandingPageUI
+                    // Redirect to LandingPageUI with fade transition
                     System.out.println("Redirecting to Landing Page...");
-                    // Hide current window
-                    setVisible(false);
-                    
-                    // Create and show the LandingPageUI
-                    Dimension currentSize = getSize();
-                    LandingPageUI landingPage = new LandingPageUI();
-                    landingPage.setSize(currentSize);
-                    landingPage.setLocationRelativeTo(null);
-                    landingPage.setVisible(true);
-                    
-                    // Dispose this window
-                    dispose();
+                    WindowTransitionManager.fadeTransition(AdminPanelUI.this, () -> new LandingPageUI());
                 }
                 
                 @Override
@@ -296,20 +288,9 @@ public class AdminPanelUI extends JFrame {
             logoLabel.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    // Redirect to LandingPageUI
+                    // Redirect to LandingPageUI with fade transition
                     System.out.println("Redirecting to Landing Page...");
-                    // Hide current window
-                    setVisible(false);
-                    
-                    // Create and show the LandingPageUI
-                    Dimension currentSize = getSize();
-                    LandingPageUI landingPage = new LandingPageUI();
-                    landingPage.setSize(currentSize);
-                    landingPage.setLocationRelativeTo(null);
-                    landingPage.setVisible(true);
-                    
-                    // Dispose this window
-                    dispose();
+                    WindowTransitionManager.fadeTransition(AdminPanelUI.this, () -> new LandingPageUI());
                 }
             });
         }

@@ -14,6 +14,7 @@ import frontend.landingpage.LandingPageUI;
 import frontend.comparison.SearchCandidateCompare;
 import frontend.comparison.CompareSelection;
 import frontend.comparison.CandidateDataManager;
+import frontend.utils.WindowTransitionManager;
 
 /**
  * Candidate Comparison UI for the Gabay application
@@ -290,13 +291,9 @@ public class CandidateComparisonUI extends JFrame {
             logoLabel.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    // Go back to landing page
-                    Dimension currentSize = getSize();
-                    dispose();
-                    LandingPageUI landingPage = new LandingPageUI();
-                    landingPage.setSize(currentSize); // Set the same size as current window
-                    landingPage.setLocationRelativeTo(null); // Center on screen
-                    landingPage.setVisible(true);
+                    // Redirect to LandingPageUI with fade transition
+                    System.out.println("Redirecting to Landing Page...");
+                    WindowTransitionManager.fadeTransition(CandidateComparisonUI.this, () -> new LandingPageUI());
                 }
                 
                 @Override
@@ -320,13 +317,9 @@ public class CandidateComparisonUI extends JFrame {
             logoLabel.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    // Go back to landing page
-                    Dimension currentSize = getSize();
-                    dispose();
-                    LandingPageUI landingPage = new LandingPageUI();
-                    landingPage.setSize(currentSize);
-                    landingPage.setLocationRelativeTo(null);
-                    landingPage.setVisible(true);
+                    // Redirect to LandingPageUI with fade transition
+                    System.out.println("Redirecting to Landing Page...");
+                    WindowTransitionManager.fadeTransition(CandidateComparisonUI.this, () -> new LandingPageUI());
                 }
             });
         }

@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 import frontend.landingpage.LandingPageUI;
 import frontend.search.ViewCandidate;
+import frontend.utils.WindowTransitionManager;
 
 /**
  * Candidate Overview UI for the Gabay application
@@ -286,13 +287,9 @@ public class CandidateOverviewUI extends JFrame {
             logoLabel.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    // Go back to landing page
-                    Dimension currentSize = getSize();
-                    dispose();
-                    LandingPageUI landingPage = new LandingPageUI();
-                    landingPage.setSize(currentSize); // Set the same size as current window
-                    landingPage.setLocationRelativeTo(null); // Center on screen
-                    landingPage.setVisible(true);
+                    // Redirect to LandingPageUI with fade transition
+                    System.out.println("Redirecting to Landing Page...");
+                    WindowTransitionManager.fadeTransition(CandidateOverviewUI.this, () -> new LandingPageUI());
                 }
                 
                 @Override
@@ -316,13 +313,9 @@ public class CandidateOverviewUI extends JFrame {
             logoLabel.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    // Go back to landing page
-                    Dimension currentSize = getSize();
-                    dispose();
-                    LandingPageUI landingPage = new LandingPageUI();
-                    landingPage.setSize(currentSize);
-                    landingPage.setLocationRelativeTo(null);
-                    landingPage.setVisible(true);
+                    // Redirect to LandingPageUI with fade transition
+                    System.out.println("Redirecting to Landing Page...");
+                    WindowTransitionManager.fadeTransition(CandidateOverviewUI.this, () -> new LandingPageUI());
                 }
             });
         }

@@ -21,6 +21,7 @@ import frontend.comparison.CandidateComparisonUI;
 import frontend.overview.CandidateOverviewUI;
 import frontend.quiz.CandidateQuizUI;
 import frontend.admin.AdminPanelUI;
+import frontend.utils.WindowTransitionManager;
 
 public class LandingPageUI extends JFrame {
     
@@ -503,42 +504,26 @@ public class LandingPageUI extends JFrame {
         
         // Add action listener for Search button
         button1.addActionListener(e -> {
-            Dimension currentSize = getSize();
-            dispose(); // Close current window
-            CandidateSearchUI searchUI = new CandidateSearchUI();
-            searchUI.setSize(currentSize); // Set the same size as current window
-            searchUI.setLocationRelativeTo(null); // Center on screen
-            searchUI.setVisible(true);
+            // Use fade transition instead of creating a new window directly
+            WindowTransitionManager.fadeTransition(this, () -> new CandidateSearchUI());
         });
         
         // Add action listener for Compare button
         button2.addActionListener(e -> {
-            Dimension currentSize = getSize();
-            dispose(); // Close current window
-            CandidateComparisonUI comparisonUI = new CandidateComparisonUI();
-            comparisonUI.setSize(currentSize); // Set the same size as current window
-            comparisonUI.setLocationRelativeTo(null); // Center on screen
-            comparisonUI.setVisible(true);
+            // Use fade transition instead of creating a new window directly
+            WindowTransitionManager.fadeTransition(this, () -> new CandidateComparisonUI());
         });
         
         // Add action listener for Overview button
         button3.addActionListener(e -> {
-            Dimension currentSize = getSize();
-            dispose(); // Close current window
-            CandidateOverviewUI overviewUI = new CandidateOverviewUI();
-            overviewUI.setSize(currentSize); // Set the same size as current window
-            overviewUI.setLocationRelativeTo(null); // Center on screen
-            overviewUI.setVisible(true);
+            // Use fade transition instead of creating a new window directly
+            WindowTransitionManager.fadeTransition(this, () -> new CandidateOverviewUI());
         });
         
         // Add action listener for Quiz button
         button4.addActionListener(e -> {
-            Dimension currentSize = getSize();
-            dispose(); // Close current window
-            CandidateQuizUI quizUI = new CandidateQuizUI();
-            quizUI.setSize(currentSize); // Set the same size as current window
-            quizUI.setLocationRelativeTo(null); // Center on screen
-            quizUI.setVisible(true);
+            // Use fade transition instead of creating a new window directly
+            WindowTransitionManager.fadeTransition(this, () -> new CandidateQuizUI());
         });
         
         // Add buttons to panel
@@ -1143,7 +1128,9 @@ public class LandingPageUI extends JFrame {
                     g2d.scale(scaleX, scaleY);
                 }
                 
-                // Rest of the paint component method remains the same
+                // Create a clip to ensure nothing is drawn outside the button bounds
+                g2d.setClip(new RoundRectangle2D.Double(0, 0, width, height, cornerRadius, cornerRadius));
+                
                 // Paint background with rounded corners - original button background
                 g2d.setColor(getBackground());
                 
@@ -1166,7 +1153,7 @@ public class LandingPageUI extends JFrame {
                     g2d.setColor(getBackground());
                     g2d.setClip(new RoundRectangle2D.Double(-slideOffset, 0, width, height, cornerRadius, cornerRadius));
                     g2d.fillRect(-slideOffset, 0, width, height);
-                    g2d.setClip(null);
+                    g2d.setClip(new RoundRectangle2D.Double(0, 0, width, height, cornerRadius, cornerRadius));
                     
                     // Draw the revealed area with darker shade of the same color
                     Color darkerBg = getBackground().darker();
@@ -1269,7 +1256,9 @@ public class LandingPageUI extends JFrame {
                     
                     // Draw the sliding button on top
                     g2d.setColor(getBackground());
+                    g2d.setClip(new RoundRectangle2D.Double(-slideOffset, 0, width, height, cornerRadius, cornerRadius));
                     g2d.fill(new RoundRectangle2D.Double(-slideOffset, 0, width, height, cornerRadius, cornerRadius));
+                    g2d.setClip(new RoundRectangle2D.Double(0, 0, width, height, cornerRadius, cornerRadius));
                     
                     // Only draw main button text and icon if button is not fully slid away
                     if (slideOffset < width + 50) { // Add some extra buffer
@@ -1311,25 +1300,32 @@ public class LandingPageUI extends JFrame {
                             
                             // Draw icon on the sliding button
                             iconX -= slideOffset;
-                            g2d.drawImage(iconImage, iconX, iconY, scaledIconWidth, scaledIconHeight, this);
+                            // Only draw the icon if it's visible within the button bounds
+                            if (iconX + scaledIconWidth > 0 && iconX < width) {
+                                g2d.drawImage(iconImage, iconX, iconY, scaledIconWidth, scaledIconHeight, this);
+                            }
                             
                             // Reset composite for text drawing
                             g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f));
                         }
                         
                         // Draw text on sliding button
-                g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+                        g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
                         g2d.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS, RenderingHints.VALUE_FRACTIONALMETRICS_ON);
                 
                         g2d.setColor(getForeground());
                         g2d.setFont(getFont());
                         
-                FontMetrics fm = g2d.getFontMetrics();
+                        FontMetrics fm = g2d.getFontMetrics();
                         String buttonText = getText();
                         int originalTextX = (width - fm.stringWidth(buttonText)) / 2;
                         
                         // Draw text on sliding portion
-                        g2d.drawString(buttonText, originalTextX - slideOffset, textBaselineY);
+                        int textX = originalTextX - slideOffset;
+                        // Only draw text if it's visible within the button bounds
+                        if (textX + fm.stringWidth(buttonText) > 0 && textX < width) {
+                            g2d.drawString(buttonText, textX, textBaselineY);
+                        }
                     }
                 } else {
                     // No sliding - just draw the icon and text normally
@@ -1380,14 +1376,17 @@ public class LandingPageUI extends JFrame {
                     g2d.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS, RenderingHints.VALUE_FRACTIONALMETRICS_ON);
                     
                     FontMetrics fm = g2d.getFontMetrics();
-                String buttonText = getText();
+                    String buttonText = getText();
                 
-                int x = (width - fm.stringWidth(buttonText)) / 2;
+                    int x = (width - fm.stringWidth(buttonText)) / 2;
                 
-                g2d.setColor(getForeground());
-                g2d.setFont(getFont());
+                    g2d.setColor(getForeground());
+                    g2d.setFont(getFont());
                     g2d.drawString(buttonText, x, textBaselineY);
                 }
+                
+                // Reset clip to avoid affecting other components
+                g2d.setClip(null);
                 
                 g2d.dispose();
             }
@@ -1915,6 +1914,9 @@ public class LandingPageUI extends JFrame {
             private float zoomFactor = 1.0f;
             private final float MAX_ZOOM = 1.08f;
             
+            // Store text Y position to prevent shifting
+            private int textBaselineY = 0;
+            
             public StyledAdminButton(String text) {
                 super(text);
                 this.buttonText = text; // Store text to ensure it's used in the paint method
@@ -2018,7 +2020,13 @@ public class LandingPageUI extends JFrame {
                 
                 int width = getWidth();
                 int height = getHeight();
-                int cornerRadius = 8; // Corner radius for admin button
+                int cornerRadius = 10; // Corner radius for admin button
+                
+                // Calculate baseline Y position for text once to prevent shifting
+                if (textBaselineY == 0) {
+                    FontMetrics fm = g2d.getFontMetrics(getFont());
+                    textBaselineY = height / 2 + fm.getAscent() / 2;
+                }
                 
                 // Apply zoom transformation
                 if (zoomFactor > 1.0f) {
@@ -2055,7 +2063,7 @@ public class LandingPageUI extends JFrame {
                     g2d.setColor(getBackground());
                     g2d.setClip(new RoundRectangle2D.Double(-slideOffset, 0, width, height, cornerRadius, cornerRadius));
                     g2d.fillRect(-slideOffset, 0, width, height);
-                    g2d.setClip(null);
+                    g2d.setClip(new RoundRectangle2D.Double(0, 0, width, height, cornerRadius, cornerRadius));
                     
                     // Draw the revealed area with darker shade of the same color
                     Color darkerBg = getBackground().darker();
@@ -2089,7 +2097,9 @@ public class LandingPageUI extends JFrame {
                     
                     // Draw the sliding button on top
                     g2d.setColor(getBackground());
+                    g2d.setClip(new RoundRectangle2D.Double(-slideOffset, 0, width, height, cornerRadius, cornerRadius));
                     g2d.fill(new RoundRectangle2D.Double(-slideOffset, 0, width, height, cornerRadius, cornerRadius));
+                    g2d.setClip(new RoundRectangle2D.Double(0, 0, width, height, cornerRadius, cornerRadius));
                     
                     // Only draw main button text if button is not fully slid away
                     if (slideOffset < width) {
@@ -2170,12 +2180,8 @@ public class LandingPageUI extends JFrame {
         
         // Add action listener to navigate to AdminLogin
         button.addActionListener(e -> {
-            Dimension currentSize = getSize();
-            dispose(); // Close current window
-            AdminLoginUI adminLogin = new AdminLoginUI();
-            adminLogin.setSize(currentSize); // Set the same size as current window
-            adminLogin.setLocationRelativeTo(null); // Center on screen
-            adminLogin.setVisible(true);
+            // Use fade transition instead of creating a new window directly
+            WindowTransitionManager.fadeTransition(LandingPageUI.this, () -> new AdminLoginUI());
         });
         
         return button;
@@ -2185,62 +2191,22 @@ public class LandingPageUI extends JFrame {
     private void handleCardClick(String cardType) {
         System.out.println("Card clicked: " + cardType);
         
-        // Save current window size
-        Dimension currentSize = getSize();
-        Point currentLocation = getLocation();
-        
-        // Close this window
-        dispose();
-        
-        // Navigate to appropriate UI
+        // Navigate to appropriate UI with fade transition
         if ("comparison".equals(cardType)) {
-            // Comment out since CandidateComparisonUI is missing
-            // CandidateComparisonUI comparisonUI = new CandidateComparisonUI();
-            // comparisonUI.setSize(currentSize);
-            // comparisonUI.setLocation(currentLocation);
-            // comparisonUI.setVisible(true);
-            // For now, just show a message
-            System.out.println("Comparison feature not yet implemented");
-            // Reopen landing page
-            reopenLandingPage(currentSize, currentLocation);
-        }
-        else if ("overview".equals(cardType)) {
-            // Comment out since CandidateOverviewUI is missing
-            // CandidateOverviewUI overviewUI = new CandidateOverviewUI();
-            // overviewUI.setSize(currentSize);
-            // overviewUI.setLocation(currentLocation);
-            // overviewUI.setVisible(true);
-            // For now, just show a message
-            System.out.println("Overview feature not yet implemented");
-            // Reopen landing page
-            reopenLandingPage(currentSize, currentLocation);
-        }
-        else if ("quiz".equals(cardType)) {
-            // Comment out since CandidateQuizUI is missing
-            // CandidateQuizUI quizUI = new CandidateQuizUI();
-            // quizUI.setSize(currentSize);
-            // quizUI.setLocation(currentLocation);
-            // quizUI.setVisible(true);
-            // For now, just show a message
-            System.out.println("Quiz feature not yet implemented");
-            // Reopen landing page
-            reopenLandingPage(currentSize, currentLocation);
+            // Use fade transition for comparison UI
+            WindowTransitionManager.fadeTransition(this, () -> new CandidateComparisonUI());
         }
         else if ("search".equals(cardType)) {
-            CandidateSearchUI searchUI = new CandidateSearchUI();
-            searchUI.setSize(currentSize);
-            searchUI.setLocation(currentLocation);
-            searchUI.setVisible(true);
+            // Use fade transition for search UI
+            WindowTransitionManager.fadeTransition(this, () -> new CandidateSearchUI());
         }
-    }
-    
-    /**
-     * Reopen the landing page (used when a feature is not implemented)
-     */
-    private void reopenLandingPage(Dimension size, Point location) {
-        LandingPageUI landingPage = new LandingPageUI();
-        landingPage.setSize(size);
-        landingPage.setLocation(location);
-        landingPage.setVisible(true);
+        else if ("overview".equals(cardType)) {
+            // Use fade transition for overview UI
+            WindowTransitionManager.fadeTransition(this, () -> new CandidateOverviewUI());
+        }
+        else if ("quiz".equals(cardType)) {
+            // Use fade transition for quiz UI
+            WindowTransitionManager.fadeTransition(this, () -> new CandidateQuizUI());
+        }
     }
 } 
