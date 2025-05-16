@@ -270,23 +270,35 @@ public class Results extends JPanel {
         // Load candidates from file
         List<Candidate> candidates = loadCandidates();
         
-        // For each candidate, calculate match percentage
+        // For each candidate, calculate match percentage based on their social stances
         for (Candidate candidate : candidates) {
-            // Simulate matching algorithm
-            // In a real implementation, this would compare user responses with candidate positions
             List<Integer> matchingIndices = new ArrayList<>();
-            Random random = new Random(candidate.getName().hashCode()); // Use name as seed for consistent results
+            Map<String, String> candidateStances = getCandidateStances(candidate.getName());
+            
+            // Map quiz questions to social stance topics
+            Map<String, Integer> questionToStanceMap = createQuestionToStanceMap();
             
             // Determine which questions match with this candidate
-            for (int i = 0; i < userResponses.size(); i++) {
-                // For demo purposes, use a random match with 60% probability
-                if (random.nextDouble() < 0.6) {
-                    matchingIndices.add(i);
+            for (int i = 0; i < userResponses.size() && i < questions.size(); i++) {
+                String question = questions.get(i);
+                String userResponse = userResponses.get(i);
+                
+                // Get the corresponding stance for this question
+                String stanceTopic = getStanceTopicForQuestion(question, questionToStanceMap);
+                
+                if (stanceTopic != null && candidateStances.containsKey(stanceTopic)) {
+                    String candidateStance = candidateStances.get(stanceTopic);
+                    
+                    // Check if user response matches candidate stance or has similar meaning
+                    if (responsesAlign(userResponse, candidateStance)) {
+                        matchingIndices.add(i);
+                    }
                 }
             }
             
             // Calculate match percentage
-            double matchPercentage = (double) matchingIndices.size() / userResponses.size();
+            double matchPercentage = userResponses.isEmpty() ? 0 : 
+                    (double) matchingIndices.size() / userResponses.size();
             
             // Create candidate match object
             CandidateMatch match = new CandidateMatch(candidate, matchPercentage, matchingIndices);
@@ -300,6 +312,279 @@ public class Results extends JPanel {
         if (matchingCandidates.size() > 5) {
             matchingCandidates = matchingCandidates.subList(0, 5);
         }
+    }
+    
+    /**
+     * Create a mapping between quiz questions and candidate stance topics
+     */
+    private Map<String, Integer> createQuestionToStanceMap() {
+        Map<String, Integer> map = new HashMap<>();
+        
+        // Map questions to stance topics based on keywords
+        for (int i = 0; i < questions.size(); i++) {
+            String question = questions.get(i).toLowerCase();
+            
+            if (question.contains("divorce")) {
+                map.put("Legalization of Divorce", i);
+            } else if (question.contains("sogie")) {
+                map.put("Passing the SOGIE Equality Bill", i);
+            } else if (question.contains("death penalty") || question.contains("reinstating the death penalty")) {
+                map.put("Reinstating the Death Penalty", i);
+            } else if (question.contains("criminal responsibility")) {
+                map.put("Lowering the Age of Criminal Responsibility", i);
+            } else if (question.contains("federalism")) {
+                map.put("Federalism", i);
+            } else if (question.contains("rotc")) {
+                map.put("Mandatory ROTC for Senior High Students", i);
+            } else if (question.contains("same-sex marriage") || question.contains("same sex marriage")) {
+                map.put("Same-Sex Marriage", i);
+            } else if (question.contains("anti-terror") || question.contains("anti terror")) {
+                map.put("Anti-Terror Law", i);
+            } else if (question.contains("foreign investment") && question.contains("land")) {
+                map.put("Foreign Investment in Land Ownership", i);
+            } else if (question.contains("healthcare") && question.contains("universal")) {
+                map.put("Universal Healthcare Funding", i);
+            } else if (question.contains("sex education")) {
+                map.put("Mandatory Sex Education", i);
+            } else if (question.contains("minimum wage")) {
+                map.put("Minimum Wage Standardization", i);
+            } else if (question.contains("jeepney modernization")) {
+                map.put("Jeepney Modernization Program", i);
+            }
+        }
+        
+        return map;
+    }
+    
+    /**
+     * Get the stance topic corresponding to a question
+     */
+    private String getStanceTopicForQuestion(String question, Map<String, Integer> questionToStanceMap) {
+        question = question.toLowerCase();
+        
+        // Look for direct matches first
+        for (Map.Entry<String, Integer> entry : questionToStanceMap.entrySet()) {
+            if (entry.getValue() == questions.indexOf(question)) {
+                return entry.getKey();
+            }
+        }
+        
+        // Expanded keyword matcher for better flexibility
+        
+        // Divorce-related terms
+        if (question.contains("divorce") || 
+            question.contains("marital separation") || 
+            question.contains("end of marriage") || 
+            question.contains("marriage dissolution") ||
+            question.contains("annulment") ||
+            question.contains("legal separation")) {
+            return "Legalization of Divorce";
+        } 
+        // SOGIE-related terms
+        else if (question.contains("sogie") || 
+                question.contains("sexual orientation") || 
+                question.contains("gender identity") || 
+                question.contains("gender expression") || 
+                question.contains("equality bill") ||
+                question.contains("lgbtq") ||
+                question.contains("lgbt") ||
+                question.contains("sexual discrimination") ||
+                question.contains("gender equality")) {
+            return "Passing the SOGIE Equality Bill";
+        } 
+        // Death penalty-related terms
+        else if (question.contains("death penalty") || 
+                question.contains("capital punishment") || 
+                question.contains("execution") ||
+                question.contains("lethal injection") ||
+                question.contains("death sentence") ||
+                question.contains("capital offense")) {
+            return "Reinstating the Death Penalty";
+        } 
+        // Criminal responsibility-related terms
+        else if (question.contains("criminal responsibility") || 
+                question.contains("juvenile justice") || 
+                question.contains("youth offenders") ||
+                question.contains("juvenile delinquency") ||
+                question.contains("child offenders") ||
+                question.contains("underage crime") ||
+                question.contains("minor offenders")) {
+            return "Lowering the Age of Criminal Responsibility";
+        } 
+        // Federalism-related terms
+        else if (question.contains("federalism") || 
+                question.contains("federal government") || 
+                question.contains("federal system") ||
+                question.contains("autonomous regions") ||
+                question.contains("decentralization") ||
+                question.contains("local autonomy")) {
+            return "Federalism";
+        } 
+        // ROTC-related terms
+        else if (question.contains("rotc") || 
+                question.contains("reserve officers") || 
+                question.contains("military training") ||
+                question.contains("cadet") ||
+                question.contains("military service education") ||
+                question.contains("military preparation") ||
+                question.contains("compulsory military training")) {
+            return "Mandatory ROTC for Senior High Students";
+        } 
+        // Same-sex marriage-related terms
+        else if (question.contains("same-sex") || 
+                question.contains("same sex") || 
+                question.contains("gay marriage") || 
+                question.contains("lgbtq marriage") ||
+                question.contains("marriage equality") ||
+                question.contains("homosexual marriage") ||
+                question.contains("equal marriage rights")) {
+            return "Same-Sex Marriage";
+        } 
+        // Anti-Terror Law-related terms
+        else if (question.contains("anti-terror") || 
+                question.contains("anti terror") || 
+                question.contains("terrorism") || 
+                question.contains("security law") ||
+                question.contains("counter-terrorism") ||
+                question.contains("terror prevention") ||
+                question.contains("national security")) {
+            return "Anti-Terror Law";
+        } 
+        // Foreign investment in land-related terms
+        else if ((question.contains("foreign") || question.contains("international") || question.contains("overseas")) && 
+                (question.contains("land") || question.contains("property") || question.contains("real estate")) &&
+                (question.contains("ownership") || question.contains("investment") || question.contains("purchase"))) {
+            return "Foreign Investment in Land Ownership";
+        } 
+        // Healthcare-related terms
+        else if (question.contains("healthcare") || 
+                question.contains("medical care") || 
+                question.contains("health insurance") ||
+                question.contains("universal health") ||
+                question.contains("medical coverage") ||
+                question.contains("health services") ||
+                question.contains("philhealth")) {
+            return "Universal Healthcare Funding";
+        } 
+        // Sex education-related terms
+        else if (question.contains("sex education") || 
+                question.contains("sexual education") ||
+                question.contains("sex ed") ||
+                question.contains("reproductive health education") ||
+                question.contains("sexual health") ||
+                question.contains("family planning education")) {
+            return "Mandatory Sex Education";
+        } 
+        // Minimum wage-related terms
+        else if (question.contains("minimum wage") || 
+                question.contains("salary standard") || 
+                question.contains("wage standardization") ||
+                question.contains("minimum pay") ||
+                question.contains("wage floor") ||
+                question.contains("basic wage") ||
+                question.contains("standard salary")) {
+            return "Minimum Wage Standardization";
+        } 
+        // Jeepney modernization-related terms
+        else if (question.contains("jeepney") || 
+                (question.contains("public") && question.contains("transport")) || 
+                question.contains("transport modernization") ||
+                question.contains("jeep phase out") ||
+                question.contains("modern public utility vehicles") ||
+                question.contains("puv modernization")) {
+            return "Jeepney Modernization Program";
+        }
+        
+        return null;
+    }
+    
+    /**
+     * Check if user response aligns with candidate stance
+     */
+    private boolean responsesAlign(String userResponse, String candidateStance) {
+        // If no data for candidate, can't match
+        if (candidateStance == null || candidateStance.equals("No Data")) {
+            return false;
+        }
+        
+        // Convert to lowercase for more flexible matching
+        String userLower = userResponse.toLowerCase();
+        String candidateLower = candidateStance.toLowerCase();
+        
+        // If user is neutral, count as a partial match with 50% probability
+        // This makes neutrals sometimes match, giving more diverse results
+        if (userLower.equals("neutral")) {
+            return Math.random() < 0.5;
+        }
+        
+        // Check for Agree responses with synonyms
+        if (userLower.contains("agree") || 
+            userLower.contains("support") || 
+            userLower.contains("favor") || 
+            userLower.contains("yes")) {
+            
+            if (candidateLower.contains("agree") || 
+                candidateLower.contains("support") || 
+                candidateLower.contains("favor") || 
+                candidateLower.contains("yes") ||
+                candidateLower.contains("for") ||
+                candidateLower.contains("approve")) {
+                return true;
+            }
+        }
+        
+        // Check for Disagree responses with synonyms
+        if (userLower.contains("disagree") || 
+            userLower.contains("oppose") || 
+            userLower.contains("against") || 
+            userLower.contains("no")) {
+            
+            if (candidateLower.contains("disagree") || 
+                candidateLower.contains("oppose") || 
+                candidateLower.contains("against") || 
+                candidateLower.contains("no") ||
+                candidateLower.contains("reject") ||
+                candidateLower.contains("disapprove")) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
+    
+    /**
+     * Get social stances for a specific candidate
+     */
+    private Map<String, String> getCandidateStances(String candidateName) {
+        Map<String, String> stances = new HashMap<>();
+        
+        try (BufferedReader reader = new BufferedReader(new FileReader("resources/data/candidates.txt"))) {
+            String line;
+            boolean inTargetCandidate = false;
+            
+            while ((line = reader.readLine()) != null) {
+                if (line.startsWith("Name:") && line.contains(candidateName)) {
+                    inTargetCandidate = true;
+                } else if (line.startsWith("Name:") && inTargetCandidate) {
+                    // Found next candidate, stop parsing
+                    break;
+                } else if (inTargetCandidate && line.startsWith("Social Stance:")) {
+                    // Parse social stance line
+                    String stanceLine = line.substring("Social Stance:".length()).trim();
+                    int dashIndex = stanceLine.lastIndexOf('-');
+                    
+                    if (dashIndex > 0) {
+                        String topic = stanceLine.substring(0, dashIndex).trim();
+                        String position = stanceLine.substring(dashIndex + 1).trim();
+                        stances.put(topic, position);
+                    }
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("Error loading candidate stances: " + e.getMessage());
+        }
+        
+        return stances;
     }
     
     /**

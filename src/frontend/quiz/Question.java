@@ -112,7 +112,9 @@ public class Question extends JPanel {
             String line;
             while ((line = reader.readLine()) != null) {
                 if (!line.trim().isEmpty()) {
-                    questions.add(line.trim());
+                    // Normalize question to make it easier to match with candidate stances
+                    line = normalizeQuestion(line.trim());
+                    questions.add(line);
                 }
             }
             System.out.println("Loaded " + questions.size() + " questions");
@@ -121,6 +123,78 @@ public class Question extends JPanel {
             // Add a default question in case file loading fails
             questions.add("Do you support this policy?");
         }
+    }
+    
+    /**
+     * Normalize question text to ensure consistent matching with candidate stances
+     */
+    private String normalizeQuestion(String question) {
+        // Convert to lowercase for consistent matching
+        String normalized = question.toLowerCase();
+        
+        // Replace common synonyms and related terms
+        if (normalized.contains("legalization of divorce") || 
+            normalized.contains("allow divorce") || 
+            normalized.contains("divorce law")) {
+            return "Do you support the legalization of divorce in the Philippines?";
+        } else if (normalized.contains("sogie") || 
+                  normalized.contains("sexual orientation") || 
+                  normalized.contains("gender identity") || 
+                  normalized.contains("gender expression") || 
+                  normalized.contains("equality bill") ||
+                  normalized.contains("lgbtq rights")) {
+            return "Do you agree with passing the SOGIE Equality Bill?";
+        } else if (normalized.contains("death penalty") || 
+                  normalized.contains("capital punishment") || 
+                  normalized.contains("execution for crimes")) {
+            return "Should the death penalty be reinstated in the Philippines?";
+        } else if (normalized.contains("criminal responsibility") || 
+                  normalized.contains("juvenile justice") || 
+                  normalized.contains("youth offenders") ||
+                  normalized.contains("minor criminals")) {
+            return "Do you support lowering the age of criminal responsibility?";
+        } else if (normalized.contains("federalism") || 
+                  normalized.contains("federal government") || 
+                  normalized.contains("federal system")) {
+            return "Are you in favor of federalism as a form of government?";
+        } else if (normalized.contains("rotc") || 
+                  normalized.contains("reserve officers") || 
+                  normalized.contains("military training") ||
+                  normalized.contains("mandatory training")) {
+            return "Should mandatory ROTC be implemented for senior high school students?";
+        } else if (normalized.contains("same-sex marriage") || 
+                  normalized.contains("same sex marriage") || 
+                  normalized.contains("gay marriage") || 
+                  normalized.contains("lgbtq marriage")) {
+            return "Do you agree with same-sex marriage being legalized?";
+        } else if (normalized.contains("anti-terror") || 
+                  normalized.contains("anti terror") || 
+                  normalized.contains("terrorism") || 
+                  normalized.contains("security law")) {
+            return "Do you support the Anti-Terror Law?";
+        } else if (normalized.contains("foreign investment") && normalized.contains("land")) {
+            return "Should foreign investment in land ownership be allowed?";
+        } else if (normalized.contains("healthcare") || 
+                  normalized.contains("medical care") || 
+                  normalized.contains("health insurance") ||
+                  normalized.contains("universal healthcare")) {
+            return "Do you agree with universal healthcare funding?";
+        } else if (normalized.contains("sex education") || 
+                  normalized.contains("sexual education") ||
+                  normalized.contains("sex ed")) {
+            return "Should mandatory sex education be implemented in schools?";
+        } else if (normalized.contains("minimum wage") || 
+                  normalized.contains("salary standard") || 
+                  normalized.contains("wage standardization")) {
+            return "Do you support the standardization of minimum wage across regions?";
+        } else if (normalized.contains("jeepney modernization") || 
+                  normalized.contains("public transport") || 
+                  normalized.contains("transport modernization")) {
+            return "Should the Jeepney Modernization Program be pursued?";
+        }
+        
+        // If no match found, return the original question
+        return question;
     }
     
     /**
