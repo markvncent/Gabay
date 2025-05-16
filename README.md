@@ -1,19 +1,31 @@
 # Gabay: Voter Awareness Application
 ![GamayLanding](https://github.com/user-attachments/assets/327294f7-5400-4d89-bb76-fd0083c891ce)
 
-<p align="center">
-  <img src="https://via.placeholder.com/100x100/2C3881/FFFFFF?text=+" alt="#2C3881">
-  <img src="https://via.placeholder.com/100x100/E94540/FFFFFF?text=+" alt="#E94540">
-  <img src="https://via.placeholder.com/100x100/F8B346/000000?text=+" alt="#F8B346">
-  <img src="https://via.placeholder.com/100x100/FFFFFF/CCCCCC?text=+" alt="#FFFFFF" style="border:1px solid #ccc;">
-</p>
+## 🎨 Color Palette
 
-<p align="center">
-  <strong>#2C3881</strong> &nbsp; &nbsp;
-  <strong>#E94540</strong> &nbsp; &nbsp;
-  <strong>#F8B346</strong> &nbsp; &nbsp;
-  <strong>#FFFFFF</strong>
-</p>
+<div style="display: flex; gap: 20px; align-items: center;">
+
+  <div style="text-align: center;">
+    <div style="width: 80px; height: 80px; background-color: #2C3881; border-radius: 8px;"></div>
+    <div><strong>#2C3881</strong><br>Deep Indigo</div>
+  </div>
+
+  <div style="text-align: center;">
+    <div style="width: 80px; height: 80px; background-color: #E94540; border-radius: 8px;"></div>
+    <div><strong>#E94540</strong><br>Vivid Red</div>
+  </div>
+
+  <div style="text-align: center;">
+    <div style="width: 80px; height: 80px; background-color: #F8B346; border-radius: 8px;"></div>
+    <div><strong>#F8B346</strong><br>Amber Gold</div>
+  </div>
+
+  <div style="text-align: center;">
+    <div style="width: 80px; height: 80px; background-color: #FFFFFF; border: 1px solid #ccc; border-radius: 8px;"></div>
+    <div><strong>#FFFFFF</strong><br>White</div>
+  </div>
+
+</div>
 
 ## Overview
 Gabay is a Java Swing application designed to help users learn about political candidates, their stances on various issues, and compare candidates to make informed voting decisions.
