@@ -1,37 +1,19 @@
 # Gabay: Voter Awareness Application
 ![GamayLanding](https://github.com/user-attachments/assets/327294f7-5400-4d89-bb76-fd0083c891ce)
 
-## 🎨 Color Palette
-
-<div style="display: flex; gap: 20px; align-items: center;">
-
-  <div style="text-align: center;">
-    <div style="width: 80px; height: 80px; background-color: #2C3881; border-radius: 8px;"></div>
-    <div><strong>#2C3881</strong><br>Deep Indigo</div>
-  </div>
-
-  <div style="text-align: center;">
-    <div style="width: 80px; height: 80px; background-color: #E94540; border-radius: 8px;"></div>
-    <div><strong>#E94540</strong><br>Vivid Red</div>
-  </div>
-
-  <div style="text-align: center;">
-    <div style="width: 80px; height: 80px; background-color: #F8B346; border-radius: 8px;"></div>
-    <div><strong>#F8B346</strong><br>Amber Gold</div>
-  </div>
-
-  <div style="text-align: center;">
-    <div style="width: 80px; height: 80px; background-color: #FFFFFF; border: 1px solid #ccc; border-radius: 8px;"></div>
-    <div><strong>#FFFFFF</strong><br>White</div>
-  </div>
-
-</div>
 
 ## Overview
 Gabay is a Java Swing application designed to help users learn about political candidates, their stances on various issues, and compare candidates to make informed voting decisions.
 
+## Color Palette
+![Group 27](https://github.com/user-attachments/assets/25f95612-245a-4998-8d9a-627181728f26)
+
 <h2 align="left">Languages and Tools:</h2>
 <p align="left"> <a href="https://www.figma.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/figma/figma-icon.svg" alt="figma" width="40" height="40"/> </a> <a href="https://www.java.com" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg" alt="java" width="40" height="40"/> </a> </p>
+
+## Developers
+
+[![Contributors](https://contrib.rocks/image?repo=markvncent/Gabay)](https://github.com/markvncent/Gabay/graphs/contributors)
 
 ## Features
 - View detailed candidate information including personal details, party affiliation, and policy positions
@@ -67,13 +49,6 @@ The application uses:
 - Custom transition effects and animations
 - First-time launch detection with splash screen
 
-### Styling Approach
-- Consistent color palette throughout the application
-- Custom-painted components for modern appearance
-- Rounded corners, drop shadows, and subtle animations
-- Standardized fonts (Inter family) for consistent typography
-- Smooth transitions between screens with fade effects
-
 ## Recent Updates
 - Added intro splash screen with progress bar for first-time application launch
 - Implemented elegant page transitions with fading effects and Gabay emblem display
@@ -91,19 +66,7 @@ The application uses:
    java -cp bin frontend.utils.SplashScreenLauncher
    ```
 
-## Development Guidelines
-When contributing to the project:
-1. Follow the existing component structure and naming conventions
-2. Maintain consistent styling (colors, fonts, padding)
-3. Create modular, reusable components
-4. Document classes and methods with JavaDoc comments
-
-## Screenshots
-
-(Screenshots would be here - consider adding screenshots of your application's main screens)
-
 ## System Requirements
-
 - Java Runtime Environment (JRE) 8 or higher
 - Minimum 4GB RAM recommended
 - 50MB disk space
@@ -155,42 +118,6 @@ Gabay/
    run_app.bat
    ```
 
-### Option 2: Manual Compilation
-
-1. Ensure you have JDK 8 or higher installed
-2. Compile the source code
-   ```
-   javac -d bin -cp bin src/frontend/utils/*.java src/frontend/landingpage/*.java src/frontend/admin/*.java src/frontend/search/*.java src/frontend/comparison/*.java src/frontend/overview/*.java src/frontend/quiz/*.java src/backend/database/*.java src/backend/models/*.java src/util/*.java
-   ```
-3. Run the application
-   ```
-   java -cp bin frontend.utils.SplashScreenLauncher
-   ```
-
-## Troubleshooting
-
-### Common Issues
-
-#### Missing Font Files
-The application uses the Inter font family. If the fonts are missing:
-
-1. Create a `lib/fonts` directory in the root of the project
-2. Download the Inter font family (specifically Inter_18pt variations)
-3. Place the font files in the `lib/fonts` directory
-
-#### Missing Image Files
-If images aren't displaying properly:
-
-1. Ensure the `resources/images` directory exists with all required images
-2. Check console output for specific missing files
-3. Check file permissions to ensure Java can read the image files
-
-#### Window Sizing Issues
-If the UI elements appear misaligned or cut off:
-
-1. Resize the window to at least 1024x768 resolution
-2. Try maximizing the window for the best experience
-
 ## Usage Guide
 
 ### First Launch
@@ -223,21 +150,9 @@ The landing page displays four main options:
 - Custom animation framework
 - Custom transition manager
 
-### Project Structure
-- `SplashScreenLauncher.java`: Entry point that shows splash screen on first launch
-- `LandingPageUI.java`: Main UI with buttons to navigate to different features
-- `CandidateSearchUI.java`: Interface for searching candidate information
-- `AdminLoginUI.java`: Administrative login interface for authentication
-- `WindowTransitionManager.java`: Handles transitions between screens
-- Supporting UI components for filters, cards, and other elements
-
 ## License
 
 All Rights Reserved, 2025
-
-## Contact & Support
-
-For questions, issues, or support, please contact the development team.
 
 ---
 
