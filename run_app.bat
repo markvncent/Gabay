@@ -1,5 +1,7 @@
 @echo off
-cd "Gabay_v2 - Backup"
+REM go to this directory
+cd /d "%~dp0"
+REM Check if Java is installed
 REM Create bin directory if it doesn't exist
 if not exist bin mkdir bin
 REM Compile all required files
