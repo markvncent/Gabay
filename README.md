@@ -1,22 +1,19 @@
-# Gabay: Political Candidate Information Application
+# Gabay: Voter Awareness Application
 ![GamayLanding](https://github.com/user-attachments/assets/327294f7-5400-4d89-bb76-fd0083c891ce)
-## 🎨 Color Palette
 
-<table>
-  <tr>
-    <td style="background-color:#2C3881; width:100px; height:100px;"></td>
-    <td style="background-color:#E94540; width:100px; height:100px;"></td>
-    <td style="background-color:#F8B346; width:100px; height:100px;"></td>
-    <td style="background-color:#FFFFFF; width:100px; height:100px; border:1px solid #ccc;"></td>
-  </tr>
-  <tr align="center">
-    <td><strong>#2C3881</strong><br>Deep Indigo</td>
-    <td><strong>#E94540</strong><br>Vivid Red</td>
-    <td><strong>#F8B346</strong><br>Amber Gold</td>
-    <td><strong>#FFFFFF</strong><br>White</td>
-  </tr>
-</table>
+<p align="center">
+  <img src="https://via.placeholder.com/100x100/2C3881/FFFFFF?text=+" alt="#2C3881">
+  <img src="https://via.placeholder.com/100x100/E94540/FFFFFF?text=+" alt="#E94540">
+  <img src="https://via.placeholder.com/100x100/F8B346/000000?text=+" alt="#F8B346">
+  <img src="https://via.placeholder.com/100x100/FFFFFF/CCCCCC?text=+" alt="#FFFFFF" style="border:1px solid #ccc;">
+</p>
 
+<p align="center">
+  <strong>#2C3881</strong> &nbsp; &nbsp;
+  <strong>#E94540</strong> &nbsp; &nbsp;
+  <strong>#F8B346</strong> &nbsp; &nbsp;
+  <strong>#FFFFFF</strong>
+</p>
 
 ## Overview
 Gabay is a Java Swing application designed to help users learn about political candidates, their stances on various issues, and compare candidates to make informed voting decisions.
