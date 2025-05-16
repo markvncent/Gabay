@@ -364,6 +364,16 @@ public class CandidateCardPanel extends JPanel {
         
         // Load candidate data from the data loader
         allCandidates = CandidateDataLoader.loadCandidates();
+        // Sort by surname (last word in name)
+        allCandidates.sort((a, b) -> {
+            String nameA = a.getName().trim();
+            String nameB = b.getName().trim();
+            String surnameA = nameA.isEmpty() ? "" : nameA.substring(nameA.lastIndexOf(' ') + 1).toLowerCase();
+            String surnameB = nameB.isEmpty() ? "" : nameB.substring(nameB.lastIndexOf(' ') + 1).toLowerCase();
+            int cmp = surnameA.compareTo(surnameB);
+            if (cmp != 0) return cmp;
+            return nameA.compareToIgnoreCase(nameB);
+        });
         filteredCandidates = new ArrayList<>(allCandidates);
         
         // If no candidates were loaded, use placeholder data
@@ -631,6 +641,16 @@ public class CandidateCardPanel extends JPanel {
                 try {
                     if (!isCancelled()) {
                         filteredCandidates = get();
+                        // Sort by surname (last word in name)
+                        filteredCandidates.sort((a, b) -> {
+                            String nameA = a.getName().trim();
+                            String nameB = b.getName().trim();
+                            String surnameA = nameA.isEmpty() ? "" : nameA.substring(nameA.lastIndexOf(' ') + 1).toLowerCase();
+                            String surnameB = nameB.isEmpty() ? "" : nameB.substring(nameB.lastIndexOf(' ') + 1).toLowerCase();
+                            int cmp = surnameA.compareTo(surnameB);
+                            if (cmp != 0) return cmp;
+                            return nameA.compareToIgnoreCase(nameB);
+                        });
                         rebuildCards();
                     }
                 } catch (Exception e) {

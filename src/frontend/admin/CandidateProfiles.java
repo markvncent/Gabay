@@ -132,6 +132,18 @@ public class CandidateProfiles {
             reader.close();
             dataLoaded = true;
             
+            // Sort by surname (last word in Name field)
+            candidateList.sort((a, b) -> {
+                String nameA = a.getOrDefault("Name", "").trim();
+                String nameB = b.getOrDefault("Name", "").trim();
+                String surnameA = nameA.isEmpty() ? "" : nameA.substring(nameA.lastIndexOf(' ') + 1).toLowerCase();
+                String surnameB = nameB.isEmpty() ? "" : nameB.substring(nameB.lastIndexOf(' ') + 1).toLowerCase();
+                int cmp = surnameA.compareTo(surnameB);
+                if (cmp != 0) return cmp;
+                // If surnames are the same, fallback to full name
+                return nameA.compareToIgnoreCase(nameB);
+            });
+            
         } catch (IOException e) {
             System.err.println("Error loading candidate data: " + e.getMessage());
             e.printStackTrace();

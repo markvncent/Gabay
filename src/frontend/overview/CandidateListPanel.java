@@ -220,8 +220,16 @@ public class CandidateListPanel extends JPanel {
             // Get candidates for this position
             List<CandidateDataLoader.Candidate> candidates = candidatesByPosition.get(position);
             
-            // Sort candidates alphabetically by name
-            candidates.sort(Comparator.comparing(CandidateDataLoader.Candidate::getName));
+            // Sort candidates alphabetically by surname (last word in name)
+            candidates.sort((a, b) -> {
+                String nameA = a.getName().trim();
+                String nameB = b.getName().trim();
+                String surnameA = nameA.isEmpty() ? "" : nameA.substring(nameA.lastIndexOf(' ') + 1).toLowerCase();
+                String surnameB = nameB.isEmpty() ? "" : nameB.substring(nameB.lastIndexOf(' ') + 1).toLowerCase();
+                int cmp = surnameA.compareTo(surnameB);
+                if (cmp != 0) return cmp;
+                return nameA.compareToIgnoreCase(nameB);
+            });
             
             // Create position header
             JPanel headerPanel = createPositionHeader(position, candidates.size());
