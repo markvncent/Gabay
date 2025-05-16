@@ -663,7 +663,9 @@ public class CandidateCardPanel extends JPanel {
         currentWorker.execute();
     }
     
-    // Helper method to apply search filter
+    /**
+     * Helper method to apply search filter
+     */
     private boolean applySearchFilter(CandidateDataLoader.Candidate candidate, String query, String filterType) {
         // If no query, match everything
         if (query == null || query.isEmpty()) {
@@ -672,14 +674,23 @@ public class CandidateCardPanel extends JPanel {
         
         // Process differently based on the filter type
         if ("Issue".equals(filterType)) {
-            // First, specifically check if this is a social stance topic
-            // This gives priority to social stances in the search
+            // First check in supported and opposed issues directly
+            String supportedIssues = safeString(candidate.getSupportedIssues()).toLowerCase();
+            String opposedIssues = safeString(candidate.getOpposedIssues()).toLowerCase();
+            
+            // Check if the query is found in supported or opposed issues
+            if (containsWordOrPartial(supportedIssues, query.toLowerCase()) || 
+                containsWordOrPartial(opposedIssues, query.toLowerCase())) {
+                return true;
+            }
+            
+            // Check if this is a social stance topic
             boolean isMatchingSocialStance = candidate.hasStanceOnTopic(query);
             
             // If no direct match on topic, check if the query is part of any social stance
             if (!isMatchingSocialStance) {
                 for (String stance : candidate.getSocialStances()) {
-                    if (stance.toLowerCase().contains(query)) {
+                    if (stance.toLowerCase().contains(query.toLowerCase())) {
                         isMatchingSocialStance = true;
                         break;
                     }
@@ -691,12 +702,17 @@ public class CandidateCardPanel extends JPanel {
                 return true;
             } 
             
+            // Try the hasStanceOn method which has more comprehensive issue checking
+            if (candidate.hasStanceOn(query)) {
+                return true;
+            }
+            
             // If still no match, check in platforms and other fields
             try {
                 java.lang.reflect.Method getPlatformsMethod = candidate.getClass().getMethod("getPlatforms");
                 Object platformsObj = getPlatformsMethod.invoke(candidate);
                 String platforms = (platformsObj != null) ? platformsObj.toString().toLowerCase() : "";
-                if (!platforms.isEmpty() && containsWordOrPartial(platforms, query)) {
+                if (!platforms.isEmpty() && containsWordOrPartial(platforms, query.toLowerCase())) {
                     return true;
                 }
             } catch (Exception e) {
@@ -708,7 +724,7 @@ public class CandidateCardPanel extends JPanel {
                 java.lang.reflect.Method getNotableLawsMethod = candidate.getClass().getMethod("getNotableLaws");
                 Object notableLawsObj = getNotableLawsMethod.invoke(candidate);
                 String notableLaws = (notableLawsObj != null) ? notableLawsObj.toString().toLowerCase() : "";
-                if (!notableLaws.isEmpty() && containsWordOrPartial(notableLaws, query)) {
+                if (!notableLaws.isEmpty() && containsWordOrPartial(notableLaws, query.toLowerCase())) {
                     return true;
                 }
             } catch (Exception e) {
